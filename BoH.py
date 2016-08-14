@@ -1,4 +1,4 @@
-VERSION_INFO = 'A_01 August 07, 2016'
+VERSION_INFO = 'A_02 August 14, 2016'
 DEBUGMODE = True
 
 #==============================================================================#
@@ -41,6 +41,7 @@ MENU_H = 0.10 * BASE_H
 MENU_W = 1.00 * BASE_W
 MENU_SIZE = (MENU_W, MENU_H)
 MENU_BTN_SIZE = (MENU_H, MENU_H)
+MENU_NAME_SIZE = (MENU_W - (2 * MENU_H), MENU_H)
 
 TABS_H = 0.10
 TABS_W = 1.00
@@ -59,10 +60,14 @@ CONT_GRID_H = CONT_W * 0.20
 CONT_GRID_W = 0.20
 CONT_GRID_SIZE = (CONT_GRID_W, CONT_GRID_H)
 
-# Stylization
+# Animations
 ANIMTIME = 0.35
 ANIMSTYLE = 'out_cubic'
-USEFONT = 'fonts/BASKVILL.TTF'
+
+# Fonts
+FONT_A = 'fonts/corbel.ttf'
+
+FONT_SZ_A = 32
 
 # System
 NONES = (None, None)
@@ -73,8 +78,8 @@ if True:
     COLOR_BODY = 'images/COLOR_BODY.png'
     COLOR_MISC = 'images/COLOR_MISC.png'
 
-    ICON_BAG = 'images/bag_icon.png'
-    ICON_OPTS = 'images/opts_icon.png'
+    ICON_BAG = 'images/ICON_BAGS.png'
+    ICON_OPTS = 'images/ICON_OPTS.png'
 
 #=======================================================================================#
 # CLASSES                                                                               #
@@ -97,6 +102,9 @@ class MainMenu(RelativeLayout):
                        size_hint = (1.0, 1.0))
         menuBagsBtn = Button(size_hint = NONES, background_normal = ICON_BAG,
                              background_down = ICON_BAG, size = MENU_BTN_SIZE)
+        menuNameLabel = Label(text = 'Bag One', font_name = FONT_A, size = MENU_NAME_SIZE,
+                              halign = 'center', valign = 'top', color = [1,1,1,1],
+                              font_size = FONT_SZ_A)
         menuOptsBtn = Button(size_hint = NONES, background_normal = ICON_OPTS,
                              background_down = ICON_OPTS, pos_hint = {'right': 1.0},
                              size = MENU_BTN_SIZE)
@@ -144,6 +152,7 @@ class MainMenu(RelativeLayout):
         # Menu Bar ======================================================================
         self.menuBar.add_widget(self.menuBG)
         self.menuBar.add_widget(self.menuBagsBtn)
+        self.menuBar.add_widget(self.menuNameLabel)
         self.menuBar.add_widget(self.menuOptsBtn)
 
         self.baseLayout.add_widget(self.menuBar)
