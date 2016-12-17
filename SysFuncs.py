@@ -3,6 +3,7 @@ kivy.require('1.9.1')
 
 # Core
 from collections import deque as Deque
+from collections import namedtuple
 import datetime
 
 # Kivy
