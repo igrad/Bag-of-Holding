@@ -6,21 +6,27 @@ from Currency import *
 class Bag():
     ID = 0
     name = 'Bag'
-    items = list()
+    items = dict()
     currency = CurrencySet()
 
     def __init__(self, **kwargs):
         if 'ID' in kwargs: self.ID = int(kwargs['ID'])
         else: self.ID = GetNewBagID()
         if 'name' in kwargs: self.name = str(kwargs['name'])
-        if 'items' in kwargs: self.items = list(kwargs['items'])
+        if 'items' in kwargs: self.items = dict(kwargs['items'])
         if 'currency' in kwargs: self.currency = CurrencySet(kwargs['currency'])
 
-        CreateBag(self)
+        StoreNewBag(self)
 
-    def UpdateName(newName):
-        self.name = newName
-        UpdateBagInfo(self.ID)
+    def UpdateBag(**kwargs):
+        if 'name' in kwargs: self.name = str(kwargs['name'])
+        if 'items' in kwargs: self.items = dict(kwargs['items'])
+        if 'currency' in kwargs: self.currency = CurrencySet(kwargs['currency'])
 
-    # TODO: def AddItem(item):
-    # TODO: def RemoveItem(itemID):
+        UpdateBagInfo(self.ID, self.name, self.items, self.currency)
+
+    def AddItem(item):
+        items[item.ID] = item
+
+    def RemoveItem(itemID):
+        del items[itemID]
