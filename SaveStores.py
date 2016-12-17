@@ -91,7 +91,7 @@ def LoadSettings():
         optsStore.put('opts', d = defaults)
 
 
-# Fetch and Update data
+# Generate new IDs
 def GetNewItemID():
     '''Gets an unused itemID number.'''
     for i in range(MAX_ITEMS):
@@ -110,20 +110,42 @@ def GetNewBagID():
 
 
 # Create new items or bags
-def CreateItem(item):
+def StoreNewItem(item):
     '''Adds the specified item to the local list (ITEMS), saves the item to memory, and updates the indices for items in the save file.'''
     ITEMS.append(item.ID)
 
     UpdateItemInfo(item)
 
-def CreateBag(bag):
+def StoreNewBag(bag):
     '''Adds the specified bag to the local list (BAGS), saves the bag to memory, and updates the indices for bags in the save file.'''
     BAGS[bag.ID] = bag
 
     SaveBagInfo(bag)
 
 
-# Remove unwanted items
+# Update existing bag or item info
+def UpdateBagInfo(ID, **kwargs):
+    scBag = BAGS[ID]
+    if 'name' in kwargs: scBag.name = str(kwargs['name'])
+    if 'items' in kwargs: scBag.items = list(kwargs['items'])
+    if 'currency' in kwargs: scBag.currency = CurrencySet(kwargs['currency'])
+
+    SaveBagInfo(scBag)
+
+def UpdateItemInfo(ID, **kwargs):
+    scItem = ITEMS[ID]
+    if 'name' in kwargs: scItem.name = str(kwargs['name'])
+    if 'qty' in kwargs: scItem.qty = int(kwargs['qty'])
+    if 'weight' in kwargs: scItem.weight = float(kwargs['qty'])
+    if 'val' in kwargs: scItem.val = float(kwargs['val'])
+    if 'desc' in kwargs: scItem.desc = str(kwargs['desc'])
+    if 'icon' in kwargs: scItem.icon = str(kwargs['icon'])
+    if 'tags' in kwargs: scItem.icon = list(kwargs['tags'])
+
+    SaveItemInfo(scItem)
+
+
+# Remove unwanted item from bag
 def RemoveItemFromBag(itemID, bagID):
     '''Removes the specified item from the "items" list owned by the specified bag.'''
     # First, remove it from the instanced ITEMS list
@@ -136,11 +158,11 @@ def RemoveItemFromBag(itemID, bagID):
 # Read/Write to save files
 def SaveBagInfo(scBag):
     '''Stores the bag by copying a shallow copy of the actual bag.'''
-    bagsStore.put(scBag.ID, name = scBag.name, items = scBag.items)
+    bagsStore.put(scBag.ID, name = scBag.name, currency = scBag.currency, items = scBag.items)
 
 def SaveItemInfo(scItem):
     '''Stores the item by copying a shallow copy of the actual item.'''
-    itemStore.put(scItem.ID, name = scItem.name, qty = scItem.qty, mass = scItem.mass,
+    itemStore.put(scItem.ID, name = scItem.name, qty = scItem.qty, weight = scItem.weight,
                   desc = scItem.desc, icon = scItem.icon, tags = scItem.tags)
 
 def DeleteItemFromSave(itemID):
