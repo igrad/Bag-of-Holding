@@ -28,13 +28,10 @@ class BagOfHolding(RelativeLayout):
         # Background
         screen_main.add_widget(BG)
 
-
         # Menu
         menu.add_widget(menu_Title)
         menu.add_widget(menu_Btn_Bag)
         menu.add_widget(menu_Btn_Opts)
-
-        screen_main.add_widget(menu)
 
 
         # Tabs
@@ -43,14 +40,11 @@ class BagOfHolding(RelativeLayout):
         tabs.add_widget(tabs_New)
         tabs.add_widget(tabs_Pick)
 
-        screen_main.add_widget(tabs)
-
 
         # Contpane Items
         cont_Scroll.add_widget(cont_List)
         contpane_items.add_widget(cont_Scroll)
 
-        screen_main.add_widget(contpane_items)
 
         # Contpane New
         contpane_new.add_widget(new_name)
@@ -63,12 +57,18 @@ class BagOfHolding(RelativeLayout):
         contpane_new.add_widget(new_cancel)
         contpane_new.add_widget(new_save)
 
-        screen_main.add_widget(contpane_new)
 
-        # Frame
+        # Render
+        screen_main.add_widget(contpane_items)
+        screen_main.add_widget(contpane_new)
         screen_main.add_widget(Border)
+        screen_main.add_widget(menu)
+        screen_main.add_widget(tabs)
 
         self.add_widget(screen_main)
+
+        # SCREEN SETTINGS ===============================================================
+        # do a flip
 
 
 
