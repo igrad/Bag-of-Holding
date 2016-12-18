@@ -25,10 +25,27 @@ from kivy.uix.image import Image
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 
+
+# GLOBAL CONSTANTS
 NONES = (None, None)
 ZEROS = (0, 0)
 FILLS = (1, 1)
 
+#GLOBAL VARIABLES
+bagsStore = JsonStore('bags_data.json')
+itemStore = JsonStore('item_data.json')
+optsStore = JsonStore('user_settings.json')
+
+BAGS = dict()
+ITEMS = dict()
+ITEMVIEWS = list()
+
+MAX_BAGS = 10
+MAX_ITEMS = 5000
+LAST_BAG_OPENED = 0
+NOOBIE_TIPS = True
+
+# GLOBAL CLASSES
 class SizeMap():
     def __init__(self, iw, ih, parentPair):
         self.w = iw
@@ -37,11 +54,6 @@ class SizeMap():
         self.hw = self.w/parentPair[0]
         self.hh = self.h/parentPair[1]
         self.hSizePair = (self.hw, self.hh)
-
-class PosMap():
-    def __init__(self, ix, iy, iw, ih, parentPair):
-        self.x = ix
-        self.y = iy
 
 def PostErrorMessage(err):
     print(err)

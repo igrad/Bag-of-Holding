@@ -1,7 +1,8 @@
 from SysFuncs import *
+from LoadSaves import *
 from Bag import *
 from BagItem import *
-from SaveStores import *
+
 
 #=======================================================================================#
 # SYSTEM VARIABLES                                                                      #
@@ -40,6 +41,9 @@ if True:
     NEW_BTN = SizeMap(520, 150, CONT.sizePair)
 
     # Positions =========================================================================
+    # SCREENS
+    SCREEN_POS_ON = ZEROS
+    SCREEN_POS_OFF = (APP_W, 0)
     # MAIN
     MENU_POS = (20, 1720)
     MENU_TITLE_POS = (260, 1723)
@@ -83,9 +87,8 @@ if True:
 
 
     # SCREENS
-    screen_main = RelativeLayout(pos = ZEROS, size_hint = FILLS, size = FRAME.sizePair)
-    screen_settings = RelativeLayout(pos = screen_main.x, size_hint = FILLS,
-        size = FRAME.sizePair)
+    screen_main = RelativeLayout(pos = SCREEN_POS_ON, size_hint = FILLS)
+    screen_settings = RelativeLayout(pos = SCREEN_POS_OFF, size_hint = FILLS)
 
 
     # Menu
@@ -124,12 +127,24 @@ if True:
 
     # Input Fields
     new_name = TextInput(size_hint = NEW_TEXT_BIG.hSizePair, hint_text = 'Name',
-        pos = NEW_NAME_POS, font_name = BASKVILLE, font_size = FONT_SIZE_B)
+        pos = NEW_NAME_POS, font_name = FONT_BASK, font_size = FONT_SIZE_A)
+
     new_icon = Image(size_hint = NEW_ICON.hSizePair, source = 'images/blankIcon.png',
         pos = NEW_ICON_POS, allow_stretch = True, keep_ratio = False)
+
     new_qty = TextInput(size_hint = NEW_TEXT_SMALL.hSizePair, hint_text = 'Quantity',
-        pos = NEW_QTY_POS, font_name = BASKVILLE, font_size = FONT_SIZE_B)
+        pos = NEW_QTY_POS, font_name = FONT_BASK, font_size = FONT_SIZE_A)
     new_weight = TextInput(size_hint = NEW_TEXT_SMALL.hSizePair, hint_text = 'Weight',
-        pos = NEW_WEIGHT_POS, font_name = BASKVILLE, font_size = FONT_SIZE_B)
+        pos = NEW_WEIGHT_POS, font_name = FONT_BASK, font_size = FONT_SIZE_A)
     new_val = TextInput(size_hint = NEW_TEXT_SMALL.hSizePair, hint_text = 'Value',
-        pos = NEW_VAL_POS, font_name = BASKVILLE, font_size = FONT_SIZE_B)
+        pos = NEW_VAL_POS, font_name = FONT_BASK, font_size = FONT_SIZE_A)
+
+    new_tags = TextInput(size_hint = NEW_TEXT_BIG.hSizePair, hint_text = 'Tags',
+        pos = NEW_TAGS_POS, font_name = FONT_BASK, font_size = FONT_SIZE_A)
+    new_desc = TextInput(size_hint = NEW_DESC.hSizePair, hint_text = 'Item description',
+        pos = NEW_DESC_POS, font_name = FONT_BASK, font_size = FONT_SIZE_A)
+
+    new_cancel = Button(size_hint = NEW_BTN.hSizePair, text = 'CANCEL',
+        pos = NEW_CANCEL_POS, font_name = FONT_BASK, font_size = FONT_SIZE_A)
+    new_save = Button(size_hint = NEW_BTN.hSizePair, text = 'SAVE',
+        pos = NEW_SAVE_POS, font_name = FONT_BASK, font_size = FONT_SIZE_A)

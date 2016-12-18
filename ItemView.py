@@ -1,6 +1,6 @@
 from SysFuncs import *
 from BagItem import *
-from SaveStores import *
+from LoadSaves import *
 from AppInit import *
 
 IV_ICON = SizeMap(120, 120, (1030, 130))
@@ -23,4 +23,3 @@ class ItemView(Button):
 
         view.add_widget(self.dicon)
         view.add_widget(self.dname)
-        

@@ -2,11 +2,12 @@ import kivy
 kivy.require('1.9.1')
 
 from SysFuncs import *
+from LoadSaves import *
 from AppInit import *
 from Bag import *
 from BagItem import *
 from ItemView import *
-from SaveStores import *
+
 
 class BagOfHolding(RelativeLayout):
     def __init__(self, **kwargs):
@@ -23,16 +24,18 @@ class BagOfHolding(RelativeLayout):
         cont_List.bind(minimum_height = cont_List.setter('height'))
 
     def AddChildren(self):
+        # SCREEN MAIN ===================================================================
         # Background
-        self.add_widget(BG)
+        screen_main.add_widget(BG)
 
-        # SCREEN MAIN
+
         # Menu
         menu.add_widget(menu_Title)
         menu.add_widget(menu_Btn_Bag)
         menu.add_widget(menu_Btn_Opts)
 
-        self.add_widget(menu)
+        screen_main.add_widget(menu)
+
 
         # Tabs
         tabs.add_widget(tabs_Items)
@@ -40,42 +43,58 @@ class BagOfHolding(RelativeLayout):
         tabs.add_widget(tabs_New)
         tabs.add_widget(tabs_Pick)
 
-        self.add_widget(tabs)
+        screen_main.add_widget(tabs)
 
-        # Cont
+
+        # Contpane Items
         cont_Scroll.add_widget(cont_List)
-        cont.add_widget(cont_Scroll)
+        contpane_items.add_widget(cont_Scroll)
 
-        screen_main.add_widget(cont)
+        screen_main.add_widget(contpane_items)
 
-        self.add_widget(screen_main)
+        # Contpane New
+        contpane_new.add_widget(new_name)
+        contpane_new.add_widget(new_icon)
+        contpane_new.add_widget(new_qty)
+        contpane_new.add_widget(new_weight)
+        contpane_new.add_widget(new_val)
+        contpane_new.add_widget(new_tags)
+        contpane_new.add_widget(new_desc)
+        contpane_new.add_widget(new_cancel)
+        contpane_new.add_widget(new_save)
 
-
-        # SCREEN NEW
-
-
+        screen_main.add_widget(contpane_new)
 
         # Frame
-        self.add_widget(Border)
+        screen_main.add_widget(Border)
+
+        self.add_widget(screen_main)
 
 
 
     def OpenBag(self, openBagID):
         b = 0
-
         found = False
-        for bag in BAGS:
-            if bag.ID == openBagID:
-                b = bag.ID
+        bag = 0
+
+        bagIDs = BAGS.keys()
+
+        for ID in bagIDs:
+            if ID == openBagID:
+                b = ID
                 found = True
 
         # Specified bag could not be found. Open the first bag listed instead and send a
         # notification to the user.
-        if not found and len(BAGS) > 0:
+        if found:
+            bag = BAGS[b]
+        elif not found and len(bagIDs) > 0:
             # TODO Notify user that the bag they've selected could not be found
             bag = BAGS[0]
+            print('BAG NOT FOUND, BAGS AVAILABLE')
         # User does not have any bags created
-        elif not found and len(BAGS) == 0:
+        elif not found and len(bagIDs) == 0:
+            print('BAG NOT FOUND, NONE')
             bag = Bag()
 
         # Update the bag title on-screen
@@ -108,8 +127,8 @@ class BagOfHolding(RelativeLayout):
         cont_List.bind(minimum_height = cont_List.setter('height'))
         cont_Scroll.add_widget(cont_List)
 
-        cont.clear_widgets()
-        cont.add_widget(cont_Scroll)
+        contpane_items.clear_widgets()
+        contpane_items.add_widget(cont_Scroll)
 
 class Builder(App):
     title = "Bag of Holding"

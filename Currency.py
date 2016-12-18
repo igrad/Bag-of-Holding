@@ -1,13 +1,14 @@
 from SysFuncs import *
 
+
 CurrencyUnit = namedtuple('CurrencyUnit', 'name unitval')
 
-class CurrencySet():
+class CurrencySet:
     cTypes = list()
-
     def __init__(self, **kwargs):
         if 'cTypes' in kwargs:
-            self.cTypes = sorted([CurrencyUnit(x[0], x[1]) for x in kwargs['cTypes']], key = lambda x:x[1])
+            self.cTypes = sorted([CurrencyUnit(x[0], x[1]) for x in kwargs['cTypes']],
+                key = lambda x:x[1])
 
     def GetCNames(self):
         return self.cTypes.keys()
