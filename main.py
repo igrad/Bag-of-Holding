@@ -100,9 +100,9 @@ class BagOfHolding(RelativeLayout):
 
         # After all items have been posted to the grid for display, update the scroller's
         # height to reflect the size of the new grid.
-        self.UpdateLiveGrid()
+        self.UpdateItemList()
 
-    def UpdateLiveGrid(self):
+    def UpdateItemList(self):
         cont_Scroll.clear_widgets()
 
         cont_List.bind(minimum_height = cont_List.setter('height'))

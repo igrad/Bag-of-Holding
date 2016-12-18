@@ -36,7 +36,7 @@ def LoadItems():
             stags = list(itemStore.get(key)['tags'])
 
             item = BagItem(ID = key, name = sname, qty = sqty, mass = smass,
-                           desc = sdesc, icon = sicon, tags = stags)
+                desc = sdesc, icon = sicon, tags = stags)
 
             ITEMS.append(item)
 
@@ -163,7 +163,7 @@ def SaveBagInfo(scBag):
 def SaveItemInfo(scItem):
     '''Stores the item by copying a shallow copy of the actual item.'''
     itemStore.put(scItem.ID, name = scItem.name, qty = scItem.qty, weight = scItem.weight,
-                  desc = scItem.desc, icon = scItem.icon, tags = scItem.tags)
+        desc = scItem.desc, icon = scItem.icon, tags = scItem.tags)
 
 def DeleteItemFromSave(itemID):
     '''Removes the item from itemStore save file. This does not remove the item from bags that it may be saved in.'''

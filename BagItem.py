@@ -48,4 +48,5 @@ class BagItem():
         if 'icon' in kwargs: self.icon = str(kwargs['icon'])
         if 'tags' in kwargs: self.icon = list(kwargs['tags'])
 
-        UpdateItemInfo(self.ID, self.qty, self.weight, self.val, self.desc, self.icon, self.tags)
+        UpdateItemInfo(self.ID, self.qty, self.weight, self.val, self.desc, self.icon,
+            self.tags)
