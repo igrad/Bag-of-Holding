@@ -42,13 +42,10 @@ def LoadBags():
             sitems = dict(bagsStore.get(str(key))['items'])
             scurrency = list(bagsStore.get(str(key))['currency'])
 
-            print('creating bag')
             newBag = Bag(ID = key, name = sname, items = sitems,
                 currency = scurrency)
-            print('created new bag')
 
             BAGS[int(key)] = newBag
-            print('stored bag')
 
         except:
             print('bag exception raised')
