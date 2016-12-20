@@ -8,6 +8,8 @@ from Bag import *
 from BagItem import *
 from ItemView import *
 
+from BTN_New import *
+
 
 class BagOfHolding(RelativeLayout):
     def __init__(self, **kwargs):
@@ -17,11 +19,15 @@ class BagOfHolding(RelativeLayout):
         # Load all saved configurations and item/bag data
         LoadData()
 
+        self.SetBinds()
         self.AddChildren()
 
         self.OpenBag(LAST_BAG_OPENED)
 
         cont_List.bind(minimum_height = cont_List.setter('height'))
+
+    def SetBinds(self):
+        tabs_New.bind(on_press = OpenContPane_New)
 
     def AddChildren(self):
         # SCREEN MAIN ===================================================================
@@ -134,13 +140,13 @@ class Builder(App):
     title = "Bag of Holding"
 
     def build_config(self, config):
-        Config.set('graphics', 'borderless', '1')
+        Config.set('graphics', 'borderless', '0')
         Config.set('graphics', 'max_fps', '60')
-        Config.set('graphics', 'height', '1080')
-        Config.set('graphics', 'width', '1920')
-        Config.set('graphics', 'rotation', '90')
+        Config.set('graphics', 'height', '960')
+        Config.set('graphics', 'width', '540')
+        Config.set('graphics', 'rotation', '00')
         Config.set('graphics', 'show_cursor', '1')
-        Config.set('graphics', 'fullscreen', '1')
+        Config.set('graphics', 'fullscreen', '0')
 
         Config.set('kivy', 'window_icon', 'images/icon.png')
         Config.write()
