@@ -3,7 +3,7 @@ from LoadSaves import *
 from Bag import *
 from BagItem import *
 
-
+scale = (2)
 #=======================================================================================#
 # SYSTEM VARIABLES                                                                      #
 #=======================================================================================#
@@ -14,8 +14,8 @@ if True:
     FONT_BASK = 'fonts/BASKVILLE.TTF'
 
     # Sizes =============================================================================
-    APP_W = 1080
-    APP_H = 1920
+    APP_W = 1080 / scale
+    APP_H = 1920 / scale
     FRAME = SizeMap(1080, 1920, (APP_W, APP_H))
 
     # MAIN
@@ -45,33 +45,33 @@ if True:
     SCREEN_POS_ON = ZEROS
     SCREEN_POS_OFF = (APP_W, 0)
     # MAIN
-    MENU_POS = (20, 1720)
-    MENU_TITLE_POS = (260, 1723)
-    MENU_BTN_BAG_POS = (5, 5)
-    MENU_BTN_OPTS_POS = (865, 5)
+    MENU_POS = (20 / scale, 1720 / scale)
+    MENU_TITLE_POS = (260 / scale, 1723 / scale)
+    MENU_BTN_BAG_POS = (5 / scale, 5 / scale)
+    MENU_BTN_OPTS_POS = (865 / scale, 5 / scale)
 
-    TABS_POS = (15, 1588)
-    PICK_POS_A = (0, 0)
-    PICK_POS_B = (349, 0)
-    PICK_POS_C = (700, 0)
-    TAB_POS_A = (5, 2)
-    TAB_POS_B = (352, 2)
-    TAB_POS_C = (702, 2)
+    TABS_POS = (15 / scale, 1588 / scale)
+    PICK_POS_A = (0 / scale, 0 / scale)
+    PICK_POS_B = (349 / scale, 0 / scale)
+    PICK_POS_C = (700 / scale, 0 / scale)
+    TAB_POS_A = (5 / scale, 2 / scale)
+    TAB_POS_B = (352 / scale, 2 / scale)
+    TAB_POS_C = (702 / scale, 2 / scale)
 
-    CONT_POS = (20, 20)
-    CONT_POS_R = (1080, 20)
-    CONT_POS_L = (-1080, 20)
+    CONT_POS = (20 / scale, 20 / scale)
+    CONT_POS_R = (1080 / scale, 20 / scale)
+    CONT_POS_L = (-1080 / scale, 20 / scale)
 
     # NEW
-    NEW_NAME_POS = (30, 1415)
-    NEW_ICON_POS = (30, 980)
-    NEW_QTY_POS = (465, 1270)
-    NEW_WEIGHT_POS = (465, 1125)
-    NEW_VAL_POS = (465, 980)
-    NEW_TAGS_POS = (30, 835)
-    NEW_DESC_POS = (30, 190)
-    NEW_CANCEL_POS = (0, 0)
-    NEW_SAVE_POS = (520, 0)
+    NEW_NAME_POS = (30 / scale, 1415 / scale)
+    NEW_ICON_POS = (30 / scale, 980 / scale)
+    NEW_QTY_POS = (465 / scale, 1270 / scale)
+    NEW_WEIGHT_POS = (465 / scale, 1125 / scale)
+    NEW_VAL_POS = (465 / scale, 980 / scale)
+    NEW_TAGS_POS = (30 / scale, 835 / scale)
+    NEW_DESC_POS = (30 / scale, 190 / scale)
+    NEW_CANCEL_POS = (0 / scale, 0 / scale)
+    NEW_SAVE_POS = (520 / scale, 0 / scale)
 
 #=======================================================================================#
 # APP WIDGETS                                                                           #
@@ -123,8 +123,6 @@ if True:
 
 
     # NEW ITEM WIDGETS
-    screen_new = RelativeLayout(pos = ZEROS, size_hint = FRAME.hSizePair)
-
     # Input Fields
     new_name = TextInput(size_hint = NEW_TEXT_BIG.hSizePair, hint_text = 'Name',
         pos = NEW_NAME_POS, font_name = FONT_BASK, font_size = FONT_SIZE_A)
