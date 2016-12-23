@@ -29,9 +29,11 @@ if True:
     TABS_PICK = SizeMap(350, 125, TABS.sizePair)
 
     CONT = SizeMap(1040, 1560, FRAME.sizePair)
+    CONT_SPACE = SizeMap(0, 5, CONT.sizePair)
+    CONT_PAD = SizeMap(5, 5, CONT.sizePair)
 
     # ITEMS
-    LISTITEM = SizeMap(1030, 172, CONT.sizePair)
+    LISTITEM = SizeMap(1030, 130, CONT.sizePair)
 
     # NEW
     NEW_TEXT_BIG = SizeMap(980, 105, CONT.sizePair)
@@ -77,10 +79,6 @@ if True:
 # APP WIDGETS                                                                           #
 #=======================================================================================#
 if True:
-    # SYSTEM
-    CURRENTBAG = 0
-
-
     # FRAME
     BG = Image(size_hint = FILLS, source = 'images/IMG_MAIN_BG.png')
     Border = Image(size_hint = FILLS, source = 'images/IMG_MAIN_BORDER.png')
@@ -118,8 +116,8 @@ if True:
     # Items Content
     cont_Scroll = ScrollView(size_hint = FILLS, do_scroll_x = False, bar_width = 0)
     cont_List = GridLayout(size_hint = LISTITEM.hSizePair, cols = 1,
-        row_force_default = True, row_default_height = 172, spacing = [0, 5],
-        padding = [5, 0])
+        row_force_default = True, spacing = list(CONT_SPACE.sizePair),
+        padding = list(CONT_PAD.sizePair), row_default_height = LISTITEM.h)
 
 
     # NEW ITEM WIDGETS

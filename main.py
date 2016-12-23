@@ -27,7 +27,20 @@ class BagOfHolding(RelativeLayout):
         cont_List.bind(minimum_height = cont_List.setter('height'))
 
     def SetBinds(self):
+        # SCREEN MAIN ===================================================================
+        # MAIN
+
+        # TABS
         tabs_New.bind(on_press = OpenContPane_New)
+
+        # CONTENTPANES
+        # Items
+        # self.bindItemViews()
+
+        # Filters
+
+        # New
+        new_save.bind(on_press = InputItem)
 
     def AddChildren(self):
         # SCREEN MAIN ===================================================================
@@ -111,9 +124,12 @@ class BagOfHolding(RelativeLayout):
         cont_List.clear_widgets()
         i = 0
 
-        for item in bag.items:
-            ITEMVIEWS.append(ItemView(item))
-            i += 1
+        print('INFO || Number of items to load: ' + str(len(bag.items)))
+
+        LoadItems(bag.items)
+
+        for itemID in bag.items:
+            ITEMVIEWS.append(ItemView(itemID = itemID))
 
             # Filters still need to be applied after opening a new bag
             # TODO Apply filters after opening new bag
@@ -121,7 +137,12 @@ class BagOfHolding(RelativeLayout):
             # Add the remaining ItemViews to the grid
             # NOTE This will need to be made a function of the filter. IE, if the item
             # NOTE passes through the filter, post it to the grid.
+            print("TROUBLESHOOTING || ITEMVIEWS entries: " + str([x.itemID for x in ITEMVIEWS]))
+            print("TROUBLESHOOTING || ITEMVIEWS[0]: " + str(ITEMVIEWS[0]))
+
             cont_List.add_widget(ITEMVIEWS[i])
+
+            i += 1
 
         # After all items have been posted to the grid for display, update the scroller's
         # height to reflect the size of the new grid.
@@ -135,6 +156,7 @@ class BagOfHolding(RelativeLayout):
 
         contpane_items.clear_widgets()
         contpane_items.add_widget(cont_Scroll)
+
 
 class Builder(App):
     title = "Bag of Holding"

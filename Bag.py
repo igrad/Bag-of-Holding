@@ -8,14 +8,14 @@ from Currency import *
 class Bag:
     ID = 0
     name = 'Bag'
-    items = dict()
+    items = list()
     currency = CurrencySet()
-    
+
     def __init__(self, **kwargs):
         if 'ID' in kwargs: self.ID = int(kwargs['ID'])
         else: self.ID = self.GetNewBagID()
         if 'name' in kwargs: self.name = str(kwargs['name'])
-        if 'items' in kwargs: self.items = dict(kwargs['items'])
+        if 'items' in kwargs: self.items = list(kwargs['items'])
         if 'currency' in kwargs: self.currency = CurrencySet(cTypes = kwargs['currency'])
 
         BAGS[self.ID] = self
@@ -30,8 +30,11 @@ class Bag:
 
         SaveBagInfo(self)
 
-    def AddItem(self, item):
-        items[item.ID] = item
+    def AddItem(self, itemID):
+        self.items.append(itemID)
+        self.items.sort()
+
+        self.SaveBagInfo()
 
     def RemoveItemFromBag(self, itemID):
         del self.items[itemID]

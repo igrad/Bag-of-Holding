@@ -29,12 +29,12 @@ class BagItem():
         if 'val' in kwargs: self.val = float(kwargs['val'])
         if 'desc' in kwargs: self.desc = str(kwargs['desc'])
         if 'icon' in kwargs: self.icon = str(kwargs['icon'])
-        if 'tags' in kwargs: self.icon = list(kwargs['tags'])
+        if 'tags' in kwargs: self.icon = str(kwargs['tags'])
 
         ITEMS[self.ID] = self
 
         if 'ID' not in kwargs:
-            SaveItemInfo(self)
+            self.SaveItemInfo()
 
     def AddQty(self):
         self.qty += 1
@@ -69,7 +69,7 @@ class BagItem():
     def SaveItemInfo(self):
         '''Stores the item by copying a shallow copy of the actual item.'''
         itemStore.put(self.ID, name = self.name, qty = self.qty, weight = self.weight,
-            desc = self.desc, icon = self.icon, tags = self.tags)
+            val = self.val, desc = self.desc, icon = self.icon, tags = self.tags)
 
     def DeleteItemFromSave(self):
         '''Removes the item from itemStore save file. This does not remove the item from bags that it may be saved in.'''

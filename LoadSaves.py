@@ -4,27 +4,28 @@ from BagItem import *
 
 # Load data
 def LoadData():
-    LoadItems()
     LoadBags()
     LoadSettings()
 
-def LoadItems():
+def LoadItems(keys):
     '''Create a temp copy of the items store in itemStore, and make them accessible to the user by appending them to the ITEMS dict.'''
     failedItems = list()
 
-    for key in itemStore.keys():
+    ITEMS.clear()
+
+    for key in keys:
         try:
             sname = str(itemStore.get(key)['name'])
             sqty = int(itemStore.get(key)['qty'])
-            smass = float(itemStore.get(key)['mass'])
+            sweight = float(itemStore.get(key)['weight'])
             sdesc = str(itemStore.get(key)['desc'])
             sicon = str(itemStore.get(key)['icon'])
             stags = list(itemStore.get(key)['tags'])
 
-            item = BagItem(ID = key, name = sname, qty = sqty, mass = smass,
+            item = BagItem(ID = key, name = sname, qty = sqty, weight = sweight,
                 desc = sdesc, icon = sicon, tags = stags)
 
-            ITEMS.append(item)
+            ITEMS[item.ID] = item
 
         except:
             failedItems.append(key)
@@ -36,20 +37,22 @@ def LoadBags():
     '''Create a temp copy of the bags stored in bagsStore, and make them accessible to the user by appending them to the BAGS dict.'''
     failedBags = list()
 
+    print('INFO || Num keys in bagsStore: ' + str(len(bagsStore.keys())))
+
     for key in bagsStore.keys():
         try:
-            sname = str(bagsStore.get(str(key))['name'])
-            sitems = dict(bagsStore.get(str(key))['items'])
-            scurrency = list(bagsStore.get(str(key))['currency'])
+            sname = str(bagsStore.get(key)['name'])
+            sitems = list(bagsStore.get(key)['items'])
+            scurrency = list(bagsStore.get(key)['currency'])
 
             newBag = Bag(ID = key, name = sname, items = sitems,
                 currency = scurrency)
 
-            BAGS[int(key)] = newBag
+            BAGS[key] = newBag
 
-        except:
-            print('bag exception raised')
-            failedBags.append(str(key))
+        except Exception as ex:
+            print('ERROR || Bag exception raised')
+            failedBags.append(str(key) + ": " + str(ex))
 
     if len(failedBags) > 0:
         PostErrorMessage("ERROR while loading bags! Could not find/open the following bag(s): " + str(failedBags))

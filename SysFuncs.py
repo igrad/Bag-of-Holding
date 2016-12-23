@@ -40,6 +40,8 @@ BAGS = dict()
 ITEMS = dict()
 ITEMVIEWS = list()
 
+CURRENTBAG = 0
+
 MAX_BAGS = 10
 MAX_ITEMS = 5000
 LAST_BAG_OPENED = 0
