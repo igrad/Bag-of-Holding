@@ -3,9 +3,9 @@ from BagItem import *
 from LoadSaves import *
 from AppInit import *
 
-IV_ICON = SizeMap(120, 120, LISTITEM.sizePair)
-IV_NAME = SizeMap(895, 70, LISTITEM.sizePair)
-IV_DESC = SizeMap(895, 50, LISTITEM.sizePair)
+IV_ICON = SizeMap(175, 175, LISTITEM.sizePair)
+IV_NAME = SizeMap(800, 75, LISTITEM.sizePair)
+IV_DESC = SizeMap(800, 65, LISTITEM.sizePair)
 
 IV_ICON_POS = (5 / scale, 5 / scale)
 
@@ -21,7 +21,9 @@ class ItemView(Button):
         try:
             self.itemID = itemID
 
-            super(ItemView, self).__init__(**kwargs)
+            super(ItemView, self).__init__(background_down = 'images/IMG_ITEMVIEWBG.png',
+                background_normal = 'images/IMG_ITEMVIEWBG.png',
+                size_hint = FILLS, **kwargs)
 
             print("TROUBLESHOOTING || This Item's ID: " + str(self.itemID))
             print("TROUBLESHOOTING || List of available IDs: " + str(ITEMS.keys()))
