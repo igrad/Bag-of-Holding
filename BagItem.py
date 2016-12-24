@@ -59,9 +59,11 @@ class BagItem():
 
     def GetNewItemID(self):
         '''Gets an unused itemID number.'''
-        keys = ITEMS.keys()
+        keys = itemStore.keys()
+        print("GetNewItemID: itemStore.keys() = " + str(itemStore.keys()))
         for i in range(MAX_ITEMS):
-            if not i in keys: return i
+            print("GetNewItemID: i = " + str(i))
+            if not str(i) in keys: return i
 
         PostErrorMessage("No more items available!")
         return None
