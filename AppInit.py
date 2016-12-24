@@ -30,10 +30,10 @@ if True:
 
     CONT = SizeMap(1040, 1560, FRAME.sizePair)
     CONT_SPACE = SizeMap(0, 5, CONT.sizePair)
-    CONT_PAD = SizeMap(5, 5, CONT.sizePair)
+    CONT_PAD = SizeMap(2, 5, CONT.sizePair)
 
     # ITEMS
-    LISTITEM = SizeMap(1030, 130, CONT.sizePair)
+    LISTITEM = SizeMap(1030, 200, CONT.sizePair)
 
     # NEW
     NEW_TEXT_BIG = SizeMap(980, 105, CONT.sizePair)
@@ -115,9 +115,9 @@ if True:
 
     # Items Content
     cont_Scroll = ScrollView(size_hint = FILLS, do_scroll_x = False, bar_width = 0)
-    cont_List = GridLayout(size_hint = LISTITEM.hSizePair, cols = 1,
-        row_force_default = True, spacing = list(CONT_SPACE.sizePair),
-        padding = list(CONT_PAD.sizePair), row_default_height = LISTITEM.h)
+    cont_List = GridLayout(size_hint = (1.0, 0), cols = 1,
+        padding = list(CONT_PAD.sizePair), spacing = list(CONT_SPACE.sizePair),
+        row_default_height = LISTITEM.h / scale, row_force_default = True)
 
 
     # NEW ITEM WIDGETS
