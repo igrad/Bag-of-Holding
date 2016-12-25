@@ -92,22 +92,22 @@ if True:
     # Menu
     menu = RelativeLayout(pos = MENU_POS, size_hint = MENU.hSizePair)
     menu_Title = Label(size_hint = MENU_TITLE.hSizePair, pos = MENU_TITLE_POS,
-        font_name = FONT_BASK, font_size = FONT_SIZE_A, color = [0,0,0,1])
+        font_name = FONT_BASK, font_size = FONT_SIZE_A, color = [1,1,1,1])
     menu_Btn_Bag = Button(size_hint = MENU_BTN.hSizePair, pos = MENU_BTN_BAG_POS,
-        background_color = [0,0,0,0.5])
+        background_color = [0,0,0,0])
     menu_Btn_Opts = Button(size_hint = MENU_BTN.hSizePair, pos = MENU_BTN_OPTS_POS,
-        background_color = [0,0,0,0.5])
+        background_color = [0,0,0,0])
 
     # Tabs
     tabs = RelativeLayout(pos = TABS_POS, size_hint = TABS.hSizePair)
     tabs_Pick = Image(size_hint = TABS_PICK.hSizePair, pos = PICK_POS_A,
         source = 'images/IMG_FRAME.png')
     tabs_Items = Button(size_hint = TABS_BTN.hSizePair, pos = TAB_POS_A,
-        background_color = [0,0,0,0.5])
+        background_color = [0,0,0,0])
     tabs_Filter = Button(size_hint = TABS_BTN_MID.hSizePair, pos = TAB_POS_B,
-        text_size = NONES, background_color = [0,0,0,0.5])
+        text_size = NONES, background_color = [0,0,0,0])
     tabs_New = Button(size_hint = TABS_BTN.hSizePair, pos = TAB_POS_C,
-        background_color = [0,0,0,0.5])
+        background_color = [0,0,0,0])
 
     # Content Panes
     contpane_items = RelativeLayout(pos = CONT_POS, size_hint = CONT.hSizePair)
