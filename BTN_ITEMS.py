@@ -6,48 +6,42 @@ from BagItem import *
 from ItemView import *
 
 def OpenContPane_Items(obj):
+    OpenBag(CURRENTBAG)
     contpane_items.pos = CONT_POS
     contpane_new.pos = CONT_POS_R
 
 def OpenBag(openBagID):
-    b = 0
-    found = False
-    bag = 0
-
+    LoadBags()
+    
     bagIDs = BAGS.keys()
+    bagID = 0
 
-    for ID in bagIDs:
-        if ID == openBagID:
-            b = ID
-            found = True
+    if len(bagIDs) < 1:
+        newBag = Bag()
+        bagID = newBag.ID
+    else:
+        if openBagID in bagIDs:
+            bagID = openBagID
+        else:
+            # TODO Notify user that the bag they've selected could not be found
+            bagID = BAGS[bagIDs[0]]
 
-    # Specified bag could not be found. Open the first bag listed instead and send a
-    # notification to the user.
-    if found:
-        bag = BAGS[b]
-    elif not found and len(bagIDs) > 0:
-        # TODO Notify user that the bag they've selected could not be found
-        bag = BAGS[0]
-        print('BAG NOT FOUND, BAGS AVAILABLE')
-    # User does not have any bags created
-    elif not found and len(bagIDs) == 0:
-        print('BAG NOT FOUND, NONE')
-        bag = Bag()
+    CURRENTBAG = bagID
+    bag = BAGS[bagID]
 
     # Update the bag title on-screen
     # TODO Update loaded bag's title at the top of screen
 
     # Update the contents of the contPane GridLayout by creating individual ItemViews
-    ITEMVIEWS.clear()
     cont_List.clear_widgets()
-    i = 0
-
-    print('INFO || Number of items to load: ' + str(len(bag.items)))
+    ITEMVIEWS.clear()
 
     LoadItems(bag.items)
 
     for itemID in bag.items:
-        ITEMVIEWS.append(ItemView(itemID = itemID))
+        itemID = int(itemID)
+
+        newItem = ItemView(itemID = itemID)
 
         # Filters still need to be applied after opening a new bag
         # TODO Apply filters after opening new bag
@@ -55,16 +49,8 @@ def OpenBag(openBagID):
         # Add the remaining ItemViews to the grid
         # NOTE This will need to be made a function of the filter. IE, if the item
         # NOTE passes through the filter, post it to the grid.
-        print("TROUBLESHOOTING || ITEMVIEWS entries: " + str([x.itemID for x in ITEMVIEWS]))
-        print("TROUBLESHOOTING || ITEMVIEWS[0]: " + str(ITEMVIEWS[0]))
 
-        cont_List.add_widget(ITEMVIEWS[i])
-
-        i += 1
-
-    # After all items have been posted to the grid for display, update the scroller's
-    # height to reflect the size of the new grid.
-    UpdateItemList()
+        cont_List.add_widget(newItem)
 
 def UpdateItemList():
     cont_Scroll.clear_widgets()
