@@ -24,8 +24,8 @@ def InputItem(obj):
     if new_name.text == '': new_name.text = 'Unnamed Item'
     if new_icon.source == '': new_icon.source = 'images/blankIcon.png'
     if new_qty.text == '': new_qty.text = '1'
-    if new_weight.text == '': new_weight.text = '0'
-    if new_val.text == '': new_val.text = '0'
+    if new_weight.text == '': new_weight.text = '1'
+    if new_val.text == '': new_val.text = '1'
     if new_tags.text == '': new_tags.text = 'notag'
     if new_desc.text == '': new_desc.text = 'An undescribable item!'
 
@@ -35,7 +35,7 @@ def InputItem(obj):
         desc = new_desc.text)
 
     # Add the item to the open bag
-    BAGS[CURRENTBAG].AddItem(newItem.ID)
+    BAGS[CURRENTBAG].AddItem(int(newItem.ID))
 
     # Display a success message to the user
 

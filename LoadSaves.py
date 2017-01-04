@@ -13,21 +13,26 @@ def LoadItems(keys):
 
     ITEMS.clear()
 
+    itemStore = JsonStore('item_data.json')
+
     for key in keys:
+        key = str(key)
         try:
             sname = str(itemStore.get(key)['name'])
             sqty = int(itemStore.get(key)['qty'])
-            sweight = float(itemStore.get(key)['weight'])
+            sweight = int(itemStore.get(key)['weight'])
+            sval = int(itemStore.get(key)['val'])
             sdesc = str(itemStore.get(key)['desc'])
             sicon = str(itemStore.get(key)['icon'])
             stags = list(itemStore.get(key)['tags'])
 
             item = BagItem(ID = key, name = sname, qty = sqty, weight = sweight,
-                desc = sdesc, icon = sicon, tags = stags)
+                val = sval, desc = sdesc, icon = sicon, tags = stags)
 
             ITEMS[item.ID] = item
 
-        except:
+        except Exception as ex:
+            print("ERROR: LoadItems() error on itemID " + str(key) + ": " + str(ex))
             failedItems.append(key)
 
     if len(failedItems) > 0:
@@ -37,7 +42,7 @@ def LoadBags():
     '''Create a temp copy of the bags stored in bagsStore, and make them accessible to the user by appending them to the BAGS dict.'''
     failedBags = list()
 
-    print('INFO || Num keys in bagsStore: ' + str(len(bagsStore.keys())))
+    bagsStore = JsonStore('bags_data.json')
 
     for key in bagsStore.keys():
         try:
@@ -66,6 +71,8 @@ def LoadSettings():
     'NOOBIE_TIPS': True}
 
     opts = defaults
+
+    optsStore = JsonStore('user_settings.json')
 
     # Settings file existed before this load. Attempt to read settings.
     if optsStore.exists('existed'):

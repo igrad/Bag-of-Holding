@@ -25,6 +25,8 @@ from kivy.uix.image import Image
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 
+from kivy.uix.behaviors import ButtonBehavior
+
 
 # GLOBAL CONSTANTS
 NONES = (None, None)
@@ -38,7 +40,7 @@ optsStore = JsonStore('user_settings.json')
 
 BAGS = dict()
 ITEMS = dict()
-ITEMVIEWS = list()
+ITEMVIEWS = dict()
 
 CURRENTBAG = 0
 
@@ -56,6 +58,9 @@ class SizeMap():
         self.hw = self.w/parentPair[0]
         self.hh = self.h/parentPair[1]
         self.hSizePair = (self.hw, self.hh)
+        self.parentW = parentPair[0]
+        self.parentH = parentPair[1]
+        self.parentPair = parentPair
 
 def PostErrorMessage(err):
     print(err)
