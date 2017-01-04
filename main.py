@@ -94,16 +94,30 @@ class BagOfHolding(RelativeLayout):
 
 
 class Builder(App):
-    title = "Bag of Holding"
+    #mode = "PROD"
+    mode = "DEV"
 
     def build_config(self, config):
+        self.title = "Bag of Holding"
+
         Config.set('graphics', 'borderless', '0')
         Config.set('graphics', 'max_fps', '60')
         Config.set('graphics', 'height', '960')
         Config.set('graphics', 'width', '540')
-        Config.set('graphics', 'rotation', '00')
         Config.set('graphics', 'show_cursor', '1')
-        Config.set('graphics', 'fullscreen', '0')
+
+
+        if Builder.mode == "DEV":
+            Config.set('graphics', 'height', '960')
+            Config.set('graphics', 'width', '540')
+            Config.set('graphics', 'rotation', '00')
+            Config.set('graphics', 'fullscreen', '0')
+        else:
+            Config.set('graphics', 'height', '1080')
+            Config.set('graphics', 'width', '1920')
+            Config.set('graphics', 'rotation', '90')
+            Config.set('graphics', 'fullscreen', '1')
+
 
         Config.set('kivy', 'window_icon', 'images/icon.png')
         Config.write()

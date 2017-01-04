@@ -3,13 +3,13 @@ from BagItem import *
 from LoadSaves import *
 from AppInit import *
 
-IV_ICON = SizeMap(172, 172, LISTITEM.sizePair)
-IV_NAME = SizeMap(790, 75, LISTITEM.sizePair)
-IV_MISC = SizeMap(790, 65, LISTITEM.sizePair)
+IV_ICON = SizeMap(172, 172, LISTITEM.pair)
+IV_NAME = SizeMap(790, 75, LISTITEM.pair)
+IV_MISC = SizeMap(790, 65, LISTITEM.pair)
 
-IV_ICON_POS = (14 / scale, 14 / scale)
-IV_NAME_POS = (218 / scale, 102 / scale)
-IV_MISC_POS = (218 / scale, 15 / scale)
+IV_ICON_POS = (14 / SCALE, 14 / SCALE)
+IV_NAME_POS = (218 / SCALE, 102 / SCALE)
+IV_MISC_POS = (218 / SCALE, 15 / SCALE)
 
 class ItemView(ButtonBehavior, RelativeLayout):
     def __init__(self, itemID, **kwargs):
@@ -20,13 +20,13 @@ class ItemView(ButtonBehavior, RelativeLayout):
 
             self.dBG = Image(size_hint = FILLS, source = 'images/IMG_ITEMVIEWBG.png',
                 allow_stretch = True, keep_ratio = False)
-            self.dicon = Image(size_hint = IV_ICON.hSizePair, pos = IV_ICON_POS,
+            self.dicon = Image(size_hint = IV_ICON.hpair, pos = IV_ICON_POS,
                 source = 'images/none.png', allow_stretch = True, keep_ratio = False)
-            self.dname = Label(size_hint = IV_NAME.hSizePair, pos = IV_NAME_POS,
+            self.dname = Label(size_hint = IV_NAME.hpair, pos = IV_NAME_POS,
                 halign = 'left', valign = 'middle', text = 'Item Name',
                 font_name = FONT_BASK, font_size = FONT_SIZE_A, color = [1,1,1,1],
                 shorten = True, shorten_from = 'right')
-            self.dmisc = BoxLayout(size_hint = IV_MISC.hSizePair, pos = IV_MISC_POS,
+            self.dmisc = BoxLayout(size_hint = IV_MISC.hpair, pos = IV_MISC_POS,
                 orientation = 'horizontal')
             self.dqty = Label(size_hint = FILLS, text = 'Quantity: ',
                 font_name = FONT_BASK, font_size = FONT_SIZE_B, color = [1,1,1,1])
@@ -55,7 +55,7 @@ class ItemView(ButtonBehavior, RelativeLayout):
             self.view.add_widget(self.dname)
             self.view.add_widget(self.dmisc)
 
-            self.dname.text_size[0] = IV_NAME.hw * IV_NAME.parentW / scale
+            self.dname.text_size[0] = IV_NAME.hw * IV_NAME.parentW / SCALE
 
             self.add_widget(self.view)
 

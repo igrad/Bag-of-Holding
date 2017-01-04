@@ -14,18 +14,18 @@ from kivy.core.text import Text
 from kivy.animation import Animation
 from kivy.storage.jsonstore import JsonStore
 
-from kivy.uix.widget import Widget
-from kivy.uix.relativelayout import RelativeLayout
+from kivy.uix.button import Button
+from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.dropdown import DropDown
 from kivy.uix.gridlayout import GridLayout
-from kivy.uix.listview import ListView
-from kivy.uix.scrollview import ScrollView
-from kivy.uix.textinput import TextInput
 from kivy.uix.image import Image
 from kivy.uix.label import Label
-from kivy.uix.button import Button
-
-from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.listview import ListView
+from kivy.uix.relativelayout import RelativeLayout
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.textinput import TextInput
+from kivy.uix.widget import Widget
 
 
 # GLOBAL CONSTANTS
@@ -54,10 +54,10 @@ class SizeMap():
     def __init__(self, iw, ih, parentPair):
         self.w = iw
         self.h = ih
-        self.sizePair = (self.w, self.h)
+        self.pair = (self.w, self.h)
         self.hw = self.w/parentPair[0]
         self.hh = self.h/parentPair[1]
-        self.hSizePair = (self.hw, self.hh)
+        self.hpair = (self.hw, self.hh)
         self.parentW = parentPair[0]
         self.parentH = parentPair[1]
         self.parentPair = parentPair
