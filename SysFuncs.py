@@ -32,6 +32,7 @@ from kivy.uix.widget import Widget
 NONES = (None, None)
 ZEROS = (0, 0)
 FILLS = (1, 1)
+SCALE = 2
 
 #GLOBAL VARIABLES
 bagsStore = JsonStore('bags_data.json')
@@ -51,9 +52,12 @@ NOOBIE_TIPS = True
 
 # GLOBAL CLASSES
 class SizeMap():
-    def __init__(self, iw, ih, parentPair):
-        self.w = iw
-        self.h = ih
+    def __init__(self, x, y, w, h, parentPair):
+        self.x = x / SCALE
+        self.y = y / SCALE
+        self.w = w
+        self.h = h
+        self.pos = (self.x, self.y)
         self.pair = (self.w, self.h)
         self.hw = self.w/parentPair[0]
         self.hh = self.h/parentPair[1]
@@ -61,6 +65,21 @@ class SizeMap():
         self.parentW = parentPair[0]
         self.parentH = parentPair[1]
         self.parentPair = parentPair
+
+    def set(self, **kwargs):
+        for arg in kwargs:
+            if arg == 'x': self.x = kwargs.pop('x') / SCALE
+            elif arg == 'x': self.y = kwargs.pop('y') / SCALE
+            elif arg == 'x': self.w = kwargs.pop('w')
+            elif arg == 'x': self.h = kwargs.pop('h')
+            elif arg == 'x': self.pos = kwargs.pop('pos')
+            elif arg == 'x': self.pair = kwargs.pop('pair')
+            elif arg == 'x': self.hw = kwargs.pop('hw')
+            elif arg == 'x': self.hh = kwargs.pop('hh')
+            elif arg == 'x': self.hpair = kwargs.pop('hpair')
+            elif arg == 'x': self.parentW = kwargs.pop('parentW')
+            elif arg == 'x': self.parentH = kwargs.pop('parentH')
+            elif arg == 'x': self.parentPair = kwargs.pop('parentPair')
 
 def PostErrorMessage(err):
     print(err)
