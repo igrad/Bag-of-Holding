@@ -15,8 +15,7 @@ def OpenContPane_New(obj):
     new_tags.text = ''
     new_desc.text = ''
 
-    contpane_items.pos = CONT_POS_L
-    contpane_new.pos = CONT_POS
+    contpane.pos = CONT_POS_NEW
 
 def InputItem(obj):
     '''Process the values input on the New Item screen, create a new item from those values, save it to memory, and add it to the currently-opened bag.'''

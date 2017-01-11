@@ -28,32 +28,33 @@ if True:
     TABS_BTN_MID = SizeMap(0, 0, 345, 120, TABS.pair)
     TABS_PICK = SizeMap(0, 0, 350, 125, TABS.pair)
 
-    CONT = SizeMap(20, 20, 1040, 1560, FRAME.pair)
+    CONT = SizeMap(20, 20, 3120, 1560, FRAME.pair)
+    CONTPANE = SizeMap(0, 0, 1040, 1560, CONT.pair)
     CONT_SPACE = SizeMap(0, 0, 0, 5, CONT.pair)
     CONT_PAD = SizeMap(0, 0, 2, 5, CONT.pair)
 
     # ITEMS
-    LISTITEM = SizeMap(0, 0, 1030, 200, CONT.pair)
+    LISTITEM = SizeMap(0, 0, 1030, 200, CONTPANE.pair)
 
     # FILTER
-    FILT_NAME = SizeMap(30, 1415, 980, 105, CONT.pair)
-    FILT_CATLBL = SizeMap(30, 1270, 300, 105, CONT.pair)
-    FILT_CAT = SizeMap(370, 1270, 400, 105, CONT.pair)
-    FILT_SORTLBL = SizeMap(30, 1125, 300, 105, CONT.pair)
-    FILT_SORT = SizeMap(370, 1125, 400, 105, CONT.pair)
-    FILT_TAGSLBL = SizeMap(30, 980, 980, 105, CONT.pair)
-    FILT_TAGS = SizeMap(30, 835, 980, 605, CONT.pair)
+    FILT_NAME = SizeMap(30, 1415, 980, 105, CONTPANE.pair)
+    FILT_CATLBL = SizeMap(30, 1270, 300, 105, CONTPANE.pair)
+    FILT_CAT = SizeMap(370, 1270, 400, 105, CONTPANE.pair)
+    FILT_SORTLBL = SizeMap(30, 1125, 300, 105, CONTPANE.pair)
+    FILT_SORT = SizeMap(370, 1125, 400, 105, CONTPANE.pair)
+    FILT_TAGSLBL = SizeMap(30, 980, 980, 105, CONTPANE.pair)
+    FILT_TAGS = SizeMap(30, 835, 980, 605, CONTPANE.pair)
 
     # NEW
-    NEW_NAME = SizeMap(30, 1415, 980, 105, CONT.pair)
-    NEW_ICON = SizeMap(30, 980, 395, 395, CONT.pair)
-    NEW_QTY = SizeMap(465, 1270, 545, 105, CONT.pair)
-    NEW_WEIGHT = SizeMap(465, 1125, 545, 105, CONT.pair)
-    NEW_VAL = SizeMap(465, 980, 545, 105, CONT.pair)
-    NEW_TAGS = SizeMap(30, 835, 980, 105, CONT.pair)
-    NEW_DESC = SizeMap(30, 190, 980, 605, CONT.pair)
-    NEW_CANCEL = SizeMap(0, 0, 520, 150, CONT.pair)
-    NEW_SAVE = SizeMap(520, 0, 520, 150, CONT.pair)
+    NEW_NAME = SizeMap(30, 1415, 980, 105, CONTPANE.pair)
+    NEW_ICON = SizeMap(30, 980, 395, 395, CONTPANE.pair)
+    NEW_QTY = SizeMap(465, 1270, 545, 105, CONTPANE.pair)
+    NEW_WEIGHT = SizeMap(465, 1125, 545, 105, CONTPANE.pair)
+    NEW_VAL = SizeMap(465, 980, 545, 105, CONTPANE.pair)
+    NEW_TAGS = SizeMap(30, 835, 980, 105, CONTPANE.pair)
+    NEW_DESC = SizeMap(30, 190, 980, 605, CONTPANE.pair)
+    NEW_CANCEL = SizeMap(0, 0, 520, 150, CONTPANE.pair)
+    NEW_SAVE = SizeMap(520, 0, 520, 150, CONTPANE.pair)
 
     # Positions =========================================================================
     # SCREENS
@@ -68,8 +69,16 @@ if True:
     TAB_POS_B = (352 / SCALE, 2 / SCALE)
     TAB_POS_C = (702 / SCALE, 2 / SCALE)
 
-    CONT_POS_R = (1080 / SCALE, 20 / SCALE)
-    CONT_POS_L = (-1080 / SCALE, 20 / SCALE)
+    CONT_POS_ITEMS = (20 / SCALE, 20 / SCALE)
+    CONT_POS_FILTERS = (-1 * CONT.w + (20 / SCALE), 20 / SCALE)
+    CONT_POS_NEW = (-2 * CONT.w + (20 / SCALE), 20 / SCALE)
+
+    #CONT_POS_R = (1080 / SCALE, 20 / SCALE)
+    #CONT_POS_L = (-1080 / SCALE, 20 / SCALE)
+    CONTPANE_POS_A = (0, 0)
+    CONTPANE_POS_B = (CONT.w, 0)
+    CONTPANE_POS_C = (2 * CONT.w, 0)
+
 
 #=======================================================================================#
 # APP WIDGETS                                                                           #
@@ -106,8 +115,10 @@ if True:
         background_color = [0,0,0,0])
 
     # Content Panes
-    contpane_items = RelativeLayout(pos = CONT.pos, size_hint = CONT.hpair)
-    contpane_new = RelativeLayout(pos = CONT_POS_R, size_hint = CONT.hpair)
+    contpane = RelativeLayout(pos = CONT.pos, size_hint = CONT.hpair)
+    contpane_items = RelativeLayout(pos = CONTPANE_POS_A, size_hint = CONTPANE.hpair)
+    contpane_filters = RelativeLayout(pos = CONTPANE_POS_B, size_hint = CONTPANE.hpair)
+    contpane_new = RelativeLayout(pos = CONTPANE_POS_C, size_hint = CONTPANE.hpair)
 
     # Items Content
     cont_Scroll = ScrollView(size_hint = FILLS, do_scroll_x = False, bar_width = 0)
@@ -128,7 +139,7 @@ if True:
         font_name = FONT_BASK, font_size = FONT_SIZE_A)
     filt_cat_weight = Button(size_hint = FILT_CAT.hpair, text = 'weight',
         font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    filt_cat_qty = Button(size_hint = FILT_CAT.hpair, text = 'value',
+    filt_cat_val = Button(size_hint = FILT_CAT.hpair, text = 'value',
         font_name = FONT_BASK, font_size = FONT_SIZE_A)
     filt_sortlbl = Label(size_hint = FILT_SORTLBL.hpair, text = 'Sort type',
         pos = FILT_SORTLBL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)

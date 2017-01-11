@@ -7,12 +7,12 @@ from ItemView import *
 
 def OpenContPane_Items(obj):
     OpenBag(CURRENTBAG)
-    contpane_items.pos = CONT_POS
-    contpane_new.pos = CONT_POS_R
+
+    contpane.pos = CONT_POS_ITEMS
 
 def OpenBag(openBagID):
     LoadBags()
-    
+
     bagIDs = BAGS.keys()
     bagID = 0
 

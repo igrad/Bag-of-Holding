@@ -9,6 +9,7 @@ from BagItem import *
 from ItemView import *
 
 from BTN_New import *
+from BTN_FILTERS import *
 from BTN_ITEMS import *
 
 
@@ -33,6 +34,7 @@ class BagOfHolding(RelativeLayout):
 
         # TABS
         tabs_Items.bind(on_press = OpenContPane_Items)
+        tabs_Filter.bind(on_press = OpenContPane_Filters)
         tabs_New.bind(on_press = OpenContPane_New)
 
         # CONTENTPANES
@@ -51,41 +53,42 @@ class BagOfHolding(RelativeLayout):
         screen_main.add_widget(BG)
 
         # Menu
-        menu.add_widget(menu_Title)
-        menu.add_widget(menu_Btn_Bag)
-        menu.add_widget(menu_Btn_Opts)
+        for widge in [menu_Title, menu_Btn_Bag, menu_Btn_Opts]:
+            menu.add_widget(widge)
 
 
         # Tabs
-        tabs.add_widget(tabs_Items)
-        tabs.add_widget(tabs_Filter)
-        tabs.add_widget(tabs_New)
-        tabs.add_widget(tabs_Pick)
+        for widge in [tabs_Items, tabs_Filter, tabs_New, tabs_Pick]:
+            tabs.add_widget(widge)
 
 
         # Contpane Items
         cont_Scroll.add_widget(cont_List)
         contpane_items.add_widget(cont_Scroll)
 
+        # Contpane Filters
+        for widge in [filt_cat_name, filt_cat_qty, filt_cat_weight, filt_cat_val]:
+            filt_cat.add_widget(widge)
+
+        filt_sort.add_widget(filt_sort_asc)
+        filt_sort.add_widget(filt_sort_des)
+
+        filt_tags_scroll.add_widget(filt_tags)
+
+        for widge in [filt_name, filt_catlbl, filt_cat, filt_sortlbl, filt_sort, filt_tagslbl, filt_tags_scroll]:
+            contpane_filters.add_widget(widge)
 
         # Contpane New
-        contpane_new.add_widget(new_name)
-        contpane_new.add_widget(new_icon)
-        contpane_new.add_widget(new_qty)
-        contpane_new.add_widget(new_weight)
-        contpane_new.add_widget(new_val)
-        contpane_new.add_widget(new_tags)
-        contpane_new.add_widget(new_desc)
-        contpane_new.add_widget(new_cancel)
-        contpane_new.add_widget(new_save)
+        for widge in [new_name, new_icon, new_qty, new_weight, new_val, new_tags, new_desc, new_cancel, new_save]:
+            contpane_new.add_widget(widge)
 
+        # Contpane
+        for widge in [contpane_items, contpane_filters, contpane_new]:
+            contpane.add_widget(widge)
 
         # Render
-        screen_main.add_widget(contpane_items)
-        screen_main.add_widget(contpane_new)
-        screen_main.add_widget(Border)
-        screen_main.add_widget(menu)
-        screen_main.add_widget(tabs)
+        for widge in [contpane, Border, menu, tabs]:
+            screen_main.add_widget(widge)
 
         self.add_widget(screen_main)
 
