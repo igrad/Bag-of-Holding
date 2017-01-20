@@ -40,7 +40,8 @@ class ItemView(ButtonBehavior, RelativeLayout):
             self.dweight.text += str(ITEMS[self.itemID].weight)
             self.dval.text += str(ITEMS[self.itemID].val)
 
-            print("Creating ItemView for " + str(self.itemID) + ": " + str(ITEMS[self.itemID].qty) + ", " + str(ITEMS[self.itemID].weight) + ", " + str(ITEMS[self.itemID].val))
+            # Diagnostic string
+            #print("Creating ItemView for " + str(self.itemID) + ": " + str(ITEMS[self.itemID].qty) + ", " + str(ITEMS[self.itemID].weight) + ", " + str(ITEMS[self.itemID].val))
 
             self.dmisc.add_widget(self.dqty)
             self.dmisc.add_widget(self.dweight)

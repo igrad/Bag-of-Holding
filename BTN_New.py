@@ -1,4 +1,5 @@
 from SysFuncs import *
+from LoadSaves import *
 from AppInit import *
 from Bag import *
 from BagItem import *
@@ -15,7 +16,13 @@ def OpenContPane_New(obj):
     new_tags.text = ''
     new_desc.text = ''
 
-    contpane.pos = CONT_POS_NEW
+    time = T_SCREENSHIFT
+
+    if list(contpane.pos) == list(CONT_POS_ITEMS):
+        time  = time * 3
+
+    anim = Animation(pos = CONT_POS_NEW, duration = time, t = ANIMTYPE)
+    anim.start(contpane)
 
 def InputItem(obj):
     '''Process the values input on the New Item screen, create a new item from those values, save it to memory, and add it to the currently-opened bag.'''
@@ -28,7 +35,7 @@ def InputItem(obj):
     if new_tags.text == '': new_tags.text = 'notag'
     if new_desc.text == '': new_desc.text = 'An undescribable item!'
 
-    # Create the item itself. Automtically added to ITEMS
+    # Create the item itself. Automatically added to ITEMS
     newItem = BagItem(name = new_name.text, icon = new_icon.source, qty = new_qty.text,
         weight = new_weight.text, val = new_val.text, tags = new_tags.text,
         desc = new_desc.text)

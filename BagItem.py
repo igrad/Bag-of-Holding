@@ -23,10 +23,11 @@ class BagItem():
         if 'icon' in kwargs: self.icon = str(kwargs['icon'])
         if 'tags' in kwargs: self.tags = str(kwargs['tags'])
 
+        if self.ID == None: return
+
         ITEMS[self.ID] = self
 
         if 'ID' not in kwargs:
-            print("saving item data.....")
             self.SaveItemInfo()
 
     def AddQty(self):
@@ -56,7 +57,7 @@ class BagItem():
         print("GetNewItemID: itemStore.keys() = " + str(itemStore.keys()))
         for i in range(MAX_ITEMS):
             print("GetNewItemID: i = " + str(i))
-            if not i in keys: return i
+            if not i in keys: return int(i)
 
         PostErrorMessage("No more items available!")
         return None

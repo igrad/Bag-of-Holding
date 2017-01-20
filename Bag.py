@@ -57,9 +57,9 @@ class Bag:
 
     def SaveBagInfo(self):
         '''Stores the bag by copying a shallow copy of the actual bag.'''
-        bagsStore.put(self.ID, name = self.name, currency = self.currency.cTypes,
+        bagsStore.put(str(self.ID), name = self.name, currency = self.currency.cTypes,
             items = self.items)
 
     def DeleteBagFromSave(self):
         '''Removes the bag from bagsStore save file.'''
-        bagsStore.delete(self.ID)
+        bagsStore.delete(str(self.ID))

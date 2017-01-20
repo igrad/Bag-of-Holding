@@ -38,26 +38,43 @@ def LoadItems(keys):
     if len(failedItems) > 0:
         PostErrorMessage("ERROR: Could not load the following items: " + str(failedItems))
 
-def LoadBags():
+def LoadBags(bagKey = None):
     '''Create a temp copy of the bags stored in bagsStore, and make them accessible to the user by appending them to the BAGS dict.'''
     failedBags = list()
 
     bagsStore = JsonStore('bags_data.json')
 
-    for key in bagsStore.keys():
-        try:
-            sname = str(bagsStore.get(key)['name'])
-            sitems = list(bagsStore.get(key)['items'])
-            scurrency = list(bagsStore.get(key)['currency'])
+    if bagKey == None:
+        for key in bagsStore.keys():
+            try:
+                sname = str(bagsStore.get(key)['name'])
+                sitems = list(bagsStore.get(key)['items'])
+                scurrency = list(bagsStore.get(key)['currency'])
 
-            newBag = Bag(ID = key, name = sname, items = sitems,
-                currency = scurrency)
+                newBag = Bag(ID = key, name = sname, items = sitems,
+                    currency = scurrency)
 
-            BAGS[key] = newBag
+                BAGS[key] = newBag
 
-        except Exception as ex:
-            print('ERROR || Bag exception raised')
-            failedBags.append(str(key) + ": " + str(ex))
+            except Exception as ex:
+                print('ERROR || Bag exception raised')
+                failedBags.append(str(key) + ": " + str(ex))
+    else:
+        if bagKey in bagsStore.keys():
+            try:
+                sname = str(bagsStore.get(key)['name'])
+                sitems = list(bagsStore.get(key)['items'])
+                scurrency = list(bagsStore.get(key)['currency'])
+
+                newBag = Bag(ID = key, name = sname, items = sitems,
+                    currency = scurrency)
+
+                BAGS[bagKey] = newBag
+
+            except Exception as ex:
+                print('ERROR || Bag exception raised, could not load bag ' + str(bagKey))
+                failedBags.append(str(key) + ": " + str(ex))
+
 
     if len(failedBags) > 0:
         PostErrorMessage("ERROR while loading bags! Could not find/open the following bag(s): " + str(failedBags))

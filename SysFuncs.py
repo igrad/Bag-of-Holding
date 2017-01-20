@@ -34,6 +34,10 @@ ZEROS = (0, 0)
 FILLS = (1, 1)
 SCALE = 2
 
+ANIMTIME = 0.50
+T_SCREENSHIFT = 0.25
+ANIMTYPE = 'in_out_quart'
+
 #GLOBAL VARIABLES
 bagsStore = JsonStore('bags_data.json')
 itemStore = JsonStore('item_data.json')
