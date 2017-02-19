@@ -1,12 +1,12 @@
 # Bag-of-Holding
-Bag of Holding is a cross-platform mobile app for maintaining inventory in fictionalized games. This project is heavily inspired by Dungeons & Dragons' Bag of Holding item, and is intended as a small play on the well-known item in D&D groups. The app is intended for both iOS and Android platforms, and does not intend to support Windows mobile devices.
+Bag of Holding is a cross-platform mobile app for maintaining inventory in RPG tabletop games, such as Dungeons and Dragons, Warhammer 40k, and others. This project is heavily inspired by Dungeons & Dragons' Bag of Holding item, and is intended as a small play on the well-known item. The app is intended for both iOS and Android platforms, and may support Windows mobile platforms down the road if Kivy begins to support it.
 
-At the time of writing, there are quite a few ideas bouncing around for this project, but few of those things are set in stone. The hopeful release for this project is early 2018, depending on how these first iterations go.
+At the time of writing, there are quite a few ideas bouncing around for this project, and few of those things are set in stone. The targeted release for this project is early 2018, depending on how the first few iterations go. The projet is currently on its third visual iteration, which should hopefully be its last.
 
-This is intended to be released as a free app, with options for donations. I do not intend to use any ads for revenue, as this is fully intended to be a small contribution to the D&D community and not a source of profit for me.
+This is intended to be released as a free app, with options for donations. There will be no ads for revenue, as this is simply a small contribution to the gaming community - not my source of income.
 
-<h2>Initial Concept Art</h2>
-<img src="http://puu.sh/sQm1E/cc3406e34c.png"><img/>
+<h3>Early Artwork (3rd iteration)</h3>
+<img src="http://puu.sh/uapte/f96cdf510b.png"><img/>
 
-<h2>Technical</h2>
-Built using Python 3.4.4 and Kivy 1.9.2. If you're interested in the source for this project, by all means have a look and critique my code!
+<h3>Technical</h3>
+As mentioned above, this is built using <a href="https://www.python.org/downloads/release/python-344/">Python 3.4.4</a> and <a href="https://kivy.org/docs/gettingstarted/intro.html">Kivy 1.9.2</a>. This project is being released for public use under the GPL 3.0 license, in keeping with Kivy and Python's respective licensing. Please see the LICENSE file for further licensing information.
