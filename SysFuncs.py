@@ -4,7 +4,7 @@ kivy.require('1.9.1')
 # Core
 from collections import deque as Deque
 from collections import namedtuple
-import datetime
+from time import clock
 
 # Kivy
 from kivy.app import App
@@ -18,6 +18,7 @@ from kivy.uix.button import Button
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.dropdown import DropDown
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import Image
 from kivy.uix.label import Label
@@ -32,7 +33,8 @@ from kivy.uix.widget import Widget
 NONES = (None, None)
 ZEROS = (0, 0)
 FILLS = (1, 1)
-SCALE = 2
+XSCALE = 1
+YSCALE = 1
 
 ANIMTIME = 0.50
 T_SCREENSHIFT = 0.25
@@ -46,6 +48,7 @@ optsStore = JsonStore('user_settings.json')
 BAGS = dict()
 ITEMS = dict()
 ITEMVIEWS = dict()
+FILTERS = dict()
 
 CURRENTBAG = 0
 
@@ -57,8 +60,8 @@ NOOBIE_TIPS = True
 # GLOBAL CLASSES
 class SizeMap():
     def __init__(self, x, y, w, h, parentPair):
-        self.x = x / SCALE
-        self.y = y / SCALE
+        self.x = x / XSCALE
+        self.y = y / YSCALE
         self.w = w
         self.h = h
         self.pos = (self.x, self.y)
@@ -70,20 +73,8 @@ class SizeMap():
         self.parentH = parentPair[1]
         self.parentPair = parentPair
 
-    def set(self, **kwargs):
-        for arg in kwargs:
-            if arg == 'x': self.x = kwargs.pop('x') / SCALE
-            elif arg == 'x': self.y = kwargs.pop('y') / SCALE
-            elif arg == 'x': self.w = kwargs.pop('w')
-            elif arg == 'x': self.h = kwargs.pop('h')
-            elif arg == 'x': self.pos = kwargs.pop('pos')
-            elif arg == 'x': self.pair = kwargs.pop('pair')
-            elif arg == 'x': self.hw = kwargs.pop('hw')
-            elif arg == 'x': self.hh = kwargs.pop('hh')
-            elif arg == 'x': self.hpair = kwargs.pop('hpair')
-            elif arg == 'x': self.parentW = kwargs.pop('parentW')
-            elif arg == 'x': self.parentH = kwargs.pop('parentH')
-            elif arg == 'x': self.parentPair = kwargs.pop('parentPair')
 
-def PostErrorMessage(err):
-    print(err)
+# GLOBAL METHODS
+def LogMsg(text):
+    processTime = clock()
+    print("[" + processTime + "] " + err)

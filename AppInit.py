@@ -2,6 +2,7 @@ from SysFuncs import *
 from LoadSaves import *
 from Bag import *
 from BagItem import *
+from modules.DropBtn import *
 
 #=======================================================================================#
 # SYSTEM VARIABLES                                                                      #
@@ -11,22 +12,23 @@ if True:
     FONT_SIZE_A = 32
     FONT_SIZE_B = 20
     FONT_BASK = 'fonts/BASKVILLE.TTF'
+    WHITE = [1,1,1,1]
+    BLACK = [0,0,0,1]
+    CLEAR = [0,0,0,0]
 
     # Sizes =============================================================================
-    APP_W = 1080 / SCALE
-    APP_H = 1920 / SCALE
-    FRAME = SizeMap(0, 0, 1080, 1920, (APP_W, APP_H))
+    APP_W = 432 / XSCALE
+    APP_H = 768 / YSCALE
+    FRAME = SizeMap(0, 0, 432, 768, (APP_W, APP_H))
 
     # MAIN
-    MENU = SizeMap(20, 1720, 1040, 180, FRAME.pair)
-    MENU_BTN_BAG = SizeMap(5, 5, 172, 172, MENU.pair)
-    MENU_BTN_OPTS = SizeMap(865, 5, 172, 172, MENU.pair)
-    MENU_TITLE = SizeMap(260, 1723, 560, 80, MENU.pair)
+    MENU = SizeMap(0, 671, 432, 98, FRAME.pair)
+    MENU_BTN_BAG = SizeMap(19, 19, 72, 72, MENU.pair)
+    MENU_BTN_OPTS = SizeMap(343, 19, 72, 72, MENU.pair)
+    MENU_TITLE = SizeMap(153, 35, 128, 40, MENU.pair)
 
-    TABS = SizeMap(15, 1588, 1050, 125, FRAME.pair)
-    TABS_BTN = SizeMap(0, 0, 342, 120, TABS.pair)
-    TABS_BTN_MID = SizeMap(0, 0, 345, 120, TABS.pair)
-    TABS_PICK = SizeMap(0, 0, 350, 125, TABS.pair)
+    TABS = SizeMap(0, 603, 432, 60, FRAME.pair)
+    TABS_BTN = SizeMap(0, 0, 144, 60, TABS.pair)
 
     CONT = SizeMap(20, 20, 3120, 1560, FRAME.pair)
     CONTPANE = SizeMap(0, 0, 1040, 1560, CONT.pair)
@@ -39,11 +41,11 @@ if True:
     # FILTER
     FILT_NAME = SizeMap(30, 1415, 980, 105, CONTPANE.pair)
     FILT_CATLBL = SizeMap(30, 1270, 300, 105, CONTPANE.pair)
-    FILT_CAT = SizeMap(370, 1270, 400, 105, CONTPANE.pair)
+    FILT_CAT = SizeMap(370, 1270, 240, 60, CONTPANE.pair)
     FILT_SORTLBL = SizeMap(30, 1125, 300, 105, CONTPANE.pair)
     FILT_SORT = SizeMap(370, 1125, 400, 105, CONTPANE.pair)
     FILT_TAGSLBL = SizeMap(30, 980, 980, 105, CONTPANE.pair)
-    FILT_TAGS = SizeMap(30, 835, 980, 605, CONTPANE.pair)
+    FILT_TAGS = SizeMap(30, 835, 980, 205, CONTPANE.pair)
 
     # NEW
     NEW_NAME = SizeMap(30, 1415, 980, 105, CONTPANE.pair)
@@ -62,19 +64,17 @@ if True:
     SCREEN_POS_OFF = (APP_W, 0)
 
     # MAIN
-    PICK_POS_A = (0 / SCALE, 0 / SCALE)
-    PICK_POS_B = (349 / SCALE, 0 / SCALE)
-    PICK_POS_C = (700 / SCALE, 0 / SCALE)
-    TAB_POS_A = (5 / SCALE, 2 / SCALE)
-    TAB_POS_B = (352 / SCALE, 2 / SCALE)
-    TAB_POS_C = (702 / SCALE, 2 / SCALE)
+    PICK_POS_A = (0 / XSCALE, 0 / YSCALE)
+    PICK_POS_B = (349 / XSCALE, 0 / YSCALE)
+    PICK_POS_C = (700 / XSCALE, 0 / YSCALE)
+    TAB_POS_A = (5 / XSCALE, 2 / YSCALE)
+    TAB_POS_B = (352 / XSCALE, 2 / YSCALE)
+    TAB_POS_C = (702 / XSCALE, 2 / YSCALE)
 
-    CONT_POS_ITEMS = (20 / SCALE, 20 / SCALE)
-    CONT_POS_FILTERS = (-1 * CONT.w + (20 / SCALE), 20 / SCALE)
-    CONT_POS_NEW = (-2 * CONT.w + (20 / SCALE), 20 / SCALE)
+    CONT_POS_ITEMS = (20 / XSCALE, 20 / YSCALE)
+    CONT_POS_FILTERS = (-1 * CONT.w + (20 / XSCALE), 20 / YSCALE)
+    CONT_POS_NEW = (-2 * CONT.w + (20 / XSCALE), 20 / YSCALE)
 
-    #CONT_POS_R = (1080 / SCALE, 20 / SCALE)
-    #CONT_POS_L = (-1080 / SCALE, 20 / SCALE)
     CONTPANE_POS_A = (0, 0)
     CONTPANE_POS_B = (CONT.w, 0)
     CONTPANE_POS_C = (2 * CONT.w, 0)
@@ -85,8 +85,7 @@ if True:
 #=======================================================================================#
 if True:
     # FRAME
-    BG = Image(size_hint = FILLS, source = 'images/IMG_MAIN_BG.png')
-    Border = Image(size_hint = FILLS, source = 'images/IMG_MAIN_BORDER.png')
+    BG = Image(size_hint = FILLS, source = 'images/IMG_MAIN.png')
 
 
     # SCREENS
@@ -99,20 +98,16 @@ if True:
     menu_Title = Label(size_hint = MENU_TITLE.hpair, pos = MENU_TITLE.pos,
         font_name = FONT_BASK, font_size = FONT_SIZE_A, color = [1,1,1,1])
     menu_Btn_Bag = Button(size_hint = MENU_BTN_BAG.hpair, pos = MENU_BTN_BAG.pos,
-        background_color = [0,0,0,0])
+        background_color = CLEAR)
     menu_Btn_Opts = Button(size_hint = MENU_BTN_OPTS.hpair, pos = MENU_BTN_OPTS.pos,
-        background_color = [0,0,0,0])
+        background_color = CLEAR)
 
     # Tabs
-    tabs = RelativeLayout(pos = TABS.pos, size_hint = TABS.hpair)
-    tabs_Pick = Image(size_hint = TABS_PICK.hpair, pos = PICK_POS_A,
-        source = 'images/IMG_FRAME.png')
-    tabs_Items = Button(size_hint = TABS_BTN.hpair, pos = TAB_POS_A,
-        background_color = [0,0,0,0])
-    tabs_Filter = Button(size_hint = TABS_BTN_MID.hpair, pos = TAB_POS_B,
-        text_size = NONES, background_color = [0,0,0,0])
-    tabs_New = Button(size_hint = TABS_BTN.hpair, pos = TAB_POS_C,
-        background_color = [0,0,0,0])
+    tabs = BoxLayout(pos = TABS.pos, size_hint = TABS.hpair, orientation = 'horizontal')
+    tabs_Sort = Button(size_hint = TABS_BTN.hpair, text = 'Sort', color = WHITE,
+        font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = CLEAR)
+    tabs_Filt = Button(size_hint = TABS_BTN.hpair, background_color = CLEAR)
+    tabs_View = Button(size_hint = TABS_BTN.hpair, background_color = CLEAR)
 
     # Content Panes
     contpane = RelativeLayout(pos = CONT.pos, size_hint = CONT.hpair)
@@ -124,7 +119,7 @@ if True:
     cont_Scroll = ScrollView(size_hint = FILLS, do_scroll_x = False, bar_width = 0)
     cont_List = GridLayout(size_hint = (1.0, 0), cols = 1,
         padding = list(CONT_PAD.pair), spacing = list(CONT_SPACE.pair),
-        row_default_height = LISTITEM.h / SCALE, row_force_default = True)
+        row_default_height = LISTITEM.h / YSCALE, row_force_default = True)
 
 
     # FILTERS ITEM WIDGETS
@@ -132,18 +127,18 @@ if True:
         pos = FILT_NAME.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
     filt_catlbl = Label(size_hint = FILT_CATLBL.hpair, text = 'Sort by',
         pos = FILT_CATLBL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    filt_cat = DropDown(size_hint = FILT_CAT.hpair, pos = FILT_CAT.pos)
-    filt_cat_name = Button(size_hint = FILT_CAT.hpair, text = 'name',
-        font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    filt_cat_qty = Button(size_hint = FILT_CAT.hpair, text = 'quantity',
-        font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    filt_cat_weight = Button(size_hint = FILT_CAT.hpair, text = 'weight',
-        font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    filt_cat_val = Button(size_hint = FILT_CAT.hpair, text = 'value',
-        font_name = FONT_BASK, font_size = FONT_SIZE_A)
+    filt_cat = DropBtn(sizeMap = CONTPANE, head_sizeMap = FILT_CAT, head_text = 'name',
+        btn_bg = 'images/filtbtnbg.png', btn_font_name = FONT_BASK,
+        btn_font_color = [0,0,1,1], btn_font_size = FONT_SIZE_A, btn_height = FILT_CAT.hh,
+        drop_direction = 'below', drop_max_height = 900,
+        drop_anim_open = {'duration': 0.30, 't': 'in_quad'},
+        drop_anim_close = {'duration': 0.30, 't': 'out_quad'},
+        options = ['name', 'quantity', 'weight', 'value'])
     filt_sortlbl = Label(size_hint = FILT_SORTLBL.hpair, text = 'Sort type',
         pos = FILT_SORTLBL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    filt_sort = DropDown(size_hint = FILT_SORT.hpair, pos = FILT_SORT.pos)
+    filt_sort = DropDown(size_hint = ZEROS)
+    filt_sort_pick = Button(size_hint = FILT_SORT.hpair, text = 'sort pick',
+        pos = FILT_SORT.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
     filt_sort_asc = Button(size_hint = FILT_SORT.hpair, text = 'ascending',
         font_name = FONT_BASK, font_size = FONT_SIZE_A)
     filt_sort_des = Button(size_hint = FILT_SORT.hpair, text = 'descending',
@@ -155,8 +150,7 @@ if True:
         do_scroll_x = False, bar_width = 0)
     filt_tags = GridLayout(size_hint = (1.0, 0), cols = 1, padding = ZEROS,
         spacing = ZEROS, row_force_default = True,
-        row_default_height = FILT_TAGSLBL.h / SCALE)
-
+        row_default_height = FILT_TAGSLBL.h / YSCALE)
 
 
     # NEW ITEM WIDGETS

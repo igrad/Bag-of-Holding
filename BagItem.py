@@ -59,7 +59,7 @@ class BagItem():
             print("GetNewItemID: i = " + str(i))
             if not i in keys: return int(i)
 
-        PostErrorMessage("No more items available!")
+        LogMsg("No more items available!")
         return None
 
     def SaveItemInfo(self):

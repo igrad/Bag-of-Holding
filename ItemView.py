@@ -52,7 +52,7 @@ class ItemView(ButtonBehavior, RelativeLayout):
             self.view.add_widget(self.dname)
             self.view.add_widget(self.dmisc)
 
-            self.dname.text_size[0] = IV_NAME.hw * IV_NAME.parentW / SCALE
+            self.dname.text_size[0] = IV_NAME.hw * IV_NAME.parentW / YSCALE
 
             self.add_widget(self.view)
 

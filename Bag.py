@@ -52,7 +52,7 @@ class Bag:
         for i in range(MAX_BAGS):
             if not i in keys: return i
 
-        PostErrorMessage("No more bags available!")
+        LogMsg("No more bags available!")
         return None
 
     def SaveBagInfo(self):

@@ -36,7 +36,7 @@ def LoadItems(keys):
             failedItems.append(key)
 
     if len(failedItems) > 0:
-        PostErrorMessage("ERROR: Could not load the following items: " + str(failedItems))
+        LogMsg("ERROR: Could not load the following items: " + str(failedItems))
 
 def LoadBags(bagKey = None):
     '''Create a temp copy of the bags stored in bagsStore, and make them accessible to the user by appending them to the BAGS dict.'''
@@ -77,7 +77,7 @@ def LoadBags(bagKey = None):
 
 
     if len(failedBags) > 0:
-        PostErrorMessage("ERROR while loading bags! Could not find/open the following bag(s): " + str(failedBags))
+        LogMsg("ERROR while loading bags! Could not find/open the following bag(s): " + str(failedBags))
 
 def LoadSettings():
     '''Calls the saved settings file and loads the settings to file.'''
@@ -101,7 +101,7 @@ def LoadSettings():
             LAST_BAG_OPENED = int(opts['LAST_BAG_OPENED'])
             NOOBIE_TIPS = bool(opts['NOOBIE_TIPS'])
         except:
-            PostErrorMessage("ERROR: Saved settings file existed, but is empty. Preferences reset to defaults.")
+            LogMsg("ERROR: Saved settings file existed, but is empty. Preferences reset to defaults.")
             optsStore.put('opts', d = defaults)
     else:
         optsStore.put('existed', d = True)
