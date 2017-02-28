@@ -22,21 +22,33 @@ if True:
     FRAME = SizeMap(0, 0, 432, 768, (APP_W, APP_H))
 
     # MAIN
-    MENU = SizeMap(0, 671, 432, 98, FRAME.pair)
-    MENU_BTN_BAG = SizeMap(19, 19, 72, 72, MENU.pair)
-    MENU_BTN_OPTS = SizeMap(343, 19, 72, 72, MENU.pair)
-    MENU_TITLE = SizeMap(153, 35, 128, 40, MENU.pair)
+    MENU = SizeMap(0, 670, 432, 98, FRAME.pair)
+    MENU_BTN_BAG = SizeMap(18, 18, 72, 72, MENU.pair)
+    MENU_BTN_OPTS = SizeMap(342, 18, 72, 72, MENU.pair)
+    MENU_TITLE = SizeMap(153, 34, 128, 40, MENU.pair)
 
-    TABS = SizeMap(0, 603, 432, 60, FRAME.pair)
+    TABS = SizeMap(0, 602, 432, 60, FRAME.pair)
     TABS_BTN = SizeMap(0, 0, 144, 60, TABS.pair)
 
-    CONT = SizeMap(20, 20, 3120, 1560, FRAME.pair)
+    CONT = SizeMap(0, 0, 432, 557, FRAME.pair)
     CONTPANE = SizeMap(0, 0, 1040, 1560, CONT.pair)
     CONT_SPACE = SizeMap(0, 0, 0, 5, CONT.pair)
-    CONT_PAD = SizeMap(0, 0, 2, 5, CONT.pair)
+    CONT_PAD = SizeMap(0, 0, 2, 2, CONT.pair)
+    CONT_SCROLL = SizeMap(0, 0, 20, 0, CONT.pair)
 
     # ITEMS
-    LISTITEM = SizeMap(0, 0, 1030, 200, CONTPANE.pair)
+    ITEMVIEW_COZY = SizeMap(0, 0, 408, 80, CONTPANE.pair)
+    ITEMVIEW_NORM = SizeMap(0, 0, 408, 24, CONTPANE.pair)
+    ITEMVIEW_CARD = SizeMap(0, 0, 408, 120, CONTPANE.pair)
+    IV_COZY_ICON = SizeMap(14, 14, 172, 172, ITEMVIEW_COZY.pair)
+    IV_COZY_NAME = SizeMap(218, 102, 790, 75, ITEMVIEW_COZY.pair)
+    IV_COZY_MISC = SizeMap(218, 15, 790, 65, ITEMVIEW_COZY.pair)
+    IV_NORM_ICON = SizeMap(14, 14, 172, 172, ITEMVIEW_NORM.pair)
+    IV_NORM_NAME = SizeMap(218, 102, 790, 75, ITEMVIEW_NORM.pair)
+    IV_NORM_MISC = SizeMap(218, 15, 790, 65, ITEMVIEW_NORM.pair)
+    IV_CARD_ICON = SizeMap(14, 14, 172, 172, ITEMVIEW_CARD.pair)
+    IV_CARD_NAME = SizeMap(218, 102, 790, 75, ITEMVIEW_CARD.pair)
+    IV_CARD_MISC = SizeMap(218, 15, 790, 65, ITEMVIEW_CARD.pair)
 
     # FILTER
     FILT_NAME = SizeMap(30, 1415, 980, 105, CONTPANE.pair)
@@ -63,22 +75,6 @@ if True:
     SCREEN_POS_ON = ZEROS
     SCREEN_POS_OFF = (APP_W, 0)
 
-    # MAIN
-    PICK_POS_A = (0 / XSCALE, 0 / YSCALE)
-    PICK_POS_B = (349 / XSCALE, 0 / YSCALE)
-    PICK_POS_C = (700 / XSCALE, 0 / YSCALE)
-    TAB_POS_A = (5 / XSCALE, 2 / YSCALE)
-    TAB_POS_B = (352 / XSCALE, 2 / YSCALE)
-    TAB_POS_C = (702 / XSCALE, 2 / YSCALE)
-
-    CONT_POS_ITEMS = (20 / XSCALE, 20 / YSCALE)
-    CONT_POS_FILTERS = (-1 * CONT.w + (20 / XSCALE), 20 / YSCALE)
-    CONT_POS_NEW = (-2 * CONT.w + (20 / XSCALE), 20 / YSCALE)
-
-    CONTPANE_POS_A = (0, 0)
-    CONTPANE_POS_B = (CONT.w, 0)
-    CONTPANE_POS_C = (2 * CONT.w, 0)
-
 
 #=======================================================================================#
 # APP WIDGETS                                                                           #
@@ -87,40 +83,33 @@ if True:
     # FRAME
     BG = Image(size_hint = FILLS, source = 'images/IMG_MAIN.png')
 
-
     # SCREENS
     screen_main = RelativeLayout(pos = SCREEN_POS_ON, size_hint = FILLS)
     screen_settings = RelativeLayout(pos = SCREEN_POS_OFF, size_hint = FILLS)
 
-
     # Menu
     menu = RelativeLayout(pos = MENU.pos, size_hint = MENU.hpair)
     menu_Title = Label(size_hint = MENU_TITLE.hpair, pos = MENU_TITLE.pos,
-        font_name = FONT_BASK, font_size = FONT_SIZE_A, color = [1,1,1,1])
+        font_name = FONT_BASK, font_size = FONT_SIZE_A, color = WHITE)
     menu_Btn_Bag = Button(size_hint = MENU_BTN_BAG.hpair, pos = MENU_BTN_BAG.pos,
-        background_color = CLEAR)
+        background_color = BLACK)
     menu_Btn_Opts = Button(size_hint = MENU_BTN_OPTS.hpair, pos = MENU_BTN_OPTS.pos,
-        background_color = CLEAR)
+        background_color = BLACK)
 
     # Tabs
     tabs = BoxLayout(pos = TABS.pos, size_hint = TABS.hpair, orientation = 'horizontal')
     tabs_Sort = Button(size_hint = TABS_BTN.hpair, text = 'Sort', color = WHITE,
-        font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = CLEAR)
-    tabs_Filt = Button(size_hint = TABS_BTN.hpair, background_color = CLEAR)
-    tabs_View = Button(size_hint = TABS_BTN.hpair, background_color = CLEAR)
+        font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = BLACK)
+    tabs_Filt = Button(size_hint = TABS_BTN.hpair, background_color = BLACK)
+    tabs_View = Button(size_hint = TABS_BTN.hpair, background_color = BLACK)
 
-    # Content Panes
-    contpane = RelativeLayout(pos = CONT.pos, size_hint = CONT.hpair)
-    contpane_items = RelativeLayout(pos = CONTPANE_POS_A, size_hint = CONTPANE.hpair)
-    contpane_filters = RelativeLayout(pos = CONTPANE_POS_B, size_hint = CONTPANE.hpair)
-    contpane_new = RelativeLayout(pos = CONTPANE_POS_C, size_hint = CONTPANE.hpair)
-
-    # Items Content
-    cont_Scroll = ScrollView(size_hint = FILLS, do_scroll_x = False, bar_width = 0)
-    cont_List = GridLayout(size_hint = (1.0, 0), cols = 1,
+    # Content
+    cont = RelativeLayout(pos = CONT.pos, size_hint = CONT.hpair)
+    cont_Scroll = ScrollView(size_hint = FILLS, do_scroll_x = False,
+        bar_width = CONT_SCROLL.x)
+    cont_List = GridLayout(size_hint = (1.0, None), cols = 1,
         padding = list(CONT_PAD.pair), spacing = list(CONT_SPACE.pair),
-        row_default_height = LISTITEM.h / YSCALE, row_force_default = True)
-
+        row_force_default = False)
 
     # FILTERS ITEM WIDGETS
     filt_name = TextInput(size_hint = FILT_NAME.hpair, hint_text = 'Item name includes',
@@ -151,7 +140,6 @@ if True:
     filt_tags = GridLayout(size_hint = (1.0, 0), cols = 1, padding = ZEROS,
         spacing = ZEROS, row_force_default = True,
         row_default_height = FILT_TAGSLBL.h / YSCALE)
-
 
     # NEW ITEM WIDGETS
     new_name = TextInput(size_hint = NEW_NAME.hpair, hint_text = 'Name',
