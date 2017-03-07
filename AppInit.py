@@ -2,7 +2,6 @@ from SysFuncs import *
 from LoadSaves import *
 from Bag import *
 from BagItem import *
-from modules.DropBtn import *
 
 #=======================================================================================#
 # SYSTEM VARIABLES                                                                      #
@@ -30,6 +29,10 @@ if True:
     TABS = SizeMap(0, 602, 432, 60, FRAME.pair)
     TABS_BTN = SizeMap(0, 0, 144, 60, TABS.pair)
 
+    DROP_NEW = SizeMap(2, 2, 428, 660, FRAME.pair)
+    DROP_SORT = SizeMap(2, 2, 428, 660, FRAME.pair)
+    DROP_VIEW = SizeMap(2, 2, 428, 660, FRAME.pair)
+
     CONT = SizeMap(0, 0, 432, 557, FRAME.pair)
     CONTPANE = SizeMap(0, 0, 1040, 1560, CONT.pair)
     CONT_SPACE = SizeMap(0, 0, 0, 5, CONT.pair)
@@ -49,15 +52,6 @@ if True:
     IV_CARD_ICON = SizeMap(14, 14, 172, 172, ITEMVIEW_CARD.pair)
     IV_CARD_NAME = SizeMap(218, 102, 790, 75, ITEMVIEW_CARD.pair)
     IV_CARD_MISC = SizeMap(218, 15, 790, 65, ITEMVIEW_CARD.pair)
-
-    # FILTER
-    FILT_NAME = SizeMap(30, 1415, 980, 105, CONTPANE.pair)
-    FILT_CATLBL = SizeMap(30, 1270, 300, 105, CONTPANE.pair)
-    FILT_CAT = SizeMap(370, 1270, 240, 60, CONTPANE.pair)
-    FILT_SORTLBL = SizeMap(30, 1125, 300, 105, CONTPANE.pair)
-    FILT_SORT = SizeMap(370, 1125, 400, 105, CONTPANE.pair)
-    FILT_TAGSLBL = SizeMap(30, 980, 980, 105, CONTPANE.pair)
-    FILT_TAGS = SizeMap(30, 835, 980, 205, CONTPANE.pair)
 
     # NEW
     NEW_NAME = SizeMap(30, 1415, 980, 105, CONTPANE.pair)
@@ -84,83 +78,58 @@ if True:
     BG = Image(size_hint = FILLS, source = 'images/IMG_MAIN.png')
 
     # SCREENS
-    screen_main = RelativeLayout(pos = SCREEN_POS_ON, size_hint = FILLS)
-    screen_settings = RelativeLayout(pos = SCREEN_POS_OFF, size_hint = FILLS)
+    screenMain = RelativeLayout(pos = SCREEN_POS_ON, size_hint = FILLS)
+    screenSettings = RelativeLayout(pos = SCREEN_POS_OFF, size_hint = FILLS)
 
     # Menu
     menu = RelativeLayout(pos = MENU.pos, size_hint = MENU.hpair)
-    menu_Title = Label(size_hint = MENU_TITLE.hpair, pos = MENU_TITLE.pos,
+    menuTitle = Label(size_hint = MENU_TITLE.hpair, pos = MENU_TITLE.pos,
         font_name = FONT_BASK, font_size = FONT_SIZE_A, color = WHITE)
-    menu_Btn_Bag = Button(size_hint = MENU_BTN_BAG.hpair, pos = MENU_BTN_BAG.pos,
-        background_color = BLACK)
-    menu_Btn_Opts = Button(size_hint = MENU_BTN_OPTS.hpair, pos = MENU_BTN_OPTS.pos,
-        background_color = BLACK)
+    menuBag = Button(size_hint = MENU_BTN_BAG.hpair, pos = MENU_BTN_BAG.pos,
+        background_color = CLEAR)
+    menuOpts = Button(size_hint = MENU_BTN_OPTS.hpair, pos = MENU_BTN_OPTS.pos,
+        background_color = CLEAR)
 
     # Tabs
     tabs = BoxLayout(pos = TABS.pos, size_hint = TABS.hpair, orientation = 'horizontal')
-    tabs_Sort = Button(size_hint = TABS_BTN.hpair, text = 'Sort', color = WHITE,
-        font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = BLACK)
-    tabs_Filt = Button(size_hint = TABS_BTN.hpair, background_color = BLACK)
-    tabs_View = Button(size_hint = TABS_BTN.hpair, background_color = BLACK)
+    tabsNew = Button(size_hint = TABS_BTN.hpair, text = 'NEW', color = WHITE,
+        font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = CLEAR)
+    tabsSort = Button(size_hint = TABS_BTN.hpair, text = 'SORT', color = WHITE,
+        font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = CLEAR)
+    tabsView = Button(size_hint = TABS_BTN.hpair, text = 'VIEW', color = WHITE,
+        font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = CLEAR)
+
+    # Tab drops
+    dropNew = RelativeLayout()
 
     # Content
     cont = RelativeLayout(pos = CONT.pos, size_hint = CONT.hpair)
-    cont_Scroll = ScrollView(size_hint = FILLS, do_scroll_x = False,
+    contScroll = ScrollView(size_hint = FILLS, do_scroll_x = False,
         bar_width = CONT_SCROLL.x)
-    cont_List = GridLayout(size_hint = (1.0, None), cols = 1,
+    contList = GridLayout(size_hint = (1.0, None), cols = 1,
         padding = list(CONT_PAD.pair), spacing = list(CONT_SPACE.pair),
         row_force_default = False)
 
-    # FILTERS ITEM WIDGETS
-    filt_name = TextInput(size_hint = FILT_NAME.hpair, hint_text = 'Item name includes',
-        pos = FILT_NAME.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    filt_catlbl = Label(size_hint = FILT_CATLBL.hpair, text = 'Sort by',
-        pos = FILT_CATLBL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    filt_cat = DropBtn(sizeMap = CONTPANE, head_sizeMap = FILT_CAT, head_text = 'name',
-        btn_bg = 'images/filtbtnbg.png', btn_font_name = FONT_BASK,
-        btn_font_color = [0,0,1,1], btn_font_size = FONT_SIZE_A, btn_height = FILT_CAT.hh,
-        drop_direction = 'below', drop_max_height = 900,
-        drop_anim_open = {'duration': 0.30, 't': 'in_quad'},
-        drop_anim_close = {'duration': 0.30, 't': 'out_quad'},
-        options = ['name', 'quantity', 'weight', 'value'])
-    filt_sortlbl = Label(size_hint = FILT_SORTLBL.hpair, text = 'Sort type',
-        pos = FILT_SORTLBL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    filt_sort = DropDown(size_hint = ZEROS)
-    filt_sort_pick = Button(size_hint = FILT_SORT.hpair, text = 'sort pick',
-        pos = FILT_SORT.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    filt_sort_asc = Button(size_hint = FILT_SORT.hpair, text = 'ascending',
-        font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    filt_sort_des = Button(size_hint = FILT_SORT.hpair, text = 'descending',
-        font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    filt_tagslbl = Label(size_hint = FILT_TAGSLBL.hpair, pos = FILT_TAGSLBL.pos,
-        font_name = FONT_BASK, font_size = FONT_SIZE_A,
-        text = 'Only show items with these tags:')
-    filt_tags_scroll = ScrollView(size_hint = FILT_TAGS.hpair, pos = FILT_TAGS.pos,
-        do_scroll_x = False, bar_width = 0)
-    filt_tags = GridLayout(size_hint = (1.0, 0), cols = 1, padding = ZEROS,
-        spacing = ZEROS, row_force_default = True,
-        row_default_height = FILT_TAGSLBL.h / YSCALE)
-
     # NEW ITEM WIDGETS
-    new_name = TextInput(size_hint = NEW_NAME.hpair, hint_text = 'Name',
+    newName = TextInput(size_hint = NEW_NAME.hpair, hint_text = 'Name',
         pos = NEW_NAME.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
 
-    new_icon = Image(size_hint = NEW_ICON.hpair, source = 'images/blankIcon.png',
+    newIcon = Image(size_hint = NEW_ICON.hpair, source = 'images/blankIcon.png',
         pos = NEW_ICON.pos, allow_stretch = True, keep_ratio = False)
 
-    new_qty = TextInput(size_hint = NEW_QTY.hpair, hint_text = 'Quantity',
+    newQty = TextInput(size_hint = NEW_QTY.hpair, hint_text = 'Quantity',
         pos = NEW_QTY.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    new_weight = TextInput(size_hint = NEW_WEIGHT.hpair, hint_text = 'Weight',
+    newWeight = TextInput(size_hint = NEW_WEIGHT.hpair, hint_text = 'Weight',
         pos = NEW_WEIGHT.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    new_val = TextInput(size_hint = NEW_VAL.hpair, hint_text = 'Value',
+    newVal = TextInput(size_hint = NEW_VAL.hpair, hint_text = 'Value',
         pos = NEW_VAL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
 
-    new_tags = TextInput(size_hint = NEW_TAGS.hpair, hint_text = 'Tags',
+    newTags = TextInput(size_hint = NEW_TAGS.hpair, hint_text = 'Tags',
         pos = NEW_TAGS.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    new_desc = TextInput(size_hint = NEW_DESC.hpair, hint_text = 'Item description',
+    newDesc = TextInput(size_hint = NEW_DESC.hpair, hint_text = 'Item description',
         pos = NEW_DESC.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
 
-    new_cancel = Button(size_hint = NEW_CANCEL.hpair, text = 'CANCEL',
+    newCancel = Button(size_hint = NEW_CANCEL.hpair, text = 'CANCEL',
         pos = NEW_CANCEL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    new_save = Button(size_hint = NEW_SAVE.hpair, text = 'SAVE',
+    newSave = Button(size_hint = NEW_SAVE.hpair, text = 'SAVE',
         pos = NEW_SAVE.pos, font_name = FONT_BASK, font_size = FONT_SIZE_A)
