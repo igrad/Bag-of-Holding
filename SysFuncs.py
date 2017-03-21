@@ -11,6 +11,7 @@ from kivy.core.text import Text
 from kivy.animation import Animation
 from kivy.storage.jsonstore import JsonStore
 
+from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.button import Button
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout

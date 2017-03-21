@@ -5,13 +5,11 @@ from Bag import *
 from BagItem import *
 
 def OpenNew(obj):
-    newName.text = ''
-    newIcon.source = 'images/blankIcon.png'
-    newQty.text = ''
-    newWeight.text = ''
-    newVal.text = ''
-    newTags.text = ''
-    newDesc.text = ''
+    '''Open/close the New drop menu from the tabs bar.'''
+    if dropNew.pos == DROP_NEW.pos:
+        dropNew.pos = SCREEN_POS_OFF
+    else:
+        dropNew.pos = DROP_NEW.pos
 
 
 def InputItem(obj):

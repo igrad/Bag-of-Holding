@@ -4,9 +4,6 @@ kivy.require('1.9.1')
 from SysFuncs import *
 from LoadSaves import *
 from AppInit import *
-from Bag import *
-from BagItem import *
-from ItemView import *
 
 from ContPane import *
 
@@ -53,12 +50,16 @@ class BagOfHolding(RelativeLayout):
         for widge in [tabsNew, tabsSort, tabsView]:
             tabs.add_widget(widge)
 
+        # Tab menus
+        for widge in [dropNewHalt, dropNewBG, newName, newIcon, newQty_L, newQty, newWeight_L, newWeight, newVal_L, newVal, newTags, newDesc, newCancel, newSave]:
+            dropNew.add_widget(widge)
+
         # Contpane
         contScroll.add_widget(contList)
         cont.add_widget(contScroll)
 
         # Render
-        for widge in [cont, menu, tabs]:
+        for widge in [cont, menu, tabs, dropNew]:
             screenMain.add_widget(widge)
 
         self.add_widget(screenMain)
