@@ -3,22 +3,7 @@ from BagItem import *
 from LoadSaves import *
 from AppInit import *
 
-class ItemView(ButtonBehavior, RelativeLayout):
-    '''Button designed to contain the aesthetics of an item on main Contents area.'''
-    def __init__(self, itemID, **kwargs):
-        try:
-            super(ItemView, self).__init__(size_hint = FILLS, **kwargs)
-
-            ITEMVIEWS[int(self.itemID)] = self
-
-        except Exception as ex:
-            LogMsg("ERROR || ItemView.__init__() failure: " + str(ex))
-
-    def on_press(self):
-        LogMsg('button named ' + str(self.itemID) + ' was pressed!')
-
-
-class CozyView(ItemView):
+class CozyView(ButtonBehavior, RelativeLayout):
     def __init__(self, itemID, **kwargs):
         self.itemID = itemID
         self.view = RelativeLayout(size_hint = FILLS)
@@ -51,7 +36,8 @@ class CozyView(ItemView):
         self.dweight.text += str(ITEMS[self.itemID].weight)
         self.dval.text += str(ITEMS[self.itemID].val)
 
-        self.dname.text_size[0] = IV_NAME.hw * IV_NAME.parentW / YSCALE
+        #self.dname.text_size[0] = IV_NAME.hw * IV_NAME.parentW / YSCALE
+        self.dname.text_size[0] = self.dname.size[0]
 
         for widge in [self.dqty, self.dweight, self.dval]:
             self.dmisc.add_widget(widge)
@@ -59,22 +45,30 @@ class CozyView(ItemView):
         for widge in [self.dBG, self.dicon, self.dname, self.dmisc]:
             self.view.add_widget(widge)
 
+        super(CozyView, self).__init__(size_hint = FILLS, **kwargs)
+
         self.add_widget(self.view)
 
-        super(CozyView, self).__init__(itemID = itemID, **kwargs)
+        print('creating cozy item: ' + str(self.dname.text))
 
-class NormView(ItemView):
+        ITEMVIEWS[int(self.itemID)] = self
+
+class NormView():
     def __init__(self, itemID, **kwargs):
         self.IV_ICON = IV_NORM_ICON
         self.IV_NAME = IV_NORM_NAME
         self.IV_MISC = IV_NORM_MISC
 
-        super(NormView, self).__init__(itemID = itemID, **kwargs)
+        #super(NormView, self).__init__(itemID = itemID, **kwargs)
 
-class CardView(ItemView):
+        # On hold until project is more complete
+
+class CardView():
     def __init__(self, itemID, **kwargs):
         self.IV_ICON = IV_CARD_ICON
         self.IV_NAME = IV_CARD_NAME
         self.IV_MISC = IV_CARD_MISC
 
-        super(CardView, self).__init__(itemID = itemID, **kwargs)
+        #super(CardView, self).__init__(itemID = itemID, **kwargs)
+
+        # On hold until project is more complete

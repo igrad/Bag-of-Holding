@@ -33,8 +33,8 @@ if True:
     TABS_BTN = SizeMap(0, 0, 144, 60, TABS.pair)
 
     # DROP MENUS
-    DROP_NEW = SizeMap(4, 182, 408, 480, FRAME.pair)
-    DROP_NEW_HALT = SizeMap(0, 0, 408, 420, DROP_NEW.pair)
+    DROP_NEW = SizeMap(0, 174, 422, 496, FRAME.pair)
+    DROP_NEW_HALT = SizeMap(4, 8, 408, 420, DROP_NEW.pair)
     DROP_SORT = SizeMap(4, 182, 408, 480, FRAME.pair)
     DROP_VIEW = SizeMap(4, 182, 408, 480, FRAME.pair)
 
@@ -59,19 +59,19 @@ if True:
     IV_CARD_MISC = SizeMap(218, 15, 790, 65, ITEMVIEW_CARD.pair)
 
     # NEW
-    NEW_NAME = SizeMap(8, 367, 392, 30, DROP_NEW.pair)
-    NEW_ICON = SizeMap(8, 205, 144, 144, DROP_NEW.pair)
-    NEW_QTY = SizeMap(222, 319, 178, 30, DROP_NEW.pair)
-    NEW_QTY_L = SizeMap(153, 319, 65, 30, DROP_NEW.pair)
-    NEW_WEIGHT = SizeMap(222, 262, 178, 30, DROP_NEW.pair)
-    NEW_WEIGHT_L = SizeMap(153, 262, 65, 30, DROP_NEW.pair)
-    NEW_VAL = SizeMap(222, 205, 178, 30, DROP_NEW.pair)
-    NEW_VAL_L = SizeMap(153, 205, 65, 30, DROP_NEW.pair)
-    NEW_TAGS = SizeMap(8, 52, 192, 135, DROP_NEW.pair)
-    NEW_TAGS_L = SizeMap(8, 188, 192, 30, DROP_NEW.pair)
-    NEW_DESC = SizeMap(208, 52, 192, 135, DROP_NEW.pair)
-    NEW_CANCEL = SizeMap(8, 8, 192, 36, DROP_NEW.pair)
-    NEW_SAVE = SizeMap(208, 8, 192, 36, DROP_NEW.pair)
+    NEW_NAME = SizeMap(12, 375, 392, 30, DROP_NEW.pair)
+    NEW_ICON = SizeMap(12, 213, 144, 144, DROP_NEW.pair)
+    NEW_QTY = SizeMap(226, 327, 178, 30, DROP_NEW.pair)
+    NEW_QTY_L = SizeMap(157, 327, 65, 30, DROP_NEW.pair)
+    NEW_WEIGHT = SizeMap(226, 270, 178, 30, DROP_NEW.pair)
+    NEW_WEIGHT_L = SizeMap(157, 270, 65, 30, DROP_NEW.pair)
+    NEW_VAL = SizeMap(226, 213, 178, 30, DROP_NEW.pair)
+    NEW_VAL_L = SizeMap(157, 213, 65, 30, DROP_NEW.pair)
+    NEW_TAGS = SizeMap(12, 60, 192, 135, DROP_NEW.pair)
+    NEW_TAGS_L = SizeMap(12, 196, 192, 30, DROP_NEW.pair)
+    NEW_DESC = SizeMap(212, 60, 192, 135, DROP_NEW.pair)
+    NEW_CANCEL = SizeMap(12, 16, 192, 36, DROP_NEW.pair)
+    NEW_SAVE = SizeMap(212, 16, 192, 36, DROP_NEW.pair)
 
     # Positions =========================================================================
     # SCREENS
@@ -110,7 +110,7 @@ if True:
 
     # Tab drops
     dropNew = RelativeLayout(size_hint = DROP_NEW.hpair, pos = SCREEN_POS_OFF)
-    dropNewHalt = InvisBtn(size_hint = DROP_NEW_HALT.hpair)
+    dropNewHalt = InvisBtn(size_hint = DROP_NEW_HALT.hpair, pos = DROP_NEW_HALT.pos)
     dropNewBG = Image(size_hint = FILLS, source = 'images/IMG_DROP_NEW.png')
 
     # Content
@@ -119,7 +119,7 @@ if True:
         bar_width = CONT_SCROLL.x)
     contList = GridLayout(size_hint = (1.0, None), cols = 1,
         padding = list(CONT_PAD.pair), spacing = list(CONT_SPACE.pair),
-        row_force_default = False)
+        row_force_default = True)
 
     # NEW ITEM WIDGETS
     newName = TextInput(size_hint = NEW_NAME.hpair, hint_text = 'Name',
