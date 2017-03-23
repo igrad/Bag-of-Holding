@@ -45,12 +45,12 @@ if True:
     CONT_SCROLL = SizeMap(0, 0, 20, 0, CONT.pair)
 
     # ITEMS
-    ITEMVIEW_COZY = SizeMap(0, 0, 408, 80, CONTPANE.pair)
+    ITEMVIEW_COZY = SizeMap(0, 0, 408, 84, CONTPANE.pair)
     ITEMVIEW_NORM = SizeMap(0, 0, 408, 24, CONTPANE.pair)
     ITEMVIEW_CARD = SizeMap(0, 0, 408, 120, CONTPANE.pair)
-    IV_COZY_ICON = SizeMap(14, 14, 172, 172, ITEMVIEW_COZY.pair)
-    IV_COZY_NAME = SizeMap(218, 102, 790, 75, ITEMVIEW_COZY.pair)
-    IV_COZY_MISC = SizeMap(218, 15, 790, 65, ITEMVIEW_COZY.pair)
+    IV_COZY_ICON = SizeMap(8, 8, 68, 68, ITEMVIEW_COZY.pair)
+    IV_COZY_NAME = SizeMap(84, 40, 316, 30, ITEMVIEW_COZY.pair)
+    IV_COZY_MISC = SizeMap(84, 10, 316, 24, ITEMVIEW_COZY.pair)
     IV_NORM_ICON = SizeMap(14, 14, 172, 172, ITEMVIEW_NORM.pair)
     IV_NORM_NAME = SizeMap(218, 102, 790, 75, ITEMVIEW_NORM.pair)
     IV_NORM_MISC = SizeMap(218, 15, 790, 65, ITEMVIEW_NORM.pair)
@@ -100,7 +100,7 @@ if True:
         background_color = CLEAR)
 
     # Tabs
-    tabs = BoxLayout(size_hint = FILLS, pos = TABS.pos, orientation = 'horizontal')
+    tabs = BoxLayout(size_hint = TABS.hpair, pos = TABS.pos, orientation = 'horizontal')
     tabsNew = Button(size_hint = TABS_BTN.hpair, text = 'NEW', color = WHITE,
         font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = CLEAR)
     tabsSort = Button(size_hint = TABS_BTN.hpair, text = 'SORT', color = WHITE,

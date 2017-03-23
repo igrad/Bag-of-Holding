@@ -59,7 +59,7 @@ class BagOfHolding(RelativeLayout):
         cont.add_widget(contScroll)
 
         # Render
-        for widge in [cont, menu, tabs, dropNew]:
+        for widge in [cont, menu, dropNew, tabs]:
             screenMain.add_widget(widge)
 
         self.add_widget(screenMain)

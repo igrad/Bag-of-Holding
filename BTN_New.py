@@ -8,8 +8,10 @@ def OpenNew(obj):
     '''Open/close the New drop menu from the tabs bar.'''
     if dropNew.pos == list(DROP_NEW.pos):
         dropNew.pos = SCREEN_POS_OFF
+        tabsNew.color = WHITE
     else:
         dropNew.pos = DROP_NEW.pos
+        tabsNew.color = BLACK
 
 
 def InputItem(obj):
