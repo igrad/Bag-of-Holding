@@ -5,11 +5,8 @@ from SysFuncs import *
 from LoadSaves import *
 from AppInit import *
 
+from Tabs import *
 from ContPane import *
-
-from BTN_New import *
-from BTN_Sort import *
-from BTN_View import *
 
 
 class BagOfHolding(RelativeLayout):
@@ -23,6 +20,9 @@ class BagOfHolding(RelativeLayout):
 
         self.SetBinds()
         self.AddChildren()
+
+        dropNew.is_open = False
+        dropSort.is_open = False
 
         OpenBag(LAST_BAG_OPENED)
 
@@ -54,12 +54,15 @@ class BagOfHolding(RelativeLayout):
         for widge in [dropNewHalt, dropNewBG, newName, newIcon, newQty_L, newQty, newWeight_L, newWeight, newVal_L, newVal, newTags, newDesc, newCancel, newSave]:
             dropNew.add_widget(widge)
 
+        for widge in [dropSortHalt, dropSortBG]:
+            dropSort.add_widget(widge)
+
         # Contpane
         contScroll.add_widget(contList)
         cont.add_widget(contScroll)
 
         # Render
-        for widge in [cont, menu, dropNew, tabs]:
+        for widge in [cont, menu, dropNew, dropSort, tabs]:
             screenMain.add_widget(widge)
 
         self.add_widget(screenMain)

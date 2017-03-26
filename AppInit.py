@@ -35,7 +35,8 @@ if True:
     # DROP MENUS
     DROP_NEW = SizeMap(0, 174, 422, 496, FRAME.pair)
     DROP_NEW_HALT = SizeMap(4, 8, 408, 420, DROP_NEW.pair)
-    DROP_SORT = SizeMap(4, 182, 408, 480, FRAME.pair)
+    DROP_SORT = SizeMap(140, 414, 288, 256, FRAME.pair)
+    DROP_SORT_HALT = SizeMap(8, 8, 272, 180, DROP_NEW.pair)
     DROP_VIEW = SizeMap(4, 182, 408, 480, FRAME.pair)
 
     CONT = SizeMap(0, 0, 432, 557, FRAME.pair)
@@ -112,6 +113,10 @@ if True:
     dropNew = RelativeLayout(size_hint = DROP_NEW.hpair, pos = SCREEN_POS_OFF)
     dropNewHalt = InvisBtn(size_hint = DROP_NEW_HALT.hpair, pos = DROP_NEW_HALT.pos)
     dropNewBG = Image(size_hint = FILLS, source = 'images/IMG_DROP_NEW.png')
+
+    dropSort = RelativeLayout(size_hint = DROP_SORT.hpair, pos = SCREEN_POS_OFF)
+    dropSortHalt = InvisBtn(size_hint = DROP_SORT_HALT.hpair, pos = DROP_SORT_HALT.pos)
+    dropSortBG = Image(size_hint = FILLS, source = 'images/IMG_DROP_SORT.png')
 
     # Content
     cont = RelativeLayout(pos = CONT.pos, size_hint = CONT.hpair)
