@@ -36,7 +36,7 @@ if True:
     DROP_NEW = SizeMap(0, 174, 422, 496, FRAME.pair)
     DROP_NEW_HALT = SizeMap(4, 8, 408, 420, DROP_NEW.pair)
     DROP_SORT = SizeMap(140, 414, 288, 256, FRAME.pair)
-    DROP_SORT_HALT = SizeMap(8, 8, 272, 180, DROP_NEW.pair)
+    DROP_SORT_HALT = SizeMap(8, 8, 272, 180, DROP_SORT.pair)
     DROP_VIEW = SizeMap(4, 182, 408, 480, FRAME.pair)
 
     CONT = SizeMap(0, 0, 432, 557, FRAME.pair)
@@ -74,6 +74,16 @@ if True:
     NEW_CANCEL = SizeMap(12, 16, 192, 36, DROP_NEW.pair)
     NEW_SAVE = SizeMap(212, 16, 192, 36, DROP_NEW.pair)
 
+    # SORT
+    SORT_TYPE = SizeMap(16, 72, 124, 92, DROP_SORT.pair)
+    SORT_TYPE_L = SizeMap(16, 166, 124, 30, DROP_SORT.pair)
+    SORT_TYPE_BTN = SizeMap(0, 0, 124, 22, SORT_TYPE.pair)
+    SORT_ORDER = SizeMap(148, 120, 124, 46, DROP_SORT.pair)
+    SORT_ORDER_L = SizeMap(148, 164, 124, 30, DROP_SORT.pair)
+    SORT_ORDER_BTN = SizeMap(0, 0, 124, 22, SORT_ORDER.pair)
+    SORT_CANCEL = SizeMap(16, 16, 124, 36, DROP_SORT.pair)
+    SORT_SAVE = SizeMap(148, 16, 124, 36, DROP_SORT.pair)
+
     # Positions =========================================================================
     # SCREENS
     SCREEN_POS_ON = ZEROS
@@ -87,9 +97,11 @@ if True:
     # FRAME
     BG = Image(size_hint = FILLS, source = 'images/IMG_MAIN.png')
 
+
     # SCREENS
     screenMain = RelativeLayout(pos = SCREEN_POS_ON, size_hint = FILLS)
     screenSettings = RelativeLayout(pos = SCREEN_POS_OFF, size_hint = FILLS)
+
 
     # Menu
     menu = RelativeLayout(pos = MENU.pos, size_hint = MENU.hpair)
@@ -100,6 +112,7 @@ if True:
     menuOpts = Button(size_hint = MENU_BTN_OPTS.hpair, pos = MENU_BTN_OPTS.pos,
         background_color = CLEAR)
 
+
     # Tabs
     tabs = BoxLayout(size_hint = TABS.hpair, pos = TABS.pos, orientation = 'horizontal')
     tabsNew = Button(size_hint = TABS_BTN.hpair, text = 'NEW', color = WHITE,
@@ -108,6 +121,7 @@ if True:
         font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = CLEAR)
     tabsView = Button(size_hint = TABS_BTN.hpair, text = 'VIEW', color = WHITE,
         font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = CLEAR)
+
 
     # Tab drops
     dropNew = RelativeLayout(size_hint = DROP_NEW.hpair, pos = SCREEN_POS_OFF)
@@ -118,21 +132,12 @@ if True:
     dropSortHalt = InvisBtn(size_hint = DROP_SORT_HALT.hpair, pos = DROP_SORT_HALT.pos)
     dropSortBG = Image(size_hint = FILLS, source = 'images/IMG_DROP_SORT.png')
 
-    # Content
-    cont = RelativeLayout(pos = CONT.pos, size_hint = CONT.hpair)
-    contScroll = ScrollView(size_hint = FILLS, do_scroll_x = False,
-        bar_width = CONT_SCROLL.x)
-    contList = GridLayout(size_hint = (1.0, None), cols = 1,
-        padding = list(CONT_PAD.pair), spacing = list(CONT_SPACE.pair),
-        row_force_default = True)
 
-    # NEW ITEM WIDGETS
+    # Tab drop: New
     newName = TextInput(size_hint = NEW_NAME.hpair, hint_text = 'Name',
         pos = NEW_NAME.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
-
     newIcon = Image(size_hint = NEW_ICON.hpair, source = 'images/blankIcon.png',
         pos = NEW_ICON.pos, allow_stretch = True, keep_ratio = False)
-
     newQty = TextInput(size_hint = NEW_QTY.hpair, hint_text = 'Quantity',
         pos = NEW_QTY.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
     newQty_L = AnchorLabel(size_hint = NEW_QTY_L.hpair, text = 'Quantity',
@@ -148,13 +153,55 @@ if True:
     newVal_L = AnchorLabel(size_hint = NEW_VAL_L.hpair, text = 'Value',
         pos = NEW_VAL_L.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
         anchor_x = 'right', color = BLACK, halign = 'right')
-
     newTags = TextInput(size_hint = NEW_TAGS.hpair, hint_text = 'Tags',
         pos = NEW_TAGS.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
     newDesc = TextInput(size_hint = NEW_DESC.hpair, hint_text = 'Item description',
         pos = NEW_DESC.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
-
     newCancel = Button(size_hint = NEW_CANCEL.hpair, text = 'CANCEL',
         pos = NEW_CANCEL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
     newSave = Button(size_hint = NEW_SAVE.hpair, text = 'SAVE',
         pos = NEW_SAVE.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
+
+
+    # Tab drop: Sort
+    sortType_L = AnchorLabel(size_hint = SORT_TYPE_L.hpair, text = 'Sort by',
+        pos = SORT_TYPE_L.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
+        anchor_x = 'left', anchor_y = 'bottom', color = BLACK, halign = 'left')
+    sortType = BoxLayout(size_hint = SORT_TYPE.hpair, pos = SORT_TYPE.pos,
+        orientation = 'vertical')
+    sortType_name = AnchorButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Name',
+        font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
+        halign = 'left', invisible = True)
+    sortType_qty = AnchorButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Quantity',
+        font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
+        halign = 'left', invisible = True)
+    sortType_weight = AnchorButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Weight',
+        font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
+        halign = 'left', invisible = True)
+    sortType_val = AnchorButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Value',
+        font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
+        halign = 'left', invisible = True)
+    sortOrder_L = AnchorLabel(size_hint = SORT_ORDER_L.hpair, text = 'Sort order',
+        pos = SORT_ORDER_L.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
+        anchor_x = 'left', anchor_y = 'bottom', color = BLACK, halign = 'left')
+    sortOrder = BoxLayout(size_hint = SORT_ORDER.hpair, pos = SORT_ORDER.pos,
+        orientation = 'vertical')
+    sortOrder_asc = AnchorButton(size_hint = SORT_ORDER_BTN.hpair, text = 'Ascending',
+        font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
+        halign = 'left', invisible = True)
+    sortOrder_desc = AnchorButton(size_hint = SORT_ORDER_BTN.hpair, text = 'Descending',
+        font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
+        halign = 'left', invisible = True)
+    sortCancel = Button(size_hint = SORT_CANCEL.hpair, text = 'CANCEL',
+        pos = SORT_CANCEL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
+    sortSave = Button(size_hint = SORT_SAVE.hpair, text = 'SAVE',
+        pos = SORT_SAVE.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
+
+
+    # Content
+    cont = RelativeLayout(pos = CONT.pos, size_hint = CONT.hpair)
+    contScroll = ScrollView(size_hint = FILLS, do_scroll_x = False,
+        bar_width = CONT_SCROLL.x)
+    contList = GridLayout(size_hint = (1.0, None), cols = 1,
+        padding = list(CONT_PAD.pair), spacing = list(CONT_SPACE.pair),
+        row_force_default = True)

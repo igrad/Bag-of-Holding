@@ -38,6 +38,15 @@ class BagOfHolding(RelativeLayout):
         newCancel.bind(on_press = OpenNew)
         newSave.bind(on_press = InputItem)
 
+        # Sort
+        sortCancel.bind(on_press = OpenSort)
+        #sortSave.bind(on_press = ApplySort)
+
+        # View
+        # Cozy
+        # Normal
+        # Card
+
     def AddChildren(self):
         # Background
         screenMain.add_widget(BG)
@@ -54,7 +63,13 @@ class BagOfHolding(RelativeLayout):
         for widge in [dropNewHalt, dropNewBG, newName, newIcon, newQty_L, newQty, newWeight_L, newWeight, newVal_L, newVal, newTags, newDesc, newCancel, newSave]:
             dropNew.add_widget(widge)
 
-        for widge in [dropSortHalt, dropSortBG]:
+        for widge in [sortType_name, sortType_qty, sortType_weight, sortType_val]:
+            sortType.add_widget(widge)
+
+        for widge in [sortOrder_asc, sortOrder_desc]:
+            sortOrder.add_widget(widge)
+
+        for widge in [dropSortHalt, dropSortBG, sortType_L, sortType, sortOrder_L, sortOrder, sortCancel, sortSave]:
             dropSort.add_widget(widge)
 
         # Contpane
