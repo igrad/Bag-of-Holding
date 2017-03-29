@@ -23,6 +23,11 @@ class BagOfHolding(RelativeLayout):
 
         dropNew.is_open = False
         dropSort.is_open = False
+        dropView.is_open = False
+
+        viewNorm.view_type = 'norm'
+        viewCozy.view_type = 'cozy'
+        viewCard.view_type = 'card'
 
         OpenBag(LAST_BAG_OPENED)
 
@@ -43,9 +48,9 @@ class BagOfHolding(RelativeLayout):
         #sortSave.bind(on_press = ApplySort)
 
         # View
-        # Cozy
-        # Normal
-        # Card
+        viewNorm.bind(on_press = SetView)
+        viewCozy.bind(on_press = SetView)
+        viewCard.bind(on_press = SetView)
 
     def AddChildren(self):
         # Background
@@ -72,12 +77,15 @@ class BagOfHolding(RelativeLayout):
         for widge in [dropSortHalt, dropSortBG, sortType_L, sortType, sortOrder_L, sortOrder, sortCancel, sortSave]:
             dropSort.add_widget(widge)
 
+        for widge in [dropViewHalt, dropViewBG, viewNorm, viewNorm_L, viewNorm_Check, viewCozy, viewCozy_L, viewCozy_Check, viewCard, viewCard_L, viewCard_Check]:
+            dropView.add_widget(widge)
+
         # Contpane
         contScroll.add_widget(contList)
         cont.add_widget(contScroll)
 
         # Render
-        for widge in [cont, menu, dropNew, dropSort, tabs]:
+        for widge in [cont, menu, dropNew, dropSort, dropView, tabs]:
             screenMain.add_widget(widge)
 
         self.add_widget(screenMain)

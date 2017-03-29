@@ -30,7 +30,6 @@ class AnchorButton(ButtonBehavior, AnchorLayout):
     quickly aligns without having to hassle with the textsize parameter.'''
 
     def __init__(self, **kwargs):
-        invisible = False
         if 'anchor_x' in kwargs: self.anchor_x = kwargs.pop('anchor_x')
         else: self.anchor_x = 'center'
         if 'anchor_y' in kwargs: self.anchor_y = kwargs.pop('anchor_y')
@@ -41,7 +40,6 @@ class AnchorButton(ButtonBehavior, AnchorLayout):
         else: self.size_hint = FILLS
         if 'size' in kwargs: self.size = kwargs.pop('size')
         else: self.size = (100, 100)
-        if 'invisible' in kwargs: invisible = kwargs.pop('invisible')
 
         super(AnchorButton, self).__init__(size_hint = self.size_hint, size = self.size,
             pos = self.pos, anchor_x = self.anchor_x, anchor_y = self.anchor_y)
@@ -49,11 +47,5 @@ class AnchorButton(ButtonBehavior, AnchorLayout):
         self.btn = Button(size_hint = FILLS, **kwargs)
         if self.anchor_x != 'center': self.btn.text_size[0] = self.btn.size[0]
         if self.anchor_y != 'center': self.btn.text_size[1] = self.btn.size[1]
-
-        if invisible:
-            self.btn.background_normal = ''
-            self.btn.background_disabled_normal = ''
-            self.btn.background_down = ''
-            self.btn.background_disabled_down = ''
 
         self.add_widget(self.btn)

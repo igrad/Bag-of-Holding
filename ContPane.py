@@ -5,17 +5,6 @@ from Bag import *
 from BagItem import *
 from ItemView import *
 
-def OpenContPane_Items(obj):
-    PopulateItemViews(CURRENTBAG)
-
-def UpdateItemList():
-    contScroll.clear_widgets()
-
-    contList.bind(minimum_height = contList.setter('height'))
-    contScroll.add_widget(contList)
-
-    cont.clear_widgets()
-    cont.add_widget(contScroll)
 
 def PopulateItemViews(openBagID):
     bag = BAGS[openBagID]
@@ -48,7 +37,6 @@ def PopulateItemViews(openBagID):
 
         contList.add_widget(ITEMVIEWS[int(itemID)])
 
-    UpdateItemList()
 
 def OpenBag(openBagID):
     LoadBags(openBagID)
@@ -67,6 +55,7 @@ def OpenBag(openBagID):
             bagID = BAGS[bagIDs[0]]
 
     CURRENTBAG = bagID
+    VIEW_TYPE = BAGS[bagID].view
 
     LoadItems(BAGS[bagID].items)
 

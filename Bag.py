@@ -10,6 +10,7 @@ class Bag:
     name = 'Bag'
     items = list()
     currency = CurrencySet()
+    view = 'cozy'
 
     def __init__(self, **kwargs):
         if 'ID' in kwargs: self.ID = int(kwargs['ID'])
@@ -17,6 +18,7 @@ class Bag:
         if 'name' in kwargs: self.name = str(kwargs['name'])
         if 'items' in kwargs: self.items = list(kwargs['items'])
         if 'currency' in kwargs: self.currency = CurrencySet(cTypes = kwargs['currency'])
+        if 'view' in kwargs: self.view = str(kwargs['view'])
 
         BAGS[self.ID] = self
 
@@ -27,8 +29,9 @@ class Bag:
         if 'name' in kwargs: self.name = str(kwargs['name'])
         if 'items' in kwargs: self.items = dict(kwargs['items'])
         if 'currency' in kwargs: self.currency = CurrencySet(kwargs['currency'])
+        if 'view' in kwargs: self.view = str(kwargs['view'])
 
-        SaveBagInfo(self)
+        self.SaveBagInfo()
 
     def AddItem(self, itemID):
         self.items.append(itemID)
@@ -58,7 +61,7 @@ class Bag:
     def SaveBagInfo(self):
         '''Stores the bag by copying a shallow copy of the actual bag.'''
         bagsStore.put(str(self.ID), name = self.name, currency = self.currency.cTypes,
-            items = self.items)
+            view = self.view, items = self.items)
 
     def DeleteBagFromSave(self):
         '''Removes the bag from bagsStore save file.'''

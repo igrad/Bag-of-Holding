@@ -2,7 +2,6 @@ from SysFuncs import *
 from LoadSaves import *
 from Bag import *
 from BagItem import *
-from InvisBtn import *
 from AnchorLabel import *
 
 #=======================================================================================#
@@ -17,6 +16,10 @@ if True:
     WHITE = [1,1,1,1]
     BLACK = [0,0,0,1]
     CLEAR = [0,0,0,0]
+
+    VIEW_CHECK_ACTIVE = 'images/IMG_VIEW_CHECK_ACTIVE.png'
+    VIEW_CHECK_INACTIVE = 'images/IMG_VIEW_CHECK_INACTIVE.png'
+    IMG_CLEAR = 'images/IMG_CLEAR.png'
 
     # Sizes =============================================================================
     APP_W = 432 / XSCALE
@@ -34,10 +37,11 @@ if True:
 
     # DROP MENUS
     DROP_NEW = SizeMap(0, 174, 422, 496, FRAME.pair)
-    DROP_NEW_HALT = SizeMap(4, 8, 408, 420, DROP_NEW.pair)
     DROP_SORT = SizeMap(140, 414, 288, 256, FRAME.pair)
+    DROP_VIEW = SizeMap(148, 414, 284, 256, FRAME.pair)
+    DROP_NEW_HALT = SizeMap(4, 8, 408, 420, DROP_NEW.pair)
     DROP_SORT_HALT = SizeMap(8, 8, 272, 180, DROP_SORT.pair)
-    DROP_VIEW = SizeMap(4, 182, 408, 480, FRAME.pair)
+    DROP_VIEW_HALT = SizeMap(8, 8, 272, 180, DROP_VIEW.pair)
 
     CONT = SizeMap(0, 0, 432, 557, FRAME.pair)
     CONTPANE = SizeMap(0, 0, 1040, 1560, CONT.pair)
@@ -84,6 +88,17 @@ if True:
     SORT_CANCEL = SizeMap(16, 16, 124, 36, DROP_SORT.pair)
     SORT_SAVE = SizeMap(148, 16, 124, 36, DROP_SORT.pair)
 
+    # VIEW
+    VIEW_NORM = SizeMap(16, 132, 256, 48, DROP_VIEW.pair)
+    VIEW_NORM_L = SizeMap(184, 144, 49, 24, DROP_VIEW.pair)
+    VIEW_NORM_CHECK = SizeMap(245, 153, 13, 12, DROP_VIEW.pair)
+    VIEW_COZY = SizeMap(16, 74, 256, 48, DROP_VIEW.pair)
+    VIEW_COZY_L = SizeMap(184, 86, 49, 24, DROP_VIEW.pair)
+    VIEW_COZY_CHECK = SizeMap(245, 95, 13, 12, DROP_VIEW.pair)
+    VIEW_CARD = SizeMap(16, 16, 256, 48, DROP_VIEW.pair)
+    VIEW_CARD_L = SizeMap(184, 28, 49, 24, DROP_VIEW.pair)
+    VIEW_CARD_CHECK = SizeMap(245, 37, 13, 12, DROP_VIEW.pair)
+
     # Positions =========================================================================
     # SCREENS
     SCREEN_POS_ON = ZEROS
@@ -125,12 +140,16 @@ if True:
 
     # Tab drops
     dropNew = RelativeLayout(size_hint = DROP_NEW.hpair, pos = SCREEN_POS_OFF)
-    dropNewHalt = InvisBtn(size_hint = DROP_NEW_HALT.hpair, pos = DROP_NEW_HALT.pos)
+    dropNewHalt = Button(size_hint = DROP_NEW_HALT.hpair, pos = DROP_NEW_HALT.pos)
     dropNewBG = Image(size_hint = FILLS, source = 'images/IMG_DROP_NEW.png')
 
     dropSort = RelativeLayout(size_hint = DROP_SORT.hpair, pos = SCREEN_POS_OFF)
-    dropSortHalt = InvisBtn(size_hint = DROP_SORT_HALT.hpair, pos = DROP_SORT_HALT.pos)
+    dropSortHalt = Button(size_hint = DROP_SORT_HALT.hpair, pos = DROP_SORT_HALT.pos)
     dropSortBG = Image(size_hint = FILLS, source = 'images/IMG_DROP_SORT.png')
+
+    dropView = RelativeLayout(size_hint = DROP_VIEW.hpair, pos = SCREEN_POS_OFF)
+    dropViewHalt = Button(size_hint = DROP_VIEW_HALT.hpair, pos = DROP_VIEW_HALT.pos)
+    dropViewBG = Image(size_hint = FILLS, source = 'images/IMG_DROP_VIEW.png')
 
 
     # Tab drop: New
@@ -171,16 +190,16 @@ if True:
         orientation = 'vertical')
     sortType_name = AnchorButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Name',
         font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
-        halign = 'left', invisible = True)
+        halign = 'left')
     sortType_qty = AnchorButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Quantity',
         font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
-        halign = 'left', invisible = True)
+        halign = 'left')
     sortType_weight = AnchorButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Weight',
         font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
-        halign = 'left', invisible = True)
+        halign = 'left')
     sortType_val = AnchorButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Value',
         font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
-        halign = 'left', invisible = True)
+        halign = 'left')
     sortOrder_L = AnchorLabel(size_hint = SORT_ORDER_L.hpair, text = 'Sort order',
         pos = SORT_ORDER_L.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
         anchor_x = 'left', anchor_y = 'bottom', color = BLACK, halign = 'left')
@@ -188,14 +207,34 @@ if True:
         orientation = 'vertical')
     sortOrder_asc = AnchorButton(size_hint = SORT_ORDER_BTN.hpair, text = 'Ascending',
         font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
-        halign = 'left', invisible = True)
+        halign = 'left')
     sortOrder_desc = AnchorButton(size_hint = SORT_ORDER_BTN.hpair, text = 'Descending',
         font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
-        halign = 'left', invisible = True)
+        halign = 'left')
     sortCancel = Button(size_hint = SORT_CANCEL.hpair, text = 'CANCEL',
         pos = SORT_CANCEL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
     sortSave = Button(size_hint = SORT_SAVE.hpair, text = 'SAVE',
         pos = SORT_SAVE.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
+
+    # Tab drop: View
+    viewNorm = Button(size_hint = VIEW_NORM.hpair, pos = VIEW_NORM.pos, opacity = 0)
+    viewNorm_L = AnchorLabel(size_hint = VIEW_NORM_L.hpair, pos = VIEW_NORM_L.pos,
+        text = 'Normal', font_name = FONT_BASK, font_size = FONT_SIZE_B, color = WHITE,
+        anchor_x = 'right', halign = 'right')
+    viewNorm_Check = Image(size_hint = VIEW_NORM_CHECK.hpair, pos = VIEW_NORM_CHECK.pos,
+        source = VIEW_CHECK_INACTIVE)
+    viewCozy = Button(size_hint = VIEW_COZY.hpair, pos = VIEW_COZY.pos, opacity = 0)
+    viewCozy_L = AnchorLabel(size_hint = VIEW_COZY_L.hpair, pos = VIEW_COZY_L.pos,
+        text = 'Cozy', font_name = FONT_BASK, font_size = FONT_SIZE_B, color = WHITE,
+        anchor_x = 'right', halign = 'right')
+    viewCozy_Check = Image(size_hint = VIEW_COZY_CHECK.hpair, pos = VIEW_COZY_CHECK.pos,
+        source = VIEW_CHECK_INACTIVE)
+    viewCard = Button(size_hint = VIEW_CARD.hpair, pos = VIEW_CARD.pos, opacity = 0)
+    viewCard_L = AnchorLabel(size_hint = VIEW_CARD_L.hpair, pos = VIEW_CARD_L.pos,
+        text = 'Cards', font_name = FONT_BASK, font_size = FONT_SIZE_B, color = WHITE,
+        anchor_x = 'right', halign = 'right')
+    viewCard_Check = Image(size_hint = VIEW_CARD_CHECK.hpair, pos = VIEW_CARD_CHECK.pos,
+        source = VIEW_CHECK_INACTIVE)
 
 
     # Content

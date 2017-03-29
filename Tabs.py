@@ -2,7 +2,7 @@ from SysFuncs import *
 from LoadSaves import *
 from AppInit import *
 from Bag import *
-from BagItem import *
+from ContPane import PopulateItemViews
 
 #=======================================================================================#
 # NEW                                                                                   #
@@ -19,7 +19,7 @@ def OpenNew(obj):
         dropNew.is_open = True
 
         if dropSort.is_open: OpenSort('close')
-        #if dropView.is_open: OpenView('close')
+        if dropView.is_open: OpenView('close')
 
 
 def InputItem(obj):
@@ -53,6 +53,8 @@ def InputItem(obj):
     newTags.text = ''
     newDesc.text = ''
 
+    PopulateItemViews(CURRENTBAG)
+
 
 #=======================================================================================#
 # SORT                                                                                  #
@@ -69,11 +71,26 @@ def OpenSort(obj):
         dropSort.is_open = True
 
         if dropNew.is_open: OpenNew('close')
-        #if dropView.is_open: OpenView('close')
+        if dropView.is_open: OpenView('close')
 
 #=======================================================================================#
 # VIEW                                                                                  #
 #=======================================================================================#
 def OpenView(obj):
-    if dropNew.is_open: OpenNew('close')
-    if dropSort.is_open: OpenSort('close')
+    if dropView.pos == list(DROP_VIEW.pos):
+        dropView.pos = SCREEN_POS_OFF
+        tabsView.color = WHITE
+        dropView.is_open = False
+    else:
+        dropView.pos = DROP_VIEW.pos
+        tabsView.color = BLACK
+        dropView.is_open = True
+
+        if dropNew.is_open: OpenNew('close')
+        if dropSort.is_open: OpenSort('close')
+
+def SetView(obj):
+    viewType = obj.view_type
+    VIEW_TYPE = viewType
+    BAGS[CURRENTBAG].UpdateBag(view = viewType)
+    PopulateItemViews(CURRENTBAG)
