@@ -2,7 +2,7 @@ from SysFuncs import *
 from LoadSaves import *
 from AppInit import *
 from Bag import *
-from ContPane import PopulateItemViews
+from ContPane import PopulateItemViews, HighlightView
 
 #=======================================================================================#
 # NEW                                                                                   #
@@ -94,3 +94,5 @@ def SetView(obj):
     VIEW_TYPE = viewType
     BAGS[CURRENTBAG].UpdateBag(view = viewType)
     PopulateItemViews(CURRENTBAG)
+
+    HighlightView(obj.view_type)

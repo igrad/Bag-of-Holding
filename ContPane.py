@@ -4,6 +4,7 @@ from AppInit import *
 from Bag import *
 from BagItem import *
 from ItemView import *
+from Tabs import *
 
 
 def PopulateItemViews(openBagID):
@@ -63,3 +64,19 @@ def OpenBag(openBagID):
     # TODO Update loaded bag's title at the top of screen
 
     PopulateItemViews(openBagID)
+
+    HighlightView(VIEW_TYPE)
+
+def HighlightView(viewType):
+    if viewType == 'norm':
+        viewNorm_Check.source = VIEW_CHECK_ACTIVE
+        viewCozy_Check.source = VIEW_CHECK_INACTIVE
+        viewCard_Check.source = VIEW_CHECK_INACTIVE
+    if viewType == 'cozy':
+        viewNorm_Check.source = VIEW_CHECK_INACTIVE
+        viewCozy_Check.source = VIEW_CHECK_ACTIVE
+        viewCard_Check.source = VIEW_CHECK_INACTIVE
+    if viewType == 'card':
+        viewNorm_Check.source = VIEW_CHECK_INACTIVE
+        viewCozy_Check.source = VIEW_CHECK_INACTIVE
+        viewCard_Check.source = VIEW_CHECK_ACTIVE
