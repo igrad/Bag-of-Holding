@@ -19,9 +19,9 @@ def LoadItems(keys):
         key = str(key)
         try:
             sname = str(itemStore.get(key)['name'])
-            sqty = int(itemStore.get(key)['qty'])
-            sweight = int(itemStore.get(key)['weight'])
-            sval = int(itemStore.get(key)['val'])
+            sqty = str(itemStore.get(key)['qty'])
+            sweight = str(itemStore.get(key)['weight'])
+            sval = str(itemStore.get(key)['val'])
             sdesc = str(itemStore.get(key)['desc'])
             sicon = str(itemStore.get(key)['icon'])
             stags = list(itemStore.get(key)['tags'])
