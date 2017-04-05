@@ -14,13 +14,13 @@ def PopulateItemViews(openBagID):
     contList.clear_widgets()
     ITEMVIEWS.clear()
 
-    if VIEW_TYPE == 'cozy':
+    if bag.view == 'cozy':
         ItemView = CozyView
         contList.row_default_height = ITEMVIEW_COZY.h
-    elif VIEW_TYPE == 'norm':
+    elif bag.view == 'norm':
         ItemView = NormView
         contList.row_default_height = ITEMVIEW_NORM.h
-    elif VIEW_TYPE == 'card':
+    elif bag.view == 'card':
         ItemView = CardView
         contList.row_default_height = ITEMVIEW_CARD.h
 
