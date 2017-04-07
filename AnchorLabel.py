@@ -19,11 +19,19 @@ class AnchorLabel(AnchorLayout):
         super(AnchorLabel, self).__init__(size_hint = self.size_hint, size = self.size,
             pos = self.pos, anchor_x = self.anchor_x, anchor_y = self.anchor_y)
 
-        self.lbl = Label(size_hint = NONES, **kwargs)
-        if self.anchor_x != 'center': self.lbl.text_size[0] = self.lbl.size[0]
-        if self.anchor_y != 'center': self.lbl.text_size[1] = self.lbl.size[1]
+        self._lbl = Label(size_hint = NONES, **kwargs)
+        if self.anchor_x != 'center': self._lbl.text_size[0] = self._lbl.size[0]
+        if self.anchor_y != 'center': self._lbl.text_size[1] = self._lbl.size[1]
 
-        self.add_widget(self.lbl)
+        self.add_widget(self._lbl)
+
+    @property
+    def text(self):
+        return self._lbl.text
+
+    @text.setter
+    def text(self, text):
+        self._lbl.text = text
 
 class AnchorButton(ButtonBehavior, AnchorLayout):
     '''Create a button from the data passed in, wrap it in a AnchorLayout, so that it
@@ -44,8 +52,16 @@ class AnchorButton(ButtonBehavior, AnchorLayout):
         super(AnchorButton, self).__init__(size_hint = self.size_hint, size = self.size,
             pos = self.pos, anchor_x = self.anchor_x, anchor_y = self.anchor_y)
 
-        self.btn = Button(size_hint = FILLS, **kwargs)
-        if self.anchor_x != 'center': self.btn.text_size[0] = self.btn.size[0]
-        if self.anchor_y != 'center': self.btn.text_size[1] = self.btn.size[1]
+        self._btn = Button(size_hint = FILLS, **kwargs)
+        if self.anchor_x != 'center': self._btn.text_size[0] = self._btn.size[0]
+        if self.anchor_y != 'center': self._btn.text_size[1] = self._btn.size[1]
 
-        self.add_widget(self.btn)
+        self.add_widget(self._btn)
+
+    @property
+    def text(self):
+        return self._btn.text
+
+    @text.setter
+    def text(self, text):
+        self._btn.text = text

@@ -7,7 +7,9 @@ from AnchorLabel import *
 class CozyView(ButtonBehavior, RelativeLayout):
     def __init__(self, itemID, **kwargs):
         self.itemID = itemID
-        self.view = RelativeLayout(size_hint = FILLS)
+        self.size_hint = FILLS
+
+        super(CozyView, self).__init__(size_hint = FILLS, **kwargs)
 
         self.IV_ICON = IV_COZY_ICON
         self.IV_NAME = IV_COZY_NAME
@@ -49,11 +51,7 @@ class CozyView(ButtonBehavior, RelativeLayout):
             self.dmisc.add_widget(widge)
 
         for widge in [self.dBG, self.dicon, self.dname, self.dmisc]:
-            self.view.add_widget(widge)
-
-        super(CozyView, self).__init__(size_hint = FILLS, **kwargs)
-
-        self.add_widget(self.view)
+            self.add_widget(widge)
 
         print('creating cozy item: ' + str(self.dname.text))
 
@@ -62,7 +60,9 @@ class CozyView(ButtonBehavior, RelativeLayout):
 class NormView(ButtonBehavior, RelativeLayout):
     def __init__(self, itemID, **kwargs):
         self.itemID = itemID
-        self.view = RelativeLayout(size_hint = FILLS)
+        self.size_hint = FILLS
+
+        super(NormView, self).__init__(size_hint = FILLS, **kwargs)
 
         self.IV_ICON = IV_NORM_ICON
         self.IV_NAME = IV_NORM_NAME
@@ -71,40 +71,35 @@ class NormView(ButtonBehavior, RelativeLayout):
         self.dBG = Image(size_hint = FILLS, source = 'images/IMG_BLACK.png',
             color = [0,0,0,0.45], allow_stretch = True, keep_ratio = False)
         self.dicon = Image(size_hint = self.IV_ICON.hpair, pos = self.IV_ICON.pos,
-            source = str(ITEMS[self.itemID].icon), allow_stretch = True,
-            keep_ratio = False)
+            source = '', allow_stretch = True, keep_ratio = False)
         self.dname = AnchorLabel(size_hint = self.IV_NAME.hpair, pos = self.IV_NAME.pos,
-            anchor_x = 'left', anchor_y = 'bottom', halign = 'left',
-            text = str(ITEMS[self.itemID].name), color = WHITE, font_name = FONT_BASK,
-            font_size = FONT_SIZE_C, shorten = True, shorten_from = 'right')
+            anchor_x = 'left', anchor_y = 'bottom', halign = 'left', text = '',
+            color = WHITE, font_name = FONT_BASK, font_size = FONT_SIZE_C,
+            shorten = True, shorten_from = 'right')
         self.dmisc = BoxLayout(size_hint = self.IV_MISC.hpair, pos = self.IV_MISC.pos,
             orientation = 'horizontal')
         self.dqty = AnchorLabel(size_hint = FILLS, anchor_x = 'right',
-            anchor_y = 'bottom', halign = 'right', text = str(ITEMS[self.itemID].qty),
-            font_name = FONT_BASK, font_size = FONT_SIZE_C, color = WHITE)
+            anchor_y = 'bottom', halign = 'right', text = '', font_name = FONT_BASK,
+            font_size = FONT_SIZE_C, color = WHITE)
         self.dweight = AnchorLabel(size_hint = FILLS, anchor_x = 'right',
-            anchor_y = 'bottom', halign = 'right', text = str(ITEMS[self.itemID].weight),
-            font_name = FONT_BASK, font_size = FONT_SIZE_C, color = WHITE)
+            anchor_y = 'bottom', halign = 'right', text = '', font_name = FONT_BASK,
+            font_size = FONT_SIZE_C, color = WHITE)
         self.dval = AnchorLabel(size_hint = FILLS, anchor_x = 'right',
-            anchor_y = 'bottom', halign = 'right', text = str(ITEMS[self.itemID].val),
+            anchor_y = 'bottom', halign = 'right', text = '',
             font_name = FONT_BASK,font_size = FONT_SIZE_C, color = WHITE)
 
-        #self.dicon.source = ITEMS[self.itemID].icon
+        self.dicon.source = ITEMS[self.itemID].icon
         self.dname.text = ITEMS[self.itemID].name
 
-        #self.dqty.text = str(ITEMS[self.itemID].qty)
-        #self.dweight.text += str(ITEMS[self.itemID].weight)
-        #self.dval.text += str(ITEMS[self.itemID].val)
+        self.dqty.text = str(ITEMS[self.itemID].qty)
+        self.dweight.text += str(ITEMS[self.itemID].weight)
+        self.dval.text += str(ITEMS[self.itemID].val)
 
         for widge in [self.dqty, self.dweight, self.dval]:
             self.dmisc.add_widget(widge)
 
         for widge in [self.dBG, self.dicon, self.dname, self.dmisc]:
-            self.view.add_widget(widge)
-
-        super(NormView, self).__init__(size_hint = FILLS, **kwargs)
-
-        self.add_widget(self.view)
+            self.add_widget(widge)
 
         print('creating norm item: ' + str(self.dname.text))
 
