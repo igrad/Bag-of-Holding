@@ -1,6 +1,3 @@
-import kivy
-kivy.require('1.9.1')
-
 # Core
 from collections import deque as Deque
 from collections import namedtuple
@@ -14,6 +11,7 @@ from kivy.core.text import Text
 from kivy.animation import Animation
 from kivy.storage.jsonstore import JsonStore
 
+from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.button import Button
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
@@ -55,6 +53,7 @@ CURRENTBAG = 0
 MAX_BAGS = 10
 MAX_ITEMS = 5000
 LAST_BAG_OPENED = 0
+VIEW_TYPE = 'cozy'
 NOOBIE_TIPS = True
 
 # GLOBAL CLASSES
@@ -77,4 +76,4 @@ class SizeMap():
 # GLOBAL METHODS
 def LogMsg(text):
     processTime = clock()
-    print("[" + processTime + "] " + err)
+    print("[" + str(processTime)[0:6] + "] " + text)

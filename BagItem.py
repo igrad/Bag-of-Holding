@@ -16,9 +16,9 @@ class BagItem():
         if 'ID' in kwargs: self.ID = int(kwargs['ID'])
         else: self.ID = self.GetNewItemID()
         if 'name' in kwargs: self.name = str(kwargs['name'])
-        if 'qty' in kwargs: self.qty = int(kwargs['qty'])
-        if 'weight' in kwargs: self.weight = int(kwargs['weight'])
-        if 'val' in kwargs: self.val = int(kwargs['val'])
+        if 'qty' in kwargs: self.qty = str(kwargs['qty'])
+        if 'weight' in kwargs: self.weight = str(kwargs['weight'])
+        if 'val' in kwargs: self.val = str(kwargs['val'])
         if 'desc' in kwargs: self.desc = str(kwargs['desc'])
         if 'icon' in kwargs: self.icon = str(kwargs['icon'])
         if 'tags' in kwargs: self.tags = str(kwargs['tags'])
@@ -42,9 +42,9 @@ class BagItem():
 
     def UpdateItem(self, **kwargs):
         if 'name' in kwargs: self.name = str(kwargs['name'])
-        if 'qty' in kwargs: self.qty = int(kwargs['qty'])
-        if 'weight' in kwargs: self.weight = int(kwargs['qty'])
-        if 'val' in kwargs: self.val = int(kwargs['val'])
+        if 'qty' in kwargs: self.qty = str(kwargs['qty'])
+        if 'weight' in kwargs: self.weight = str(kwargs['qty'])
+        if 'val' in kwargs: self.val = str(kwargs['val'])
         if 'desc' in kwargs: self.desc = str(kwargs['desc'])
         if 'icon' in kwargs: self.icon = str(kwargs['icon'])
         if 'tags' in kwargs: self.tags = list(kwargs['tags'])
@@ -54,9 +54,8 @@ class BagItem():
     def GetNewItemID(self):
         '''Gets an unused itemID number.'''
         keys = [int(x) for x in itemStore.keys()]
-        print("GetNewItemID: itemStore.keys() = " + str(itemStore.keys()))
+
         for i in range(MAX_ITEMS):
-            print("GetNewItemID: i = " + str(i))
             if not i in keys: return int(i)
 
         LogMsg("No more items available!")

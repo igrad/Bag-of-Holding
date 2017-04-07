@@ -4,19 +4,15 @@ kivy.require('1.9.1')
 from SysFuncs import *
 from LoadSaves import *
 from AppInit import *
-from Bag import *
-from BagItem import *
-from ItemView import *
-from modules.DropBtn import *
 
-from BTN_New import *
-from BTN_FILTERS import *
-from BTN_ITEMS import *
+from Tabs import *
+from ContPane import *
 
 
 class BagOfHolding(RelativeLayout):
     def __init__(self, **kwargs):
         '''Initialize the necessary elements for the app.'''
+        LogMsg('Beginning app initialization.')
         super(BagOfHolding, self).__init__(**kwargs)
 
         # Load all saved configurations and item/bag data
@@ -25,76 +21,74 @@ class BagOfHolding(RelativeLayout):
         self.SetBinds()
         self.AddChildren()
 
+        dropNew.is_open = False
+        dropSort.is_open = False
+        dropView.is_open = False
+
+        viewNorm.view_type = 'norm'
+        viewCozy.view_type = 'cozy'
+        viewCard.view_type = 'card'
+
         OpenBag(LAST_BAG_OPENED)
 
-        cont_List.bind(minimum_height = cont_List.setter('height'))
+        contList.bind(minimum_height = contList.setter('height'))
 
     def SetBinds(self):
-        # SCREEN MAIN ===================================================================
-        # MAIN
-
         # TABS
-        #tabs_Sort.bind(on_press = OpenDropSort)
-        #tabs_Filt.bind(on_press = OpenDropFilt)
-        #tabs_View.bind(on_press = OpenDropView)
-
-        # CONTENTPANES
-        # Items
-        # self.bindItemViews()
-
-        # Filters
-        filt_cat.bind(on_press = OpenFilt_Cat)
+        tabsNew.bind(on_press = OpenNew)
+        tabsSort.bind(on_press = OpenSort)
+        tabsView.bind(on_press = OpenView)
 
         # New
-        new_cancel.bind(on_press = OpenContPane_New)
-        new_save.bind(on_press = InputItem)
+        newCancel.bind(on_press = OpenNew)
+        newSave.bind(on_press = InputItem)
+
+        # Sort
+        sortCancel.bind(on_press = OpenSort)
+        #sortSave.bind(on_press = ApplySort)
+
+        # View
+        viewNorm.bind(on_press = SetView)
+        viewCozy.bind(on_press = SetView)
+        viewCard.bind(on_press = SetView)
 
     def AddChildren(self):
-        # SCREEN MAIN ===================================================================
         # Background
-        screen_main.add_widget(BG)
+        screenMain.add_widget(BG)
 
         # Menu
-        for widge in [menu_Title, menu_Btn_Bag, menu_Btn_Opts]:
+        for widge in [menuTitle, menuBag, menuBagBtn, menuOpts, menuOptsBtn]:
             menu.add_widget(widge)
 
         # Tabs
-        for widge in [tabs_Sort, tabs_Filt, tabs_View]:
+        for widge in [tabsNew, tabsSort, tabsView]:
             tabs.add_widget(widge)
 
+        # Tab menus
+        for widge in [dropNewHalt, dropNewBG, newName, newIcon, newQty_L, newQty, newWeight_L, newWeight, newVal_L, newVal, newTags, newDesc, newCancel, newSave]:
+            dropNew.add_widget(widge)
 
-        # Contpane Items
-        cont_Scroll.add_widget(cont_List)
-        contpane_items.add_widget(cont_Scroll)
+        for widge in [sortType_name, sortType_qty, sortType_weight, sortType_val]:
+            sortType.add_widget(widge)
 
-        # Contpane Filters
-        # for widge in [filt_cat_name, filt_cat_qty, filt_cat_weight, filt_cat_val]:
-        #     filt_cat.add_widget(widge)
+        for widge in [sortOrder_asc, sortOrder_desc]:
+            sortOrder.add_widget(widge)
 
-        filt_sort.add_widget(filt_sort_asc)
-        filt_sort.add_widget(filt_sort_des)
+        for widge in [dropSortHalt, dropSortBG, sortType_L, sortType, sortOrder_L, sortOrder, sortCancel, sortSave]:
+            dropSort.add_widget(widge)
 
-        filt_tags_scroll.add_widget(filt_tags)
-
-        for widge in [filt_name, filt_catlbl, filt_cat, filt_sortlbl, filt_sort_pick, filt_sort, filt_tagslbl, filt_tags_scroll]:
-            contpane_filters.add_widget(widge)
-
-        # Contpane New
-        for widge in [new_name, new_icon, new_qty, new_weight, new_val, new_tags, new_desc, new_cancel, new_save]:
-            contpane_new.add_widget(widge)
+        for widge in [dropViewHalt, dropViewBG, viewNorm, viewNorm_L, viewNorm_Check, viewCozy, viewCozy_L, viewCozy_Check, viewCard, viewCard_L, viewCard_Check]:
+            dropView.add_widget(widge)
 
         # Contpane
-        for widge in [contpane_items, contpane_filters, contpane_new]:
-            contpane.add_widget(widge)
+        contScroll.add_widget(contList)
+        cont.add_widget(contScroll)
 
         # Render
-        for widge in [contpane, menu, tabs]:
-            screen_main.add_widget(widge)
+        for widge in [cont, menu, dropNew, dropSort, dropView, tabs]:
+            screenMain.add_widget(widge)
 
-        self.add_widget(screen_main)
-
-        # SCREEN SETTINGS ===============================================================
-        # do a flip
+        self.add_widget(screenMain)
 
 
 class Builder(App):

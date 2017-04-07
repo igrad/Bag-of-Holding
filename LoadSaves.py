@@ -19,9 +19,9 @@ def LoadItems(keys):
         key = str(key)
         try:
             sname = str(itemStore.get(key)['name'])
-            sqty = int(itemStore.get(key)['qty'])
-            sweight = int(itemStore.get(key)['weight'])
-            sval = int(itemStore.get(key)['val'])
+            sqty = str(itemStore.get(key)['qty'])
+            sweight = str(itemStore.get(key)['weight'])
+            sval = str(itemStore.get(key)['val'])
             sdesc = str(itemStore.get(key)['desc'])
             sicon = str(itemStore.get(key)['icon'])
             stags = list(itemStore.get(key)['tags'])
@@ -32,7 +32,7 @@ def LoadItems(keys):
             ITEMS[item.ID] = item
 
         except Exception as ex:
-            print("ERROR: LoadItems() error on itemID " + str(key) + ": " + str(ex))
+            LogMsg("ERROR: LoadItems() error on itemID " + str(key) + ": " + str(ex))
             failedItems.append(key)
 
     if len(failedItems) > 0:
@@ -43,38 +43,28 @@ def LoadBags(bagKey = None):
     failedBags = list()
 
     bagsStore = JsonStore('bags_data.json')
+    bagRange = list(bagsStore.keys())
 
-    if bagKey == None:
-        for key in bagsStore.keys():
-            try:
-                sname = str(bagsStore.get(key)['name'])
-                sitems = list(bagsStore.get(key)['items'])
-                scurrency = list(bagsStore.get(key)['currency'])
+    # A bag ID has been specified. Only load that bag
+    if bagKey != None:
+        bagRange = [bagKey]
 
-                newBag = Bag(ID = key, name = sname, items = sitems,
-                    currency = scurrency)
+    for key in bagRange:
+        key = str(key)
+        try:
+            sname = str(bagsStore.get(key)['name'])
+            sitems = list(bagsStore.get(key)['items'])
+            scurrency = list(bagsStore.get(key)['currency'])
+            sview = str(bagsStore.get(key)['view'])
 
-                BAGS[key] = newBag
+            newBag = Bag(ID = key, name = sname, items = sitems,
+                currency = scurrency, view = sview)
 
-            except Exception as ex:
-                print('ERROR || Bag exception raised')
-                failedBags.append(str(key) + ": " + str(ex))
-    else:
-        if bagKey in bagsStore.keys():
-            try:
-                sname = str(bagsStore.get(key)['name'])
-                sitems = list(bagsStore.get(key)['items'])
-                scurrency = list(bagsStore.get(key)['currency'])
+            BAGS[key] = newBag
 
-                newBag = Bag(ID = key, name = sname, items = sitems,
-                    currency = scurrency)
-
-                BAGS[bagKey] = newBag
-
-            except Exception as ex:
-                print('ERROR || Bag exception raised, could not load bag ' + str(bagKey))
-                failedBags.append(str(key) + ": " + str(ex))
-
+        except Exception as ex:
+            LogMsg('ERROR || Bag exception raised, could not load bag ' + str(key) + '. Returned error: ' + str(ex))
+            failedBags.append(str(key))
 
     if len(failedBags) > 0:
         LogMsg("ERROR while loading bags! Could not find/open the following bag(s): " + str(failedBags))
@@ -84,8 +74,7 @@ def LoadSettings():
     defaults = {
     'MAX_BAGS': 10,
     'MAX_ITEMS': 5000,
-    'LAST_BAG_OPENED': 0,
-    'NOOBIE_TIPS': True}
+    'LAST_BAG_OPENED': 0}
 
     opts = defaults
 
@@ -99,7 +88,6 @@ def LoadSettings():
             MAX_BAGS = int(opts['MAX_BAGS'])
             MAX_ITEMS = int(opts['MAX_ITEMS'])
             LAST_BAG_OPENED = int(opts['LAST_BAG_OPENED'])
-            NOOBIE_TIPS = bool(opts['NOOBIE_TIPS'])
         except:
             LogMsg("ERROR: Saved settings file existed, but is empty. Preferences reset to defaults.")
             optsStore.put('opts', d = defaults)
