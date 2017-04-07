@@ -12,6 +12,7 @@ if True:
     FONT_SIZE_A = 32
     FONT_SIZE_B = 20
     FONT_SIZE_C = 16
+    FONT_SIZE_HEAD = 48
     FONT_BASK = 'fonts/BASKVILLE.TTF'
     WHITE = [1,1,1,1]
     BLACK = [0,0,0,1]
@@ -47,7 +48,7 @@ if True:
     CONTPANE = SizeMap(0, 0, 1040, 1560, CONT.pair)
     CONT_SPACE = SizeMap(0, 0, 0, 5, CONT.pair)
     CONT_PAD = SizeMap(0, 0, 2, 2, CONT.pair)
-    CONT_SCROLL = SizeMap(0, 0, 20, 0, CONT.pair)
+    CONT_SCROLL = SizeMap(0, 0, 12, 0, CONT.pair)
 
     # ITEMS
     ITEMVIEW_COZY = SizeMap(0, 0, 408, 84, CONTPANE.pair)
@@ -122,9 +123,13 @@ if True:
     menu = RelativeLayout(pos = MENU.pos, size_hint = MENU.hpair)
     menuTitle = Label(size_hint = MENU_TITLE.hpair, pos = MENU_TITLE.pos,
         font_name = FONT_BASK, font_size = FONT_SIZE_A, color = WHITE)
-    menuBag = Button(size_hint = MENU_BTN_BAG.hpair, pos = MENU_BTN_BAG.pos,
+    menuBag = Image(size_hint = MENU_BTN_BAG.hpair, pos = MENU_BTN_BAG.pos,
+        source = 'images/IMG_BAGS.png', keep_ratio = False, allow_stretch = True)
+    menuBagBtn = Button(size_hint = MENU_BTN_BAG.hpair, pos = MENU_BTN_BAG.pos,
         background_color = CLEAR)
-    menuOpts = Button(size_hint = MENU_BTN_OPTS.hpair, pos = MENU_BTN_OPTS.pos,
+    menuOpts = Image(size_hint = MENU_BTN_OPTS.hpair, pos = MENU_BTN_OPTS.pos,
+        source = 'images/IMG_SETTINGS.png', keep_ratio = False, allow_stretch = True)
+    menuOptsBtn = Button(size_hint = MENU_BTN_OPTS.hpair, pos = MENU_BTN_OPTS.pos,
         background_color = CLEAR)
 
 

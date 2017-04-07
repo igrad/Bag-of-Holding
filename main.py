@@ -57,7 +57,7 @@ class BagOfHolding(RelativeLayout):
         screenMain.add_widget(BG)
 
         # Menu
-        for widge in [menuTitle, menuBag, menuOpts]:
+        for widge in [menuTitle, menuBag, menuBagBtn, menuOpts, menuOptsBtn]:
             menu.add_widget(widge)
 
         # Tabs
