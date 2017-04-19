@@ -52,6 +52,9 @@ class BagOfHolding(RelativeLayout):
         viewCozy.bind(on_press = SetView)
         viewCard.bind(on_press = SetView)
 
+        # Select
+        SetItemViewsOnPress(SelectItem)
+
     def AddChildren(self):
         # Background
         screenMain.add_widget(BG)
@@ -84,8 +87,15 @@ class BagOfHolding(RelativeLayout):
         contScroll.add_widget(contList)
         cont.add_widget(contScroll)
 
+        # Selected Item
+        for widge in [pickQty, pickWeight, pickVal]:
+            pickMisc.add_widget(widge)
+
+        for widge in [pickShade, pickHalt, pickBG, pickName, pickIcon, pickMisc, pickDesc, pickOpts, pickX]:
+            pick.add_widget(widge)
+
         # Render
-        for widge in [cont, menu, dropNew, dropSort, dropView, tabs]:
+        for widge in [cont, menu, dropNew, dropSort, dropView, tabs, pick]:
             screenMain.add_widget(widge)
 
         self.add_widget(screenMain)

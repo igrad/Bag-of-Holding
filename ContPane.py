@@ -61,7 +61,7 @@ def OpenBag(openBagID):
     LoadItems(BAGS[bagID].items)
 
     # Update the bag title on-screen
-    # TODO Update loaded bag's title at the top of screen
+    menuTitle.text = BAGS[CURRENTBAG].name
 
     PopulateItemViews(openBagID)
 
@@ -80,3 +80,21 @@ def HighlightView(viewType):
         viewNorm_Check.source = VIEW_CHECK_INACTIVE
         viewCozy_Check.source = VIEW_CHECK_INACTIVE
         viewCard_Check.source = VIEW_CHECK_ACTIVE
+
+def SelectItem(btn):
+
+    if pick.pos != list(PICK.pos):
+        LogMsg('Item selected: ' + str(btn.dname.text))
+        itemID = btn.itemID
+
+        pickName.text = ITEMS[itemID].name
+        pickIcon.source = ITEMS[itemID].icon
+        pickQty.text = 'Quantity: ' + str(ITEMS[itemID].qty)
+        pickWeight.text = 'Weight: ' + str(ITEMS[itemID].weight)
+        pickVal.text = 'Value: ' + str(ITEMS[itemID].val)
+        pickDesc.text = ITEMS[itemID].tags + '\n' + str(ITEMS[itemID].desc)
+
+        pick.pos = PICK.pos
+
+    else:
+        pick.pos = SCREEN_POS_OFF

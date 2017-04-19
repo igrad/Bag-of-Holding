@@ -49,6 +49,18 @@ class AnchorButton(ButtonBehavior, AnchorLayout):
         if 'size' in kwargs: self.size = kwargs.pop('size')
         else: self.size = (100, 100)
 
+        if 'image' in kwargs: self._image = kwargs.pop('image')
+        elif 'source' in kwargs: self._image = Image(source = kwargs.pop('source'))
+        else: self._image = None
+        if ('allow_stretch' in kwargs) and (self._image != None):
+            self._image.allow_stretch = kwargs.pop('allow_stretch')
+        if ('keep_ratio' in kwargs) and (self._image != None):
+            self._image.keep_ratio = kwargs.pop('keep_ratio')
+        if 'background_img' in kwargs:
+            self._img = kwargs.pop('background_img')
+            if self._img == None: self._img = 'images/IMG_CLEAR.png'
+        else: self._img = None
+
         super(AnchorButton, self).__init__(size_hint = self.size_hint, size = self.size,
             pos = self.pos, anchor_x = self.anchor_x, anchor_y = self.anchor_y)
 
@@ -56,7 +68,11 @@ class AnchorButton(ButtonBehavior, AnchorLayout):
         if self.anchor_x != 'center': self._btn.text_size[0] = self._btn.size[0]
         if self.anchor_y != 'center': self._btn.text_size[1] = self._btn.size[1]
 
+        if self._img != None:
+            self._btn.background_normal = self._btn.background_down = self._btn.background_disabled_normal = self._btn.background_disabled_down = self._img
+
         self.add_widget(self._btn)
+        if self._image != None: self.add_widget(self._image)
 
     @property
     def text(self):
@@ -65,3 +81,11 @@ class AnchorButton(ButtonBehavior, AnchorLayout):
     @text.setter
     def text(self, text):
         self._btn.text = text
+
+    @property
+    def image(self):
+        return self._image
+
+    @image.setter
+    def image(self, newImage):
+        self._image = newImage

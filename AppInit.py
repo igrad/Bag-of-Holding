@@ -12,6 +12,7 @@ if True:
     FONT_SIZE_A = 32
     FONT_SIZE_B = 20
     FONT_SIZE_C = 16
+    FONT_SIZE_D = 24
     FONT_SIZE_HEAD = 48
     FONT_BASK = 'fonts/BASKVILLE.TTF'
     WHITE = [1,1,1,1]
@@ -21,6 +22,7 @@ if True:
     VIEW_CHECK_ACTIVE = 'images/IMG_VIEW_CHECK_ACTIVE.png'
     VIEW_CHECK_INACTIVE = 'images/IMG_VIEW_CHECK_INACTIVE.png'
     IMG_CLEAR = 'images/IMG_CLEAR.png'
+    IMG_BLACK = 'images/IMG_BLACK.png'
 
     # Sizes =============================================================================
     APP_W = 432 / XSCALE
@@ -36,6 +38,25 @@ if True:
     TABS = SizeMap(0, 602, 432, 60, FRAME.pair)
     TABS_BTN = SizeMap(0, 0, 144, 60, TABS.pair)
 
+    CONT = SizeMap(0, 0, 432, 557, FRAME.pair)
+    CONT_SPACE = SizeMap(0, 0, 0, 5, CONT.pair)
+    CONT_PAD = SizeMap(0, 0, 2, 2, CONT.pair)
+    CONT_SCROLL = SizeMap(0, 0, 12, 0, CONT.pair)
+
+    # SELECTED ITEM
+    # Note: spacing should be (20, 20, 392, 516)
+    PICK = SizeMap(0, 105, 432, 557, FRAME.pair)
+    PICK_SHADE = SizeMap(0, -105, 432, 768, PICK.pair)
+    PICK_NAME = SizeMap(20, 476, 392, 40, PICK.pair)
+    PICK_ICON = SizeMap(20, 312, 392, 160, PICK.pair)
+    PICK_MISC = SizeMap(21, 290, 390, 18, PICK.pair)
+    PICK_QTY = SizeMap(0, 0, 130, 18, PICK.pair)
+    PICK_WEIGHT = SizeMap(0, 0, 130, 18, PICK.pair)
+    PICK_VAL = SizeMap(0, 0, 130, 18, PICK.pair)
+    PICK_DESC = SizeMap(20, 20, 392, 266, PICK.pair)
+    PICK_OPTS = SizeMap(8, 550, 26, 26, PICK.pair)
+    PICK_X = SizeMap(396, 550, 26, 26, PICK.pair)
+
     # DROP MENUS
     DROP_NEW = SizeMap(0, 174, 422, 496, FRAME.pair)
     DROP_SORT = SizeMap(140, 414, 288, 256, FRAME.pair)
@@ -44,25 +65,19 @@ if True:
     DROP_SORT_HALT = SizeMap(8, 8, 272, 180, DROP_SORT.pair)
     DROP_VIEW_HALT = SizeMap(8, 8, 272, 180, DROP_VIEW.pair)
 
-    CONT = SizeMap(0, 0, 432, 557, FRAME.pair)
-    CONTPANE = SizeMap(0, 0, 1040, 1560, CONT.pair)
-    CONT_SPACE = SizeMap(0, 0, 0, 5, CONT.pair)
-    CONT_PAD = SizeMap(0, 0, 2, 2, CONT.pair)
-    CONT_SCROLL = SizeMap(0, 0, 12, 0, CONT.pair)
-
     # ITEMS
-    ITEMVIEW_COZY = SizeMap(0, 0, 408, 84, CONTPANE.pair)
-    ITEMVIEW_NORM = SizeMap(0, 0, 408, 24, CONTPANE.pair)
-    ITEMVIEW_CARD = SizeMap(0, 0, 408, 120, CONTPANE.pair)
+    ITEMVIEW_COZY = SizeMap(0, 0, 408, 84, CONT.pair)
+    ITEMVIEW_NORM = SizeMap(0, 0, 408, 24, CONT.pair)
+    ITEMVIEW_CARD = SizeMap(0, 0, 408, 140, CONT.pair)
     IV_COZY_ICON = SizeMap(8, 8, 68, 68, ITEMVIEW_COZY.pair)
     IV_COZY_NAME = SizeMap(84, 40, 316, 30, ITEMVIEW_COZY.pair)
     IV_COZY_MISC = SizeMap(84, 10, 316, 24, ITEMVIEW_COZY.pair)
     IV_NORM_ICON = SizeMap(4, 4, 16, 16, ITEMVIEW_NORM.pair)
     IV_NORM_NAME = SizeMap(24, 2, 204, 24, ITEMVIEW_NORM.pair)
     IV_NORM_MISC = SizeMap(232, 2, 172, 24, ITEMVIEW_NORM.pair)
-    IV_CARD_ICON = SizeMap(14, 14, 172, 172, ITEMVIEW_CARD.pair)
-    IV_CARD_NAME = SizeMap(218, 102, 790, 75, ITEMVIEW_CARD.pair)
-    IV_CARD_MISC = SizeMap(218, 15, 790, 65, ITEMVIEW_CARD.pair)
+    IV_CARD_ICON = SizeMap(8, 8, 68, 68, ITEMVIEW_COZY.pair)
+    IV_CARD_NAME = SizeMap(84, 40, 316, 30, ITEMVIEW_COZY.pair)
+    IV_CARD_MISC = SizeMap(84, 10, 316, 24, ITEMVIEW_COZY.pair)
 
     # NEW
     NEW_NAME = SizeMap(12, 375, 392, 30, DROP_NEW.pair)
@@ -141,6 +156,47 @@ if True:
         font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = CLEAR)
     tabsView = Button(size_hint = TABS_BTN.hpair, text = 'VIEW', color = WHITE,
         font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = CLEAR)
+
+
+    # Content
+    cont = RelativeLayout(pos = CONT.pos, size_hint = CONT.hpair)
+    contScroll = ScrollView(size_hint = FILLS, do_scroll_x = False,
+        bar_width = CONT_SCROLL.x)
+    contList = GridLayout(size_hint = (1.0, None), cols = 1,
+        padding = list(CONT_PAD.pair), spacing = list(CONT_SPACE.pair),
+        row_force_default = True)
+
+
+    # Selected Item
+    pick = RelativeLayout(pos = SCREEN_POS_OFF, size_hint = PICK.hpair)
+    pickShade = Image(size_hint = PICK_SHADE.hpair, pos = PICK_SHADE.pos,
+        source = IMG_BLACK, color = [0,0,0,0.6], allow_stretch = True, keep_ratio = False)
+    pickHalt = Button(opacity = 0, size_hint = FILLS)
+    pickBG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png')
+    pickName = AnchorLabel(pos = PICK_NAME.pos, size_hint = PICK_NAME.hpair,
+        font_name = FONT_BASK, font_size = FONT_SIZE_A, color = BLACK,
+        anchor_y = 'center', valign = 'middle')
+    pickIcon = Image(pos = PICK_ICON.pos, size_hint = PICK_ICON.hpair,
+        source = 'images/blankIcon.png', allow_stretch = False, keep_ratio = True)
+    pickMisc = BoxLayout(pos = PICK_MISC.pos, size_hint = PICK_MISC.hpair,
+        orientation = 'horizontal')
+    pickQty = Label(font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
+        text = 'Quantity: ')
+    pickWeight = Label(font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
+        text = 'Weight: ')
+    pickVal = Label(font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
+        text = 'Value: ')
+    pickDesc = AnchorLabel(pos = PICK_DESC.pos, size_hint = PICK_DESC.hpair,
+        font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
+        text = 'Description', anchor_x = 'left', anchor_y = 'top', halign = 'left',
+        valign = 'top')
+    pickOpts = AnchorButton(pos = PICK_OPTS.pos, size_hint = PICK_OPTS.hpair,
+        source = 'images/IMG_SETTINGS.png', keep_ratio = True, allow_stretch = False,
+        background_img = None)
+    pickX = AnchorButton(pos = PICK_X.pos, size_hint = PICK_X.hpair,
+        text = 'X', font_name = FONT_BASK, font_size = FONT_SIZE_D, color = WHITE,
+        background_img = None, valign = 'bottom')
+
 
 
     # Tab drops
@@ -240,12 +296,3 @@ if True:
         anchor_x = 'right', halign = 'right')
     viewCard_Check = Image(size_hint = VIEW_CARD_CHECK.hpair, pos = VIEW_CARD_CHECK.pos,
         source = VIEW_CHECK_INACTIVE)
-
-
-    # Content
-    cont = RelativeLayout(pos = CONT.pos, size_hint = CONT.hpair)
-    contScroll = ScrollView(size_hint = FILLS, do_scroll_x = False,
-        bar_width = CONT_SCROLL.x)
-    contList = GridLayout(size_hint = (1.0, None), cols = 1,
-        padding = list(CONT_PAD.pair), spacing = list(CONT_SPACE.pair),
-        row_force_default = True)
