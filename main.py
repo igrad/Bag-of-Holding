@@ -53,7 +53,9 @@ class BagOfHolding(RelativeLayout):
         viewCard.bind(on_press = SetView)
 
         # Select
+        pickX.bind(on_press = SelectItem)
         SetItemViewsOnPress(SelectItem)
+
 
     def AddChildren(self):
         # Background

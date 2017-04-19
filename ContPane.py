@@ -82,11 +82,12 @@ def HighlightView(viewType):
         viewCard_Check.source = VIEW_CHECK_ACTIVE
 
 def SelectItem(btn):
+    print('selectItem called')
 
     if pick.pos != list(PICK.pos):
         LogMsg('Item selected: ' + str(btn.dname.text))
         itemID = btn.itemID
-
+        print('showing')
         pickName.text = ITEMS[itemID].name
         pickIcon.source = ITEMS[itemID].icon
         pickQty.text = 'Quantity: ' + str(ITEMS[itemID].qty)
@@ -97,4 +98,5 @@ def SelectItem(btn):
         pick.pos = PICK.pos
 
     else:
+        print('hiding')
         pick.pos = SCREEN_POS_OFF

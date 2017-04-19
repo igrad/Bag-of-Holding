@@ -33,7 +33,7 @@ class AnchorLabel(AnchorLayout):
     def text(self, text):
         self._lbl.text = text
 
-class AnchorButton(ButtonBehavior, AnchorLayout):
+class AnchorButton(AnchorLayout):
     '''Create a button from the data passed in, wrap it in a AnchorLayout, so that it
     quickly aligns without having to hassle with the textsize parameter.'''
 
@@ -73,6 +73,12 @@ class AnchorButton(ButtonBehavior, AnchorLayout):
 
         self.add_widget(self._btn)
         if self._image != None: self.add_widget(self._image)
+
+    def bind(self, **kwargs):
+        if 'on_press' in kwargs and len(kwargs) == 1:
+            return self._btn.bind(on_press = kwargs.pop('on_press'))
+        else:
+            super(AnchorButton, self).bind()
 
     @property
     def text(self):
