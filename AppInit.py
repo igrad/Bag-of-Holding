@@ -57,6 +57,20 @@ if True:
     PICK_OPTS = SizeMap(8, 550, 26, 26, PICK.pair)
     PICK_X = SizeMap(396, 550, 26, 26, PICK.pair)
 
+    EDIT_NAME = SizeMap(20, 480, 392, 40, PICK.pair)
+    EDIT_ICON = SizeMap(20, 328, 144, 144, PICK.pair)
+    EDIT_QTY = SizeMap(240, 442, 172, 30, PICK.pair)
+    EDIT_QTY_L = SizeMap(180, 442, 54, 30, PICK.pair)
+    EDIT_WEIGHT = SizeMap(240, 385, 172, 30, PICK.pair)
+    EDIT_WEIGHT_L = SizeMap(180, 385, 54, 30, PICK.pair)
+    EDIT_VAL = SizeMap(240, 328, 172, 30, PICK.pair)
+    EDIT_VAL_L = SizeMap(180, 328, 54, 30, PICK.pair)
+    EDIT_TAGS = SizeMap(20, 58, 192, 262, PICK.pair)
+    EDIT_DESC = SizeMap(220, 58, 192, 262, PICK.pair)
+    EDIT_CANCEL = SizeMap(20, 20, 192, 30, PICK.pair)
+    EDIT_SAVE = SizeMap(220, 20, 192, 30, PICK.pair)
+    EDIT_X = PICK_X
+
     # DROP MENUS
     DROP_NEW = SizeMap(0, 174, 422, 496, FRAME.pair)
     DROP_SORT = SizeMap(140, 414, 288, 256, FRAME.pair)
@@ -159,7 +173,7 @@ if True:
 
 
     # Content
-    cont = RelativeLayout(pos = CONT.pos, size_hint = CONT.hpair)
+    cont = RelativeLayout(size_hint = CONT.hpair, pos = CONT.pos)
     contScroll = ScrollView(size_hint = FILLS, do_scroll_x = False,
         bar_width = CONT_SCROLL.x)
     contList = GridLayout(size_hint = (1.0, None), cols = 1,
@@ -168,17 +182,18 @@ if True:
 
 
     # Selected Item
-    pick = RelativeLayout(pos = SCREEN_POS_OFF, size_hint = PICK.hpair)
-    pickShade = Image(size_hint = PICK_SHADE.hpair, pos = PICK_SHADE.pos,
+    pick = RelativeLayout(size_hint = PICK.hpair, pos = SCREEN_POS_OFF)
+    pickShade = Image(pos = PICK_SHADE.pos, size_hint = PICK_SHADE.hpair,
         source = IMG_BLACK, color = [0,0,0,0.6], allow_stretch = True, keep_ratio = False)
-    pickHalt = Button(opacity = 0, size_hint = FILLS)
+    pickHalt = Button(size_hint = FILLS, opacity = 0)
     pickBG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png')
-    pickName = AnchorLabel(pos = PICK_NAME.pos, size_hint = PICK_NAME.hpair,
+    pickWidges = RelativeLayout(size_hint = FILLS, pos = ZEROS)
+    pickName = AnchorLabel(size_hint = PICK_NAME.hpair, pos = PICK_NAME.pos,
         font_name = FONT_BASK, font_size = FONT_SIZE_A, color = BLACK,
         anchor_y = 'center', valign = 'middle')
-    pickIcon = Image(pos = PICK_ICON.pos, size_hint = PICK_ICON.hpair,
+    pickIcon = Image(size_hint = PICK_ICON.hpair, pos = PICK_ICON.pos,
         source = 'images/blankIcon.png', allow_stretch = False, keep_ratio = True)
-    pickMisc = BoxLayout(pos = PICK_MISC.pos, size_hint = PICK_MISC.hpair,
+    pickMisc = BoxLayout(size_hint = PICK_MISC.hpair, pos = PICK_MISC.pos,
         orientation = 'horizontal')
     pickQty = Label(font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
         text = 'Quantity: ')
@@ -186,16 +201,48 @@ if True:
         text = 'Weight: ')
     pickVal = Label(font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
         text = 'Value: ')
-    pickDesc = AnchorLabel(pos = PICK_DESC.pos, size_hint = PICK_DESC.hpair,
+    pickDesc = AnchorLabel(size_hint = PICK_DESC.hpair, pos = PICK_DESC.pos,
         font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
         text = 'Description', anchor_x = 'left', anchor_y = 'top', halign = 'left',
         valign = 'top')
-    pickOpts = AnchorButton(pos = PICK_OPTS.pos, size_hint = PICK_OPTS.hpair,
+    pickOpts = AnchorButton(size_hint = PICK_OPTS.hpair, pos = PICK_OPTS.pos,
         source = 'images/IMG_SETTINGS.png', keep_ratio = True, allow_stretch = False,
         background_img = None)
-    pickX = AnchorButton(pos = PICK_X.pos, size_hint = PICK_X.hpair,
+    pickX = AnchorButton(size_hint = PICK_X.hpair, pos = PICK_X.pos,
         text = 'X', font_name = FONT_BASK, font_size = FONT_SIZE_D, color = WHITE,
         background_img = None, valign = 'bottom')
+
+    editWidges = RelativeLayout(size_hint = FILLS, pos = SCREEN_POS_OFF)
+    editName = TextInput(size_hint = EDIT_NAME.hpair, pos = EDIT_NAME.pos,
+        font_name = FONT_BASK, font_size = FONT_SIZE_A)
+    editIcon = Image(size_hint = EDIT_ICON.hpair, pos = EDIT_ICON.pos,
+        source = 'images/blankIcon.png', allow_stretch = True, keep_ratio = True)
+    editQty = TextInput(size_hint = EDIT_QTY.hpair, pos = EDIT_QTY.pos,
+        font_name = FONT_BASK, font_size = FONT_SIZE_C)
+    editQty_L = AnchorLabel(size_hint = EDIT_QTY_L.hpair, pos = EDIT_QTY_L.pos,
+        text = 'Quantity', font_name = FONT_BASK, font_size = FONT_SIZE_C,
+        anchor_x = 'right', color = BLACK, halign = 'right')
+    editWeight = TextInput(size_hint = EDIT_WEIGHT.hpair, pos = EDIT_WEIGHT.pos,
+        font_name = FONT_BASK, font_size = FONT_SIZE_C)
+    editWeight_L = AnchorLabel(size_hint = EDIT_WEIGHT_L.hpair, pos = EDIT_WEIGHT_L.pos,
+        text = 'Weight', font_name = FONT_BASK, font_size = FONT_SIZE_C,
+        anchor_x = 'right', color = BLACK, halign = 'right')
+    editVal = TextInput(size_hint = EDIT_VAL.hpair, pos = EDIT_VAL.pos,
+        font_name = FONT_BASK, font_size = FONT_SIZE_C)
+    editVal_L = AnchorLabel(size_hint = EDIT_VAL_L.hpair, pos = EDIT_VAL_L.pos,
+        text = 'Value', font_name = FONT_BASK, font_size = FONT_SIZE_C,
+        anchor_x = 'right', color = BLACK, halign = 'right')
+    editTags = TextInput(size_hint = EDIT_TAGS.hpair, pos = EDIT_TAGS.pos,
+        font_name = FONT_BASK, font_size = FONT_SIZE_C)
+    editDesc = TextInput(size_hint = EDIT_DESC.hpair, pos = EDIT_DESC.pos,
+        font_name = FONT_BASK, font_size = FONT_SIZE_C)
+    editX = AnchorButton(size_hint = EDIT_X.hpair, pos = EDIT_X.pos,
+        text = 'X', font_name = FONT_BASK, font_size = FONT_SIZE_D, color = WHITE,
+        background_img = None, valign = 'bottom')
+    editCancel = Button(size_hint = EDIT_CANCEL.hpair, pos = EDIT_CANCEL.pos,
+        text = 'CANCEL', font_name = FONT_BASK, font_size = FONT_SIZE_C)
+    editSave = Button(size_hint = EDIT_SAVE.hpair, pos = EDIT_SAVE.pos,
+        text = 'SAVE', font_name = FONT_BASK, font_size = FONT_SIZE_C)
 
 
 
