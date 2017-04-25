@@ -54,8 +54,6 @@ class BagOfHolding(RelativeLayout):
 
         # Select
         pickX.bind(on_press = SelectItem)
-        pickOpts.bind(on_press = EditItem)
-        editX.bind(on_press = EditItem)
         SetItemViewsOnPress(SelectItem)
 
 
@@ -92,16 +90,13 @@ class BagOfHolding(RelativeLayout):
         cont.add_widget(contScroll)
 
         # Selected Item
-        for widge in [pickQty, pickWeight, pickVal]:
+        for widge in [pickQty_L, pickQty_I, pickWeight_L, pickWeight_I, pickVal_L, pickVal_I]:
             pickMisc.add_widget(widge)
 
         for widge in [pickName, pickIcon, pickMisc, pickDesc, pickOpts, pickX]:
             pickWidges.add_widget(widge)
 
-        for widge in [editName, editIcon, editQty, editQty_L, editWeight, editWeight_L, editVal, editVal_L, editTags, editDesc, editCancel, editSave, editX]:
-            editWidges.add_widget(widge)
-
-        for widge in [pickShade, pickHalt, pickBG, pickWidges, editWidges]:
+        for widge in [pickShade, pickHalt, pickBG, pickWidges]:
             pick.add_widget(widge)
 
         # Render

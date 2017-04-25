@@ -81,9 +81,9 @@ def SelectItem(btn):
         pick.itemID = itemID = btn.itemID
         pickName.text = ITEMS[itemID].name
         pickIcon.source = ITEMS[itemID].icon
-        pickQty.text = 'Quantity: ' + str(ITEMS[itemID].qty)
-        pickWeight.text = 'Weight: ' + str(ITEMS[itemID].weight)
-        pickVal.text = 'Value: ' + str(ITEMS[itemID].val)
+        pickQty_I.text = str(ITEMS[itemID].qty)
+        pickWeight_I.text = str(ITEMS[itemID].weight)
+        pickVal_I.text = str(ITEMS[itemID].val)
         pickDesc.text = ITEMS[itemID].tags + '\n' + str(ITEMS[itemID].desc)
 
         pick.pos = PICK.pos

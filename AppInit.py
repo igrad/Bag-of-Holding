@@ -49,27 +49,13 @@ if True:
     PICK_SHADE = SizeMap(0, -105, 432, 768, PICK.pair)
     PICK_NAME = SizeMap(20, 476, 392, 40, PICK.pair)
     PICK_ICON = SizeMap(20, 312, 392, 160, PICK.pair)
-    PICK_MISC = SizeMap(21, 290, 390, 18, PICK.pair)
-    PICK_QTY = SizeMap(0, 0, 130, 18, PICK.pair)
-    PICK_WEIGHT = SizeMap(0, 0, 130, 18, PICK.pair)
-    PICK_VAL = SizeMap(0, 0, 130, 18, PICK.pair)
+    PICK_MISC = SizeMap(21, 290, 390, 24, PICK.pair)
+    PICK_QTY = SizeMap(0, 0, 130, 24, PICK.pair)
+    PICK_WEIGHT = SizeMap(0, 1, 390, 10, PICK_MISC.pair)
+    PICK_VAL = SizeMap(0, 0, 130, 24, PICK.pair)
     PICK_DESC = SizeMap(20, 20, 392, 266, PICK.pair)
     PICK_OPTS = SizeMap(8, 550, 26, 26, PICK.pair)
     PICK_X = SizeMap(396, 550, 26, 26, PICK.pair)
-
-    EDIT_NAME = SizeMap(20, 480, 392, 40, PICK.pair)
-    EDIT_ICON = SizeMap(20, 328, 144, 144, PICK.pair)
-    EDIT_QTY = SizeMap(240, 442, 172, 30, PICK.pair)
-    EDIT_QTY_L = SizeMap(180, 442, 54, 30, PICK.pair)
-    EDIT_WEIGHT = SizeMap(240, 385, 172, 30, PICK.pair)
-    EDIT_WEIGHT_L = SizeMap(180, 385, 54, 30, PICK.pair)
-    EDIT_VAL = SizeMap(240, 328, 172, 30, PICK.pair)
-    EDIT_VAL_L = SizeMap(180, 328, 54, 30, PICK.pair)
-    EDIT_TAGS = SizeMap(20, 58, 192, 262, PICK.pair)
-    EDIT_DESC = SizeMap(220, 58, 192, 262, PICK.pair)
-    EDIT_CANCEL = SizeMap(20, 20, 192, 30, PICK.pair)
-    EDIT_SAVE = SizeMap(220, 20, 192, 30, PICK.pair)
-    EDIT_X = PICK_X
 
     # DROP MENUS
     DROP_NEW = SizeMap(0, 174, 422, 496, FRAME.pair)
@@ -140,7 +126,8 @@ if True:
 #=======================================================================================#
 if True:
     # FRAME
-    BG = Image(size_hint = FILLS, source = 'images/IMG_MAIN.png')
+    BG = Image(size_hint = FILLS, source = 'images/IMG_MAIN.png', allow_stretch = True,
+        keep_ratio = False)
 
 
     # SCREENS
@@ -186,7 +173,8 @@ if True:
     pickShade = Image(pos = PICK_SHADE.pos, size_hint = PICK_SHADE.hpair,
         source = IMG_BLACK, color = [0,0,0,0.6], allow_stretch = True, keep_ratio = False)
     pickHalt = Button(size_hint = FILLS, opacity = 0)
-    pickBG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png')
+    pickBG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
+        allow_stretch = True, keep_ratio = False)
     pickWidges = RelativeLayout(size_hint = FILLS, pos = ZEROS)
     pickName = AnchorLabel(size_hint = PICK_NAME.hpair, pos = PICK_NAME.pos,
         font_name = FONT_BASK, font_size = FONT_SIZE_A, color = BLACK,
@@ -195,16 +183,29 @@ if True:
         source = 'images/blankIcon.png', allow_stretch = False, keep_ratio = True)
     pickMisc = BoxLayout(size_hint = PICK_MISC.hpair, pos = PICK_MISC.pos,
         orientation = 'horizontal')
-    pickQty = Label(font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
-        text = 'Quantity: ')
-    pickWeight = Label(font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
-        text = 'Weight: ')
-    pickVal = Label(font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
-        text = 'Value: ')
-    pickDesc = AnchorLabel(size_hint = PICK_DESC.hpair, pos = PICK_DESC.pos,
-        font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
-        text = 'Description', anchor_x = 'left', anchor_y = 'top', halign = 'left',
-        valign = 'top')
+    pickQty_L = AnchorLabel(pos = PICK_QTY.pos, font_name = FONT_BASK,
+        font_size = FONT_SIZE_C, color = BLACK, text = 'Quantity: ', anchor_x = 'right',
+        halign = 'right', valign = 'bottom')
+    pickQty_I = TextInput(font_name = FONT_BASK, font_size = FONT_SIZE_C,
+        foreground_color = BLACK, background_normal = 'images/IMG_1x1BORDER.png',
+        background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
+        write_tab = False, multiline = False, cursor_color = BLACK)
+    pickWeight_L = AnchorLabel(font_name = FONT_BASK, font_size = FONT_SIZE_C,
+        color = BLACK, text = 'Weight: ', anchor_x = 'right', anchor_y = 'bottom',
+        halign = 'right', valign = 'bottom')
+    pickWeight_I = TextInput(font_name = FONT_BASK, font_size = FONT_SIZE_C,
+        foreground_color = BLACK, background_normal = 'images/IMG_1x1BORDER.png',
+        background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
+        write_tab = False, multiline = False, cursor_color = BLACK)
+    pickVal_L = AnchorLabel(font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
+        text = 'Value: ', anchor_x = 'right', anchor_y = 'bottom', halign = 'right',
+        valign = 'bottom')
+    pickVal_I = TextInput(font_name = FONT_BASK, font_size = FONT_SIZE_C,
+        foreground_color = BLACK, background_normal = 'images/IMG_1x1BORDER.png',
+        background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
+        write_tab = False, multiline = False, cursor_color = BLACK)
+    pickDesc = TextInput(size_hint = PICK_DESC.hpair, pos = PICK_DESC.pos,
+        font_name = FONT_BASK, font_size = FONT_SIZE_C, foreground_color = BLACK, background_normal = 'images/IMG_1x1BORDER.png', background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2], cursor_color = BLACK)
     pickOpts = AnchorButton(size_hint = PICK_OPTS.hpair, pos = PICK_OPTS.pos,
         source = 'images/IMG_SETTINGS.png', keep_ratio = True, allow_stretch = False,
         background_img = None)
@@ -212,51 +213,21 @@ if True:
         text = 'X', font_name = FONT_BASK, font_size = FONT_SIZE_D, color = WHITE,
         background_img = None, valign = 'bottom')
 
-    editWidges = RelativeLayout(size_hint = FILLS, pos = SCREEN_POS_OFF)
-    editName = TextInput(size_hint = EDIT_NAME.hpair, pos = EDIT_NAME.pos,
-        font_name = FONT_BASK, font_size = FONT_SIZE_A)
-    editIcon = Image(size_hint = EDIT_ICON.hpair, pos = EDIT_ICON.pos,
-        source = 'images/blankIcon.png', allow_stretch = True, keep_ratio = True)
-    editQty = TextInput(size_hint = EDIT_QTY.hpair, pos = EDIT_QTY.pos,
-        font_name = FONT_BASK, font_size = FONT_SIZE_C)
-    editQty_L = AnchorLabel(size_hint = EDIT_QTY_L.hpair, pos = EDIT_QTY_L.pos,
-        text = 'Quantity', font_name = FONT_BASK, font_size = FONT_SIZE_C,
-        anchor_x = 'right', color = BLACK, halign = 'right')
-    editWeight = TextInput(size_hint = EDIT_WEIGHT.hpair, pos = EDIT_WEIGHT.pos,
-        font_name = FONT_BASK, font_size = FONT_SIZE_C)
-    editWeight_L = AnchorLabel(size_hint = EDIT_WEIGHT_L.hpair, pos = EDIT_WEIGHT_L.pos,
-        text = 'Weight', font_name = FONT_BASK, font_size = FONT_SIZE_C,
-        anchor_x = 'right', color = BLACK, halign = 'right')
-    editVal = TextInput(size_hint = EDIT_VAL.hpair, pos = EDIT_VAL.pos,
-        font_name = FONT_BASK, font_size = FONT_SIZE_C)
-    editVal_L = AnchorLabel(size_hint = EDIT_VAL_L.hpair, pos = EDIT_VAL_L.pos,
-        text = 'Value', font_name = FONT_BASK, font_size = FONT_SIZE_C,
-        anchor_x = 'right', color = BLACK, halign = 'right')
-    editTags = TextInput(size_hint = EDIT_TAGS.hpair, pos = EDIT_TAGS.pos,
-        font_name = FONT_BASK, font_size = FONT_SIZE_C)
-    editDesc = TextInput(size_hint = EDIT_DESC.hpair, pos = EDIT_DESC.pos,
-        font_name = FONT_BASK, font_size = FONT_SIZE_C)
-    editX = AnchorButton(size_hint = EDIT_X.hpair, pos = EDIT_X.pos,
-        text = 'X', font_name = FONT_BASK, font_size = FONT_SIZE_D, color = WHITE,
-        background_img = None, valign = 'bottom')
-    editCancel = Button(size_hint = EDIT_CANCEL.hpair, pos = EDIT_CANCEL.pos,
-        text = 'CANCEL', font_name = FONT_BASK, font_size = FONT_SIZE_C)
-    editSave = Button(size_hint = EDIT_SAVE.hpair, pos = EDIT_SAVE.pos,
-        text = 'SAVE', font_name = FONT_BASK, font_size = FONT_SIZE_C)
-
-
 
     # Tab drops
     dropNew = RelativeLayout(size_hint = DROP_NEW.hpair, pos = SCREEN_POS_OFF)
-    dropNewHalt = Button(size_hint = DROP_NEW_HALT.hpair, pos = DROP_NEW_HALT.pos)
+    dropNewHalt = Button(size_hint = DROP_NEW_HALT.hpair, pos = DROP_NEW_HALT.pos,
+        opacity = 0)
     dropNewBG = Image(size_hint = FILLS, source = 'images/IMG_DROP_NEW.png')
 
     dropSort = RelativeLayout(size_hint = DROP_SORT.hpair, pos = SCREEN_POS_OFF)
-    dropSortHalt = Button(size_hint = DROP_SORT_HALT.hpair, pos = DROP_SORT_HALT.pos)
+    dropSortHalt = Button(size_hint = DROP_SORT_HALT.hpair, pos = DROP_SORT_HALT.pos,
+        opacity = 0)
     dropSortBG = Image(size_hint = FILLS, source = 'images/IMG_DROP_SORT.png')
 
     dropView = RelativeLayout(size_hint = DROP_VIEW.hpair, pos = SCREEN_POS_OFF)
-    dropViewHalt = Button(size_hint = DROP_VIEW_HALT.hpair, pos = DROP_VIEW_HALT.pos)
+    dropViewHalt = Button(size_hint = DROP_VIEW_HALT.hpair, pos = DROP_VIEW_HALT.pos,
+        opacity = 0)
     dropViewBG = Image(size_hint = FILLS, source = 'images/IMG_DROP_VIEW.png')
 
 

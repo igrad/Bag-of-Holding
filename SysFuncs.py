@@ -35,7 +35,6 @@ XSCALE = 1
 YSCALE = 1
 
 ANIMTIME = 0.50
-T_SCREENSHIFT = 0.25
 ANIMTYPE = 'in_out_quart'
 
 #GLOBAL VARIABLES
@@ -59,10 +58,10 @@ NOOBIE_TIPS = True
 # GLOBAL CLASSES
 class SizeMap():
     def __init__(self, x, y, w, h, parentPair):
-        self.x = x / XSCALE
-        self.y = y / YSCALE
-        self.w = w
-        self.h = h
+        self.x = int(x / XSCALE)
+        self.y = int(y / YSCALE)
+        self.w = int(w / XSCALE)
+        self.h = int(h / YSCALE)
         self.pos = (self.x, self.y)
         self.pair = (self.w, self.h)
         self.hw = self.w/parentPair[0]
