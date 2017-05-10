@@ -33,6 +33,7 @@ class BagOfHolding(RelativeLayout):
 
         contList.bind(minimum_height = contList.setter('height'))
 
+
     def SetBinds(self):
         # TABS
         tabsNew.bind(on_press = OpenNew)
@@ -93,7 +94,7 @@ class BagOfHolding(RelativeLayout):
         for widge in [pickQty_L, pickQty_I, pickWeight_L, pickWeight_I, pickVal_L, pickVal_I]:
             pickMisc.add_widget(widge)
 
-        for widge in [pickName, pickIcon, pickMisc, pickDesc, pickOpts, pickX]:
+        for widge in [pickName, pickIcon, pickMisc, pickTags, pickDesc, pickOpts, pickX]:
             pickWidges.add_widget(widge)
 
         for widge in [pickShade, pickHalt, pickBG, pickWidges]:
@@ -109,6 +110,7 @@ class BagOfHolding(RelativeLayout):
 class Builder(App):
     #mode = "PROD"
     mode = "DEV"
+
 
     def build_config(self, config):
         self.title = "Bag of Holding"
@@ -137,6 +139,7 @@ class Builder(App):
 
         Config.set('kivy', 'window_icon', 'images/icon.png')
         Config.write()
+
 
     def build(self):
         config = self.config

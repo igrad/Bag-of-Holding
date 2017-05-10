@@ -24,19 +24,19 @@ def LoadItems(keys):
             sval = str(itemStore.get(key)['val'])
             sdesc = str(itemStore.get(key)['desc'])
             sicon = str(itemStore.get(key)['icon'])
-            stags = list(itemStore.get(key)['tags'])
+            stags = str(itemStore.get(key)['tags'])
 
             item = BagItem(ID = key, name = sname, qty = sqty, weight = sweight,
                 val = sval, desc = sdesc, icon = sicon, tags = stags)
 
-            ITEMS[item.ID] = item
+            ITEMS[str(item.ID)] = item
 
         except Exception as ex:
-            LogMsg("ERROR: LoadItems() error on itemID " + str(key) + ": " + str(ex))
+            LogErr("LoadItems() error on itemID " + str(key) + ": " + str(ex))
             failedItems.append(key)
 
     if len(failedItems) > 0:
-        LogMsg("ERROR: Could not load the following items: " + str(failedItems))
+        LogErr("Could not load the following items: " + str(failedItems))
 
 def LoadBags(bagKey = None):
     '''Create a temp copy of the bags stored in bagsStore, and make them accessible to the user by appending them to the BAGS dict.'''
@@ -62,12 +62,12 @@ def LoadBags(bagKey = None):
 
             BAGS[key] = newBag
 
-        except Exception as ex:
-            LogMsg('ERROR || Bag exception raised, could not load bag ' + str(key) + '. Returned error: ' + str(ex))
+        except Exception:
+            LogExc('Bag exception raised, could not load bag ' + str(key))
             failedBags.append(str(key))
 
     if len(failedBags) > 0:
-        LogMsg("ERROR while loading bags! Could not find/open the following bag(s): " + str(failedBags))
+        LogErr("Could not find/open the following bag(s): " + str(failedBags))
 
 def LoadSettings():
     '''Calls the saved settings file and loads the settings to file.'''
@@ -89,7 +89,7 @@ def LoadSettings():
             MAX_ITEMS = int(opts['MAX_ITEMS'])
             LAST_BAG_OPENED = int(opts['LAST_BAG_OPENED'])
         except:
-            LogMsg("ERROR: Saved settings file existed, but is empty. Preferences reset to defaults.")
+            LogMsg("Saved settings file existed, but is empty. Preferences reset to defaults.")
             optsStore.put('opts', d = defaults)
     else:
         optsStore.put('existed', d = True)

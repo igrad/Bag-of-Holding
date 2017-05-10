@@ -25,9 +25,11 @@ class AnchorLabel(AnchorLayout):
 
         self.add_widget(self._lbl)
 
+
     @property
     def text(self):
         return self._lbl.text
+
 
     @text.setter
     def text(self, text):
@@ -80,17 +82,21 @@ class AnchorButton(AnchorLayout):
         else:
             super(AnchorButton, self).bind()
 
+
     @property
     def text(self):
         return self._btn.text
+
 
     @text.setter
     def text(self, text):
         self._btn.text = text
 
+
     @property
     def image(self):
         return self._image
+
 
     @image.setter
     def image(self, newImage):

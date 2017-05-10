@@ -38,6 +38,8 @@ if True:
     TABS = SizeMap(0, 602, 432, 60, FRAME.pair)
     TABS_BTN = SizeMap(0, 0, 144, 60, TABS.pair)
 
+    SEARCH = SizeMap(0, 558, 432, 44, FRAME.pair)
+
     CONT = SizeMap(0, 0, 432, 557, FRAME.pair)
     CONT_SPACE = SizeMap(0, 0, 0, 5, CONT.pair)
     CONT_PAD = SizeMap(0, 0, 2, 2, CONT.pair)
@@ -49,11 +51,12 @@ if True:
     PICK_SHADE = SizeMap(0, -105, 432, 768, PICK.pair)
     PICK_NAME = SizeMap(20, 476, 392, 40, PICK.pair)
     PICK_ICON = SizeMap(20, 312, 392, 160, PICK.pair)
-    PICK_MISC = SizeMap(21, 290, 390, 24, PICK.pair)
-    PICK_QTY = SizeMap(0, 0, 130, 24, PICK.pair)
-    PICK_WEIGHT = SizeMap(0, 1, 390, 10, PICK_MISC.pair)
-    PICK_VAL = SizeMap(0, 0, 130, 24, PICK.pair)
-    PICK_DESC = SizeMap(20, 20, 392, 266, PICK.pair)
+    PICK_MISC = SizeMap(21, 287, 390, 27, PICK.pair)
+    PICK_QTY = SizeMap(0, 0, 130, 27, PICK.pair)
+    PICK_WEIGHT = SizeMap(0, 1, 390, 27, PICK_MISC.pair)
+    PICK_VAL = SizeMap(0, 0, 130, 27, PICK.pair)
+    PICK_TAGS = SizeMap(20, 256, 392, 27, PICK.pair)
+    PICK_DESC = SizeMap(20, 20, 392, 232, PICK.pair)
     PICK_OPTS = SizeMap(8, 550, 26, 26, PICK.pair)
     PICK_X = SizeMap(396, 550, 26, 26, PICK.pair)
 
@@ -191,21 +194,28 @@ if True:
         background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
         write_tab = False, multiline = False, cursor_color = BLACK)
     pickWeight_L = AnchorLabel(font_name = FONT_BASK, font_size = FONT_SIZE_C,
-        color = BLACK, text = 'Weight: ', anchor_x = 'right', anchor_y = 'bottom',
-        halign = 'right', valign = 'bottom')
+        color = BLACK, text = 'Weight: ', anchor_x = 'right', halign = 'right',
+        valign = 'bottom')
     pickWeight_I = TextInput(font_name = FONT_BASK, font_size = FONT_SIZE_C,
         foreground_color = BLACK, background_normal = 'images/IMG_1x1BORDER.png',
         background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
         write_tab = False, multiline = False, cursor_color = BLACK)
     pickVal_L = AnchorLabel(font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK,
-        text = 'Value: ', anchor_x = 'right', anchor_y = 'bottom', halign = 'right',
-        valign = 'bottom')
+        text = 'Value: ', anchor_x = 'right', halign = 'right', valign = 'bottom')
     pickVal_I = TextInput(font_name = FONT_BASK, font_size = FONT_SIZE_C,
         foreground_color = BLACK, background_normal = 'images/IMG_1x1BORDER.png',
         background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
         write_tab = False, multiline = False, cursor_color = BLACK)
+    pickTags = TextInput(size_hint = PICK_TAGS.hpair, pos = PICK_TAGS.pos,
+        font_name = FONT_BASK, font_size = FONT_SIZE_C, foreground_color = BLACK,
+        background_normal = 'images/IMG_1x1BORDER.png',
+        background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
+        cursor_color = BLACK)
     pickDesc = TextInput(size_hint = PICK_DESC.hpair, pos = PICK_DESC.pos,
-        font_name = FONT_BASK, font_size = FONT_SIZE_C, foreground_color = BLACK, background_normal = 'images/IMG_1x1BORDER.png', background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2], cursor_color = BLACK)
+        font_name = FONT_BASK, font_size = FONT_SIZE_C, foreground_color = BLACK,
+        background_normal = 'images/IMG_1x1BORDER.png',
+        background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
+        cursor_color = BLACK)
     pickOpts = AnchorButton(size_hint = PICK_OPTS.hpair, pos = PICK_OPTS.pos,
         source = 'images/IMG_SETTINGS.png', keep_ratio = True, allow_stretch = False,
         background_img = None)

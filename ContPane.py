@@ -25,7 +25,7 @@ def PopulateItemViews(openBagID):
         contList.row_default_height = ITEMVIEW_CARD.h
 
     for itemID in bag.items:
-        itemID = int(itemID)
+        itemID = str(itemID)
 
         newItem = ItemView(itemID = itemID)
 
@@ -36,7 +36,7 @@ def PopulateItemViews(openBagID):
         # NOTE This will need to be made a function of the filter. IE, if the item
         # NOTE passes through the filter, post it to the grid.
 
-        contList.add_widget(ITEMVIEWS[int(itemID)])
+        contList.add_widget(ITEMVIEWS[str(itemID)])
 
 
 def OpenBag(openBagID):
@@ -67,6 +67,7 @@ def OpenBag(openBagID):
 
     HighlightView(VIEW_TYPE)
 
+
 def HighlightView(viewType):
     viewNorm_Check.source = VIEW_CHECK_INACTIVE
     viewCozy_Check.source = VIEW_CHECK_INACTIVE
@@ -76,34 +77,39 @@ def HighlightView(viewType):
     elif viewType == 'cozy': viewCozy_Check.source = VIEW_CHECK_ACTIVE
     elif viewType == 'card': viewCard_Check.source = VIEW_CHECK_ACTIVE
 
+
 def SelectItem(btn):
+    '''Called when an ItemView is called for display in the PICK screen.'''
     if pick.pos != list(PICK.pos):
-        pick.itemID = itemID = btn.itemID
-        pickName.text = ITEMS[itemID].name
-        pickIcon.source = ITEMS[itemID].icon
-        pickQty_I.text = str(ITEMS[itemID].qty)
-        pickWeight_I.text = str(ITEMS[itemID].weight)
-        pickVal_I.text = str(ITEMS[itemID].val)
-        pickDesc.text = ITEMS[itemID].tags + '\n' + str(ITEMS[itemID].desc)
+        pick.itemID = btn.itemID
+        pickName.text = ITEMS[pick.itemID].name
+        pickIcon.source = ITEMS[pick.itemID].icon
+        pickQty_I.text = str(ITEMS[pick.itemID].qty)
+        pickWeight_I.text = str(ITEMS[pick.itemID].weight)
+        pickVal_I.text = str(ITEMS[pick.itemID].val)
+        pickTags.text = str(ITEMS[pick.itemID].tags)
+        pickDesc.text = str(ITEMS[pick.itemID].desc)
 
         pick.pos = PICK.pos
     else:
         pick.pos = SCREEN_POS_OFF
 
-def EditItem(btn):
-    if editWidges.pos != list(ZEROS):
-        itemID = pick.itemID
-        editName.text = ITEMS[itemID].name
-        editIcon.source = ITEMS[itemID].icon
-        editQty.text = str(ITEMS[itemID].qty)
-        editWeight.text = str(ITEMS[itemID].weight)
-        editVal.text = str(ITEMS[itemID].val)
-        editTags.text = str(ITEMS[itemID].tags)
-        editDesc.text =  ITEMS[itemID].desc
+        args = dict()
+        if pickName.text != str(ITEMS[pick.itemID].name):
+            args['name'] = str(pickName.text)
+        if pickIcon.source != ITEMS[pick.itemID].icon:
+            args['icon'] = str(pickIcon.source)
+        if pickQty_I.text != str(ITEMS[pick.itemID].qty):
+            args['qty'] = str(pickQty_I.text)
+        if pickWeight_I.text != str(ITEMS[pick.itemID].weight):
+            args['weight'] = str(pickWeight_I.text)
+        if pickVal_I.text != str(ITEMS[pick.itemID].val):
+            args['val'] = str(pickVal_I.text)
+        if pickTags.text != str(ITEMS[pick.itemID].tags):
+            args['tags'] = str(pickTags.text)
+        if pickDesc.text != str(ITEMS[pick.itemID].desc):
+            args['desc'] = str(pickDesc.text)
 
-        editWidges.pos = ZEROS
-        pickWidges.pos = SCREEN_POS_OFF
-
-    else:
-        editWidges.pos = SCREEN_POS_OFF
-        pickWidges.pos = ZEROS
+        if len(args) > 0:
+            ITEMS[pick.itemID].UpdateItem(**args)
+            ITEMVIEWS[str(pick.itemID)].UpdateItemView(**args)

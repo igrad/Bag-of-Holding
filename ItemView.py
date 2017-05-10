@@ -16,7 +16,7 @@ def SetItemViewsOnPress(func):
 
 class CozyView(ButtonBehavior, RelativeLayout):
     def __init__(self, itemID, **kwargs):
-        self.itemID = itemID
+        self.itemID = str(itemID)
         self.size_hint = FILLS
 
         super(CozyView, self).__init__(size_hint = FILLS, **kwargs)
@@ -25,7 +25,7 @@ class CozyView(ButtonBehavior, RelativeLayout):
         self.IV_NAME = IV_COZY_NAME
         self.IV_MISC = IV_COZY_MISC
 
-        bg_var = self.itemID % 3
+        bg_var = int(self.itemID) % 3
         bg = 'images/IMG_COZYVIEW_BG_1.png'
 
         if bg_var == 1:
@@ -50,6 +50,8 @@ class CozyView(ButtonBehavior, RelativeLayout):
         self.dval = Label(size_hint = FILLS, text = 'Value: ', font_name = FONT_BASK,
             font_size = FONT_SIZE_C, color = BLACK)
 
+        print('item keys: ' + str(ITEMS.keys()))
+
         self.dicon.source = ITEMS[self.itemID].icon
         self.dname.text = ITEMS[self.itemID].name
 
@@ -63,13 +65,25 @@ class CozyView(ButtonBehavior, RelativeLayout):
         for widge in [self.dBG, self.dicon, self.dname, self.dmisc]:
             self.add_widget(widge)
 
-        print('creating cozy item: ' + str(self.dname.text))
+        ITEMVIEWS[self.itemID] = self
 
-        ITEMVIEWS[int(self.itemID)] = self
+
+    def UpdateItemView(self, **kwargs):
+        try:
+            if 'name' in kwargs: self.dname.text = str(kwargs['name'])
+            if 'qty' in kwargs: self.dqty.text = 'Quantity: ' + str(kwargs['qty'])
+            if 'weight' in kwargs: self.dweight.text = 'Weight: ' + str(kwargs['weight'])
+            if 'val' in kwargs: self.dval.text = 'Value: ' + str(kwargs['val'])
+            if 'icon' in kwargs: self.dicon.source = str(kwargs['icon'])
+
+        except Exception as ex:
+            LogExc('CozyView.UpdateItemView()')
+
+
 
 class NormView(ButtonBehavior, RelativeLayout):
     def __init__(self, itemID, **kwargs):
-        self.itemID = itemID
+        self.itemID = str(itemID)
         self.size_hint = FILLS
 
         super(NormView, self).__init__(size_hint = FILLS, **kwargs)
@@ -111,9 +125,18 @@ class NormView(ButtonBehavior, RelativeLayout):
         for widge in [self.dBG, self.dicon, self.dname, self.dmisc]:
             self.add_widget(widge)
 
-        print('creating norm item: ' + str(self.dname.text))
+        ITEMVIEWS[self.itemID] = self
 
-        ITEMVIEWS[int(self.itemID)] = self
+    def UpdateItemView(self, **kwargs):
+        try:
+            if 'name' in kwargs: self.dname.text = str(kwargs['name'])
+            if 'qty' in kwargs: self.dqty.text = str(kwargs['qty'])
+            if 'weight' in kwargs: self.dweight.text = str(kwargs['weight'])
+            if 'val' in kwargs: self.dval.text = str(kwargs['val'])
+            if 'icon' in kwargs: self.dicon.source = str(kwargs['icon'])
+
+        except Exception as ex:
+            LogExc('NormView.UpdateItemView()')
 
 class CardView(ButtonBehavior, RelativeLayout):
     def __init__(self, itemID, **kwargs):
@@ -121,12 +144,12 @@ class CardView(ButtonBehavior, RelativeLayout):
         self.IV_NAME = IV_CARD_NAME
         self.IV_MISC = IV_CARD_MISC
 
-        self.itemID = itemID
+        self.itemID = str(itemID)
         self.size_hint = FILLS
 
         super(CardView, self).__init__(size_hint = FILLS, **kwargs)
 
-        bg_var = self.itemID % 3
+        bg_var = int(self.itemID) % 3
         bg = 'images/IMG_COZYVIEW_BG_1.png'
 
         if bg_var == 1:
@@ -164,6 +187,17 @@ class CardView(ButtonBehavior, RelativeLayout):
         for widge in [self.dBG, self.dicon, self.dname, self.dmisc]:
             self.add_widget(widge)
 
-        print('creating card item: ' + str(self.dname.text))
+        ITEMVIEWS[self.itemID] = self
 
-        ITEMVIEWS[int(self.itemID)] = self
+    def UpdateItemView(self, **kwargs):
+        try:
+            if 'name' in kwargs: self.dname.text = str(kwargs['name'])
+            if 'qty' in kwargs: self.dqty.text = str(kwargs['qty'])
+            if 'weight' in kwargs: self.dweight.text = str(kwargs['weight'])
+            if 'val' in kwargs: self.dval.text = str(kwargs['val'])
+            if 'desc' in kwargs: self.ddesc.text = str(kwargs['desc'])
+            if 'icon' in kwargs: self.dicon.source = str(kwargs['icon'])
+            if 'tags' in kwargs: self.dtags.text = str(kwargs['tags'])
+
+        except Exception as ex:
+            LogExc('CardView.UpdateItemView()')

@@ -2,6 +2,7 @@
 from collections import deque as Deque
 from collections import namedtuple
 from time import clock
+from traceback import format_exc
 
 # Kivy
 from kivy.app import App
@@ -73,6 +74,13 @@ class SizeMap():
 
 
 # GLOBAL METHODS
-def LogMsg(text):
+def LogMsg(arg1):
     processTime = clock()
-    print("[" + str(processTime)[0:6] + "] " + text)
+    print('[' + str(processTime)[0:6] + '] ' + str(arg1))
+
+def LogErr(arg1):
+    print('[' + str(clock())[0:6] + '] ERROR || ' + str(arg1))
+
+def LogExc(arg1):
+    processTime = clock()
+    print('\n[' + str(processTime)[0:6] + '] EXCEPTION in ' + str(arg1) + '\n' + str(format_exc()))
