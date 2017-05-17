@@ -5,8 +5,10 @@ At the time of writing, there are quite a few ideas bouncing around for this pro
 
 This is intended to be released as a free app, with options for donations. There will be no ads for revenue, as this is simply a small contribution to the gaming community - not my source of income.
 
+<div style="float: right;">
 <h3>Concept Artwork (3rd iteration)</h3>
-<img style="float:center;" src="https://puu.sh/vT5sJ/a416098f94.jpg"><img/>
+<img src="https://puu.sh/vT5sJ/a416098f94.jpg"><img/>
+</div>
 
 <h3>Technical</h3>
 As mentioned above, this is built using <a href="https://www.python.org/downloads/release/python-344/">Python 3.4.4</a> and <a href="https://kivy.org/docs/gettingstarted/intro.html">Kivy 1.10.0</a>. This project is being released for public use under the GPL 3.0 license, in keeping with Kivy and Python's respective licensing. Please see the LICENSE file for further licensing information.
