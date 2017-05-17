@@ -1,5 +1,5 @@
 import kivy
-kivy.require('1.9.1')
+kivy.require('1.10.0')
 
 from SysFuncs import *
 from LoadSaves import *
@@ -30,6 +30,7 @@ class BagOfHolding(RelativeLayout):
         viewCard.view_type = 'card'
 
         OpenBag(LAST_BAG_OPENED)
+        GenerateComparisonPhrases()
 
         contList.bind(minimum_height = contList.setter('height'))
 
@@ -53,7 +54,10 @@ class BagOfHolding(RelativeLayout):
         viewCozy.bind(on_press = SetView)
         viewCard.bind(on_press = SetView)
 
-        # Select
+        # SEARCH
+        searchInput.bind(text = LiveFilterFromSearch)
+
+        # SELECT
         pickX.bind(on_press = SelectItem)
         SetItemViewsOnPress(SelectItem)
 
@@ -86,6 +90,10 @@ class BagOfHolding(RelativeLayout):
         for widge in [dropViewHalt, dropViewBG, viewNorm, viewNorm_L, viewNorm_Check, viewCozy, viewCozy_L, viewCozy_Check, viewCard, viewCard_L, viewCard_Check]:
             dropView.add_widget(widge)
 
+        # Search
+        search.add_widget(searchBG)
+        search.add_widget(searchInput)
+
         # Contpane
         contScroll.add_widget(contList)
         cont.add_widget(contScroll)
@@ -101,7 +109,7 @@ class BagOfHolding(RelativeLayout):
             pick.add_widget(widge)
 
         # Render
-        for widge in [cont, menu, dropNew, dropSort, dropView, tabs, pick]:
+        for widge in [cont, menu, search, dropNew, dropSort, dropView, tabs, pick]:
             screenMain.add_widget(widge)
 
         self.add_widget(screenMain)

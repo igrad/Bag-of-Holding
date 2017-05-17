@@ -7,7 +7,23 @@ from ItemView import *
 from Tabs import *
 
 
-def PopulateItemViews(openBagID):
+COMPARISONPHRASES = []
+
+FIELDS = ['name', 'qty', 'quantity', 'lbs', 'kg', 'weight', 'val', 'value', 'tag', 'tags', 'desc', 'description']
+COMPARATORS = ['=', '>', '<']
+
+
+def GenerateComparisonPhrases():
+    items = BAGS[CURRENTBAG].items
+
+    z = [[x + y for x in FIELDS] for y in COMPARATORS]
+
+    for x in z:
+        for y in x:
+            COMPARISONPHRASES.append(y)
+
+
+def PopulateItemViews(openBagID, items = None):
     bag = BAGS[openBagID]
 
     # Update the contents of the contPane GridLayout by creating individual ItemViews
@@ -24,19 +40,131 @@ def PopulateItemViews(openBagID):
         ItemView = CardView
         contList.row_default_height = ITEMVIEW_CARD.h
 
-    for itemID in bag.items:
+    if items == None:
+        items = bag.items
+    else:
+        print('Loading filter to screen...')
+
+    for itemID in items:
         itemID = str(itemID)
 
         newItem = ItemView(itemID = itemID)
 
-        # Filters still need to be applied after opening a new bag
+        # Apply the search input parameters if not explicitly specified in the items arg
+        if items == None:
+            LiveFilterFromSearch(None, None, False)
+
+        # Filters of this bag need to be applied
         # TODO Apply filters after opening new bag
 
         # Add the remaining ItemViews to the grid
-        # NOTE This will need to be made a function of the filter. IE, if the item
-        # NOTE passes through the filter, post it to the grid.
+        # This will need to be made a function of the filter. IE, if the item
+        # passes through the filter, post it to the grid.
 
         contList.add_widget(ITEMVIEWS[str(itemID)])
+
+
+def FilterItemViews(filterPart):
+    try:
+        typedPre = 'str(ITEMS[key].' + filterPart[0] + ')'
+        typedPart1 = 'str(filterPart[1])'
+
+        if str(filterPart[1]).isdigit:
+            typedPre = 'int(ITEMS[key].' + filterPart[0] + ')'
+            typedPart1 = 'int(filterPart[1])'
+
+        evalStr = typedPre + filterPart[2] + typedPart1
+        print('\nEvalStr == ' + evalStr)
+
+        passed = []
+        for key in ITEMS.keys():
+            try:
+                if eval(evalStr):
+                    passed.append(key)
+            except ValueError:
+                continue
+
+        PopulateItemViews(CURRENTBAG, passed)
+
+        return True
+
+    except Exception as ex:
+        LogExc('ContPane.FilterItemViews(' + str(filterPart) + ')')
+        return False
+
+
+def LiveFilterFromSearch(obj, value, forceupdate = True):
+    '''Generate filter for the ContPane as text is input to the search bar.
+    ----------
+    None obj: The widget from which this request came
+    Str value: Text input/search string
+    Bool forceupdate: If false, this will not force the ContPane to refresh
+
+    If a search filter is successfully applied, returns True. If no changes are made,
+    returns False.'''
+    if value == None:
+        value = str(searchInput.text)
+
+    compString = value.replace(' ', '').lower()
+
+    if compString == '':
+        return False
+
+    try:
+        for phrase in COMPARISONPHRASES:
+            if phrase in compString:
+                if phrase == compString:
+                    return
+
+                def ReplacePhrase(newWord, compString = compString, phrase = phrase):
+                    compString = compString.replace(phrase[:-1], newWord)
+                    phrase = str(newWord) + str(phrase[-1:])
+
+                    return compString, phrase
+
+                if 'quantity' in phrase:
+                    compString, phrase = ReplacePhrase('qty')
+                elif 'lbs' in phrase or 'kg' in phrase:
+                    compString, phrase = ReplacePhrase('weight')
+                elif 'value' in phrase:
+                    compString, phrase = ReplacePhrase('val')
+
+                print('Phrase going into = comparison: {0}'.format(phrase))
+                if '=' in phrase:
+                    compString = compString.replace(phrase, phrase + '=')
+                    phrase = str(phrase) + '='
+
+                comp = []
+
+                if '==' in compString:
+                    comp = compString.split('==', 1)
+                    comp.append('==')
+                elif '>' in compString:
+                    comp = compString.split('>', 1)
+                    comp.append('>')
+                elif '<' in compString:
+                    comp = compString.split('<', 1)
+                    comp.append('<')
+                else:
+                    return False
+
+                # If the filter could not be applied correctly, end the sequence
+                if not FilterItemViews(comp):
+                    return False
+
+                # If the filter was applied successfully, exit with success code
+                return True
+
+        # If forceupdate is true, force a visual update in ContPane
+        if forceupdate:
+            PopulateItemViews(CURRENTBAG)
+
+            return True
+
+    except Exception as ex:
+        LogExc('LiveFilterFromSearch(' + str(obj) + ', ' + str(value) + ')')
+
+        return False
 
 
 def OpenBag(openBagID):
@@ -69,6 +197,7 @@ def OpenBag(openBagID):
 
 
 def HighlightView(viewType):
+    '''Check the corresponding view selection in the VIEW tab.'''
     viewNorm_Check.source = VIEW_CHECK_INACTIVE
     viewCozy_Check.source = VIEW_CHECK_INACTIVE
     viewCard_Check.source = VIEW_CHECK_INACTIVE

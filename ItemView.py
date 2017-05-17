@@ -50,8 +50,6 @@ class CozyView(ButtonBehavior, RelativeLayout):
         self.dval = Label(size_hint = FILLS, text = 'Value: ', font_name = FONT_BASK,
             font_size = FONT_SIZE_C, color = BLACK)
 
-        print('item keys: ' + str(ITEMS.keys()))
-
         self.dicon.source = ITEMS[self.itemID].icon
         self.dname.text = ITEMS[self.itemID].name
 

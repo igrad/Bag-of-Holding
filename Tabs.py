@@ -73,11 +73,12 @@ def OpenSort(obj):
         if dropNew.is_open: OpenNew('close')
         if dropView.is_open: OpenView('close')
 
+
 #=======================================================================================#
 # VIEW                                                                                  #
 #=======================================================================================#
 def OpenView(obj):
-    if dropView.pos == list(DROP_VIEW.pos):
+    if (dropView.pos == list(DROP_VIEW.pos)) or (obj == 'open'):
         dropView.pos = SCREEN_POS_OFF
         tabsView.color = WHITE
         dropView.is_open = False

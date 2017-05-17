@@ -38,7 +38,8 @@ if True:
     TABS = SizeMap(0, 602, 432, 60, FRAME.pair)
     TABS_BTN = SizeMap(0, 0, 144, 60, TABS.pair)
 
-    SEARCH = SizeMap(0, 558, 432, 44, FRAME.pair)
+    SEARCH = SizeMap(11, 563, 326, 34, FRAME.pair)
+    SEARCH_INPUT = SizeMap(34, 0, 284, 34, SEARCH.pair)
 
     CONT = SizeMap(0, 0, 432, 557, FRAME.pair)
     CONT_SPACE = SizeMap(0, 0, 0, 5, CONT.pair)
@@ -161,6 +162,16 @@ if True:
     tabsView = Button(size_hint = TABS_BTN.hpair, text = 'VIEW', color = WHITE,
         font_name = FONT_BASK, font_size = FONT_SIZE_A, background_color = CLEAR)
 
+    # Search
+    search = RelativeLayout(size_hint = SEARCH.hpair, pos = SEARCH.pos)
+    searchBG = Image(size_hint = FILLS, source = 'images/IMG_SEARCH.png',
+        allow_stretch = True, keep_ratio = False)
+    searchInput = TextInput(size_hint = SEARCH_INPUT.hpair, pos = SEARCH_INPUT.pos,
+        hint_text = 'Search for an item...', font_name = FONT_BASK,
+        font_size = FONT_SIZE_C, foreground_color = BLACK, write_tab = False,
+        multiline = False, cursor_color = BLACK, background_normal = '',
+        background_active = '', background_color = CLEAR)
+
 
     # Content
     cont = RelativeLayout(size_hint = CONT.hpair, pos = CONT.pos)
@@ -174,7 +185,8 @@ if True:
     # Selected Item
     pick = RelativeLayout(size_hint = PICK.hpair, pos = SCREEN_POS_OFF)
     pickShade = Image(pos = PICK_SHADE.pos, size_hint = PICK_SHADE.hpair,
-        source = IMG_BLACK, color = [0,0,0,0.6], allow_stretch = True, keep_ratio = False)
+        source = IMG_BLACK, color = [0,0,0,0.6], allow_stretch = True,
+        keep_ratio = False)
     pickHalt = Button(size_hint = FILLS, opacity = 0)
     pickBG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
         allow_stretch = True, keep_ratio = False)

@@ -4,7 +4,7 @@ from LoadSaves import *
 class BagItem():
     '''An unassigned item that represents all the item-specific data required by the user.
     ----------
-    String name: Name of the item
+    Str name: Name of the item
     Str qty: Quantity of this item within the bag
     Str weight: Weight of the item in analogous units
     Str val: Value of the item in analogous units
@@ -37,7 +37,7 @@ class BagItem():
             if str(tag).lower() in [str(x).lower() for x in tags]: return True
             else: return False
         except Exception:
-            LogExc('BagItem.HasTag()')
+            LogExc('BagItem.HasTag(' + str(tag) + ')')
 
 
     def UpdateItem(self, **kwargs):
@@ -62,7 +62,7 @@ class BagItem():
         keys = [int(x) for x in itemStore.keys()]
 
         for i in range(MAX_ITEMS):
-            if not i in keys: return int(i)
+            if not i in keys: return str(i)
 
         LogMsg("No more items available!")
         return None
