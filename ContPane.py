@@ -6,16 +6,35 @@ from BagItem import *
 from ItemView import *
 from Tabs import *
 
+from kivy.clock import Clock, partial
+
 
 COMPARISONPHRASES = []
 
 FIELDS = ['name', 'qty', 'quantity', 'lbs', 'kg', 'weight', 'val', 'value', 'tag', 'tags', 'desc', 'description']
 COMPARATORS = ['=', '>', '<']
 
+SEARCHTRIGGEREVENT = None
+
+def BuildSearchTimer(obj, value):
+    global SEARCHTRIGGEREVENT
+    SEARCHTRIGGEREVENT = Clock.schedule_once(partial(LiveFilterFromSearch, obj, value), 0.5)
+    SEARCHTRIGGEREVENT.cancel()
+
+
+def ScheduleSearch(obj, value):
+    if SEARCHTRIGGEREVENT == None:
+        BuildSearchTimer(obj, value)
+    try:
+        global SEARCHTRIGGEREVENT
+        SEARCHTRIGGEREVENT.cancel()
+        SEARCHTRIGGEREVENT = Clock.schedule_once(partial(LiveFilterFromSearch, obj, value), 0.5)
+    except:
+        LogErr('Search not scheduled yet')
+
 
 def GenerateComparisonPhrases():
     items = BAGS[CURRENTBAG].items
-
     z = [[x + y for x in FIELDS] for y in COMPARATORS]
 
     for x in z:
@@ -40,49 +59,82 @@ def PopulateItemViews(openBagID, items = None):
         ItemView = CardView
         contList.row_default_height = ITEMVIEW_CARD.h
 
+    checkSearchInput = False
     if items == None:
         items = bag.items
-    else:
-        print('Loading filter to screen...')
+        checkSearchInput = True
 
     for itemID in items:
         itemID = str(itemID)
 
         newItem = ItemView(itemID = itemID)
 
-        # Apply the search input parameters if not explicitly specified in the items arg
-        if items == None:
-            LiveFilterFromSearch(None, None, False)
-
-        # Filters of this bag need to be applied
-        # TODO Apply filters after opening new bag
-
-        # Add the remaining ItemViews to the grid
-        # This will need to be made a function of the filter. IE, if the item
-        # passes through the filter, post it to the grid.
-
         contList.add_widget(ITEMVIEWS[str(itemID)])
+
+    # Apply the search input parameters if not explicitly specified in the items arg
+    if checkSearchInput == True:
+        print('Checking for search input because no items were specified...')
+        LiveFilterFromSearch(None, None)
+
+    # Filters of this bag need to be applied
+    # TODO Apply filters after opening new bag
+
+    # Add the remaining ItemViews to the grid
+    # This will need to be made a function of the filter. IE, if the item
+    # passes through the filter, post it to the grid.
 
 
 def FilterItemViews(filterPart):
+    '''Identify which items within this bag should be included in the search results.
+    List filterPart: A list of three strings
+        [0]: Attribute to be checked. If 'any', will check all attributes of the item
+        [1]: The value which we compare the attribute values to.
+        [2]: The comparison operator, '==', '>', '<', or ' in '.'''
+
+    def ExtractNumber(string):
+        number = ''
+        for x in str(string):
+            if x in '0123456789,.':
+                number += x
+
+        if number != '':
+            return float(number)
+        else:
+            return string
+
     try:
-        typedPre = 'str(ITEMS[key].' + filterPart[0] + ')'
-        typedPart1 = 'str(filterPart[1])'
+        # Determine if a specific field is being queried
+        params = [filterPart[0]]
+        evalStrings = []
 
-        if str(filterPart[1]).isdigit:
-            typedPre = 'int(ITEMS[key].' + filterPart[0] + ')'
-            typedPart1 = 'int(filterPart[1])'
+        if filterPart[0] == 'any':
+            params = ['name', 'qty', 'weight', 'val', 'tags', 'desc']
 
-        evalStr = typedPre + filterPart[2] + typedPart1
-        print('\nEvalStr == ' + evalStr)
+        for param in params:
+            typedPart0 = ''
+            typedPart1 = ''
+
+            if filterPart[2] == ' in ':
+                typedPart0 = 'str(filterPart[1]).lower()'
+                typedPart1 = 'str(ITEMS[key].' + param + ').lower()'
+            elif str(filterPart[1]).isdigit:
+                typedPart0 = 'float(ExtractNumber(ITEMS[key].' + param + '))'
+                typedPart1 = 'float(filterPart[1])'
+
+            evalStrings.append(typedPart0 + filterPart[2] + typedPart1)
+
+            print("evalStr == " + typedPart0 + filterPart[2] + typedPart1)
 
         passed = []
         for key in ITEMS.keys():
-            try:
-                if eval(evalStr):
-                    passed.append(key)
-            except ValueError:
-                continue
+            for evalStr in evalStrings:
+                try:
+                    if eval(evalStr):
+                        passed.append(key)
+                        break
+                except ValueError:
+                    LogExc('ValueError raised: ')
+                    continue
 
         PopulateItemViews(CURRENTBAG, passed)
 
@@ -93,7 +145,7 @@ def FilterItemViews(filterPart):
         return False
 
 
-def LiveFilterFromSearch(obj, value, forceupdate = True):
+def LiveFilterFromSearch(obj, value, dt = 0):
     '''Generate filter for the ContPane as text is input to the search bar.
     ----------
     None obj: The widget from which this request came
@@ -107,10 +159,19 @@ def LiveFilterFromSearch(obj, value, forceupdate = True):
 
     compString = value.replace(' ', '').lower()
 
-    if compString == '':
+    if dt != 0 and compString == '':
+        # If this func was triggered by a scheduled search, we can force the ContPane to
+        # update when there's nothing input.
+        PopulateItemViews(CURRENTBAG)
+        return False
+    elif compString == '':
+        # If this func was NOT triggered by a scheduled search, we cannot force the
+        # ContPane update because this function is nested in other functions. All we
+        # need is the return value indicating that there is nothing in the search field.
         return False
 
     try:
+        # Check if any comparison phrases are found in the query
         for phrase in COMPARISONPHRASES:
             if phrase in compString:
                 if phrase == compString:
@@ -129,7 +190,6 @@ def LiveFilterFromSearch(obj, value, forceupdate = True):
                 elif 'value' in phrase:
                     compString, phrase = ReplacePhrase('val')
 
-                print('Phrase going into = comparison: {0}'.format(phrase))
                 if '=' in phrase:
                     compString = compString.replace(phrase, phrase + '=')
                     phrase = str(phrase) + '='
@@ -155,15 +215,12 @@ def LiveFilterFromSearch(obj, value, forceupdate = True):
                 # If the filter was applied successfully, exit with success code
                 return True
 
-        # If forceupdate is true, force a visual update in ContPane
-        if forceupdate:
-            PopulateItemViews(CURRENTBAG)
 
-            return True
+        # If no phrases are found, perform a regular search
+        FilterItemViews(['any', value, ' in '])
 
     except Exception as ex:
         LogExc('LiveFilterFromSearch(' + str(obj) + ', ' + str(value) + ')')
-
         return False
 
 

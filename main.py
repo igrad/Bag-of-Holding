@@ -55,7 +55,7 @@ class BagOfHolding(RelativeLayout):
         viewCard.bind(on_press = SetView)
 
         # SEARCH
-        searchInput.bind(text = LiveFilterFromSearch)
+        searchInput.bind(text = ScheduleSearch)
 
         # SELECT
         pickX.bind(on_press = SelectItem)
