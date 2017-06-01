@@ -6,8 +6,8 @@ At the time of writing, there are quite a few ideas bouncing around for this pro
 This is intended to be released as a free app, with options for donations. There will be no ads for revenue, as this is simply a small contribution to the gaming community - not my source of income.
 
 <div style="float: right;">
-<h3>Concept Artwork (3rd iteration)</h3>
-<img src="https://puu.sh/vT5sJ/a416098f94.jpg"><img/>
+<h3>Development preview</h3>
+<img src="http://puu.sh/w77BH/c5aff99c84.png"><img/>
 </div>
 
 <h3>Technical</h3>
