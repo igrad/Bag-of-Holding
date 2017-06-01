@@ -1,5 +1,7 @@
 from SysFuncs import *
 
+
+
 class AnchorLabel(AnchorLayout):
     '''Create a label from the data passed in, wrap it in a AnchorLayout, so that it
     quickly aligns without having to hassle with the textsize parameter.'''
@@ -19,7 +21,7 @@ class AnchorLabel(AnchorLayout):
         super(AnchorLabel, self).__init__(size_hint = self.size_hint, size = self.size,
             pos = self.pos, anchor_x = self.anchor_x, anchor_y = self.anchor_y)
 
-        self._lbl = Label(size_hint = NONES, **kwargs)
+        self._lbl = Label(size_hint = NONES, size = self.size, **kwargs)
         if self.anchor_x != 'center': self._lbl.text_size[0] = self._lbl.size[0]
         if self.anchor_y != 'center': self._lbl.text_size[1] = self._lbl.size[1]
 
@@ -34,6 +36,8 @@ class AnchorLabel(AnchorLayout):
     @text.setter
     def text(self, text):
         self._lbl.text = text
+
+
 
 class AnchorButton(AnchorLayout):
     '''Create a button from the data passed in, wrap it in a AnchorLayout, so that it

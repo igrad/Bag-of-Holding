@@ -24,16 +24,19 @@ from kivy.uix.label import Label
 from kivy.uix.listview import ListView
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.scrollview import ScrollView
+from kivy.uix.stencilview import StencilView
 from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
+
+from StencilLayout import StencilLayout
 
 
 # GLOBAL CONSTANTS
 NONES = (None, None)
 ZEROS = (0, 0)
 FILLS = (1, 1)
-XSCALE = 1
-YSCALE = 1
+XSCALE = 1.0
+YSCALE = 1.0
 
 ANIMTIME = 0.50
 ANIMTYPE = 'in_out_quart'
@@ -75,12 +78,10 @@ class SizeMap():
 
 # GLOBAL METHODS
 def LogMsg(arg1):
-    processTime = clock()
-    print('[' + str(processTime)[0:6] + '] ' + str(arg1))
+    print('[INFO   ] [:::' + str(clock())[0:6] + ':::] ' + str(arg1))
 
 def LogErr(arg1):
-    print('[' + str(clock())[0:6] + '] ERROR || ' + str(arg1))
+    print('[ERROR  ] [:::' + str(clock())[0:6] + ':::] ' + str(arg1))
 
 def LogExc(arg1):
-    processTime = clock()
-    print('\n[' + str(processTime)[0:6] + '] EXCEPTION in ' + str(arg1) + '\n' + str(format_exc()))
+    print('\n[EXCEPT ] [:::' + str(clock())[0:6] + ':::] EXCEPTION in ' + str(arg1) + '\n' + str(format_exc()))

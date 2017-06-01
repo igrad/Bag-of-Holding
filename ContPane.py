@@ -43,6 +43,9 @@ def GenerateComparisonPhrases():
 
 
 def PopulateItemViews(openBagID, items = None):
+    '''Create the ItemView objects and put them on-screen.
+    str openBagID: ID number of the bag to open.
+    List items: list of items to be loaded, defaults to None to load all items in bag.'''
     bag = BAGS[openBagID]
 
     # Update the contents of the contPane GridLayout by creating individual ItemViews
@@ -69,7 +72,12 @@ def PopulateItemViews(openBagID, items = None):
 
         newItem = ItemView(itemID = itemID)
 
+        if bag.view == 'card':
+            newItem.SetDescNumLines()
+
         contList.add_widget(ITEMVIEWS[str(itemID)])
+
+
 
     # Apply the search input parameters if not explicitly specified in the items arg
     if checkSearchInput == True:
@@ -86,6 +94,7 @@ def PopulateItemViews(openBagID, items = None):
 
 def FilterItemViews(filterPart):
     '''Identify which items within this bag should be included in the search results.
+    ----------
     List filterPart: A list of three strings
         [0]: Attribute to be checked. If 'any', will check all attributes of the item
         [1]: The value which we compare the attribute values to.
@@ -119,7 +128,7 @@ def FilterItemViews(filterPart):
                 typedPart1 = 'str(ITEMS[key].' + param + ').lower()'
             elif str(filterPart[1]).isdigit:
                 typedPart0 = 'float(ExtractNumber(ITEMS[key].' + param + '))'
-                typedPart1 = 'float(filterPart[1])'
+                typedPart1 = str(float(filterPart[1]))
 
             evalStrings.append(typedPart0 + filterPart[2] + typedPart1)
 
@@ -129,6 +138,7 @@ def FilterItemViews(filterPart):
         for key in ITEMS.keys():
             for evalStr in evalStrings:
                 try:
+                    print('evalstr == ' + evalStr)
                     if eval(evalStr):
                         passed.append(key)
                         break
@@ -190,7 +200,7 @@ def LiveFilterFromSearch(obj, value, dt = 0):
                 elif 'value' in phrase:
                     compString, phrase = ReplacePhrase('val')
 
-                if '=' in phrase:
+                if '=' in phrase and '==' not in compString:
                     compString = compString.replace(phrase, phrase + '=')
                     phrase = str(phrase) + '='
 

@@ -72,16 +72,17 @@ if True:
     # ITEMS
     ITEMVIEW_COZY = SizeMap(0, 0, 408, 84, CONT.pair)
     ITEMVIEW_NORM = SizeMap(0, 0, 408, 24, CONT.pair)
-    ITEMVIEW_CARD = SizeMap(0, 0, 408, 140, CONT.pair)
+    ITEMVIEW_CARD = SizeMap(0, 0, 408, 156, CONT.pair)
     IV_COZY_ICON = SizeMap(8, 8, 68, 68, ITEMVIEW_COZY.pair)
     IV_COZY_NAME = SizeMap(84, 40, 316, 30, ITEMVIEW_COZY.pair)
     IV_COZY_MISC = SizeMap(84, 10, 316, 24, ITEMVIEW_COZY.pair)
     IV_NORM_ICON = SizeMap(4, 4, 16, 16, ITEMVIEW_NORM.pair)
     IV_NORM_NAME = SizeMap(24, 2, 204, 24, ITEMVIEW_NORM.pair)
     IV_NORM_MISC = SizeMap(232, 2, 172, 24, ITEMVIEW_NORM.pair)
-    IV_CARD_ICON = SizeMap(8, 8, 68, 68, ITEMVIEW_COZY.pair)
-    IV_CARD_NAME = SizeMap(84, 40, 316, 30, ITEMVIEW_COZY.pair)
-    IV_CARD_MISC = SizeMap(84, 10, 316, 24, ITEMVIEW_COZY.pair)
+    IV_CARD_ICON = SizeMap(8, 80, 68, 68, ITEMVIEW_CARD.pair)
+    IV_CARD_NAME = SizeMap(84, 112, 316, 30, ITEMVIEW_CARD.pair)
+    IV_CARD_MISC = SizeMap(84, 82, 316, 24, ITEMVIEW_CARD.pair)
+    IV_CARD_DESC = SizeMap(8, 8, 392, 64, ITEMVIEW_CARD.pair)
 
     # NEW
     NEW_NAME = SizeMap(12, 375, 392, 30, DROP_NEW.pair)
@@ -191,9 +192,11 @@ if True:
     pickBG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
         allow_stretch = True, keep_ratio = False)
     pickWidges = RelativeLayout(size_hint = FILLS, pos = ZEROS)
-    pickName = AnchorLabel(size_hint = PICK_NAME.hpair, pos = PICK_NAME.pos,
-        font_name = FONT_BASK, font_size = FONT_SIZE_A, color = BLACK,
-        anchor_y = 'center', valign = 'middle')
+    pickName = TextInput(size_hint = PICK_NAME.hpair, pos = PICK_NAME.pos,
+        font_name = FONT_BASK, font_size = FONT_SIZE_A, foreground_color = BLACK,
+        border = [2,2,2,2], write_tab = False, multiline = False, cursor_color = BLACK,
+        background_normal = 'images/IMG_1x1BORDER.png', hint_text = 'Item Name',
+        background_active = 'images/IMG_1x1BORDER.png')
     pickIcon = Image(size_hint = PICK_ICON.hpair, pos = PICK_ICON.pos,
         source = 'images/blankIcon.png', allow_stretch = False, keep_ratio = True)
     pickMisc = BoxLayout(size_hint = PICK_MISC.hpair, pos = PICK_MISC.pos,
