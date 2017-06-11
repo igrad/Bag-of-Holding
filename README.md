@@ -25,7 +25,7 @@ Main Menu | Selected Item
 - [x] Implementation of ***ContPane***
 - [x] ***ItemView*** selection methods (a.k.a. ***Select***)
 - [x] Edit item data in ***Select*** window
-- [ ] Edit item Icon in ***Select*** window
+- [x] Edit item Icon in ***Select*** window
 - [ ] Design of ***Options*** sub-menu in ***Select*** window
 - [ ] Options to delete item, move item to another bag, share item, create printable version of item card
 
