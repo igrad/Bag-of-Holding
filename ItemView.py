@@ -175,9 +175,10 @@ class CardView(ButtonBehavior, RelativeLayout):
         self.dval = Label(size_hint = FILLS, text = 'Value: ', font_name = FONT_BASK,
             font_size = FONT_SIZE_C, color = BLACK)
         self.ddescwrap = StencilLayout(size_hint = IV_DESC.hpair, pos = IV_DESC.pos)
-        self.ddesc = TextInput(size_hint = (0.99, None),
+        self.ddesc = TextInput(size_hint = (0.99, None), disabled = True,
             pos_hint = {'x': 0.01, 'top': 1}, font_name = FONT_BASK,
-            font_size = FONT_SIZE_C, background_color = CLEAR, foreground_color = BLACK)
+            font_size = FONT_SIZE_C, background_color = CLEAR, foreground_color = BLACK,
+            disabled_foreground_color = BLACK)
 
         self.dicon.source = ITEMS[self.itemID].icon
         self.dname.text = ITEMS[self.itemID].name
@@ -200,17 +201,11 @@ class CardView(ButtonBehavior, RelativeLayout):
 
     def SetDescNumLines(self):
         before = self.ddesc.size[1]
-        print('size before: ' + str(self.ddesc.size[1]))
         self.ddesc.size[1] = int(len(self.ddesc._lines) * self.ddesc.line_height)
-        print('size after: ' + str(self.ddesc.size[1]))
 
 
     def UpdateItemView(self, **kwargs):
         try:
-            if kwargs.keys().len() == 0:
-                # Update all items if no args are specified
-                pass
-
             if 'name' in kwargs: self.dname.text = str(kwargs['name'])
             if 'qty' in kwargs: self.dqty.text = str(kwargs['qty'])
             if 'weight' in kwargs: self.dweight.text = str(kwargs['weight'])

@@ -23,10 +23,11 @@ def BuildSearchTimer(obj, value):
 
 
 def ScheduleSearch(obj, value):
+    global SEARCHTRIGGEREVENT
+
     if SEARCHTRIGGEREVENT == None:
         BuildSearchTimer(obj, value)
     try:
-        global SEARCHTRIGGEREVENT
         SEARCHTRIGGEREVENT.cancel()
         SEARCHTRIGGEREVENT = Clock.schedule_once(partial(LiveFilterFromSearch, obj, value), 0.5)
     except:
@@ -81,7 +82,6 @@ def PopulateItemViews(openBagID, items = None):
 
     # Apply the search input parameters if not explicitly specified in the items arg
     if checkSearchInput == True:
-        print('Checking for search input because no items were specified...')
         LiveFilterFromSearch(None, None)
 
     # Filters of this bag need to be applied
@@ -132,13 +132,12 @@ def FilterItemViews(filterPart):
 
             evalStrings.append(typedPart0 + filterPart[2] + typedPart1)
 
-            print("evalStr == " + typedPart0 + filterPart[2] + typedPart1)
+            #print("evalStr == " + typedPart0 + filterPart[2] + typedPart1)
 
         passed = []
         for key in ITEMS.keys():
             for evalStr in evalStrings:
                 try:
-                    print('evalstr == ' + evalStr)
                     if eval(evalStr):
                         passed.append(key)
                         break
@@ -276,25 +275,17 @@ def HighlightView(viewType):
 
 def SelectItem(btn):
     '''Called when an ItemView is called for display in the PICK screen.'''
-    if pick.pos != list(PICK.pos):
-        pick.itemID = btn.itemID
-        pickName.text = ITEMS[pick.itemID].name
-        pickIcon.source = ITEMS[pick.itemID].icon
-        pickQty_I.text = str(ITEMS[pick.itemID].qty)
-        pickWeight_I.text = str(ITEMS[pick.itemID].weight)
-        pickVal_I.text = str(ITEMS[pick.itemID].val)
-        pickTags.text = str(ITEMS[pick.itemID].tags)
-        pickDesc.text = str(ITEMS[pick.itemID].desc)
-
-        pick.pos = PICK.pos
-    else:
+    if (pick.pos == list(PICK.pos)) or (btn == None):
+        pick.is_open = False
         pick.pos = SCREEN_POS_OFF
 
         args = dict()
         if pickName.text != str(ITEMS[pick.itemID].name):
             args['name'] = str(pickName.text)
-        if pickIcon.source != ITEMS[pick.itemID].icon:
-            args['icon'] = str(pickIcon.source)
+        # if pickIcon.source != ITEMS[pick.itemID].icon:
+        #     args['icon'] = str(pickIcon.source)
+        if pickIcon.background_normal != ITEMS[pick.itemID].icon:
+            args['icon'] = str(pickIcon.background_normal)
         if pickQty_I.text != str(ITEMS[pick.itemID].qty):
             args['qty'] = str(pickQty_I.text)
         if pickWeight_I.text != str(ITEMS[pick.itemID].weight):
@@ -309,3 +300,25 @@ def SelectItem(btn):
         if len(args) > 0:
             ITEMS[pick.itemID].UpdateItem(**args)
             ITEMVIEWS[str(pick.itemID)].UpdateItemView(**args)
+    else:
+        pick.is_open = True
+
+        if type(btn) != int:
+            pick.itemID = btn.itemID
+            
+        pickName.text = ITEMS[pick.itemID].name
+        #pickIcon.source = ITEMS[pick.itemID].icon
+        pickIcon.background_normal = ITEMS[pick.itemID].icon
+        pickIcon.background_down = ITEMS[pick.itemID].icon
+        pickQty_I.text = str(ITEMS[pick.itemID].qty)
+        pickWeight_I.text = str(ITEMS[pick.itemID].weight)
+        pickVal_I.text = str(ITEMS[pick.itemID].val)
+        pickTags.text = str(ITEMS[pick.itemID].tags)
+        pickDesc.text = str(ITEMS[pick.itemID].desc)
+
+        try:
+            pickIcon.selected = int(ITEMS[pick.itemID].icon[-7:-4])
+        except:
+            pickIcon.selected = None
+
+        pick.pos = PICK.pos

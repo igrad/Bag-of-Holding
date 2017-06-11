@@ -35,8 +35,8 @@ from StencilLayout import StencilLayout
 NONES = (None, None)
 ZEROS = (0, 0)
 FILLS = (1, 1)
-XSCALE = 1.0
-YSCALE = 1.0
+XSCALE = 0.75
+YSCALE = 0.75
 
 ANIMTIME = 0.50
 ANIMTYPE = 'in_out_quart'
@@ -66,11 +66,14 @@ class SizeMap():
         self.y = int(y / YSCALE)
         self.w = int(w / XSCALE)
         self.h = int(h / YSCALE)
+
         self.pos = (self.x, self.y)
         self.pair = (self.w, self.h)
+
         self.hw = self.w/parentPair[0]
         self.hh = self.h/parentPair[1]
         self.hpair = (self.hw, self.hh)
+
         self.parentW = parentPair[0]
         self.parentH = parentPair[1]
         self.parentPair = parentPair

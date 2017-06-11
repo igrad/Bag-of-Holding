@@ -4,12 +4,13 @@ from AppInit import *
 from Bag import *
 from ContPane import PopulateItemViews, HighlightView
 
+
 #=======================================================================================#
 # NEW                                                                                   #
 #=======================================================================================#
 def OpenNew(obj):
     '''Open/close the New drop menu from the tabs bar.'''
-    if dropNew.pos == list(DROP_NEW.pos):
+    if (dropNew.pos == list(DROP_NEW.pos)) or (obj == None):
         dropNew.pos = SCREEN_POS_OFF
         tabsNew.color = WHITE
         dropNew.is_open = False

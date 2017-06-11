@@ -2,37 +2,53 @@ import kivy
 kivy.require('1.10.0')
 
 from SysFuncs import *
-from LoadSaves import *
-from AppInit import *
 
+from LoadSaves import *
+
+from AppInit import *
 from Tabs import *
 from ContPane import *
-
+from Icon import LoadAllIcons, OpenIconMenu
 
 class BagOfHolding(RelativeLayout):
     def __init__(self, **kwargs):
         '''Initialize the necessary elements for the app.'''
         LogMsg('Beginning app initialization.')
+
         super(BagOfHolding, self).__init__(**kwargs)
 
         # Load all saved configurations and item/bag data
         LoadData()
 
+        # Build widgets hierarchy
         self.SetBinds()
         self.AddChildren()
+
+        # Set window statuses
+        pick.is_open = False
+        icon.is_open = False
 
         dropNew.is_open = False
         dropSort.is_open = False
         dropView.is_open = False
 
+        # Set view types
         viewNorm.view_type = 'norm'
         viewCozy.view_type = 'cozy'
         viewCard.view_type = 'card'
 
+        # Load up data needed for the ContPane
         OpenBag(LAST_BAG_OPENED)
         GenerateComparisonPhrases()
 
         contList.bind(minimum_height = contList.setter('height'))
+
+        # Load up auxilliary windows
+        LoadAllIcons()
+
+        iconGrid.bind(minimum_height = iconGrid.setter('height'))
+
+        LogMsg('App initialization complete.')
 
 
     def SetBinds(self):
@@ -59,7 +75,11 @@ class BagOfHolding(RelativeLayout):
 
         # SELECT
         pickX.bind(on_press = SelectItem)
+        pickIcon.bind(on_press = OpenIconMenu)
         SetItemViewsOnPress(SelectItem)
+
+        # ICON
+        iconCancel.bind(on_press = OpenIconMenu)
 
 
     def AddChildren(self):
@@ -105,11 +125,16 @@ class BagOfHolding(RelativeLayout):
         for widge in [pickName, pickIcon, pickMisc, pickTags, pickDesc, pickOpts, pickX]:
             pickWidges.add_widget(widge)
 
-        for widge in [pickShade, pickHalt, pickBG, pickWidges]:
+        for widge in [pickHalt, pickBG, pickWidges]:
             pick.add_widget(widge)
 
+        iconScroll.add_widget(iconGrid)
+
+        for widge in [iconHalt, iconBG, iconScroll, iconCancel, iconSave]:
+            icon.add_widget(widge)
+
         # Render
-        for widge in [cont, menu, search, dropNew, dropSort, dropView, tabs, pick]:
+        for widge in [cont, menu, search, dropNew, dropSort, dropView, tabs, pick, icon]:
             screenMain.add_widget(widge)
 
         self.add_widget(screenMain)
@@ -123,31 +148,32 @@ class Builder(App):
     def build_config(self, config):
         self.title = "Bag of Holding"
 
-        height = str(int(768 / YSCALE))
-        width = str(int(432 / XSCALE))
+        global XSCALE, YSCALE
 
-        Config.set('graphics', 'borderless', '0')
-        Config.set('graphics', 'max_fps', '60')
+        height = int(768 / YSCALE)
+        width = int(432 / XSCALE)
+
+        Config.set('graphics', 'borderless', 1)
+        Config.set('graphics', 'resizable', 0)
+        Config.set('graphics', 'max_fps', 60)
         Config.set('graphics', 'height', height)
         Config.set('graphics', 'width', width)
         Config.set('graphics', 'show_cursor', '1')
 
-
         if Builder.mode == "DEV":
-            Config.set('graphics', 'height', height)
-            Config.set('graphics', 'width', width)
-            Config.set('graphics', 'rotation', '00')
-            Config.set('graphics', 'fullscreen', '0')
+            Config.set('graphics', 'fullscreen', 0)
+            Window.left = 3072
+            Window.top = 28
+            Config.set('graphics', 'rotation', 0)
         else:
-            Config.set('graphics', 'height', '1080')
-            Config.set('graphics', 'width', '1920')
-            Config.set('graphics', 'rotation', '90')
-            Config.set('graphics', 'fullscreen', '1')
-
+            Config.set('graphics', 'rotation', 0)
+            #Config.set('graphics', 'fullscreen', 1)
+            Window.fullscreen = True
 
         Config.set('kivy', 'window_icon', 'images/icon.png')
         Config.write()
 
+        LogMsg('Window size found: {}'.format(Window.size))
 
     def build(self):
         config = self.config
