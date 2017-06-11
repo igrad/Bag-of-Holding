@@ -9,7 +9,7 @@ This is intended to be released as a free app, with options for donations. There
 
 Main Menu | Selected Item
 --------- | -------------
-![Main Menu](images/Demo_Screenies/Main.jpg) | ![Selected Item](images/Demo_Screenies/Selection.jpg)
+![Main Menu](https://puu.sh/whnLO/5a92cf096c.jpg) | ![Selected Item](https://puu.sh/whnMd/421cd31226.jpg)
 
 ## Tasks
 - [x] Design of core menus
