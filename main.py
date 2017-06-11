@@ -8,7 +8,7 @@ from LoadSaves import *
 from AppInit import *
 from Tabs import *
 from ContPane import *
-from Icon import LoadAllIcons, OpenIconMenu
+from Icon import LoadAllIcons, OpenIconMenu, SaveIcon
 
 class BagOfHolding(RelativeLayout):
     def __init__(self, **kwargs):
@@ -31,6 +31,8 @@ class BagOfHolding(RelativeLayout):
         dropNew.is_open = False
         dropSort.is_open = False
         dropView.is_open = False
+
+        newIcon.selected = None
 
         # Set view types
         viewNorm.view_type = 'norm'
@@ -60,6 +62,7 @@ class BagOfHolding(RelativeLayout):
         # New
         newCancel.bind(on_press = OpenNew)
         newSave.bind(on_press = InputItem)
+        newIcon.bind(on_press = OpenIconMenu)
 
         # Sort
         sortCancel.bind(on_press = OpenSort)
@@ -80,6 +83,7 @@ class BagOfHolding(RelativeLayout):
 
         # ICON
         iconCancel.bind(on_press = OpenIconMenu)
+        iconSave.bind(on_press = SaveIcon)
 
 
     def AddChildren(self):

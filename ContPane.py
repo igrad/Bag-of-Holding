@@ -275,15 +275,17 @@ def HighlightView(viewType):
 
 def SelectItem(btn):
     '''Called when an ItemView is called for display in the PICK screen.'''
-    if (pick.pos == list(PICK.pos)) or (btn == None):
+
+    if btn == 'picknoupdate':
+        pick.is_open = True
+        pick.pos = PICK.pos
+    elif (pick.pos == list(PICK.pos)) or (btn == None):
         pick.is_open = False
         pick.pos = SCREEN_POS_OFF
 
         args = dict()
         if pickName.text != str(ITEMS[pick.itemID].name):
             args['name'] = str(pickName.text)
-        # if pickIcon.source != ITEMS[pick.itemID].icon:
-        #     args['icon'] = str(pickIcon.source)
         if pickIcon.background_normal != ITEMS[pick.itemID].icon:
             args['icon'] = str(pickIcon.background_normal)
         if pickQty_I.text != str(ITEMS[pick.itemID].qty):
@@ -305,7 +307,7 @@ def SelectItem(btn):
 
         if type(btn) != int:
             pick.itemID = btn.itemID
-            
+
         pickName.text = ITEMS[pick.itemID].name
         #pickIcon.source = ITEMS[pick.itemID].icon
         pickIcon.background_normal = ITEMS[pick.itemID].icon

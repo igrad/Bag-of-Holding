@@ -28,7 +28,8 @@ def InputItem(obj):
     values, save it to memory, and add it to the currently-opened bag.'''
     # Set the defaults to input if the user didn't enter anything
     if newName.text == '': newName.text = 'Unnamed Item'
-    if newIcon.source == '': newIcon.source = 'images/blankIcon.png'
+    if newIcon.background_normal == '': newIcon.background_normal = 'images/blankIcon.png'
+    if newIcon.background_down == '': newIcon.background_down = 'images/blankIcon.png'
     if newQty.text == '': newQty.text = '1'
     if newWeight.text == '': newWeight.text = '1'
     if newVal.text == '': newVal.text = '1'
@@ -36,9 +37,9 @@ def InputItem(obj):
     if newDesc.text == '': newDesc.text = 'An undescribable item!'
 
     # Create the item itself. Automatically added to ITEMS
-    newItem = BagItem(name = newName.text, icon = newIcon.source, qty = newQty.text,
-        weight = newWeight.text, val = newVal.text, tags = newTags.text,
-        desc = newDesc.text)
+    newItem = BagItem(name = newName.text, icon = newIcon.background_normal,
+        qty = newQty.text, weight = newWeight.text, val = newVal.text,
+        tags = newTags.text, desc = newDesc.text)
 
     # Add the item to the open bag
     BAGS[CURRENTBAG].AddItem(int(newItem.ID))
@@ -47,7 +48,8 @@ def InputItem(obj):
 
     # Reset text input fields
     newName.text = ''
-    newIcon.source = 'images/blankIcon.png'
+    newIcon.background_down = 'images/blankIcon.png'
+    newIcon.background_normal = 'images/blankIcon.png'
     newQty.text = ''
     newWeight.text = ''
     newVal.text = ''

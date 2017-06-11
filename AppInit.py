@@ -49,7 +49,7 @@ CONT_SCROLL = SizeMap(0, 0, 12, 0, CONT.pair)
 PICK = SizeMap(0, 105, 432, 557, FRAME.pair)
 PICK_HALT = SizeMap(0, -105, 432, 768, PICK.pair)
 PICK_NAME = SizeMap(20, 476, 392, 40, PICK.pair)
-PICK_ICON = SizeMap(20, 316, 392, 156, PICK.pair)
+PICK_ICON = SizeMap(138, 316, 156, 156, PICK.pair)
 PICK_MISC = SizeMap(21, 287, 390, 27, PICK.pair)
 PICK_QTY = SizeMap(0, 0, 130, 27, PICK.pair)
 PICK_WEIGHT = SizeMap(0, 1, 390, 27, PICK_MISC.pair)
@@ -193,7 +193,7 @@ contList = GridLayout(size_hint = (1.0, None), cols = 1,
 # Selected Item
 pick = RelativeLayout(size_hint = PICK.hpair, pos = SCREEN_POS_OFF)
 pickHalt = Button(pos = PICK_HALT.pos, size_hint = PICK_HALT.hpair,
-    background_disabled_normal = IMG_BLACK, opacity = 0.6, disabled = True)
+    background_disabled_normal = IMG_BLACK, opacity = 0.5, disabled = True)
 pickBG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
     allow_stretch = True, keep_ratio = False)
 pickWidges = RelativeLayout(size_hint = FILLS, pos = ZEROS)
@@ -202,12 +202,9 @@ pickName = TextInput(size_hint = PICK_NAME.hpair, pos = PICK_NAME.pos,
     border = [2,2,2,2], write_tab = False, multiline = False, cursor_color = BLACK,
     background_normal = 'images/IMG_1x1BORDER.png', hint_text = 'Item Name',
     background_active = 'images/IMG_1x1BORDER.png')
-# pickIcon = Image(size_hint = PICK_ICON.hpair, pos = PICK_ICON.pos,
-#     source = 'images/blankIcon.png', allow_stretch = False, keep_ratio = True)
 pickIcon = Button(size_hint = PICK_ICON.hpair, pos = PICK_ICON.pos,
-    background_normal = 'images/blankIcon.png', background_down = 'images/blankIcon.png')
-pickIconSelect = Button(size_hint = PICK_ICON.hpair, pos = PICK_ICON.pos,
-    opacity = 0)
+    background_normal = 'images/blankIcon.png', background_down = 'images/blankIcon.png',
+    border = [0,0,0,0])
 pickMisc = BoxLayout(size_hint = PICK_MISC.hpair, pos = PICK_MISC.pos,
     orientation = 'horizontal')
 pickQty_L = AnchorLabel(pos = PICK_QTY.pos, font_name = FONT_BASK,
@@ -251,7 +248,7 @@ pickX = AnchorButton(size_hint = PICK_X.hpair, pos = PICK_X.pos,
 # Icon selection
 icon = RelativeLayout(size_hint = ICON.hpair, pos = SCREEN_POS_FAR_OFF)
 iconHalt = Button(pos = ICON_HALT.pos, size_hint = ICON_HALT.hpair,
-    background_disabled_normal = IMG_BLACK, opacity = 0.6, disabled = True)
+    background_disabled_normal = IMG_BLACK, opacity = 0.5, disabled = True)
 iconBG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
     allow_stretch = True, keep_ratio = False)
 iconScroll = ScrollView(size_hint = ICON_SCROLL.hpair, pos = ICON_SCROLL.pos,
@@ -263,7 +260,6 @@ iconCancel = Button(size_hint = ICON_CANCEL.hpair, pos = ICON_CANCEL.pos,
     text = 'Cancel', font_name = FONT_BASK, font_size = FONT_SIZE_D, color = WHITE)
 iconSave = Button(size_hint = ICON_SAVE.hpair, pos = ICON_SAVE.pos,
     text = 'Save', font_name = FONT_BASK, font_size = FONT_SIZE_D, color = WHITE)
-
 
 
 # Tab drops
@@ -288,21 +284,25 @@ dropViewBG = Image(size_hint = FILLS, source = 'images/IMG_DROP_VIEW.png',
 
 # Tab drop: New
 newName = TextInput(size_hint = NEW_NAME.hpair, hint_text = 'Name',
-    pos = NEW_NAME.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
-newIcon = Image(size_hint = NEW_ICON.hpair, source = 'images/blankIcon.png',
-    pos = NEW_ICON.pos, allow_stretch = True, keep_ratio = False)
+    pos = NEW_NAME.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
+    write_tab = False, multiline = False)
+newIcon = Button(size_hint = NEW_ICON.hpair, pos = NEW_ICON.pos,
+    background_normal = 'images/blankIcon.png', background_down = 'images/blankIcon.png')
 newQty = TextInput(size_hint = NEW_QTY.hpair, hint_text = 'Quantity',
-    pos = NEW_QTY.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
+    pos = NEW_QTY.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
+    write_tab = False, multiline = False)
 newQty_L = AnchorLabel(size_hint = NEW_QTY_L.hpair, text = 'Quantity',
     pos = NEW_QTY_L.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
     anchor_x = 'right', color = BLACK, halign = 'right')
 newWeight = TextInput(size_hint = NEW_WEIGHT.hpair, hint_text = 'Weight',
-    pos = NEW_WEIGHT.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
+    pos = NEW_WEIGHT.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
+    write_tab = False, multiline = False)
 newWeight_L = AnchorLabel(size_hint = NEW_WEIGHT_L.hpair, text = 'Weight',
     pos = NEW_WEIGHT_L.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
     anchor_x = 'right', color = BLACK, halign = 'right')
 newVal = TextInput(size_hint = NEW_VAL.hpair, hint_text = 'Value',
-    pos = NEW_VAL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
+    pos = NEW_VAL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
+    write_tab = False, multiline = False)
 newVal_L = AnchorLabel(size_hint = NEW_VAL_L.hpair, text = 'Value',
     pos = NEW_VAL_L.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
     anchor_x = 'right', color = BLACK, halign = 'right')

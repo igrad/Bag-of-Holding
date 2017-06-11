@@ -29,12 +29,17 @@ def LoadIcon(index, selected = False, is_new = False):
             selectBorder = Image(source = 'images/IMG_SELECTOR.png',
             allow_stretch = True, keep_ratio = False)
 
-            wrap.add_widget(selectBorder)
+            wrap.add_widget(selectBorder, 1)
+
+            icon.selected = index
 
         btn = Button(background_normal = 'images/icons/{:03d}.png'.format(index),
         background_down = 'images/icons/{:03d}.png'.format(index))
 
-        wrap.add_widget(btn)
+        wrap.add_widget(btn, 0)
+
+        btn.index = index
+        btn.bind(on_press = HighlightIcon)
 
         iconGrid.add_widget(wrap, index)
         return True
@@ -43,6 +48,7 @@ def LoadIcon(index, selected = False, is_new = False):
         LogExc('Icon.LoadIcon({}, {}, {})'.format(index, selected, is_new))
         return False
 
+
 def HighlightIcon(obj):
     '''Called when one of the icon options is pressed.'''
     if icon.selected != None:
@@ -50,6 +56,21 @@ def HighlightIcon(obj):
 
     LoadIcon(obj.index, selected = True)
     icon.selected = obj.index
+
+
+def SaveIcon(obj):
+    '''Called whent the Save button on the Icon selection window is pressed.'''
+    if icon.selected == None:
+        OpenIconMenu(None)
+
+    newbg = iconGrid.children[icon.selected].children[0].background_down
+
+    if icon.called_from == 'pick':
+        pickIcon.background_normal = pickIcon.background_down = newbg
+        OpenIconMenu('picknoupdate')
+    elif icon.called_from == 'new':
+        newIcon.background_normal = newIcon.background_down = newbg
+        OpenIconMenu(None)
 
 
 def LoadAllIcons():
@@ -72,7 +93,10 @@ def OpenIconMenu(obj):
         icon.pos = SCREEN_POS_FAR_OFF
 
         if icon.called_from == 'pick':
-            SelectItem(int(pick.itemID))
+            if obj == 'picknoupdate':
+                SelectItem('picknoupdate')
+            else:
+                SelectItem(int(pick.itemID))
         elif icon.called_from == 'new':
             OpenNew(0)
         return
@@ -85,21 +109,18 @@ def OpenIconMenu(obj):
                 LoadIcon(icon.selected)
 
             LoadIcon(obj.selected, selected = True)
-        elif obj.selected == None:
+        else:
             # If no item is specified by the opener, then don't highlight anything
+            if icon.selected != None:
+                LoadIcon(icon.selected)
             icon.selected = None
 
-        if pick.is_open:
+        if pick.is_open and obj != 'picknoupdate':
             SelectItem(None)
             icon.called_from = 'pick'
-        elif tabsNew.is_open:
+        elif dropNew.is_open:
             OpenNew(None)
             icon.called_from = 'new'
 
         icon.is_open = True
         icon.pos = ICON.pos
-
-        LogMsg('ICON: {}'.format(ICON.pair))
-        LogMsg('ICON_SCROLL: {}'.format(ICON_SCROLL.pair))
-        LogMsg('ICON_GRID: {}'.format(ICON_GRID.pair))
-        LogMsg('ICON_HEIGHT: {}'.format(ICON_HEIGHT.pair))
