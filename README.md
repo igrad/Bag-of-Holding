@@ -9,7 +9,7 @@ This is intended to be released as a free app, with options for donations. There
 
 Main Menu | Selected Item
 --------- | -------------
-![Main Menu](https://puu.sh/whnLO/5a92cf096c.jpg) | ![Selected Item](https://puu.sh/whnMd/421cd31226.jpg)
+![Main Menu](https://puu.sh/whnRT/f5757abe40.jpg) | ![Selected Item](https://puu.sh/whnMd/421cd31226.jpg)
 
 ## Tasks
 - [x] Design of core menus
@@ -30,5 +30,9 @@ Main Menu | Selected Item
 - [ ] Options to delete item, move item to another bag, share item, create printable version of item card
 
 
-## Technical
+### Technical
 As mentioned above, this is built using <a href="https://www.python.org/downloads/release/python-344/">Python 3.4.4</a> and <a href="https://kivy.org/docs/gettingstarted/intro.html">Kivy 1.10.0</a>. This project is being released for public use under the GPL 3.0 license, in keeping with Kivy and Python's respective licensing. Please see the LICENSE file for further licensing information.
+
+### Credits
+* **Ian Gradert** - Design, all coding, all artwork except for item icons
+* **www.game-icons.net** - All item icons
