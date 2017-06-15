@@ -64,10 +64,6 @@ class BagOfHolding(RelativeLayout):
         newSave.bind(on_press = InputItem)
         newIcon.bind(on_press = OpenIconMenu)
 
-        # Sort
-        sortCancel.bind(on_press = OpenSort)
-        #sortSave.bind(on_press = ApplySort)
-
         # View
         viewNorm.bind(on_press = SetView)
         viewCozy.bind(on_press = SetView)
@@ -108,7 +104,7 @@ class BagOfHolding(RelativeLayout):
         for widge in [sortOrder_asc, sortOrder_desc]:
             sortOrder.add_widget(widge)
 
-        for widge in [dropSortHalt, dropSortBG, sortType_L, sortType, sortOrder_L, sortOrder, sortCancel, sortSave]:
+        for widge in [dropSortHalt, dropSortBG, sortType_L, sortType, sortOrder_L, sortOrder]:
             dropSort.add_widget(widge)
 
         for widge in [dropViewHalt, dropViewBG, viewNorm, viewNorm_L, viewNorm_Check, viewCozy, viewCozy_L, viewCozy_Check, viewCard, viewCard_L, viewCard_Check]:

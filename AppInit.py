@@ -72,10 +72,10 @@ ICON_SAVE = SizeMap(184, 20, 156, 32, ICON.pair)
 
 # DROP MENUS
 DROP_NEW = SizeMap(0, 174, 422, 496, FRAME.pair)
-DROP_SORT = SizeMap(140, 414, 288, 256, FRAME.pair)
+DROP_SORT = SizeMap(140, 474, 288, 196, FRAME.pair)
 DROP_VIEW = SizeMap(148, 414, 284, 256, FRAME.pair)
 DROP_NEW_HALT = SizeMap(4, 8, 408, 420, DROP_NEW.pair)
-DROP_SORT_HALT = SizeMap(8, 8, 272, 180, DROP_SORT.pair)
+DROP_SORT_HALT = SizeMap(8, 8, 272, 120, DROP_SORT.pair)
 DROP_VIEW_HALT = SizeMap(8, 8, 272, 180, DROP_VIEW.pair)
 
 # ITEMS
@@ -109,14 +109,12 @@ NEW_CANCEL = SizeMap(12, 16, 192, 36, DROP_NEW.pair)
 NEW_SAVE = SizeMap(212, 16, 192, 36, DROP_NEW.pair)
 
 # SORT
-SORT_TYPE = SizeMap(16, 72, 124, 92, DROP_SORT.pair)
-SORT_TYPE_L = SizeMap(16, 166, 124, 30, DROP_SORT.pair)
+SORT_TYPE = SizeMap(16, 12, 124, 92, DROP_SORT.pair)
+SORT_TYPE_L = SizeMap(16, 106, 124, 30, DROP_SORT.pair)
 SORT_TYPE_BTN = SizeMap(0, 0, 124, 22, SORT_TYPE.pair)
-SORT_ORDER = SizeMap(148, 120, 124, 46, DROP_SORT.pair)
-SORT_ORDER_L = SizeMap(148, 164, 124, 30, DROP_SORT.pair)
+SORT_ORDER = SizeMap(148, 60, 124, 46, DROP_SORT.pair)
+SORT_ORDER_L = SizeMap(148, 104, 124, 30, DROP_SORT.pair)
 SORT_ORDER_BTN = SizeMap(0, 0, 124, 22, SORT_ORDER.pair)
-SORT_CANCEL = SizeMap(16, 16, 124, 36, DROP_SORT.pair)
-SORT_SAVE = SizeMap(148, 16, 124, 36, DROP_SORT.pair)
 
 # VIEW
 VIEW_NORM = SizeMap(16, 132, 256, 48, DROP_VIEW.pair)
@@ -345,10 +343,6 @@ sortOrder_asc = AnchorButton(size_hint = SORT_ORDER_BTN.hpair, text = 'Ascending
 sortOrder_desc = AnchorButton(size_hint = SORT_ORDER_BTN.hpair, text = 'Descending',
     font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
     halign = 'left')
-sortCancel = Button(size_hint = SORT_CANCEL.hpair, text = 'CANCEL',
-    pos = SORT_CANCEL.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
-sortSave = Button(size_hint = SORT_SAVE.hpair, text = 'SAVE',
-    pos = SORT_SAVE.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C)
 
 # Tab drop: View
 viewNorm = Button(size_hint = VIEW_NORM.hpair, pos = VIEW_NORM.pos, opacity = 0)

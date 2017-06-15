@@ -38,9 +38,6 @@ FILLS = (1, 1)
 XSCALE = 0.75
 YSCALE = 0.75
 
-ANIMTIME = 0.50
-ANIMTYPE = 'in_out_quart'
-
 #GLOBAL VARIABLES
 bagsStore = JsonStore('bags_data.json')
 itemStore = JsonStore('item_data.json')
@@ -83,8 +80,10 @@ class SizeMap():
 def LogMsg(arg1):
     print('[INFO   ] [:::' + str(clock())[0:6] + ':::] ' + str(arg1))
 
+
 def LogErr(arg1):
     print('[ERROR  ] [:::' + str(clock())[0:6] + ':::] ' + str(arg1))
+
 
 def LogExc(arg1):
     print('\n[EXCEPT ] [:::' + str(clock())[0:6] + ':::] EXCEPTION in ' + str(arg1) + '\n' + str(format_exc()))
