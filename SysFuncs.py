@@ -26,6 +26,7 @@ from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.stencilview import StencilView
 from kivy.uix.textinput import TextInput
+from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.widget import Widget
 
 from StencilLayout import StencilLayout
@@ -56,6 +57,7 @@ LAST_BAG_OPENED = 0
 VIEW_TYPE = 'cozy'
 NOOBIE_TIPS = True
 
+
 # GLOBAL CLASSES
 class SizeMap():
     def __init__(self, x, y, w, h, parentPair):
@@ -77,6 +79,19 @@ class SizeMap():
 
 
 # GLOBAL METHODS
+def ExtractNumber(string):
+    number = ''
+    for x in str(string):
+        if x in '0123456789,.':
+            number += x
+
+    if number != '':
+        if '.' in number: return float(number)
+        return int(number)
+    else:
+        return string
+
+
 def LogMsg(arg1):
     print('[INFO   ] [:::' + str(clock())[0:6] + ':::] ' + str(arg1))
 

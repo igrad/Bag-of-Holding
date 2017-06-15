@@ -1,5 +1,6 @@
 from SysFuncs import *
 from LoadSaves import *
+from Currency import ConvertStringToUnits
 
 class BagItem():
     '''An unassigned item that represents all the item-specific data required by the user.
@@ -30,6 +31,67 @@ class BagItem():
 
         if 'ID' not in kwargs:
             self._SaveItemInfo_()
+
+
+    def __lt__(self, other):
+        if SORT_ATTR == 'Name':
+            return self.name < other.name
+        elif SORT_ATTR == 'Quantity':
+            return self.qty < other.qty
+        elif SORT_ATTR == 'Weight':
+            return self.weight < other.weight
+        elif SORT_ATTR == 'Value':
+            return ConvertStringToUnits(self.val) < ConvertStringToUnits(other.val)
+
+    def __le__(self, other):
+        if SORT_ATTR == 'Name':
+            return self.name <= other.name
+        elif SORT_ATTR == 'Quantity':
+            return self.qty <= other.qty
+        elif SORT_ATTR == 'Weight':
+            return self.weight <= other.weight
+        elif SORT_ATTR == 'Value':
+            return ConvertStringToUnits(self.val) <= ConvertStringToUnits(other.val)
+
+    def __eq__(self, other):
+        if SORT_ATTR == 'Name':
+            return self.name == other.name
+        elif SORT_ATTR == 'Quantity':
+            return self.qty == other.qty
+        elif SORT_ATTR == 'Weight':
+            return self.weight == other.weight
+        elif SORT_ATTR == 'Value':
+            return ConvertStringToUnits(self.val) == ConvertStringToUnits(other.val)
+
+    def __ne__(self, other):
+        if SORT_ATTR == 'Name':
+            return self.name != other.name
+        elif SORT_ATTR == 'Quantity':
+            return self.qty != other.qty
+        elif SORT_ATTR != 'Weight':
+            return self.weight != other.weight
+        elif SORT_ATTR != 'Value':
+            return ConvertStringToUnits(self.val) == ConvertStringToUnits(other.val)
+
+    def __ge__(self, other):
+        if SORT_ATTR == 'Name':
+            return self.name >= other.name
+        elif SORT_ATTR == 'Quantity':
+            return self.qty >= other.qty
+        elif SORT_ATTR == 'Weight':
+            return self.weight >= other.weight
+        elif SORT_ATTR == 'Value':
+            return ConvertStringToUnits(self.val) >= ConvertStringToUnits(other.val)
+
+    def __gt__(self, other):
+        if SORT_ATTR == 'Name':
+            return self.name > other.name
+        elif SORT_ATTR == 'Quantity':
+            return self.qty > other.qty
+        elif SORT_ATTR == 'Weight':
+            return self.weight > other.weight
+        elif SORT_ATTR == 'Value':
+            return ConvertStringToUnits(self.val) > ConvertStringToUnits(other.val)
 
 
     def HasTag(self, tag):

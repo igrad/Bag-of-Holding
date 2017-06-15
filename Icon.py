@@ -97,8 +97,6 @@ def OpenIconMenu(obj):
                 SelectItem('picknoupdate')
             else:
                 SelectItem(int(pick.itemID))
-        elif icon.called_from == 'new':
-            OpenNew(0)
         return
     else:
         if obj.selected != None:
@@ -119,7 +117,6 @@ def OpenIconMenu(obj):
             SelectItem(None)
             icon.called_from = 'pick'
         elif dropNew.is_open:
-            OpenNew(None)
             icon.called_from = 'new'
 
         icon.is_open = True

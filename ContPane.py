@@ -9,6 +9,9 @@ from Tabs import *
 from kivy.clock import Clock, partial
 
 
+SORT_ATTR = 'Name'
+SORT_METHOD = 'Ascending'
+
 COMPARISONPHRASES = []
 
 FIELDS = ['name', 'qty', 'quantity', 'lbs', 'kg', 'weight', 'val', 'value', 'tag', 'tags', 'desc', 'description']
@@ -63,10 +66,19 @@ def PopulateItemViews(openBagID, items = None):
         ItemView = CardView
         contList.row_default_height = ITEMVIEW_CARD.h
 
+    # If no items were explicitly listed for this function, check the search input to see
+    # if there's anything worthwhile there.
     checkSearchInput = False
     if items == None:
         items = bag.items
         checkSearchInput = True
+
+    # Apply the sorting method to the items of this bag
+    print('items before ' + str(items))
+    print('SORT_ATTR = ' + SORT_ATTR)
+    print('SORT_METHOD = ' + SORT_METHOD)
+    items = ApplySort(items)
+    print('\nitems after ' + str(items))
 
     for itemID in items:
         itemID = str(itemID)
@@ -78,18 +90,9 @@ def PopulateItemViews(openBagID, items = None):
 
         contList.add_widget(ITEMVIEWS[str(itemID)])
 
-
-
     # Apply the search input parameters if not explicitly specified in the items arg
     if checkSearchInput == True:
         LiveFilterFromSearch(None, None)
-
-    # Filters of this bag need to be applied
-    # TODO Apply filters after opening new bag
-
-    # Add the remaining ItemViews to the grid
-    # This will need to be made a function of the filter. IE, if the item
-    # passes through the filter, post it to the grid.
 
 
 def FilterItemViews(filterPart):
@@ -99,17 +102,6 @@ def FilterItemViews(filterPart):
         [0]: Attribute to be checked. If 'any', will check all attributes of the item
         [1]: The value which we compare the attribute values to.
         [2]: The comparison operator, '==', '>', '<', or ' in '.'''
-
-    def ExtractNumber(string):
-        number = ''
-        for x in str(string):
-            if x in '0123456789,.':
-                number += x
-
-        if number != '':
-            return float(number)
-        else:
-            return string
 
     try:
         # Determine if a specific field is being queried
@@ -324,3 +316,35 @@ def SelectItem(btn):
             pickIcon.selected = None
 
         pick.pos = PICK.pos
+
+
+def ApplySort(obj):
+    '''Apply the sorting method to the contents of the bag.'''
+    reverse = False
+
+    global SORT_METHOD, SORT_ATTR
+
+    print('Beginning sort!\norder: {}\ntype:{}'.format(SORT_METHOD, SORT_ATTR))
+
+    if SORT_METHOD == 'Descending':
+        reverse = True
+
+    if SORT_ATTR == 'Name':
+        return [y.ID for y in sorted([ITEMS[str(item)] for item in obj],
+        key = lambda x: x.name, reverse = reverse)]
+    elif SORT_ATTR == 'Quantity':
+        return [y.ID for y in sorted([ITEMS[str(item)] for item in obj],
+        key = lambda x: x.qty, reverse = reverse)]
+    elif SORT_ATTR == 'Weight':
+        return [y.ID for y in sorted([ITEMS[str(item)] for item in obj],
+        key = lambda x: x.weight, reverse = reverse)]
+    elif SORT_ATTR == 'Value':
+        return [y.ID for y in sorted([ITEMS[str(item)] for item in obj],
+        key = lambda x: x.val, reverse = reverse)]
+
+
+def SortChanged(attr, method):
+    '''Indicate that the sorting parameters have been changed.'''
+    global SORT_ATTR, SORT_METHOD
+    SORT_ATTR = attr
+    SORT_METHOD = method

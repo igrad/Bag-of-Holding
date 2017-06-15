@@ -26,3 +26,8 @@ class CurrencySet:
         for cType in self.cTypes:
             if cType.name == name:
                 del self.cTypes[cType]
+
+def ConvertStringToUnits(str):
+    '''Interpret the intended value of the string by converting the labeled units in the
+    string to the intended unit-value.'''
+    pass

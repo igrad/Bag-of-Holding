@@ -1,8 +1,9 @@
+import SysFuncs
 from SysFuncs import *
 from LoadSaves import *
 from AppInit import *
 from Bag import *
-from ContPane import PopulateItemViews, HighlightView
+from ContPane import PopulateItemViews, HighlightView, SortChanged
 
 
 #=======================================================================================#
@@ -77,6 +78,41 @@ def OpenSort(obj):
         if dropView.is_open: OpenView('close')
 
 
+def UpdateSort(obj):
+    '''Called when one of the buttons within the sort menu is pressed.'''
+    print('\n\nbutton pressed: ' + obj.text)
+
+    sort_attr = ''
+    sort_method = ''
+
+    findAttr = True
+    findMethod = True
+
+    if obj.text in ['Name', 'Quantity', 'Weight', 'Value']:
+        sort_attr = obj.text
+        findAttr = False
+    else:
+        sort_method = obj.text
+        findMethod = False
+
+    if findAttr:
+        l = ToggleButton.get_widgets('sortAttr')
+        for item in l:
+            if item.state == 'down':
+                print('Found item currently activated: {}'.format(item.text))
+                sort_attr = item.text
+
+    if findMethod:
+        l = ToggleButton.get_widgets('sortMethod')
+        for item in l:
+            if item.state == 'down':
+                print('Found item currently activated: {}'.format(item.text))
+                sort_method = item.text
+
+    SortChanged(sort_attr, sort_method)
+    PopulateItemViews(CURRENTBAG)
+
+
 #=======================================================================================#
 # VIEW                                                                                  #
 #=======================================================================================#
@@ -92,6 +128,7 @@ def OpenView(obj):
 
         if dropNew.is_open: OpenNew('close')
         if dropSort.is_open: OpenSort('close')
+
 
 def SetView(obj):
     viewType = obj.view_type

@@ -69,6 +69,15 @@ class BagOfHolding(RelativeLayout):
         viewCozy.bind(on_press = SetView)
         viewCard.bind(on_press = SetView)
 
+        # SORT
+        sortType_name.bind(on_press = UpdateSort)
+        sortType_qty.bind(on_press = UpdateSort)
+        sortType_weight.bind(on_press = UpdateSort)
+        sortType_val.bind(on_press = UpdateSort)
+
+        sortOrder_asc.bind(on_press = UpdateSort)
+        sortOrder_desc.bind(on_press = UpdateSort)
+
         # SEARCH
         searchInput.bind(text = ScheduleSearch)
 

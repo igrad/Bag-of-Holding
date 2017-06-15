@@ -285,7 +285,8 @@ newName = TextInput(size_hint = NEW_NAME.hpair, hint_text = 'Name',
     pos = NEW_NAME.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
     write_tab = False, multiline = False)
 newIcon = Button(size_hint = NEW_ICON.hpair, pos = NEW_ICON.pos,
-    background_normal = 'images/blankIcon.png', background_down = 'images/blankIcon.png')
+    background_normal = 'images/blankIcon.png', background_down = 'images/blankIcon.png',
+    border = [0,0,0,0])
 newQty = TextInput(size_hint = NEW_QTY.hpair, hint_text = 'Quantity',
     pos = NEW_QTY.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
     write_tab = False, multiline = False)
@@ -320,29 +321,29 @@ sortType_L = AnchorLabel(size_hint = SORT_TYPE_L.hpair, text = 'Sort by',
     anchor_x = 'left', anchor_y = 'bottom', color = BLACK, halign = 'left')
 sortType = BoxLayout(size_hint = SORT_TYPE.hpair, pos = SORT_TYPE.pos,
     orientation = 'vertical')
-sortType_name = AnchorButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Name',
+sortType_name = AnchorToggleButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Name',
     font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
-    halign = 'left')
-sortType_qty = AnchorButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Quantity',
+    halign = 'left', group = 'sortAttr', allow_no_selection = False, state = 'down')
+sortType_qty = AnchorToggleButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Quantity',
     font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
-    halign = 'left')
-sortType_weight = AnchorButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Weight',
+    halign = 'left', group = 'sortAttr', allow_no_selection = False)
+sortType_weight = AnchorToggleButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Weight',
     font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
-    halign = 'left')
-sortType_val = AnchorButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Value',
+    halign = 'left', group = 'sortAttr', allow_no_selection = False)
+sortType_val = AnchorToggleButton(size_hint = SORT_TYPE_BTN.hpair, text = 'Value',
     font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
-    halign = 'left')
+    halign = 'left', group = 'sortAttr', allow_no_selection = False)
 sortOrder_L = AnchorLabel(size_hint = SORT_ORDER_L.hpair, text = 'Sort order',
     pos = SORT_ORDER_L.pos, font_name = FONT_BASK, font_size = FONT_SIZE_C,
     anchor_x = 'left', anchor_y = 'bottom', color = BLACK, halign = 'left')
 sortOrder = BoxLayout(size_hint = SORT_ORDER.hpair, pos = SORT_ORDER.pos,
     orientation = 'vertical')
-sortOrder_asc = AnchorButton(size_hint = SORT_ORDER_BTN.hpair, text = 'Ascending',
+sortOrder_asc = AnchorToggleButton(size_hint = SORT_ORDER_BTN.hpair, text = 'Ascending',
     font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
-    halign = 'left')
-sortOrder_desc = AnchorButton(size_hint = SORT_ORDER_BTN.hpair, text = 'Descending',
+    halign = 'left', group = 'sortMethod', allow_no_selection = False, state = 'down')
+sortOrder_desc = AnchorToggleButton(size_hint = SORT_ORDER_BTN.hpair, text = 'Descending',
     font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK, anchor_x = 'left',
-    halign = 'left')
+    halign = 'left', group = 'sortMethod', allow_no_selection = False)
 
 # Tab drop: View
 viewNorm = Button(size_hint = VIEW_NORM.hpair, pos = VIEW_NORM.pos, opacity = 0)
