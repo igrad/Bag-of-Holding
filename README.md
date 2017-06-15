@@ -9,25 +9,11 @@ This is intended to be released as a free app, with options for donations. There
 
 Main Menu | Selected Item
 --------- | -------------
-![Main Menu](https://puu.sh/whnRT/f5757abe40.jpg) | ![Selected Item](https://puu.sh/whnMd/421cd31226.jpg)
+![Main Menu](https://puu.sh/wkmqa/66f23537fb.jpg) | ![Selected Item](https://puu.sh/wkmqv/4b3b34cda3.jpg)
 
-## Tasks
-- [x] Design of core menus
-- [ ] Design of ***Bags*** and ***Settings*** menus
-- [ ] Implementation of ***Bags*** and ***Settings*** buttons
-- [x] Implementation of ***Tabs*** buttons
-- [x] Create new item from ***New*** button in ***Tabs***
-- [ ] Reorder items using ***Sort*** button in ***Tabs***
-- [x] Change view type using ***View*** button in ***Tabs***
-- [x] Implementation of ***Search Bar***
-- [x] Search after 0.5s delay using auto-filtering
-- [x] Search using keywords in query, such as qty, weight, val & some synonyms
-- [x] Implementation of ***ContPane***
-- [x] ***ItemView*** selection methods (a.k.a. ***Select***)
-- [x] Edit item data in ***Select*** window
-- [x] Edit item Icon in ***Select*** window
-- [ ] Design of ***Options*** sub-menu in ***Select*** window
-- [ ] Options to delete item, move item to another bag, share item, create printable version of item card
+
+Create New Item | Change View Type
+![Create New Item](https://puu.sh/wkmue/15423ff313.jpg) | ![Change View Type](https://puu.sh/wkmw3/39aea58cda.jpg)
 
 
 ### Technical
