@@ -13,6 +13,7 @@ Main Menu | Selected Item
 
 
 Create New Item | Change View Type
+--------------- | ----------------
 ![Create New Item](https://puu.sh/wkmue/15423ff313.jpg) | ![Change View Type](https://puu.sh/wkmw3/39aea58cda.jpg)
 
 
