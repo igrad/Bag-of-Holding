@@ -1,9 +1,9 @@
 # Bag-of-Holding
-Bag of Holding is a cross-platform mobile app for maintaining inventory in RPG tabletop games, such as Dungeons and Dragon. This project is named after the "Bag of Holding" item from Dungeons & Dragons, and is intended as a small play on the well-known item. The app is intended for both iOS and Android platforms, and may support Windows mobile platforms down the road if Kivy begins to support it.
+Bag of Holding is a cross-platform mobile app for maintaining inventory in RPG tabletop games, such as Dungeons and Dragons. This project is named after the "Bag of Holding" item from Dungeons & Dragons, and is intended as a small play on the well-known item. The app is intended for both iOS and Android platforms, and may support Windows mobile platforms down the road if Kivy begins to support it.
 
 The targeted release for this project is early 2018, though that is certainly subject to change this early in development.
 
-This is intended to be released as a free app, with options for donations. There will be no ads for revenue; this is simply a small contribution to the gaming community, not my source of income.
+This will be released as a free app, with options for donations. There will be no ads; this is simply a small contribution to the gaming community, not my source of income.
 
 ## Development preview
 
@@ -18,7 +18,7 @@ Create New Item | Change View Type
 
 
 ### Technical
-As mentioned above, this is built using <a href="https://www.python.org/downloads/release/python-344/">Python 3.4.4</a> and <a href="https://kivy.org/docs/gettingstarted/intro.html">Kivy 1.10.0</a>. This project is being released for public use under the GPL 3.0 license, in keeping with Kivy and Python's respective licensing. Please see the LICENSE file for further licensing information.
+This is built using <a href="https://www.python.org/downloads/release/python-344/">Python 3.4.4</a> and <a href="https://kivy.org/docs/gettingstarted/intro.html">Kivy 1.10.0</a>. This project is being released for public use under the GPL 3.0 license, in keeping with Kivy and Python's respective licensing. Please see the LICENSE file for further licensing information.
 
 ### Credits
 * **Ian Gradert** - Design, all coding, all artwork except for item icons
