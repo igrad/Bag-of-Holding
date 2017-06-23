@@ -1,3 +1,4 @@
+#!usr/bin/python3
 import kivy
 kivy.require('1.10.0')
 
@@ -9,6 +10,7 @@ from AppInit import *
 from Tabs import *
 from ContPane import *
 from Icon import LoadAllIcons, OpenIconMenu, SaveIcon
+from BagPick import *
 
 class BagOfHolding(RelativeLayout):
     def __init__(self, **kwargs):
@@ -25,6 +27,8 @@ class BagOfHolding(RelativeLayout):
         self.AddChildren()
 
         # Set window statuses
+        bagPick.is_open = False
+
         pick.is_open = False
         icon.is_open = False
 
@@ -81,6 +85,10 @@ class BagOfHolding(RelativeLayout):
         # SEARCH
         searchInput.bind(text = ScheduleSearch)
 
+        # BAGPICK
+        menuBagBtn.bind(on_press = OpenBagPickMenu)
+        bagPickHalt.bind(on_press = OpenBagPickMenu)
+
         # SELECT
         pickX.bind(on_press = SelectItem)
         pickIcon.bind(on_press = OpenIconMenu)
@@ -127,6 +135,12 @@ class BagOfHolding(RelativeLayout):
         contScroll.add_widget(contList)
         cont.add_widget(contScroll)
 
+        # Bags menu
+        bagPickScroll.add_widget(bagPickGrid)
+
+        for widge in [bagPickHalt, bagPickBG, bagPickName, bagPickScroll]:
+            bagPick.add_widget(widge)
+
         # Selected Item
         for widge in [pickQty_L, pickQty_I, pickWeight_L, pickWeight_I, pickVal_L, pickVal_I]:
             pickMisc.add_widget(widge)
@@ -143,7 +157,7 @@ class BagOfHolding(RelativeLayout):
             icon.add_widget(widge)
 
         # Render
-        for widge in [cont, menu, search, dropNew, dropSort, dropView, tabs, pick, icon]:
+        for widge in [cont, menu, search, dropNew, dropSort, dropView, tabs, bagPick, pick, icon]:
             screenMain.add_widget(widge)
 
         self.add_widget(screenMain)
@@ -169,15 +183,17 @@ class Builder(App):
         Config.set('graphics', 'width', width)
         Config.set('graphics', 'show_cursor', '1')
 
+        LogMsg('Getting app launch mode...')
         if Builder.mode == "DEV":
+            LogMsg('Opening App in Dev mode.')
             Config.set('graphics', 'fullscreen', 0)
             Window.left = 3072
             Window.top = 28
             Config.set('graphics', 'rotation', 0)
         else:
-            Config.set('graphics', 'rotation', 0)
-            #Config.set('graphics', 'fullscreen', 1)
-            Window.fullscreen = True
+            LogMsg('Opening App in Prod mode.')
+            Config.set('graphics', 'rotation', 90)
+            Config.set('graphics', 'fullscreen', 'auto')
 
         Config.set('kivy', 'window_icon', 'images/icon.png')
         Config.write()

@@ -44,6 +44,15 @@ CONT_SPACE = SizeMap(0, 0, 0, 5, CONT.pair)
 CONT_PAD = SizeMap(0, 0, 2, 2, CONT.pair)
 CONT_SCROLL = SizeMap(0, 0, 12, 0, CONT.pair)
 
+# BAGPICK MENU
+BAGPICK = SizeMap(0, 0, 380, 768, FRAME.pair)
+BAGPICK_HALT = SizeMap(0, 0, 432, 768, BAGPICK.pair)
+BAGPICK_NAME = SizeMap(7, 697, 344, 56, BAGPICK.pair)
+BAGPICK_SCROLL = SizeMap(7, 19, 344, 676, BAGPICK.pair)
+BAGPICK_ITEM = SizeMap(0, 0, 344, 64, BAGPICK_SCROLL.pair)
+BAGPICK_ITEM_NAME = SizeMap(0, 24, 344, 40, BAGPICK_ITEM.pair)
+BAGPICK_ITEM_MISC = SizeMap(0, 4, 344, 20, BAGPICK_ITEM.pair)
+
 # SELECTED ITEM
 # Note: spacing should be (20, 20, 392, 516)
 PICK = SizeMap(0, 105, 432, 557, FRAME.pair)
@@ -186,6 +195,20 @@ contScroll = ScrollView(size_hint = FILLS, do_scroll_x = False,
 contList = GridLayout(size_hint = (1.0, None), cols = 1,
     padding = list(CONT_PAD.pair), spacing = list(CONT_SPACE.pair),
     row_force_default = True)
+
+
+# Bag selection menu
+bagPick = RelativeLayout(size_hint = BAGPICK.hpair, pos = SCREEN_POS_OFF)
+bagPickHalt = Button(pos = BAGPICK_HALT.pos, size_hint = BAGPICK_HALT.hpair,
+    background_normal = IMG_BLACK, background_down = IMG_BLACK, opacity = 0.5)
+bagPickBG = Image(size_hint = FILLS, source = 'images/IMG_BAG_PICK_BG.png',
+    allow_stretch = True, keep_ratio = False)
+bagPickName = Label(size_hint = BAGPICK_NAME.hpair, pos = BAGPICK_NAME.pos,
+    text = 'Bags', font_name = FONT_BASK, font_size = FONT_SIZE_A)
+bagPickScroll = ScrollView(size_hint = BAGPICK_SCROLL.hpair,
+    pos = BAGPICK_SCROLL.pos, do_scroll_x = False, bar_width = 0)
+bagPickGrid = GridLayout(size_hint = (1.0, None), cols = 1,
+    row_default_height = BAGPICK_ITEM.h, row_force_default = True)
 
 
 # Selected Item
