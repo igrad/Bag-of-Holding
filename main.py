@@ -43,6 +43,9 @@ class BagOfHolding(RelativeLayout):
         viewCozy.view_type = 'cozy'
         viewCard.view_type = 'card'
 
+        # Load up data for bagPick menu
+        bagPickGrid.bind(minimum_height = bagPickGrid.setter('height'))
+
         # Load up data needed for the ContPane
         OpenBag(LAST_BAG_OPENED)
         GenerateComparisonPhrases()
