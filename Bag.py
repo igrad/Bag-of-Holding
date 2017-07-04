@@ -6,11 +6,10 @@ from Currency import *
 
 
 class Bag:
-    ID = 0
-    name = 'Bag'
-    items = list()
-    currency = CurrencySet()
-    view = 'cozy'
+    '''An instance of a user's bag. This contains all of the meta data about the
+    bag as well as lists the contents of the bag as ID references. Information
+    about the items themselves are not stored here, just the IDs of the items
+    assigned to this bag.'''
 
     def __init__(self, **kwargs):
         if 'ID' in kwargs: self.ID = int(kwargs['ID'])

@@ -6,12 +6,12 @@ from AnchorLabel import *
 
 
 def LoadBagPickGridData():
-
+    pass
 
 def OpenBagPickMenu(obj):
     '''Open up the bagPick menu on-screen.'''
     if bagPick.is_open:
-        bagPick.pos = SCREEN_POS_OFF
+        bagPick.pos = ScreenPos.OFF
         bagPick.is_open = False
 
     else:

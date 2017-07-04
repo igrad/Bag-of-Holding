@@ -53,18 +53,18 @@ def PopulateItemViews(openBagID, items = None):
     bag = BAGS[openBagID]
 
     # Update the contents of the contPane GridLayout by creating individual ItemViews
-    contList.clear_widgets()
+    cont.list.clear_widgets()
     ITEMVIEWS.clear()
 
     if bag.view == 'cozy':
         ItemView = CozyView
-        contList.row_default_height = ITEMVIEW_COZY.h
+        cont.list.row_default_height = size.ITEMVIEW_COZY.h
     elif bag.view == 'norm':
         ItemView = NormView
-        contList.row_default_height = ITEMVIEW_NORM.h
+        cont.list.row_default_height = size.ITEMVIEW_NORM.h
     elif bag.view == 'card':
         ItemView = CardView
-        contList.row_default_height = ITEMVIEW_CARD.h
+        cont.list.row_default_height = size.ITEMVIEW_CARD.h
 
     # If no items were explicitly listed for this function, check the search input to see
     # if there's anything worthwhile there.
@@ -88,7 +88,7 @@ def PopulateItemViews(openBagID, items = None):
         if bag.view == 'card':
             newItem.SetDescNumLines()
 
-        contList.add_widget(ITEMVIEWS[str(itemID)])
+        cont.list.add_widget(ITEMVIEWS[str(itemID)])
 
     # Apply the search input parameters if not explicitly specified in the items arg
     if checkSearchInput == True:
@@ -156,7 +156,7 @@ def LiveFilterFromSearch(obj, value, dt = 0):
     If a search filter is successfully applied, returns True. If no changes are made,
     returns False.'''
     if value == None:
-        value = str(searchInput.text)
+        value = str(search.input.text)
 
     compString = value.replace(' ', '').lower()
 
@@ -247,7 +247,7 @@ def OpenBag(openBagID):
     LoadItems(BAGS[bagID].items)
 
     # Update the bag title on-screen
-    menuTitle.text = BAGS[CURRENTBAG].name
+    menu.title.text = BAGS[CURRENTBAG].name
 
     PopulateItemViews(openBagID)
 
@@ -256,13 +256,13 @@ def OpenBag(openBagID):
 
 def HighlightView(viewType):
     '''Check the corresponding view selection in the VIEW tab.'''
-    viewNorm_Check.source = VIEW_CHECK_INACTIVE
-    viewCozy_Check.source = VIEW_CHECK_INACTIVE
-    viewCard_Check.source = VIEW_CHECK_INACTIVE
+    dview.norm_Check.source = VIEW_CHECK_INACTIVE
+    dview.cozy_Check.source = VIEW_CHECK_INACTIVE
+    dview.card_Check.source = VIEW_CHECK_INACTIVE
 
-    if viewType == 'norm': viewNorm_Check.source = VIEW_CHECK_ACTIVE
-    elif viewType == 'cozy': viewCozy_Check.source = VIEW_CHECK_ACTIVE
-    elif viewType == 'card': viewCard_Check.source = VIEW_CHECK_ACTIVE
+    if viewType == 'norm': dview.norm_Check.source = VIEW_CHECK_ACTIVE
+    elif viewType == 'cozy': dview.cozy_Check.source = VIEW_CHECK_ACTIVE
+    elif viewType == 'card': dview.card_Check.source = VIEW_CHECK_ACTIVE
 
 
 def SelectItem(btn):
@@ -271,25 +271,25 @@ def SelectItem(btn):
     if btn == 'picknoupdate':
         pick.is_open = True
         pick.pos = PICK.pos
-    elif (pick.pos == list(PICK.pos)) or (btn == None):
+    elif (pick.pos == list(size.PICK.pos)) or (btn == None):
         pick.is_open = False
-        pick.pos = SCREEN_POS_OFF
+        pick.pos = screenPos.OFF
 
         args = dict()
-        if pickName.text != str(ITEMS[pick.itemID].name):
-            args['name'] = str(pickName.text)
-        if pickIcon.background_normal != ITEMS[pick.itemID].icon:
-            args['icon'] = str(pickIcon.background_normal)
-        if pickQty_I.text != str(ITEMS[pick.itemID].qty):
-            args['qty'] = str(pickQty_I.text)
-        if pickWeight_I.text != str(ITEMS[pick.itemID].weight):
-            args['weight'] = str(pickWeight_I.text)
-        if pickVal_I.text != str(ITEMS[pick.itemID].val):
-            args['val'] = str(pickVal_I.text)
-        if pickTags.text != str(ITEMS[pick.itemID].tags):
-            args['tags'] = str(pickTags.text)
-        if pickDesc.text != str(ITEMS[pick.itemID].desc):
-            args['desc'] = str(pickDesc.text)
+        if pick.name.text != str(ITEMS[pick.itemID].name):
+            args['name'] = str(pick.name.text)
+        if pick.icon.background_normal != ITEMS[pick.itemID].icon:
+            args['icon'] = str(pick.icon.background_normal)
+        if pick.qty_I.text != str(ITEMS[pick.itemID].qty):
+            args['qty'] = str(pick.qty_I.text)
+        if pick.weight_I.text != str(ITEMS[pick.itemID].weight):
+            args['weight'] = str(pick.weight_I.text)
+        if pick.val_I.text != str(ITEMS[pick.itemID].val):
+            args['val'] = str(pick.val_I.text)
+        if pick.tags.text != str(ITEMS[pick.itemID].tags):
+            args['tags'] = str(pick.tags.text)
+        if pick.desc.text != str(ITEMS[pick.itemID].desc):
+            args['desc'] = str(pick.desc.text)
 
         if len(args) > 0:
             ITEMS[pick.itemID].UpdateItem(**args)
@@ -300,22 +300,22 @@ def SelectItem(btn):
         if type(btn) != int:
             pick.itemID = btn.itemID
 
-        pickName.text = ITEMS[pick.itemID].name
-        #pickIcon.source = ITEMS[pick.itemID].icon
-        pickIcon.background_normal = ITEMS[pick.itemID].icon
-        pickIcon.background_down = ITEMS[pick.itemID].icon
-        pickQty_I.text = str(ITEMS[pick.itemID].qty)
-        pickWeight_I.text = str(ITEMS[pick.itemID].weight)
-        pickVal_I.text = str(ITEMS[pick.itemID].val)
-        pickTags.text = str(ITEMS[pick.itemID].tags)
-        pickDesc.text = str(ITEMS[pick.itemID].desc)
+        pick.name.text = ITEMS[pick.itemID].name
+        #pick.icon.source = ITEMS[pick.itemID].icon
+        pick.icon.background_normal = ITEMS[pick.itemID].icon
+        pick.icon.background_down = ITEMS[pick.itemID].icon
+        pick.qty_I.text = str(ITEMS[pick.itemID].qty)
+        pick.weight_I.text = str(ITEMS[pick.itemID].weight)
+        pick.val_I.text = str(ITEMS[pick.itemID].val)
+        pick.tags.text = str(ITEMS[pick.itemID].tags)
+        pick.desc.text = str(ITEMS[pick.itemID].desc)
 
         try:
-            pickIcon.selected = int(ITEMS[pick.itemID].icon[-7:-4])
+            pick.icon.selected = int(ITEMS[pick.itemID].icon[-7:-4])
         except:
-            pickIcon.selected = None
+            pick.icon.selected = None
 
-        pick.pos = PICK.pos
+        pick.pos = size.PICK.pos
 
 
 def ApplySort(obj):

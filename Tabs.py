@@ -11,13 +11,13 @@ from ContPane import PopulateItemViews, HighlightView, SortChanged
 #=======================================================================================#
 def OpenNew(obj):
     '''Open/close the New drop menu from the tabs bar.'''
-    if (dropNew.pos == list(DROP_NEW.pos)) or (obj == None):
-        dropNew.pos = SCREEN_POS_OFF
-        tabsNew.color = WHITE
+    if (dnew.pos == list(DROP_NEW.pos)) or (obj == None):
+        dnew.pos = ScreenPos.OFF
+        tabs.new.color = WHITE
         dropNew.is_open = False
     else:
-        dropNew.pos = DROP_NEW.pos
-        tabsNew.color = BLACK
+        dnew.pos = size.DROP_NEW.pos
+        tabs.new.color = BLACK
         dropNew.is_open = True
 
         if dropSort.is_open: OpenSort('close')
@@ -28,19 +28,19 @@ def InputItem(obj):
     '''Process the values input on the New Item screen, create a new item from those
     values, save it to memory, and add it to the currently-opened bag.'''
     # Set the defaults to input if the user didn't enter anything
-    if newName.text == '': newName.text = 'Unnamed Item'
-    if newIcon.background_normal == '': newIcon.background_normal = 'images/blankIcon.png'
-    if newIcon.background_down == '': newIcon.background_down = 'images/blankIcon.png'
-    if newQty.text == '': newQty.text = '1'
-    if newWeight.text == '': newWeight.text = '1'
-    if newVal.text == '': newVal.text = '1'
-    if newTags.text == '': newTags.text = 'notag'
-    if newDesc.text == '': newDesc.text = 'An undescribable item!'
+    if dnew.name.text == '': dnew.name.text = 'Unnamed Item'
+    if dnew.icon.background_normal == '': dnew.icon.background_normal = 'images/blankIcon.png'
+    if dnew.icon.background_down == '': dnew.icon.background_down = 'images/blankIcon.png'
+    if dnew.Qty.text == '': dnew.Qty.text = '1'
+    if dnew.weight.text == '': dnew.weight.text = '1'
+    if dnew.val.text == '': dnew.val.text = '1'
+    if dnew.tags.text == '': dnew.tags.text = 'notag'
+    if dnew.desc.text == '': dnew.desc.text = 'An undescribable item!'
 
     # Create the item itself. Automatically added to ITEMS
-    newItem = BagItem(name = newName.text, icon = newIcon.background_normal,
-        qty = newQty.text, weight = newWeight.text, val = newVal.text,
-        tags = newTags.text, desc = newDesc.text)
+    newItem = BagItem(name = dnew.name.text, icon = dnew.icon.background_normal,
+        qty = dnew.Qty.text, weight = dnew.weight.text, val = dnew.val.text,
+        tags = dnew.tags.text, desc = dnew.desc.text)
 
     # Add the item to the open bag
     BAGS[CURRENTBAG].AddItem(int(newItem.ID))
@@ -48,14 +48,14 @@ def InputItem(obj):
     # Display a success message to the user
 
     # Reset text input fields
-    newName.text = ''
-    newIcon.background_down = 'images/blankIcon.png'
-    newIcon.background_normal = 'images/blankIcon.png'
-    newQty.text = ''
-    newWeight.text = ''
-    newVal.text = ''
-    newTags.text = ''
-    newDesc.text = ''
+    dnew.name.text = ''
+    dnew.icon.background_down = 'images/blankIcon.png'
+    dnew.icon.background_normal = 'images/blankIcon.png'
+    dnew.Qty.text = ''
+    dnew.weight.text = ''
+    dnew.val.text = ''
+    dnew.tags.text = ''
+    dnew.desc.text = ''
 
     PopulateItemViews(CURRENTBAG)
 
@@ -66,12 +66,12 @@ def InputItem(obj):
 def OpenSort(obj):
     '''Open/close the Sort drop menu from the tabs bar.'''
     if (dropSort.pos == list(DROP_SORT.pos)) or (obj == 'open'):
-        dropSort.pos = SCREEN_POS_OFF
-        tabsSort.color = WHITE
+        dropSort.pos = ScreenPos.OFF
+        tabs.sort.color = WHITE
         dropSort.is_open = False
     else:
         dropSort.pos = DROP_SORT.pos
-        tabsSort.color = BLACK
+        tabs.sort.color = BLACK
         dropSort.is_open = True
 
         if dropNew.is_open: OpenNew('close')
@@ -118,12 +118,12 @@ def UpdateSort(obj):
 #=======================================================================================#
 def OpenView(obj):
     if (dropView.pos == list(DROP_VIEW.pos)) or (obj == 'open'):
-        dropView.pos = SCREEN_POS_OFF
-        tabsView.color = WHITE
+        dropView.pos = ScreenPos.OFF
+        tabs.view.color = WHITE
         dropView.is_open = False
     else:
         dropView.pos = DROP_VIEW.pos
-        tabsView.color = BLACK
+        tabs.view.color = BLACK
         dropView.is_open = True
 
         if dropNew.is_open: OpenNew('close')

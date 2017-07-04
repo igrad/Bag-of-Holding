@@ -32,138 +32,140 @@ class BagOfHolding(RelativeLayout):
         pick.is_open = False
         icon.is_open = False
 
-        dropNew.is_open = False
-        dropSort.is_open = False
-        dropView.is_open = False
+        dnew.is_open = False
+        dsort.is_open = False
+        dview.is_open = False
 
-        newIcon.selected = None
+        dnew.icon.selected = None
 
         # Set view types
-        viewNorm.view_type = 'norm'
-        viewCozy.view_type = 'cozy'
-        viewCard.view_type = 'card'
+        dview.norm.view_type = 'norm'
+        dview.cozy.view_type = 'cozy'
+        dview.card.view_type = 'card'
 
         # Load up data for bagPick menu
-        bagPickGrid.bind(minimum_height = bagPickGrid.setter('height'))
+        bagPick.grid.bind(minimum_height = bagPick.grid.setter('height'))
 
         # Load up data needed for the ContPane
         OpenBag(LAST_BAG_OPENED)
         GenerateComparisonPhrases()
 
-        contList.bind(minimum_height = contList.setter('height'))
+        cont.list.bind(minimum_height = cont.list.setter('height'))
 
         # Load up auxilliary windows
         LoadAllIcons()
 
-        iconGrid.bind(minimum_height = iconGrid.setter('height'))
+        icon.grid.bind(minimum_height = icon.grid.setter('height'))
 
         LogMsg('App initialization complete.')
 
 
     def SetBinds(self):
         # TABS
-        tabsNew.bind(on_press = OpenNew)
-        tabsSort.bind(on_press = OpenSort)
-        tabsView.bind(on_press = OpenView)
+        tabs.new.bind(on_press = OpenNew)
+        tabs.sort.bind(on_press = OpenSort)
+        tabs.view.bind(on_press = OpenView)
 
         # New
-        newCancel.bind(on_press = OpenNew)
-        newSave.bind(on_press = InputItem)
-        newIcon.bind(on_press = OpenIconMenu)
+        dnew.cancel.bind(on_press = OpenNew)
+        dnew.save.bind(on_press = InputItem)
+        dnew.icon.bind(on_press = OpenIconMenu)
 
         # View
-        viewNorm.bind(on_press = SetView)
-        viewCozy.bind(on_press = SetView)
-        viewCard.bind(on_press = SetView)
+        dview.norm.bind(on_press = SetView)
+        dview.cozy.bind(on_press = SetView)
+        dview.card.bind(on_press = SetView)
 
         # SORT
-        sortType_name.bind(on_press = UpdateSort)
-        sortType_qty.bind(on_press = UpdateSort)
-        sortType_weight.bind(on_press = UpdateSort)
-        sortType_val.bind(on_press = UpdateSort)
+        dsort.type_name.bind(on_press = UpdateSort)
+        dsort.type_qty.bind(on_press = UpdateSort)
+        dsort.type_weight.bind(on_press = UpdateSort)
+        dsort.type_val.bind(on_press = UpdateSort)
 
-        sortOrder_asc.bind(on_press = UpdateSort)
-        sortOrder_desc.bind(on_press = UpdateSort)
+        dsort.order_asc.bind(on_press = UpdateSort)
+        dsort.order_desc.bind(on_press = UpdateSort)
 
         # SEARCH
-        searchInput.bind(text = ScheduleSearch)
+        search.input.bind(text = ScheduleSearch)
 
         # BAGPICK
-        menuBagBtn.bind(on_press = OpenBagPickMenu)
-        bagPickHalt.bind(on_press = OpenBagPickMenu)
+        menu.bagBtn.bind(on_press = OpenBagPickMenu)
+        bagPick.halt.bind(on_press = OpenBagPickMenu)
 
         # SELECT
-        pickX.bind(on_press = SelectItem)
-        pickIcon.bind(on_press = OpenIconMenu)
+        pick.X.bind(on_press = SelectItem)
+        pick.icon.bind(on_press = OpenIconMenu)
         SetItemViewsOnPress(SelectItem)
 
         # ICON
-        iconCancel.bind(on_press = OpenIconMenu)
-        iconSave.bind(on_press = SaveIcon)
+        icon.cancel.bind(on_press = OpenIconMenu)
+        icon.save.bind(on_press = SaveIcon)
 
 
     def AddChildren(self):
         # Background
-        screenMain.add_widget(BG)
+        base.screenMain.add_widget(base.BG)
 
         # Menu
-        for widge in [menuTitle, menuBag, menuBagBtn, menuOpts, menuOptsBtn]:
-            menu.add_widget(widge)
+        for widge in [menu.title, menu.bag, menu.bagBtn, menu.opts, menu.optsBtn]:
+            menu.base.add_widget(widge)
 
         # Tabs
-        for widge in [tabsNew, tabsSort, tabsView]:
-            tabs.add_widget(widge)
+        for widge in [tabs.new, tabs.sort, tabs.view]:
+            tabs.base.add_widget(widge)
 
-        # Tab menus
-        for widge in [dropNewHalt, dropNewBG, newName, newIcon, newQty_L, newQty, newWeight_L, newWeight, newVal_L, newVal, newTags, newDesc, newCancel, newSave]:
-            dropNew.add_widget(widge)
+        # New Drop Menu
+        for widge in [dnew.halt, dnew.BG, dnew.name, dnew.icon, dnew.qty_L, dnew.qty, dnew.weight_L, dnew.weight, dnew.val_L, dnew.val, dnew.tags, dnew.desc, dnew.cancel, dnew.save]:
+            dnew.base.add_widget(widge)
 
-        for widge in [sortType_name, sortType_qty, sortType_weight, sortType_val]:
-            sortType.add_widget(widge)
+        # Sort Drop Menu
+        for widge in [dsort.type_name, dsort.type_qty, dsort.type_weight, dsort.type_val]:
+            dsort.type.add_widget(widge)
 
-        for widge in [sortOrder_asc, sortOrder_desc]:
-            sortOrder.add_widget(widge)
+        for widge in [dsort.order_asc, dsort.order_desc]:
+            dsort.order.add_widget(widge)
 
-        for widge in [dropSortHalt, dropSortBG, sortType_L, sortType, sortOrder_L, sortOrder]:
-            dropSort.add_widget(widge)
+        for widge in [dsort.halt, dsort.BG, dsort.type_L, dsort.type, dsort.order_L, dsort.order]:
+            dsort.base.add_widget(widge)
 
-        for widge in [dropViewHalt, dropViewBG, viewNorm, viewNorm_L, viewNorm_Check, viewCozy, viewCozy_L, viewCozy_Check, viewCard, viewCard_L, viewCard_Check]:
-            dropView.add_widget(widge)
+        # View Drop Menu
+        for widge in [dview.halt, dview.BG, dview.norm, dview.norm_L, dview.norm_Check, dview.cozy, dview.cozy_L, dview.cozy_Check, dview.card, dview.card_L, dview.card_Check]:
+            dview.base.add_widget(widge)
 
         # Search
-        search.add_widget(searchBG)
-        search.add_widget(searchInput)
+        search.base.add_widget(search.BG)
+        search.base.add_widget(search.input)
 
         # Contpane
-        contScroll.add_widget(contList)
-        cont.add_widget(contScroll)
+        cont.scroll.add_widget(cont.list)
+        cont.base.add_widget(cont.scroll)
 
         # Bags menu
-        bagPickScroll.add_widget(bagPickGrid)
+        bagPick.scroll.add_widget(bagPick.grid)
 
-        for widge in [bagPickHalt, bagPickBG, bagPickName, bagPickScroll]:
-            bagPick.add_widget(widge)
+        for widge in [bagPick.halt, bagPick.BG, bagPick.name, bagPick.scroll]:
+            bagPick.base.add_widget(widge)
 
         # Selected Item
-        for widge in [pickQty_L, pickQty_I, pickWeight_L, pickWeight_I, pickVal_L, pickVal_I]:
-            pickMisc.add_widget(widge)
+        for widge in [pick.qty_L, pick.qty_I, pick.weight_L, pick.weight_I, pick.val_L, pick.val_I]:
+            pick.misc.add_widget(widge)
 
-        for widge in [pickName, pickIcon, pickMisc, pickTags, pickDesc, pickOpts, pickX]:
-            pickWidges.add_widget(widge)
+        for widge in [pick.name, pick.icon, pick.misc, pick.tags, pick.desc, pick.opts, pick.X]:
+            pick.widges.add_widget(widge)
 
-        for widge in [pickHalt, pickBG, pickWidges]:
-            pick.add_widget(widge)
+        for widge in [pick.halt, pick.BG, pick.widges]:
+            pick.base.add_widget(widge)
 
-        iconScroll.add_widget(iconGrid)
+        icon.scroll.add_widget(icon.grid)
 
-        for widge in [iconHalt, iconBG, iconScroll, iconCancel, iconSave]:
-            icon.add_widget(widge)
+        for widge in [icon.halt, icon.BG, icon.scroll, icon.cancel, icon.save]:
+            icon.base.add_widget(widge)
 
         # Render
-        for widge in [cont, menu, search, dropNew, dropSort, dropView, tabs, bagPick, pick, icon]:
-            screenMain.add_widget(widge)
+        for widge in [cont.base, menu.base, search.base, dnew.base, dsort.base, dview.base, tabs.base, bagPick.base, pick.base, icon.base]:
+            base.screenMain.add_widget(widge)
 
-        self.add_widget(screenMain)
+        self.add_widget(base.screenMain)
 
 
 class Builder(App):
@@ -202,6 +204,7 @@ class Builder(App):
         Config.write()
 
         LogMsg('Window size found: {}'.format(Window.size))
+
 
     def build(self):
         config = self.config

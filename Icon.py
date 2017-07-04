@@ -10,7 +10,7 @@ from Tabs import OpenNew
 NUM_DEFAULT_ICONS = 40
 
 def LoadIcon(index, selected = False, is_new = False):
-    '''Load a single icon onto the iconGrid.
+    '''Load a single icon onto the icon.grid.
     ----------
     Int index: Index of the child to be loaded/reloaded
     Bool selected: Determines if the item is highlighted or not
@@ -19,7 +19,7 @@ def LoadIcon(index, selected = False, is_new = False):
     try:
         if not is_new:
             try:
-                iconGrid.remove_widget(iconGrid.children[index])
+                icon.grid.remove_widget(icon.grid.children[index])
             except IndexError:
                 pass
 
@@ -41,7 +41,7 @@ def LoadIcon(index, selected = False, is_new = False):
         btn.index = index
         btn.bind(on_press = HighlightIcon)
 
-        iconGrid.add_widget(wrap, index)
+        icon.grid.add_widget(wrap, index)
         return True
 
     except:
@@ -63,19 +63,19 @@ def SaveIcon(obj):
     if icon.selected == None:
         OpenIconMenu(None)
 
-    newbg = iconGrid.children[icon.selected].children[0].background_down
+    newbg = icon.grid.children[icon.selected].children[0].background_down
 
     if icon.called_from == 'pick':
-        pickIcon.background_normal = pickIcon.background_down = newbg
+        pick.icon.background_normal = pick.icon.background_down = newbg
         OpenIconMenu('picknoupdate')
     elif icon.called_from == 'new':
-        newIcon.background_normal = newIcon.background_down = newbg
+        dnew.icon.background_normal = dnew.icon.background_down = newbg
         OpenIconMenu(None)
 
 
 def LoadAllIcons():
     '''Load all of the default icons into the grid of selectable icons.'''
-    iconGrid.clear_widgets()
+    icon.grid.clear_widgets()
 
     # Load icons in reverse order so that their indices are set appropriately
     for i in range(NUM_DEFAULT_ICONS):
