@@ -11,17 +11,17 @@ from ContPane import PopulateItemViews, HighlightView, SortChanged
 #=======================================================================================#
 def OpenNew(obj):
     '''Open/close the New drop menu from the tabs bar.'''
-    if (dnew.pos == list(DROP_NEW.pos)) or (obj == None):
-        dnew.pos = ScreenPos.OFF
+    if (dnew.pos == list(size.DROP_NEW.pos)) or (obj == None):
+        dnew.pos = screenPos.OFF
         tabs.new.color = WHITE
-        dropNew.is_open = False
+        dnew.is_open = False
     else:
         dnew.pos = size.DROP_NEW.pos
         tabs.new.color = BLACK
-        dropNew.is_open = True
+        dnew.is_open = True
 
-        if dropSort.is_open: OpenSort('close')
-        if dropView.is_open: OpenView('close')
+        if dsort.is_open: OpenSort('close')
+        if dview.is_open: OpenView('close')
 
 
 def InputItem(obj):
@@ -51,6 +51,7 @@ def InputItem(obj):
     dnew.name.text = ''
     dnew.icon.background_down = 'images/blankIcon.png'
     dnew.icon.background_normal = 'images/blankIcon.png'
+    dnew.icon.selected = None
     dnew.Qty.text = ''
     dnew.weight.text = ''
     dnew.val.text = ''
@@ -65,17 +66,17 @@ def InputItem(obj):
 #=======================================================================================#
 def OpenSort(obj):
     '''Open/close the Sort drop menu from the tabs bar.'''
-    if (dropSort.pos == list(DROP_SORT.pos)) or (obj == 'open'):
-        dropSort.pos = ScreenPos.OFF
+    if (dsort.pos == list(size.DROP_SORT.pos)) or (obj == 'open'):
+        dsort.pos = screenPos.OFF
         tabs.sort.color = WHITE
-        dropSort.is_open = False
+        dsort.is_open = False
     else:
-        dropSort.pos = DROP_SORT.pos
+        dsort.pos = size.DROP_SORT.pos
         tabs.sort.color = BLACK
-        dropSort.is_open = True
+        dsort.is_open = True
 
-        if dropNew.is_open: OpenNew('close')
-        if dropView.is_open: OpenView('close')
+        if dnew.is_open: OpenNew('close')
+        if dview.is_open: OpenView('close')
 
 
 def UpdateSort(obj):
@@ -117,17 +118,17 @@ def UpdateSort(obj):
 # VIEW                                                                                  #
 #=======================================================================================#
 def OpenView(obj):
-    if (dropView.pos == list(DROP_VIEW.pos)) or (obj == 'open'):
-        dropView.pos = ScreenPos.OFF
+    if (dview.pos == list(size.DROP_VIEW.pos)) or (obj == 'open'):
+        dview.pos = screenPos.OFF
         tabs.view.color = WHITE
-        dropView.is_open = False
+        dview.is_open = False
     else:
-        dropView.pos = DROP_VIEW.pos
+        dview.pos = size.DROP_VIEW.pos
         tabs.view.color = BLACK
-        dropView.is_open = True
+        dview.is_open = True
 
-        if dropNew.is_open: OpenNew('close')
-        if dropSort.is_open: OpenSort('close')
+        if dnew.is_open: OpenNew('close')
+        if dsort.is_open: OpenSort('close')
 
 
 def SetView(obj):

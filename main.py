@@ -90,7 +90,7 @@ class BagOfHolding(RelativeLayout):
 
         # BAGPICK
         menu.bagBtn.bind(on_press = OpenBagPickMenu)
-        bagPick.halt.bind(on_press = OpenBagPickMenu)
+        bagPick.back.bind(on_press = OpenBagPickMenu)
 
         # SELECT
         pick.X.bind(on_press = SelectItem)
@@ -143,7 +143,7 @@ class BagOfHolding(RelativeLayout):
         # Bags menu
         bagPick.scroll.add_widget(bagPick.grid)
 
-        for widge in [bagPick.halt, bagPick.BG, bagPick.name, bagPick.scroll]:
+        for widge in [bagPick.back, bagPick.halt, bagPick.BG, bagPick.name, bagPick.scroll]:
             bagPick.base.add_widget(widge)
 
         # Selected Item

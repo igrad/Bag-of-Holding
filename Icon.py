@@ -70,6 +70,7 @@ def SaveIcon(obj):
         OpenIconMenu('picknoupdate')
     elif icon.called_from == 'new':
         dnew.icon.background_normal = dnew.icon.background_down = newbg
+        dnew.icon.selected = icon.selected
         OpenIconMenu(None)
 
 
@@ -90,7 +91,7 @@ def OpenIconMenu(obj):
     '''Opens the icon menu.'''
     if icon.is_open:
         icon.is_open = False
-        icon.pos = SCREEN_POS_FAR_OFF
+        icon.pos = screenPos.FAR_OFF
 
         if icon.called_from == 'pick':
             if obj == 'picknoupdate':
@@ -116,8 +117,8 @@ def OpenIconMenu(obj):
         if pick.is_open and obj != 'picknoupdate':
             SelectItem(None)
             icon.called_from = 'pick'
-        elif dropNew.is_open:
+        elif dnew.is_open:
             icon.called_from = 'new'
 
         icon.is_open = True
-        icon.pos = ICON.pos
+        icon.pos = size.ICON.pos

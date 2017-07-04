@@ -11,7 +11,6 @@ CLEAR = [0,0,0,0]
 
 VIEW_CHECK_ACTIVE = 'images/IMG_VIEW_CHECK_ACTIVE.png'
 VIEW_CHECK_INACTIVE = 'images/IMG_VIEW_CHECK_INACTIVE.png'
-IMG_CLEAR = 'images/IMG_CLEAR.png'
 IMG_BLACK = 'images/IMG_BLACK.png'
 IMG_WHITE = 'images/IMG_WHITE.png'
 
@@ -74,7 +73,8 @@ class Size():
 
         # BAGPICK MENU
         self.BAGPICK = SizeMap(0, 0, 380, 768, self.FRAME.pair)
-        self.BAGPICK_HALT = SizeMap(0, 0, 432, 768, self.BAGPICK.pair)
+        self.BAGPICK_HALT = SizeMap(0, 0, 368, 768, self.BAGPICK.pair)
+        self.BAGPICK_BACK = SizeMap(360, 0, 72, 768, self.BAGPICK.pair)
         self.BAGPICK_NAME = SizeMap(7, 697, 344, 56, self.BAGPICK.pair)
         self.BAGPICK_SCROLL = SizeMap(7, 19, 344, 676, self.BAGPICK.pair)
         self.BAGPICK_ITEM = SizeMap(0, 0, 344, 64, self.BAGPICK_SCROLL.pair)
@@ -249,9 +249,11 @@ class BagPick(HasBase):
     def __init__(self, Size, ScreenPos, **kwargs):
         # Bag selection menu
         self.base = RelativeLayout(size_hint = Size.BAGPICK.hpair, pos = ScreenPos.OFF)
-        self.halt = Button(pos = Size.BAGPICK_HALT.pos,
-            size_hint = Size.BAGPICK_HALT.hpair, background_normal = IMG_BLACK,
+        self.back = Button(pos = Size.BAGPICK_BACK.pos,
+            size_hint = Size.BAGPICK_BACK.hpair, background_normal = IMG_BLACK,
             background_down = IMG_BLACK, opacity = 0.5)
+        self.halt = Button(pos = Size.BAGPICK_HALT.pos,
+            size_hint = Size.BAGPICK_HALT.hpair, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_BAG_PICK_BG.png',
             allow_stretch = True, keep_ratio = False)
         self.name = Label(size_hint = Size.BAGPICK_NAME.hpair,

@@ -11,11 +11,11 @@ def LoadBagPickGridData():
 def OpenBagPickMenu(obj):
     '''Open up the bagPick menu on-screen.'''
     if bagPick.is_open:
-        bagPick.pos = ScreenPos.OFF
+        bagPick.pos = screenPos.OFF
         bagPick.is_open = False
 
     else:
-        bagPick.pos = BAGPICK.pos
+        bagPick.pos = size.BAGPICK.pos
         bagPick.is_open = True
 
 
