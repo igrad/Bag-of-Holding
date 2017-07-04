@@ -50,7 +50,7 @@ def PopulateItemViews(openBagID, items = None):
     '''Create the ItemView objects and put them on-screen.
     str openBagID: ID number of the bag to open.
     List items: list of items to be loaded, defaults to None to load all items in bag.'''
-    bag = BAGS[openBagID]
+    bag = BAGS[str(openBagID)]
 
     # Update the contents of the contPane GridLayout by creating individual ItemViews
     cont.list.clear_widgets()
@@ -226,9 +226,10 @@ def LiveFilterFromSearch(obj, value, dt = 0):
 
 
 def OpenBag(openBagID):
+    openBagID = str(openBagID)
     LoadBags(openBagID)
 
-    bagIDs = BAGS.keys()
+    bagIDs = list(BAGS.keys())
     bagID = 0
 
     if len(bagIDs) < 1:
@@ -239,7 +240,7 @@ def OpenBag(openBagID):
             bagID = openBagID
         else:
             # TODO Notify user that the bag they've selected could not be found
-            bagID = BAGS[bagIDs[0]]
+            bagID = str(bagIDs[0])
 
     CURRENTBAG = bagID
     VIEW_TYPE = BAGS[bagID].view

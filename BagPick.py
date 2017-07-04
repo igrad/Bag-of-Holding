@@ -15,15 +15,26 @@ def OpenBagPickMenu(obj):
         bagPick.is_open = False
 
     else:
+        bagPick.grid.clear_widgets()
+
+        # Create a list of all of the bagIDs where the bags are sorted alphabetically
+        # by name.
+        bagIDs = [y.ID for y in sorted([BAGS[str(bagID)] for bagID in BAGS.keys()],
+        key = lambda x: x.name, reverse = True)]
+
+        for bagID in bagIDs:
+            bpi = BagPickItem(bagID)
+            bagPick.grid.add_widget(bpi)
+
         bagPick.pos = size.BAGPICK.pos
         bagPick.is_open = True
 
 
 class BagPickItem(ButtonBehavior, RelativeLayout):
-    def __init__(self, itemID, **kwargs):
-        NAME = BPI_NAME
-        MISC = BPI_MISC
-        ITEM = BPI_ITEM
+    def __init__(self, bagID, **kwargs):
+        NAME = size.BAGPICK_ITEM_NAME
+        MISC = size.BAGPICK_ITEM_MISC
+        BPI = size.BAGPICK_ITEM
 
         self.bagID = str(bagID)
         self.size_hint = FILLS
@@ -38,40 +49,34 @@ class BagPickItem(ButtonBehavior, RelativeLayout):
         elif bg_var == 2:
             bg = 'images/IMG_COZYVIEW_BG_3.png'
 
-        self.dBG = Image(size_hint = FILLS, source = bg, allow_stretch = True,
+        self.BG = Image(size_hint = FILLS, source = bg, allow_stretch = True,
             keep_ratio = False)
-        self.dicon = Image(size_hint = IV_ICON.hpair, pos = IV_ICON.pos,
-            source = 'images/IMG_CLEAR.png', allow_stretch = True, keep_ratio = False)
-        self.dname = Label(size_hint = IV_NAME.hpair, pos = IV_NAME.pos,
+        self.name = Label(size_hint = NAME.hpair, pos = NAME.pos,
             halign = 'left', valign = 'middle', text = 'Item Name', color = BLACK,
             font_name = FONT_BASK, font_size = FONT_SIZE_A, shorten = True,
             shorten_from = 'right')
-        self.dmisc = BoxLayout(size_hint = IV_MISC.hpair, pos = IV_MISC.pos,
+        self.misc = BoxLayout(size_hint = MISC.hpair, pos = MISC.pos,
             orientation = 'horizontal')
-        self.dqty = Label(size_hint = FILLS, text = 'Quantity: ', font_name = FONT_BASK,
+        self.tot_items = Label(size_hint = FILLS, text = 'Items: ',
+            font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK)
+        self.tot_weight = Label(size_hint = FILLS, text = 'Weight: ',
+            font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK)
+        self.tot_val = Label(size_hint = FILLS, text = 'Value: ', font_name = FONT_BASK,
             font_size = FONT_SIZE_C, color = BLACK)
-        self.dweight = Label(size_hint = FILLS, text = 'Weight: ', font_name = FONT_BASK,
-            font_size = FONT_SIZE_C, color = BLACK)
-        self.dval = Label(size_hint = FILLS, text = 'Value: ', font_name = FONT_BASK,
-            font_size = FONT_SIZE_C, color = BLACK)
-        self.ddescwrap = StencilLayout(size_hint = IV_DESC.hpair, pos = IV_DESC.pos)
-        self.ddesc = TextInput(size_hint = (0.99, None), disabled = True,
-            pos_hint = {'x': 0.01, 'top': 1}, font_name = FONT_BASK,
-            font_size = FONT_SIZE_C, background_color = CLEAR, foreground_color = BLACK,
-            disabled_foreground_color = BLACK)
 
-        self.dicon.source = ITEMS[self.itemID].icon
-        self.dname.text = ITEMS[self.itemID].name
+        self.name.text = BAGS[self.bagID].name
 
-        self.ddescwrap.add_widget(self.ddesc)
+        self.UpdateTotals()
 
-        self.dqty.text += str(ITEMS[self.itemID].qty)
-        self.dweight.text += str(ITEMS[self.itemID].weight)
-        self.dval.text += str(ITEMS[self.itemID].val)
-        self.ddesc.text = str(ITEMS[self.itemID].desc)
+        for widge in [self.tot_items, self.tot_weight, self.tot_val]:
+            self.misc.add_widget(widge)
 
-        for widge in [self.dqty, self.dweight, self.dval]:
-            self.dmisc.add_widget(widge)
-
-        for widge in [self.dBG, self.dicon, self.dname, self.dmisc, self.ddescwrap]:
+        for widge in [self.BG, self.name, self.misc]:
             self.add_widget(widge)
+
+
+    def UpdateTotals(self):
+        BAGS[self.bagID].SetTotals()
+        self.tot_items.text += str(BAGS[self.bagID].tot_items)
+        self.tot_weight.text += str(BAGS[self.bagID].tot_weight)
+        self.tot_val.text += str(BAGS[self.bagID].tot_val)

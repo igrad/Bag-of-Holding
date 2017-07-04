@@ -12,31 +12,39 @@ class Bag:
     assigned to this bag.'''
 
     def __init__(self, **kwargs):
-        if 'ID' in kwargs: self.ID = int(kwargs['ID'])
+        if 'ID' in kwargs: self.ID = str(kwargs['ID'])
         else: self.ID = self.GetNewBagID()
         if 'name' in kwargs: self.name = str(kwargs['name'])
         if 'items' in kwargs: self.items = list(kwargs['items'])
         if 'currency' in kwargs: self.currency = CurrencySet(cTypes = kwargs['currency'])
         if 'view' in kwargs: self.view = str(kwargs['view'])
 
+        self.tot_items = len(self.items)
+        self.tot_weight = 0
+        self.tot_val = 0
+
         BAGS[self.ID] = self
 
         if 'ID' not in kwargs:
             self.SaveBagInfo()
 
+
     def UpdateBag(self, **kwargs):
         if 'name' in kwargs: self.name = str(kwargs['name'])
-        if 'items' in kwargs: self.items = dict(kwargs['items'])
+        if 'items' in kwargs: self.items = list(kwargs['items'])
         if 'currency' in kwargs: self.currency = CurrencySet(kwargs['currency'])
         if 'view' in kwargs: self.view = str(kwargs['view'])
 
         self.SaveBagInfo()
+        self.SetTotals()
+
 
     def AddItem(self, itemID):
         self.items.append(itemID)
         self.items.sort()
 
         self.SaveBagInfo()
+
 
     def RemoveItemFromBag(self, itemID):
         del self.items[itemID]
@@ -47,20 +55,30 @@ class Bag:
 
         self.SaveBagInfo()
 
+
     def GetNewBagID(self):
         '''Gets an unused bagID number.'''
         keys = BAGS.keys()
 
         for i in range(MAX_BAGS):
-            if not i in keys: return i
+            if not i in keys: return str(i)
 
         LogMsg("No more bags available!")
         return None
+
 
     def SaveBagInfo(self):
         '''Stores the bag by copying a shallow copy of the actual bag.'''
         bagsStore.put(str(self.ID), name = self.name, currency = self.currency.cTypes,
             view = self.view, items = self.items)
+
+
+    def SetTotals(self):
+        '''Set the tot_items, tot_weight, and tot_val properties.'''
+        self.tot_items = len(self.items)
+        self.tot_weight = sum([int(ExtractNumber(ITEMS[str(x)].weight)) for x in self.items])
+        self.tot_val = sum([ExtractNumber(ITEMS[str(x)].val) for x in self.items])
+
 
     def DeleteBagFromSave(self):
         '''Removes the bag from bagsStore save file.'''

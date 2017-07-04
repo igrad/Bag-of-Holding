@@ -49,7 +49,7 @@ ITEMS = dict()
 ITEMVIEWS = dict()
 FILTERS = dict()
 
-CURRENTBAG = 0
+CURRENTBAG = "0"
 
 MAX_BAGS = 10
 MAX_ITEMS = 5000
