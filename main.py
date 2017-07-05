@@ -174,6 +174,8 @@ class Builder(App):
 
 
     def build_config(self, config):
+        LogMsg('Building Configurations...')
+
         self.title = "Bag of Holding"
 
         global XSCALE, YSCALE
@@ -188,7 +190,6 @@ class Builder(App):
         Config.set('graphics', 'width', width)
         Config.set('graphics', 'show_cursor', '1')
 
-        LogMsg('Getting app launch mode...')
         if Builder.mode == "DEV":
             LogMsg('Opening App in Dev mode.')
             Config.set('graphics', 'fullscreen', 0)
@@ -213,4 +214,5 @@ class Builder(App):
         return BagOfHolding()
 
 if __name__ == '__main__':
+    LogMsg('Starting up')
     Builder().run()

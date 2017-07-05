@@ -93,12 +93,12 @@ def ExtractNumber(string):
 
 
 def LogMsg(arg1):
-    print('[INFO   ] [:::' + str(clock())[0:6] + ':::] ' + str(arg1))
+    print('[LOG_MSG] [:::' + str(clock())[0:6] + ':::] ' + str(arg1))
 
 
 def LogErr(arg1):
-    print('[ERROR  ] [:::' + str(clock())[0:6] + ':::] ' + str(arg1))
+    print('[LOG_ERR] [:::' + str(clock())[0:6] + ':::] ' + str(arg1))
 
 
 def LogExc(arg1):
-    print('\n[EXCEPT ] [:::' + str(clock())[0:6] + ':::] EXCEPTION in ' + str(arg1) + '\n' + str(format_exc()))
+    print('\n[LOG_EXC] [:::' + str(clock())[0:6] + ':::] EXCEPTION in ' + str(arg1) + '\n' + str(format_exc()))

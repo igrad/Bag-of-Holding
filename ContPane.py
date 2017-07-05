@@ -74,11 +74,7 @@ def PopulateItemViews(openBagID, items = None):
         checkSearchInput = True
 
     # Apply the sorting method to the items of this bag
-    print('items before ' + str(items))
-    print('SORT_ATTR = ' + SORT_ATTR)
-    print('SORT_METHOD = ' + SORT_METHOD)
     items = ApplySort(items)
-    print('\nitems after ' + str(items))
 
     for itemID in items:
         itemID = str(itemID)
@@ -324,8 +320,6 @@ def ApplySort(obj):
     reverse = False
 
     global SORT_METHOD, SORT_ATTR
-
-    print('Beginning sort!\norder: {}\ntype:{}'.format(SORT_METHOD, SORT_ATTR))
 
     if SORT_METHOD == 'Descending':
         reverse = True

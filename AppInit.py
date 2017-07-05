@@ -39,6 +39,7 @@ class HasBase():
         if self.size_hint: self.base.size_hint = new_val
 
 
+
 class Size():
     def __init__(self, **kwargs):
         # Stylization ====================================================================
