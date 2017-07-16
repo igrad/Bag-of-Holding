@@ -193,7 +193,8 @@ class Menu(HasBase):
         self.base = RelativeLayout(pos = Size.MENU.pos, size_hint = Size.MENU.hpair)
         self.title = Label(size_hint = Size.MENU_TITLE.hpair, pos = Size.MENU_TITLE.pos,
             font_name = FONT_BASK, font_size = Size.FONT_SIZE_A, color = WHITE)
-        self.bag = Image(size_hint = Size.MENU_BTN_BAG.hpair, pos = Size.MENU_BTN_BAG.pos,
+        self.bag = Image(size_hint = Size.MENU_BTN_BAG.hpair,
+            pos = Size.MENU_BTN_BAG.pos,
             source = 'images/IMG_BAGS.png', keep_ratio = False, allow_stretch = True)
         self.bagBtn = Button(size_hint = Size.MENU_BTN_BAG.hpair,
             pos = Size.MENU_BTN_BAG.pos, background_color = CLEAR)
@@ -211,11 +212,14 @@ class Tabs(HasBase):
         self.base = BoxLayout(size_hint = Size.TABS.hpair, pos = Size.TABS.pos,
             orientation = 'horizontal')
         self.new = Button(size_hint = Size.TABS_BTN.hpair, text = 'NEW', color = WHITE,
-            font_name = FONT_BASK, font_size = Size.FONT_SIZE_A, background_color = CLEAR)
-        self.sort = Button(size_hint = Size.TABS_BTN.hpair, text = 'SORT', color = WHITE,
-            font_name = FONT_BASK, font_size = Size.FONT_SIZE_A, background_color = CLEAR)
-        self.view = Button(size_hint = Size.TABS_BTN.hpair, text = 'VIEW', color = WHITE,
-            font_name = FONT_BASK, font_size = Size.FONT_SIZE_A, background_color = CLEAR)
+            font_name = FONT_BASK, font_size = Size.FONT_SIZE_A,
+            background_color = CLEAR)
+        self.sort = Button(size_hint = Size.TABS_BTN.hpair, text = 'SORT',
+            color = WHITE, font_name = FONT_BASK, font_size = Size.FONT_SIZE_A,
+            background_color = CLEAR)
+        self.view = Button(size_hint = Size.TABS_BTN.hpair, text = 'VIEW',
+            color = WHITE, font_name = FONT_BASK, font_size = Size.FONT_SIZE_A,
+            background_color = CLEAR)
 
 
 
@@ -249,6 +253,7 @@ class Cont(HasBase):
 class BagPick(HasBase):
     def __init__(self, Size, ScreenPos, **kwargs):
         # Bag selection menu
+        self.is_open = False
         self.base = RelativeLayout(size_hint = Size.BAGPICK.hpair, pos = ScreenPos.OFF)
         self.back = Button(pos = Size.BAGPICK_BACK.pos,
             size_hint = Size.BAGPICK_BACK.hpair, background_normal = IMG_BLACK,
@@ -270,22 +275,25 @@ class BagPick(HasBase):
 class Pick(HasBase):
     def __init__(self, Size, ScreenPos, **kwargs):
         # Selected Item
+        self.is_open = False
+
         self.base = RelativeLayout(size_hint = Size.PICK.hpair, pos = ScreenPos.OFF)
         self.halt = Button(pos = Size.PICK_HALT.pos, size_hint = Size.PICK_HALT.hpair,
             background_disabled_normal = IMG_BLACK, opacity = 0.5, disabled = True)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
             allow_stretch = True, keep_ratio = False)
         self.widges = RelativeLayout(size_hint = FILLS, pos = ZEROS)
-        self.name = TextInput(size_hint = Size.PICK_NAME.hpair, pos = Size.PICK_NAME.pos,
-            font_name = FONT_BASK, font_size = Size.FONT_SIZE_A, foreground_color = BLACK,
+        self.name = TextInput(size_hint = Size.PICK_NAME.hpair,
+            pos = Size.PICK_NAME.pos, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_A, foreground_color = BLACK,
             border = [2,2,2,2], write_tab = False, multiline = False,
             cursor_color = BLACK, background_normal = 'images/IMG_1x1BORDER.png',
             hint_text = 'Item Name', background_active = 'images/IMG_1x1BORDER.png')
         self.icon = Button(size_hint = Size.PICK_ICON.hpair, pos = Size.PICK_ICON.pos,
             background_normal = 'images/blankIcon.png',
             background_down = 'images/blankIcon.png', border = [0,0,0,0])
-        self.misc = BoxLayout(size_hint = Size.PICK_MISC.hpair, pos = Size.PICK_MISC.pos,
-            orientation = 'horizontal')
+        self.misc = BoxLayout(size_hint = Size.PICK_MISC.hpair,
+            pos = Size.PICK_MISC.pos, orientation = 'horizontal')
         self.qty_L = AnchorLabel(pos = Size.PICK_QTY.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C, color = BLACK, text = 'Quantity: ',
             anchor_x = 'right', halign = 'right', valign = 'bottom')
@@ -307,13 +315,15 @@ class Pick(HasBase):
             foreground_color = BLACK, background_normal = 'images/IMG_1x1BORDER.png',
             background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
             write_tab = False, multiline = False, cursor_color = BLACK)
-        self.tags = TextInput(size_hint = Size.PICK_TAGS.hpair, pos = Size.PICK_TAGS.pos,
-            font_name = FONT_BASK, font_size = Size.FONT_SIZE_C, foreground_color = BLACK,
+        self.tags = TextInput(size_hint = Size.PICK_TAGS.hpair,
+            pos = Size.PICK_TAGS.pos, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_C, foreground_color = BLACK,
             background_normal = 'images/IMG_1x1BORDER.png',
             background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
             cursor_color = BLACK)
-        self.desc = TextInput(size_hint = Size.PICK_DESC.hpair, pos = Size.PICK_DESC.pos,
-            font_name = FONT_BASK, font_size = Size.FONT_SIZE_C, foreground_color = BLACK,
+        self.desc = TextInput(size_hint = Size.PICK_DESC.hpair,
+            pos = Size.PICK_DESC.pos, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_C, foreground_color = BLACK,
             background_normal = 'images/IMG_1x1BORDER.png',
             background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
             cursor_color = BLACK)
@@ -329,13 +339,15 @@ class Pick(HasBase):
 class Icon(HasBase):
     def __init__(self, Size, ScreenPos, **kwargs):
         # Icon selection
+        self.is_open = False
         self.base = RelativeLayout(size_hint = Size.ICON.hpair, pos = ScreenPos.FAR_OFF)
         self.halt = Button(pos = Size.ICON_HALT.pos, size_hint = Size.ICON_HALT.hpair,
             background_disabled_normal = IMG_BLACK, opacity = 0.5, disabled = True)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
             allow_stretch = True, keep_ratio = False)
         self.scroll = ScrollView(size_hint = Size.ICON_SCROLL.hpair,
-            pos = Size.ICON_SCROLL.pos, do_scroll_x = False, bar_width = Size.ICON_BAR.w)
+            pos = Size.ICON_SCROLL.pos, do_scroll_x = False,
+            bar_width = Size.ICON_BAR.w)
         self.grid = GridLayout(size_hint = (1.0, None), cols = 4,
             row_default_height = Size.ICON_HEIGHT.h, row_force_default = True,
             col_default_width = Size.ICON_HEIGHT.w, col_force_default = True)
@@ -351,6 +363,7 @@ class Icon(HasBase):
 class New(HasBase):
     def __init__(self, Size, ScreenPos, **kwargs):
         # Tab drop: New
+        self.is_open = False
         self.base = RelativeLayout(size_hint = Size.DROP_NEW.hpair,
             pos = ScreenPos.OFF)
         self.halt = Button(size_hint = Size.DROP_NEW_HALT.hpair,
@@ -358,7 +371,8 @@ class New(HasBase):
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_DROP_NEW.png',
             allow_stretch = True, keep_ratio = False)
         self.name = TextInput(size_hint = Size.NEW_NAME.hpair, hint_text = 'Name',
-            pos = Size.NEW_NAME.pos, font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
+            pos = Size.NEW_NAME.pos, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_C,
             write_tab = False, multiline = False)
         self.icon = Button(size_hint = Size.NEW_ICON.hpair, pos = Size.NEW_ICON.pos,
             background_normal = 'images/blankIcon.png',
@@ -367,23 +381,26 @@ class New(HasBase):
             pos = Size.NEW_QTY.pos, font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             write_tab = False, multiline = False)
         self.qty_L = AnchorLabel(size_hint = Size.NEW_QTY_L.hpair, text = 'Quantity',
-            pos = Size.NEW_QTY_L.pos, font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
+            pos = Size.NEW_QTY_L.pos, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_C,
             anchor_x = 'right', color = BLACK, halign = 'right')
         self.weight = TextInput(size_hint = Size.NEW_WEIGHT.hpair, hint_text = 'Weight',
             pos = Size.NEW_WEIGHT.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C, write_tab = False, multiline = False)
-        self.weight_L = AnchorLabel(size_hint = Size.NEW_WEIGHT_L.hpair, text = 'Weight',
-            pos = Size.NEW_WEIGHT_L.pos, font_name = FONT_BASK,
+        self.weight_L = AnchorLabel(size_hint = Size.NEW_WEIGHT_L.hpair,
+            text = 'Weight', pos = Size.NEW_WEIGHT_L.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C, anchor_x = 'right', color = BLACK,
             halign = 'right')
         self.val = TextInput(size_hint = Size.NEW_VAL.hpair, hint_text = 'Value',
             pos = Size.NEW_VAL.pos, font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             write_tab = False, multiline = False)
         self.val_L = AnchorLabel(size_hint = Size.NEW_VAL_L.hpair, text = 'Value',
-            pos = Size.NEW_VAL_L.pos, font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
+            pos = Size.NEW_VAL_L.pos, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_C,
             anchor_x = 'right', color = BLACK, halign = 'right')
         self.tags = TextInput(size_hint = Size.NEW_TAGS.hpair, hint_text = 'Tags',
-            pos = Size.NEW_TAGS.pos, font_name = FONT_BASK, font_size = Size.FONT_SIZE_C)
+            pos = Size.NEW_TAGS.pos, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_C)
         self.desc = TextInput(size_hint = Size.NEW_DESC.hpair,
             hint_text = 'Item description', pos = Size.NEW_DESC.pos,
             font_name = FONT_BASK, font_size = Size.FONT_SIZE_C)
@@ -391,13 +408,16 @@ class New(HasBase):
             pos = Size.NEW_CANCEL.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C)
         self.save = Button(size_hint = Size.NEW_SAVE.hpair, text = 'SAVE',
-            pos = Size.NEW_SAVE.pos, font_name = FONT_BASK, font_size = Size.FONT_SIZE_C)
+            pos = Size.NEW_SAVE.pos, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_C)
 
 
 
 class Sort(HasBase):
     def __init__(self, Size, ScreenPos, **kwargs):
-        self.base = RelativeLayout(size_hint = Size.DROP_SORT.hpair, pos = ScreenPos.OFF)
+        self.is_open = False
+        self.base = RelativeLayout(size_hint = Size.DROP_SORT.hpair,
+            pos = ScreenPos.OFF)
         self.halt = Button(size_hint = Size.DROP_SORT_HALT.hpair,
             pos = Size.DROP_SORT_HALT.pos, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_DROP_SORT.png',
@@ -406,8 +426,8 @@ class Sort(HasBase):
             pos = Size.SORT_TYPE_L.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C, anchor_x = 'left', anchor_y = 'bottom',
             color = BLACK, halign = 'left')
-        self.type = BoxLayout(size_hint = Size.SORT_TYPE.hpair, pos = Size.SORT_TYPE.pos,
-            orientation = 'vertical')
+        self.type = BoxLayout(size_hint = Size.SORT_TYPE.hpair,
+            pos = Size.SORT_TYPE.pos, orientation = 'vertical')
         self.type_name = AnchorToggleButton(size_hint = Size.SORT_TYPE_BTN.hpair,
             text = 'Name', font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             color = BLACK, anchor_x = 'left', halign = 'left', group = 'sortAttr',
@@ -443,7 +463,9 @@ class Sort(HasBase):
 
 class View(HasBase):
     def __init__(self, Size, ScreenPos, **kwargs):
-        self.base = RelativeLayout(size_hint = Size.DROP_VIEW.hpair, pos = ScreenPos.OFF)
+        self.is_open = False
+        self.base = RelativeLayout(size_hint = Size.DROP_VIEW.hpair,
+            pos = ScreenPos.OFF)
         self.halt = Button(size_hint = Size.DROP_VIEW_HALT.hpair,
             pos = Size.DROP_VIEW_HALT.pos, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_DROP_VIEW.png',

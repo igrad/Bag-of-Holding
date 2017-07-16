@@ -27,15 +27,6 @@ class BagOfHolding(RelativeLayout):
         self.AddChildren()
 
         # Set window statuses
-        bagPick.is_open = False
-
-        pick.is_open = False
-        icon.is_open = False
-
-        dnew.is_open = False
-        dsort.is_open = False
-        dview.is_open = False
-
         dnew.icon.selected = None
 
         # Set view types
