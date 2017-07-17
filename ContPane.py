@@ -120,8 +120,6 @@ def FilterItemViews(filterPart):
 
             evalStrings.append(typedPart0 + filterPart[2] + typedPart1)
 
-            #print("evalStr == " + typedPart0 + filterPart[2] + typedPart1)
-
         passed = []
         for key in ITEMS.keys():
             for evalStr in evalStrings:

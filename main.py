@@ -52,6 +52,8 @@ class BagOfHolding(RelativeLayout):
 
 
     def SetBinds(self):
+        LogMsg('Setting widget binds')
+
         # TABS
         tabs.new.bind(on_press = OpenNew)
         tabs.sort.bind(on_press = OpenSort)
@@ -91,9 +93,12 @@ class BagOfHolding(RelativeLayout):
         # ICON
         icon.cancel.bind(on_press = OpenIconMenu)
         icon.save.bind(on_press = SaveIcon)
+        LogMsg('Widget binds set!')
 
 
     def AddChildren(self):
+        LogMsg('Creating widget hierarchy')
+
         # Background
         base.screenMain.add_widget(base.BG)
 
@@ -160,8 +165,8 @@ class BagOfHolding(RelativeLayout):
 
 
 class Builder(App):
-    #mode = "PROD"
-    mode = "DEV"
+    mode = "PROD"
+    #mode = "DEV"
 
 
     def build_config(self, config):
@@ -169,10 +174,8 @@ class Builder(App):
 
         self.title = "Bag of Holding"
 
-        global XSCALE, YSCALE
-
-        height = int(768 / YSCALE)
-        width = int(432 / XSCALE)
+        height = 768
+        width = 432
 
         Config.set('graphics', 'borderless', 1)
         Config.set('graphics', 'resizable', 0)
@@ -196,6 +199,29 @@ class Builder(App):
         Config.write()
 
         LogMsg('Window size found: {}'.format(Window.size))
+
+        # Build widgets
+        LogMsg('Resizing widget groups')
+
+        scale.X = 432/Window.size[0]
+        scale.Y = 768/Window.size[1]
+
+
+        global size, screenPos, base, menu, tabs, search, cont, bagPick, bagOpen, pick, icon, dnew, dsort, dview, FONT_SIZE_A, FONT_SIZE_B, FONT_SIZE_C, FONT_SIZE_D, FONT_SIZE_HEAD
+        size.__init__()
+        screenPos.__init__(size)
+        base.__init__(size, screenPos)
+        menu.__init__(size, screenPos)
+        tabs.__init__(size, screenPos)
+        search.__init__(size, screenPos)
+        cont.__init__(size, screenPos)
+        bagPick.__init__(size, screenPos)
+        bagOpen.__init__(size, screenPos)
+        pick.__init__(size, screenPos)
+        icon.__init__(size, screenPos)
+        dnew.__init__(size, screenPos)
+        dsort.__init__(size, screenPos)
+        dview.__init__(size, screenPos)
 
 
     def build(self):

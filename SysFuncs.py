@@ -36,8 +36,6 @@ from StencilLayout import StencilLayout
 NONES = (None, None)
 ZEROS = (0, 0)
 FILLS = (1, 1)
-XSCALE = 0.75
-YSCALE = 0.75
 
 #GLOBAL VARIABLES
 bagsStore = JsonStore('bags_data.json')
@@ -59,12 +57,18 @@ NOOBIE_TIPS = True
 
 
 # GLOBAL CLASSES
+class SCALE():
+    def __init__(self, **kwargs):
+        self.X = 0.75
+        self.Y = 0.75
+
+
 class SizeMap():
     def __init__(self, x, y, w, h, parentPair):
-        self.x = int(x / XSCALE)
-        self.y = int(y / YSCALE)
-        self.w = int(w / XSCALE)
-        self.h = int(h / YSCALE)
+        self.x = int(x / scale.X)
+        self.y = int(y / scale.Y)
+        self.w = int(w / scale.X)
+        self.h = int(h / scale.Y)
 
         self.pos = (self.x, self.y)
         self.pair = (self.w, self.h)
@@ -102,3 +106,6 @@ def LogErr(arg1):
 
 def LogExc(arg1):
     print('\n[LOG_EXC] [:::' + str(clock())[0:6] + ':::] EXCEPTION in ' + str(arg1) + '\n' + str(format_exc()))
+
+
+scale = SCALE()

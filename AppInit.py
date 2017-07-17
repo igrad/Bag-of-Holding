@@ -43,7 +43,7 @@ class HasBase():
 class Size():
     def __init__(self, **kwargs):
         # Stylization ====================================================================
-        self.MAX = max(XSCALE, YSCALE)
+        self.MAX = max(scale.X, scale.Y)
         self.FONT_SIZE_A = 32/self.MAX
         self.FONT_SIZE_B = 20/self.MAX
         self.FONT_SIZE_C = 16/self.MAX
@@ -51,8 +51,8 @@ class Size():
         self.FONT_SIZE_HEAD = 48/self.MAX
 
         # Sizes ==========================================================================
-        self.APP_W = 432/XSCALE
-        self.APP_H = 768/YSCALE
+        self.APP_W = 432/scale.X
+        self.APP_H = 768/scale.Y
         self.FRAME = SizeMap(0, 0, 432, 768, (self.APP_W, self.APP_H))
 
         # MAIN
@@ -82,6 +82,13 @@ class Size():
         self.BAGPICK_ITEM_NAME = SizeMap(0, 24, 344, 40, self.BAGPICK_ITEM.pair)
         self.BAGPICK_ITEM_MISC = SizeMap(0, 4, 344, 20, self.BAGPICK_ITEM.pair)
 
+        # BAGOPEN MENU
+        self.BAGOPEN = SizeMap(36, 106, 360, 556, self.FRAME.pair)
+        self.BAGOPEN_HALT = SizeMap(-36, -106, 432, 768, self.BAGOPEN.pair)
+        self.BAGOPEN_NAME = SizeMap(8, 524, 344, 32, self.BAGOPEN.pair)
+        self.BAGOPEN_BTNS = SizeMap(8, 8, 344, 508, self.BAGOPEN.pair)
+        self.BAGOPEN_BTN = SizeMap(0, 0, 344, 32, self.BAGOPEN_BTNS.pair)
+
         # SELECTED ITEM
         # Note: spacing should be (20, 20, 392, 516)
         self.PICK = SizeMap(0, 105, 432, 557, self.FRAME.pair)
@@ -97,8 +104,9 @@ class Size():
         self.PICK_OPTS = SizeMap(8, 550, 26, 26, self.PICK.pair)
         self.PICK_X = SizeMap(396, 550, 26, 26, self.PICK.pair)
 
-        self.ICON = SizeMap(36, 105, 360, 556, self.FRAME.pair)
-        self.ICON_HALT = SizeMap(-36, -105, 432, 768, self.ICON.pair)
+        # ICON MENU
+        self.ICON = SizeMap(36, 106, 360, 556, self.FRAME.pair)
+        self.ICON_HALT = SizeMap(-36, -106, 432, 768, self.ICON.pair)
         self.ICON_SCROLL = SizeMap(20, 60, 320, 476, self.ICON.pair)
         self.ICON_BAR = SizeMap(0, 0, 4, 0, self.ICON_SCROLL.pair)
         self.ICON_GRID = SizeMap(0, 0, 320, 476, self.ICON_SCROLL.pair)
@@ -270,6 +278,39 @@ class BagPick(HasBase):
         self.grid = GridLayout(size_hint = (1.0, None), cols = 1,
             row_default_height = Size.BAGPICK_ITEM.h, row_force_default = True)
 
+
+
+class BagOpen(HasBase):
+    def __init__(self, Size, ScreenPos, **kwargs):
+        # Bag open/edit menu
+        self.is_open = False
+        self.base = RelativeLayout(size_hint = Size.BAGOPEN.hpair, pos = ScreenPos.OFF)
+        self.halt = Button(size_hint = Size.BAGOPEN_HALT.hpair,
+            pos = Size.BAGOPEN_HALT.pos, background_normal = IMG_BLACK,
+            background_down = IMG_BLACK, opacity = 0.5)
+        self.BG = Image(size_hint = FILLS, source = 'images/IMG_BAG_OPEN_BG.png',
+            allow_stretch = True, keep_ratio = False)
+        self.name = Label(size_hint = Size.BAGOPEN_NAME.hpair,
+            pos = Size.BAGOPEN_NAME.pos, text = 'Bag Name', font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_A)
+        self.btns = BoxLayout(size_hint = Size.BAGOPEN_BTNS.hpair,
+            pos = Size.BAGOPEN_BTNS.pos, orientation = 'vertical')
+        self.weight = AnchorButton(size_hint = Size.BAGOPEN_BTN.hpair,
+            text = 'Set weight system', color = WHITE, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_A, valign = 'bottom',
+            background_img = 'images/IMG_BAG_OPEN_BTN.png')
+        self.currency = AnchorButton(size_hint = Size.BAGOPEN_BTN.hpair,
+            text = 'Set currency system', color = WHITE, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_A, valign = 'bottom',
+            background_img = 'images/IMG_BAG_OPEN_BTN.png')
+        self.delete = AnchorButton(size_hint = Size.BAGOPEN_BTN.hpair,
+            text = 'Delete bag', color = WHITE, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_A, valign = 'bottom',
+            background_img = 'images/IMG_BAG_OPEN_BTN.png')
+        self.done = AnchorButton(size_hint = Size.BAGOPEN_BTN.hpair,
+            text = 'Save', color = WHITE, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_A, valign = 'bottom',
+            background_img = 'images/IMG_BAG_OPEN_BTN.png')
 
 
 class Pick(HasBase):
@@ -496,6 +537,7 @@ class View(HasBase):
             pos = Size.VIEW_CARD_CHECK.pos, source = VIEW_CHECK_INACTIVE)
 
 
+LogMsg('Creating widget groups...')
 
 size = Size()
 screenPos = ScreenPos(size)
@@ -505,6 +547,7 @@ tabs = Tabs(size, screenPos)
 search = Search(size, screenPos)
 cont = Cont(size, screenPos)
 bagPick = BagPick(size, screenPos)
+bagOpen = BagOpen(size, screenPos)
 pick = Pick(size, screenPos)
 icon = Icon(size, screenPos)
 dnew = New(size, screenPos)
@@ -516,3 +559,4 @@ FONT_SIZE_B = size.FONT_SIZE_B
 FONT_SIZE_C = size.FONT_SIZE_C
 FONT_SIZE_D = size.FONT_SIZE_D
 FONT_SIZE_HEAD = size.FONT_SIZE_HEAD
+print(str(size))
