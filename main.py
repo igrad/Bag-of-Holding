@@ -139,7 +139,7 @@ class BagOfHolding(RelativeLayout):
         # Bags menu
         bagPick.scroll.add_widget(bagPick.grid)
 
-        for widge in [bagPick.back, bagPick.halt, bagPick.BG, bagPick.name, bagPick.scroll]:
+        for widge in [bagPick.back, bagPick.halt, bagPick.BG, bagPick.name, bagPick.scroll, bagPick.newBag]:
             bagPick.base.add_widget(widge)
 
         # Selected Item
@@ -174,8 +174,8 @@ class Builder(App):
 
         self.title = "Bag of Holding"
 
-        height = 768
-        width = 432
+        height = int(768/scale.Y)
+        width = int(432/scale.X)
 
         Config.set('graphics', 'borderless', 1)
         Config.set('graphics', 'resizable', 0)
@@ -195,6 +195,10 @@ class Builder(App):
             Config.set('graphics', 'rotation', 90)
             Config.set('graphics', 'fullscreen', 'auto')
 
+
+        scale.X = 432/Window.size[0]
+        scale.Y = 768/Window.size[1]
+
         Config.set('kivy', 'window_icon', 'images/icon.png')
         Config.write()
 
@@ -202,10 +206,6 @@ class Builder(App):
 
         # Build widgets
         LogMsg('Resizing widget groups')
-
-        scale.X = 432/Window.size[0]
-        scale.Y = 768/Window.size[1]
-
 
         global size, screenPos, base, menu, tabs, search, cont, bagPick, bagOpen, pick, icon, dnew, dsort, dview, FONT_SIZE_A, FONT_SIZE_B, FONT_SIZE_C, FONT_SIZE_D, FONT_SIZE_HEAD
         size.__init__()

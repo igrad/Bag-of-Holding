@@ -76,11 +76,12 @@ class Size():
         self.BAGPICK = SizeMap(0, 0, 380, 768, self.FRAME.pair)
         self.BAGPICK_HALT = SizeMap(0, 0, 368, 768, self.BAGPICK.pair)
         self.BAGPICK_BACK = SizeMap(360, 0, 72, 768, self.BAGPICK.pair)
-        self.BAGPICK_NAME = SizeMap(7, 697, 344, 56, self.BAGPICK.pair)
-        self.BAGPICK_SCROLL = SizeMap(7, 19, 344, 676, self.BAGPICK.pair)
+        self.BAGPICK_NAME = SizeMap(8, 698, 344, 56, self.BAGPICK.pair)
+        self.BAGPICK_SCROLL = SizeMap(8, 60, 344, 636, self.BAGPICK.pair)
         self.BAGPICK_ITEM = SizeMap(0, 0, 344, 64, self.BAGPICK_SCROLL.pair)
         self.BAGPICK_ITEM_NAME = SizeMap(0, 24, 344, 40, self.BAGPICK_ITEM.pair)
         self.BAGPICK_ITEM_MISC = SizeMap(0, 4, 344, 20, self.BAGPICK_ITEM.pair)
+        self.BAGPICK_NEW = SizeMap(8, 20, 344, 32, self.BAGPICK.pair)
 
         # BAGOPEN MENU
         self.BAGOPEN = SizeMap(36, 106, 360, 556, self.FRAME.pair)
@@ -277,6 +278,9 @@ class BagPick(HasBase):
             pos = Size.BAGPICK_SCROLL.pos, do_scroll_x = False, bar_width = 0)
         self.grid = GridLayout(size_hint = (1.0, None), cols = 1,
             row_default_height = Size.BAGPICK_ITEM.h, row_force_default = True)
+        self.newBag = AnchorButton(size_hint = Size.BAGPICK_NEW.hpair,
+            pos = Size.BAGPICK_NEW.pos, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_D, text = 'New Bag')
 
 
 
