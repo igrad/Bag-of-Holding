@@ -264,11 +264,9 @@ def SelectItem(btn):
     '''Called when an ItemView is called for display in the PICK screen.'''
 
     if btn == 'picknoupdate':
-        pick.is_open = True
-        pick.pos = PICK.pos
+        pick.open()
     elif (pick.pos == list(size.PICK.pos)) or (btn == None):
-        pick.is_open = False
-        pick.pos = screenPos.OFF
+        pick.close()
 
         args = dict()
         if pick.name.text != str(ITEMS[pick.itemID].name):
@@ -290,7 +288,6 @@ def SelectItem(btn):
             ITEMS[pick.itemID].UpdateItem(**args)
             ITEMVIEWS[str(pick.itemID)].UpdateItemView(**args)
     else:
-        pick.is_open = True
 
         if type(btn) != int:
             pick.itemID = btn.itemID
@@ -310,7 +307,7 @@ def SelectItem(btn):
         except:
             pick.icon.selected = None
 
-        pick.pos = size.PICK.pos
+        pick.open()
 
 
 def ApplySort(obj):

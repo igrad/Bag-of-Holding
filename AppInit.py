@@ -18,6 +18,7 @@ IMG_WHITE = 'images/IMG_WHITE.png'
 
 class HasBase():
     def __init__(self, **kwargs):
+        super(HasBase, self).__init__()
         self.base = False
 
     # POS
@@ -37,6 +38,23 @@ class HasBase():
     @size_hint.setter
     def size_hint(self, new_val):
         if self.size_hint: self.base.size_hint = new_val
+
+
+
+class Opens():
+    def open(self):
+        if self.pos_on != None:
+            self.is_open = True
+            self.base.pos = self.pos_on
+        else:
+            return 'No open position specified!'
+
+    def close(self):
+        if self.pos_off != None:
+            self.is_open = False
+            self.base.pos = self.pos_off
+        else:
+            return 'No close position specified!'
 
 
 
@@ -259,10 +277,13 @@ class Cont(HasBase):
 
 
 
-class BagPick(HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+class BagPick(Opens, HasBase):
+    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
         # Bag selection menu
+        self.pos_on = pos_on
+        self.pos_off = pos_off
         self.is_open = False
+
         self.base = RelativeLayout(size_hint = Size.BAGPICK.hpair, pos = ScreenPos.OFF)
         self.back = Button(pos = Size.BAGPICK_BACK.pos,
             size_hint = Size.BAGPICK_BACK.hpair, background_normal = IMG_BLACK,
@@ -284,10 +305,13 @@ class BagPick(HasBase):
 
 
 
-class BagOpen(HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+class BagOpen(Opens, HasBase):
+    def __init__(self, pos_on, pos_off, Size, ScreenPos,**kwargs):
         # Bag open/edit menu
+        self.pos_on = pos_on
+        self.pos_off = pos_off
         self.is_open = False
+
         self.base = RelativeLayout(size_hint = Size.BAGOPEN.hpair, pos = ScreenPos.OFF)
         self.halt = Button(size_hint = Size.BAGOPEN_HALT.hpair,
             pos = Size.BAGOPEN_HALT.pos, background_normal = IMG_BLACK,
@@ -317,9 +341,11 @@ class BagOpen(HasBase):
             background_img = 'images/IMG_BAG_OPEN_BTN.png')
 
 
-class Pick(HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+class Pick(Opens, HasBase):
+    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
         # Selected Item
+        self.pos_on = pos_on
+        self.pos_off = pos_off
         self.is_open = False
 
         self.base = RelativeLayout(size_hint = Size.PICK.hpair, pos = ScreenPos.OFF)
@@ -381,10 +407,13 @@ class Pick(HasBase):
 
 
 
-class Icon(HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+class Icon(Opens, HasBase):
+    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
         # Icon selection
+        self.pos_on = pos_on
+        self.pos_off = pos_off
         self.is_open = False
+
         self.base = RelativeLayout(size_hint = Size.ICON.hpair, pos = ScreenPos.FAR_OFF)
         self.halt = Button(pos = Size.ICON_HALT.pos, size_hint = Size.ICON_HALT.hpair,
             background_disabled_normal = IMG_BLACK, opacity = 0.5, disabled = True)
@@ -405,10 +434,13 @@ class Icon(HasBase):
 
 
 
-class New(HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+class New(Opens, HasBase):
+    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
         # Tab drop: New
+        self.pos_on = pos_on
+        self.pos_off = pos_off
         self.is_open = False
+
         self.base = RelativeLayout(size_hint = Size.DROP_NEW.hpair,
             pos = ScreenPos.OFF)
         self.halt = Button(size_hint = Size.DROP_NEW_HALT.hpair,
@@ -458,9 +490,12 @@ class New(HasBase):
 
 
 
-class Sort(HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+class Sort(Opens, HasBase):
+    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
+        self.pos_on = pos_on
+        self.pos_off = pos_off
         self.is_open = False
+
         self.base = RelativeLayout(size_hint = Size.DROP_SORT.hpair,
             pos = ScreenPos.OFF)
         self.halt = Button(size_hint = Size.DROP_SORT_HALT.hpair,
@@ -506,9 +541,12 @@ class Sort(HasBase):
 
 
 
-class View(HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+class View(Opens, HasBase):
+    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
+        self.pos_on = pos_on
+        self.pos_off = pos_off
         self.is_open = False
+
         self.base = RelativeLayout(size_hint = Size.DROP_VIEW.hpair,
             pos = ScreenPos.OFF)
         self.halt = Button(size_hint = Size.DROP_VIEW_HALT.hpair,
@@ -550,17 +588,16 @@ menu = Menu(size, screenPos)
 tabs = Tabs(size, screenPos)
 search = Search(size, screenPos)
 cont = Cont(size, screenPos)
-bagPick = BagPick(size, screenPos)
-bagOpen = BagOpen(size, screenPos)
-pick = Pick(size, screenPos)
-icon = Icon(size, screenPos)
-dnew = New(size, screenPos)
-dsort = Sort(size, screenPos)
-dview = View(size, screenPos)
+bagPick = BagPick(size.BAGPICK.pos, screenPos.OFF, size, screenPos)
+bagOpen = BagOpen(size.BAGOPEN.pos, screenPos.OFF, size, screenPos)
+pick = Pick(size.PICK.pos, screenPos.OFF, size, screenPos)
+icon = Icon(size.ICON.pos, screenPos.FAR_OFF, size, screenPos)
+dnew = New(size.DROP_NEW.pos, screenPos.OFF, size, screenPos)
+dsort = Sort(size.DROP_SORT.pos, screenPos.OFF, size, screenPos)
+dview = View(size.DROP_VIEW.pos, screenPos.OFF, size, screenPos)
 
 FONT_SIZE_A = size.FONT_SIZE_A
 FONT_SIZE_B = size.FONT_SIZE_B
 FONT_SIZE_C = size.FONT_SIZE_C
 FONT_SIZE_D = size.FONT_SIZE_D
 FONT_SIZE_HEAD = size.FONT_SIZE_HEAD
-print(str(size))

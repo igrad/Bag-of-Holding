@@ -12,13 +12,11 @@ from ContPane import PopulateItemViews, HighlightView, SortChanged
 def OpenNew(obj):
     '''Open/close the New drop menu from the tabs bar.'''
     if (dnew.pos == list(size.DROP_NEW.pos)) or (obj == None):
-        dnew.pos = screenPos.OFF
+        dnew.close()
         tabs.new.color = WHITE
-        dnew.is_open = False
     else:
-        dnew.pos = size.DROP_NEW.pos
+        dnew.open()
         tabs.new.color = BLACK
-        dnew.is_open = True
 
         if dsort.is_open: OpenSort('close')
         if dview.is_open: OpenView('close')
@@ -67,13 +65,11 @@ def InputItem(obj):
 def OpenSort(obj):
     '''Open/close the Sort drop menu from the tabs bar.'''
     if (dsort.pos == list(size.DROP_SORT.pos)) or (obj == 'open'):
-        dsort.pos = screenPos.OFF
+        dsort.close()
         tabs.sort.color = WHITE
-        dsort.is_open = False
     else:
-        dsort.pos = size.DROP_SORT.pos
+        dsort.open()
         tabs.sort.color = BLACK
-        dsort.is_open = True
 
         if dnew.is_open: OpenNew('close')
         if dview.is_open: OpenView('close')
@@ -119,13 +115,11 @@ def UpdateSort(obj):
 #=======================================================================================#
 def OpenView(obj):
     if (dview.pos == list(size.DROP_VIEW.pos)) or (obj == 'open'):
-        dview.pos = screenPos.OFF
+        dview.close()
         tabs.view.color = WHITE
-        dview.is_open = False
     else:
-        dview.pos = size.DROP_VIEW.pos
+        dview.open()
         tabs.view.color = BLACK
-        dview.is_open = True
 
         if dnew.is_open: OpenNew('close')
         if dsort.is_open: OpenSort('close')
