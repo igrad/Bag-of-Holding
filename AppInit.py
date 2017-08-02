@@ -104,8 +104,8 @@ class Size():
         # BAGOPEN MENU
         self.BAGOPEN = SizeMap(36, 106, 360, 556, self.FRAME.pair)
         self.BAGOPEN_HALT = SizeMap(-36, -106, 432, 768, self.BAGOPEN.pair)
-        self.BAGOPEN_NAME = SizeMap(8, 524, 344, 32, self.BAGOPEN.pair)
-        self.BAGOPEN_BTNS = SizeMap(8, 8, 344, 508, self.BAGOPEN.pair)
+        self.BAGOPEN_NAME = SizeMap(8, 516, 344, 32, self.BAGOPEN.pair)
+        self.BAGOPEN_BTNS = SizeMap(8, 8, 344, 500, self.BAGOPEN.pair)
         self.BAGOPEN_BTN = SizeMap(0, 0, 344, 32, self.BAGOPEN_BTNS.pair)
 
         # SELECTED ITEM
@@ -312,7 +312,7 @@ class BagOpen(Opens, HasBase):
         self.pos_off = pos_off
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = Size.BAGOPEN.hpair, pos = ScreenPos.OFF)
+        self.base = RelativeLayout(size_hint = Size.BAGOPEN.hpair, pos = self.pos_off)
         self.halt = Button(size_hint = Size.BAGOPEN_HALT.hpair,
             pos = Size.BAGOPEN_HALT.pos, background_normal = IMG_BLACK,
             background_down = IMG_BLACK, opacity = 0.5)
@@ -589,7 +589,7 @@ tabs = Tabs(size, screenPos)
 search = Search(size, screenPos)
 cont = Cont(size, screenPos)
 bagPick = BagPick(size.BAGPICK.pos, screenPos.OFF, size, screenPos)
-bagOpen = BagOpen(size.BAGOPEN.pos, screenPos.OFF, size, screenPos)
+bagOpen = BagOpen(size.BAGOPEN.pos, screenPos.FAR_OFF, size, screenPos)
 pick = Pick(size.PICK.pos, screenPos.OFF, size, screenPos)
 icon = Icon(size.ICON.pos, screenPos.FAR_OFF, size, screenPos)
 dnew = New(size.DROP_NEW.pos, screenPos.OFF, size, screenPos)

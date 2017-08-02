@@ -3,6 +3,7 @@ from AppInit import *
 from Bag import *
 from Currency import *
 from AnchorLabel import *
+from BagOpen import PreviewBagMenu
 
 
 def LoadBagPickGridData():
@@ -24,6 +25,7 @@ def OpenBagPickMenu(obj):
         for bagID in bagIDs:
             bpi = BagPickItem(bagID)
             bpi.bagID = bagID
+            bpi.bind(on_press = PreviewBagMenu)
             bagPick.grid.add_widget(bpi)
 
         bagPick.open()

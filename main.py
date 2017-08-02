@@ -102,17 +102,21 @@ class BagOfHolding(RelativeLayout):
         # Background
         base.screenMain.add_widget(base.BG)
 
+
         # Menu
         for widge in [menu.title, menu.bag, menu.bagBtn, menu.opts, menu.optsBtn]:
             menu.base.add_widget(widge)
+
 
         # Tabs
         for widge in [tabs.new, tabs.sort, tabs.view]:
             tabs.base.add_widget(widge)
 
+
         # New Drop Menu
         for widge in [dnew.halt, dnew.BG, dnew.name, dnew.icon, dnew.qty_L, dnew.qty, dnew.weight_L, dnew.weight, dnew.val_L, dnew.val, dnew.tags, dnew.desc, dnew.cancel, dnew.save]:
             dnew.base.add_widget(widge)
+
 
         # Sort Drop Menu
         for widge in [dsort.type_name, dsort.type_qty, dsort.type_weight, dsort.type_val]:
@@ -124,23 +128,36 @@ class BagOfHolding(RelativeLayout):
         for widge in [dsort.halt, dsort.BG, dsort.type_L, dsort.type, dsort.order_L, dsort.order]:
             dsort.base.add_widget(widge)
 
+
         # View Drop Menu
         for widge in [dview.halt, dview.BG, dview.norm, dview.norm_L, dview.norm_Check, dview.cozy, dview.cozy_L, dview.cozy_Check, dview.card, dview.card_L, dview.card_Check]:
             dview.base.add_widget(widge)
+
 
         # Search
         search.base.add_widget(search.BG)
         search.base.add_widget(search.input)
 
+
         # Contpane
         cont.scroll.add_widget(cont.list)
         cont.base.add_widget(cont.scroll)
+
 
         # Bags menu
         bagPick.scroll.add_widget(bagPick.grid)
 
         for widge in [bagPick.back, bagPick.halt, bagPick.BG, bagPick.name, bagPick.scroll, bagPick.newBag]:
             bagPick.base.add_widget(widge)
+
+
+        # Bag preview menu
+        for widge in (bagOpen.weight, bagOpen.currency, bagOpen.delete, bagOpen.done):
+            bagOpen.btns.add_widget(widge)
+
+        for widge in (bagOpen.halt, bagOpen.BG, bagOpen.name, bagOpen.btns):
+            bagOpen.base.add_widget(widge)
+
 
         # Selected Item
         for widge in [pick.qty_L, pick.qty_I, pick.weight_L, pick.weight_I, pick.val_L, pick.val_I]:
@@ -152,10 +169,13 @@ class BagOfHolding(RelativeLayout):
         for widge in [pick.halt, pick.BG, pick.widges]:
             pick.base.add_widget(widge)
 
+
+        # Icon selection screen
         icon.scroll.add_widget(icon.grid)
 
         for widge in [icon.halt, icon.BG, icon.scroll, icon.cancel, icon.save]:
             icon.base.add_widget(widge)
+
 
         # Render
         for widge in [cont.base, menu.base, search.base, dnew.base, dsort.base, dview.base, tabs.base, bagPick.base, bagOpen.base, pick.base, icon.base]:
@@ -216,7 +236,7 @@ class Builder(App):
         search.__init__(size, screenPos)
         cont.__init__(size, screenPos)
         bagPick.__init__(size.BAGPICK.pos, screenPos.OFF, size, screenPos)
-        bagOpen.__init__(size.BAGOPEN.pos, screenPos.OFF, size, screenPos)
+        bagOpen.__init__(size.BAGOPEN.pos, screenPos.FAR_OFF, size, screenPos)
         pick.__init__(size.PICK.pos, screenPos.OFF, size, screenPos)
         icon.__init__(size.ICON.pos, screenPos.OFF, size, screenPos)
         dnew.__init__(size.DROP_NEW.pos, screenPos.OFF, size, screenPos)
