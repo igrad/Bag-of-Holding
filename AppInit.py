@@ -108,6 +108,9 @@ class Size():
         self.BAGOPEN_BTNS = SizeMap(8, 8, 344, 500, self.BAGOPEN.pair)
         self.BAGOPEN_BTN = SizeMap(0, 0, 344, 32, self.BAGOPEN_BTNS.pair)
 
+        # BAGDELETE MENU
+        self.BAGDELETE = SizeMap(0, 0, 0, 0, self.FRAME.pair)
+
         # SELECTED ITEM
         # Note: spacing should be (20, 20, 392, 516)
         self.PICK = SizeMap(0, 105, 432, 557, self.FRAME.pair)
@@ -339,6 +342,17 @@ class BagOpen(Opens, HasBase):
             text = 'Save', color = WHITE, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_A, valign = 'bottom',
             background_img = 'images/IMG_BAG_OPEN_BTN.png')
+
+
+
+class BagDelete(Opens, HasBase):
+    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
+        self.pos_on = pos_on
+        self.pos_off = pos_off
+        self.is_open = False
+
+        self.base = RelativeLayout(size_hint = Size.BAGDELETE.hpair, pos = self.pos_off)
+
 
 
 class Pick(Opens, HasBase):
@@ -590,6 +604,7 @@ search = Search(size, screenPos)
 cont = Cont(size, screenPos)
 bagPick = BagPick(size.BAGPICK.pos, screenPos.OFF, size, screenPos)
 bagOpen = BagOpen(size.BAGOPEN.pos, screenPos.FAR_OFF, size, screenPos)
+bagDelete = BagDelete(size.BAGDELETE.pos, screenPos.FAR_OFF, size, screenpos)
 pick = Pick(size.PICK.pos, screenPos.OFF, size, screenPos)
 icon = Icon(size.ICON.pos, screenPos.FAR_OFF, size, screenPos)
 dnew = New(size.DROP_NEW.pos, screenPos.OFF, size, screenPos)
