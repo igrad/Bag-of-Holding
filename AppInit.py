@@ -102,11 +102,11 @@ class Size():
         self.BAGPICK_NEW = SizeMap(8, 20, 344, 32, self.BAGPICK.pair)
 
         # BAGOPEN MENU
-        self.BAGOPEN = SizeMap(36, 106, 360, 556, self.FRAME.pair)
-        self.BAGOPEN_HALT = SizeMap(-36, -106, 432, 768, self.BAGOPEN.pair)
-        self.BAGOPEN_NAME = SizeMap(8, 516, 344, 32, self.BAGOPEN.pair)
-        self.BAGOPEN_BTNS = SizeMap(8, 8, 344, 500, self.BAGOPEN.pair)
-        self.BAGOPEN_BTN = SizeMap(0, 0, 344, 32, self.BAGOPEN_BTNS.pair)
+        self.BAGOPEN = SizeMap(32, 272, 368, 224, self.FRAME.pair)
+        self.BAGOPEN_HALT = SizeMap(-36, -276, 432, 768, self.BAGOPEN.pair)
+        self.BAGOPEN_NAME = SizeMap(12, 180, 344, 32, self.BAGOPEN.pair)
+        self.BAGOPEN_BTNS = SizeMap(12, 12, 344, 160, self.BAGOPEN.pair)
+        self.BAGOPEN_BTN = SizeMap(0, 0, 344, 40, self.BAGOPEN_BTNS.pair)
 
         # BAGDELETE MENU
         self.BAGDELETE = SizeMap(0, 0, 0, 0, self.FRAME.pair)
@@ -328,20 +328,20 @@ class BagOpen(Opens, HasBase):
             pos = Size.BAGOPEN_BTNS.pos, orientation = 'vertical')
         self.weight = AnchorButton(size_hint = Size.BAGOPEN_BTN.hpair,
             text = 'Set weight system', color = WHITE, font_name = FONT_BASK,
-            font_size = Size.FONT_SIZE_A, valign = 'bottom',
-            background_img = 'images/IMG_BAG_OPEN_BTN.png')
+            font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
+            background_img = 'images/IMG_BTN_BG_1.png')
         self.currency = AnchorButton(size_hint = Size.BAGOPEN_BTN.hpair,
             text = 'Set currency system', color = WHITE, font_name = FONT_BASK,
-            font_size = Size.FONT_SIZE_A, valign = 'bottom',
-            background_img = 'images/IMG_BAG_OPEN_BTN.png')
+            font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
+            background_img = 'images/IMG_BTN_BG_2.png')
         self.delete = AnchorButton(size_hint = Size.BAGOPEN_BTN.hpair,
             text = 'Delete bag', color = WHITE, font_name = FONT_BASK,
-            font_size = Size.FONT_SIZE_A, valign = 'bottom',
-            background_img = 'images/IMG_BAG_OPEN_BTN.png')
+            font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
+            background_img = 'images/IMG_BTN_BG_3.png')
         self.done = AnchorButton(size_hint = Size.BAGOPEN_BTN.hpair,
-            text = 'Save', color = WHITE, font_name = FONT_BASK,
-            font_size = Size.FONT_SIZE_A, valign = 'bottom',
-            background_img = 'images/IMG_BAG_OPEN_BTN.png')
+            text = 'Save Changes', color = WHITE, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
+            background_img = 'images/IMG_BTN_BG_4.png')
 
 
 
@@ -604,7 +604,7 @@ search = Search(size, screenPos)
 cont = Cont(size, screenPos)
 bagPick = BagPick(size.BAGPICK.pos, screenPos.OFF, size, screenPos)
 bagOpen = BagOpen(size.BAGOPEN.pos, screenPos.FAR_OFF, size, screenPos)
-bagDelete = BagDelete(size.BAGDELETE.pos, screenPos.FAR_OFF, size, screenpos)
+bagDelete = BagDelete(size.BAGDELETE.pos, screenPos.FAR_OFF, size, screenPos)
 pick = Pick(size.PICK.pos, screenPos.OFF, size, screenPos)
 icon = Icon(size.ICON.pos, screenPos.FAR_OFF, size, screenPos)
 dnew = New(size.DROP_NEW.pos, screenPos.OFF, size, screenPos)
