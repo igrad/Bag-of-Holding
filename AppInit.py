@@ -102,14 +102,17 @@ class Size():
         self.BAGPICK_NEW = SizeMap(8, 20, 344, 32, self.BAGPICK.pair)
 
         # BAGOPEN MENU
-        self.BAGOPEN = SizeMap(32, 272, 368, 224, self.FRAME.pair)
+        self.BAGOPEN = SizeMap(32, 272, 368, 232, self.FRAME.pair)
         self.BAGOPEN_HALT = SizeMap(-36, -276, 432, 768, self.BAGOPEN.pair)
         self.BAGOPEN_NAME = SizeMap(12, 180, 344, 32, self.BAGOPEN.pair)
         self.BAGOPEN_BTNS = SizeMap(12, 12, 344, 160, self.BAGOPEN.pair)
         self.BAGOPEN_BTN = SizeMap(0, 0, 344, 40, self.BAGOPEN_BTNS.pair)
 
         # BAGDELETE MENU
-        self.BAGDELETE = SizeMap(0, 0, 0, 0, self.FRAME.pair)
+        self.BAGDELETE = SizeMap(32, 272, 368, 232, self.FRAME.pair)
+        self.BAGDELETE_LBL = SizeMap(12, 180, 344, 32, self.BAGOPEN.pair)
+        self.BAGDELETE_CANCEL = SizeMap(12, 12, 168, 40, self.BAGOPEN.pair)
+        self.BAGDELETE_CONFIRM = SizeMap(188, 12, 168, 40, self.BAGOPEN.pair)
 
         # SELECTED ITEM
         # Note: spacing should be (20, 20, 392, 516)
@@ -319,7 +322,7 @@ class BagOpen(Opens, HasBase):
         self.halt = Button(size_hint = Size.BAGOPEN_HALT.hpair,
             pos = Size.BAGOPEN_HALT.pos, background_normal = IMG_BLACK,
             background_down = IMG_BLACK, opacity = 0.5)
-        self.BG = Image(size_hint = FILLS, source = 'images/IMG_BAG_OPEN_BG.png',
+        self.BG = Image(size_hint = FILLS, source = 'images/IMG_PROMPT_SMALL.png',
             allow_stretch = True, keep_ratio = False)
         self.name = Label(size_hint = Size.BAGOPEN_NAME.hpair,
             pos = Size.BAGOPEN_NAME.pos, text = 'Bag Name', font_name = FONT_BASK,
@@ -351,7 +354,9 @@ class BagDelete(Opens, HasBase):
         self.pos_off = pos_off
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = Size.BAGDELETE.hpair, pos = self.pos_off)
+        self.base = RelativeLayout(size_hint = size.BAGDELETE.hpair, pos = self.pos_off)
+        #self.lbl = Label(size_hint = size.BAGDELETE_LBL.hpair,
+        #    pos = size.BAGDELETE_LBL.pos, )
 
 
 
@@ -591,6 +596,7 @@ class View(Opens, HasBase):
             halign = 'right')
         self.card_Check = Image(size_hint = Size.VIEW_CARD_CHECK.hpair,
             pos = Size.VIEW_CARD_CHECK.pos, source = VIEW_CHECK_INACTIVE)
+
 
 
 LogMsg('Creating widget groups...')

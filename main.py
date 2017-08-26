@@ -187,12 +187,16 @@ class BagOfHolding(RelativeLayout):
 class Builder(App):
     #mode = "PROD"
     mode = "DEV"
-
+    res = "normal"
 
     def build_config(self, config):
         LogMsg('Building Configurations...')
 
         self.title = "Bag of Holding"
+
+        if Builder.res == "small":
+            scale.Y = 1
+            scale.X = 1
 
         height = int(768/scale.Y)
         width = int(432/scale.X)
@@ -209,6 +213,9 @@ class Builder(App):
             Config.set('graphics', 'fullscreen', 0)
             Window.left = 3072
             Window.top = 28
+            if Builder.res == "small":
+                Window.left = 1366 - width
+                Window.top = 768 - height
             Config.set('graphics', 'rotation', 0)
         else:
             LogMsg('Opening App in Prod mode.')
