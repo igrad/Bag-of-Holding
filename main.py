@@ -242,13 +242,13 @@ class Builder(App):
         tabs.__init__(size, screenPos)
         search.__init__(size, screenPos)
         cont.__init__(size, screenPos)
-        bagPick.__init__(size.BAGPICK.pos, screenPos.OFF, size, screenPos)
-        bagOpen.__init__(size.BAGOPEN.pos, screenPos.FAR_OFF, size, screenPos)
-        pick.__init__(size.PICK.pos, screenPos.OFF, size, screenPos)
-        icon.__init__(size.ICON.pos, screenPos.FAR_OFF, size, screenPos)
-        dnew.__init__(size.DROP_NEW.pos, screenPos.OFF, size, screenPos)
-        dsort.__init__(size.DROP_SORT.pos, screenPos.OFF, size, screenPos)
-        dview.__init__(size.DROP_VIEW.pos, screenPos.OFF, size, screenPos)
+        bagPick.__init__(size, screenPos)
+        bagOpen.__init__(size, screenPos)
+        pick.__init__(size, screenPos)
+        icon.__init__(size, screenPos)
+        dnew.__init__(size, screenPos)
+        dsort.__init__(size, screenPos)
+        dview.__init__(size, screenPos)
 
 
     def build(self):

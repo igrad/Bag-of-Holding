@@ -21,9 +21,9 @@ class CozyView(ButtonBehavior, RelativeLayout):
 
         super(CozyView, self).__init__(size_hint = FILLS, **kwargs)
 
-        IV_ICON = size.IV_COZY_ICON
-        IV_NAME = size.IV_COZY_NAME
-        IV_MISC = size.IV_COZY_MISC
+        IV_ICON = cont.IV_COZY_ICON
+        IV_NAME = cont.IV_COZY_NAME
+        IV_MISC = cont.IV_COZY_MISC
 
         bg_var = int(self.itemID) % 3
         bg = 'images/IMG_COZYVIEW_BG_1.png'
@@ -86,9 +86,9 @@ class NormView(ButtonBehavior, RelativeLayout):
 
         super(NormView, self).__init__(size_hint = FILLS, **kwargs)
 
-        IV_ICON = size.IV_NORM_ICON
-        IV_NAME = size.IV_NORM_NAME
-        IV_MISC = size.IV_NORM_MISC
+        IV_ICON = cont.IV_NORM_ICON
+        IV_NAME = cont.IV_NORM_NAME
+        IV_MISC = cont.IV_NORM_MISC
 
         self.dBG = Image(size_hint = FILLS, source = 'images/IMG_BLACK.png',
             color = [0,0,0,0.45], allow_stretch = True, keep_ratio = False)
@@ -140,10 +140,10 @@ class NormView(ButtonBehavior, RelativeLayout):
 
 class CardView(ButtonBehavior, RelativeLayout):
     def __init__(self, itemID, **kwargs):
-        IV_ICON = size.IV_CARD_ICON
-        IV_NAME = size.IV_CARD_NAME
-        IV_MISC = size.IV_CARD_MISC
-        IV_DESC = size.IV_CARD_DESC
+        IV_ICON = cont.IV_CARD_ICON
+        IV_NAME = cont.IV_CARD_NAME
+        IV_MISC = cont.IV_CARD_MISC
+        IV_DESC = cont.IV_CARD_DESC
 
         self.itemID = str(itemID)
         self.size_hint = FILLS
