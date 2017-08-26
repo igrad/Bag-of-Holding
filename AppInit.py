@@ -74,6 +74,7 @@ class Size():
         self.Frame = SizeMap(0, 0, 432, 768, (self.APP_W, self.APP_H))
 
 
+
 class ScreenPos():
     def __init__(self, Size, **kwargs):
         self.ON = ZEROS
@@ -91,6 +92,24 @@ class Base():
         # SCREENS
         self.screenMain = RelativeLayout(pos = ScreenPos.ON, size_hint = FILLS)
         self.screenSettings = RelativeLayout(pos = ScreenPos.OFF, size_hint = FILLS)
+
+
+
+class Halt(Button):
+    def __init__(self, **kwargs):
+        self.pos = ZEROS
+        self.size_hint = size.Frame.pair
+        self.disabled = False
+        self.opacity = 0.5
+        self.background_normal = self.background_down = IMG_BLACK
+        self.background_disabled_normal = IMG_BLACK
+
+        if 'pos' in kwargs: self.pos = kwargs.pop('pos')
+        if 'size_hint' in kwargs: self.size_hint = kwargs.pop('size_hint')
+        if 'disabled' in kwargs: self.disabled = kwargs.pop('disabled')
+        if 'opacity' in kwargs: self.opacity = kwargs.pop('opacity')
+
+        super(Halt, self).__init__(**kwargs)
 
 
 
@@ -204,8 +223,7 @@ class BagPick(Opens, HasBase):
         self.back = Button(pos = self.BACK.pos,
             size_hint = self.BACK.hpair, background_normal = IMG_BLACK,
             background_down = IMG_BLACK, opacity = 0.5)
-        self.halt = Button(pos = self.HALT.pos,
-            size_hint = self.HALT.hpair, opacity = 0)
+        self.halt = Halt(size_hint = self.HALT.hpair, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_BAG_PICK_BG.png',
             allow_stretch = True, keep_ratio = False)
         self.name = Label(size_hint = self.NAME.hpair,
@@ -235,9 +253,7 @@ class BagOpen(Opens, HasBase):
         self.is_open = False
 
         self.base = RelativeLayout(size_hint = self.BAGOPEN.hpair, pos = self.pos_off)
-        self.halt = Button(size_hint = self.HALT.hpair,
-            pos = self.HALT.pos, background_normal = IMG_BLACK,
-            background_down = IMG_BLACK, opacity = 0.5)
+        self.halt = Halt(pos = self.HALT.pos)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PROMPT_SMALL.png',
             allow_stretch = True, keep_ratio = False)
         self.name = Label(size_hint = self.NAME.hpair,
@@ -268,9 +284,9 @@ class BagDelete(Opens, HasBase):
     def __init__(self, Size, ScreenPos, **kwargs):
         # BAGDELETE MENU
         self.BAGDELETE = SizeMap(32, 272, 368, 232, Size.Frame.pair)
-        self.BAGDELETE_LBL = SizeMap(12, 180, 344, 32, self.BAGDELETE.pair)
-        self.BAGDELETE_CANCEL = SizeMap(12, 12, 168, 40, self.BAGDELETE.pair)
-        self.BAGDELETE_CONFIRM = SizeMap(188, 12, 168, 40, self.BAGDELETE.pair)
+        self.LBL = SizeMap(12, 180, 344, 32, self.BAGDELETE.pair)
+        self.CANCEL = SizeMap(12, 12, 168, 40, self.BAGDELETE.pair)
+        self.CONFIRM = SizeMap(188, 12, 168, 40, self.BAGDELETE.pair)
 
         self.pos_on = self.BAGDELETE.pos
         self.pos_off = ScreenPos.FAR_OFF
@@ -303,8 +319,7 @@ class Pick(Opens, HasBase):
         self.is_open = False
 
         self.base = RelativeLayout(size_hint = self.PICK.hpair, pos = ScreenPos.OFF)
-        self.halt = Button(pos = self.HALT.pos, size_hint = self.HALT.hpair,
-            background_disabled_normal = IMG_BLACK, opacity = 0.5, disabled = True)
+        self.halt = Halt(pos = self.HALT.pos, disabled = True)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
             allow_stretch = True, keep_ratio = False)
         self.widges = RelativeLayout(size_hint = FILLS, pos = ZEROS)
@@ -380,8 +395,7 @@ class Icon(Opens, HasBase):
         self.is_open = False
 
         self.base = RelativeLayout(size_hint = self.ICON.hpair, pos = ScreenPos.FAR_OFF)
-        self.halt = Button(pos = self.HALT.pos, size_hint = self.HALT.hpair,
-            background_disabled_normal = IMG_BLACK, opacity = 0.5, disabled = True)
+        self.halt = Halt(pos = self.HALT.pos, disabled = True)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
             allow_stretch = True, keep_ratio = False)
         self.scroll = ScrollView(size_hint = self.SCROLL.hpair,
@@ -423,8 +437,7 @@ class New(Opens, HasBase):
 
         self.base = RelativeLayout(size_hint = self.NEW.hpair,
             pos = ScreenPos.OFF)
-        self.halt = Button(size_hint = self.HALT.hpair,
-            pos = self.HALT.pos, opacity = 0)
+        self.halt = Halt(size_hint = self.HALT.hpair, pos = self.HALT.pos, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_DROP_NEW.png',
             allow_stretch = True, keep_ratio = False)
         self.name = TextInput(size_hint = self.NAME.hpair, hint_text = 'Name',
@@ -487,8 +500,7 @@ class Sort(Opens, HasBase):
 
         self.base = RelativeLayout(size_hint = self.SORT.hpair,
             pos = ScreenPos.OFF)
-        self.halt = Button(size_hint = self.HALT.hpair,
-            pos = self.HALT.pos, opacity = 0)
+        self.halt = Halt(size_hint = self.HALT.hpair, pos = self.HALT.pos, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_DROP_SORT.png',
             allow_stretch = True, keep_ratio = False)
         self.type_L = AnchorLabel(size_hint = self.TYPE_L.hpair, text = 'Sort by',
@@ -550,8 +562,7 @@ class View(Opens, HasBase):
 
         self.base = RelativeLayout(size_hint = self.VIEW.hpair,
             pos = ScreenPos.OFF)
-        self.halt = Button(size_hint = self.HALT.hpair,
-            pos = self.HALT.pos, opacity = 0)
+        self.halt = Halt(size_hint = self.HALT.hpair, pos = self.HALT.pos, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_DROP_VIEW.png',
             allow_stretch = True, keep_ratio = False)
         self.norm = Button(size_hint = self.NORM.hpair, pos = self.NORM.pos,
