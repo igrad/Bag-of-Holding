@@ -11,7 +11,7 @@ from ContPane import PopulateItemViews, HighlightView, SortChanged
 #=======================================================================================#
 def OpenNew(obj):
     '''Open/close the New drop menu from the tabs bar.'''
-    if (dnew.pos == list(size.DROP_NEW.pos)) or (obj == None):
+    if (dnew.pos == list(dnew.NEW.pos)) or (obj == None):
         dnew.close()
         tabs.new.color = WHITE
     else:
@@ -29,7 +29,7 @@ def InputItem(obj):
     if dnew.name.text == '': dnew.name.text = 'Unnamed Item'
     if dnew.icon.background_normal == '': dnew.icon.background_normal = 'images/blankIcon.png'
     if dnew.icon.background_down == '': dnew.icon.background_down = 'images/blankIcon.png'
-    if dnew.Qty.text == '': dnew.Qty.text = '1'
+    if dnew.qty.text == '': dnew.qty.text = '1'
     if dnew.weight.text == '': dnew.weight.text = '1'
     if dnew.val.text == '': dnew.val.text = '1'
     if dnew.tags.text == '': dnew.tags.text = 'notag'
@@ -37,7 +37,7 @@ def InputItem(obj):
 
     # Create the item itself. Automatically added to ITEMS
     newItem = BagItem(name = dnew.name.text, icon = dnew.icon.background_normal,
-        qty = dnew.Qty.text, weight = dnew.weight.text, val = dnew.val.text,
+        qty = dnew.qty.text, weight = dnew.weight.text, val = dnew.val.text,
         tags = dnew.tags.text, desc = dnew.desc.text)
 
     # Add the item to the open bag
@@ -50,7 +50,7 @@ def InputItem(obj):
     dnew.icon.background_down = 'images/blankIcon.png'
     dnew.icon.background_normal = 'images/blankIcon.png'
     dnew.icon.selected = None
-    dnew.Qty.text = ''
+    dnew.qty.text = ''
     dnew.weight.text = ''
     dnew.val.text = ''
     dnew.tags.text = ''
@@ -64,7 +64,7 @@ def InputItem(obj):
 #=======================================================================================#
 def OpenSort(obj):
     '''Open/close the Sort drop menu from the tabs bar.'''
-    if (dsort.pos == list(size.DROP_SORT.pos)) or (obj == 'open'):
+    if (dsort.pos == list(dsort.SORT.pos)) or (obj == 'open'):
         dsort.close()
         tabs.sort.color = WHITE
     else:
@@ -114,7 +114,7 @@ def UpdateSort(obj):
 # VIEW                                                                                  #
 #=======================================================================================#
 def OpenView(obj):
-    if (dview.pos == list(size.DROP_VIEW.pos)) or (obj == 'open'):
+    if (dview.pos == list(dview.VIEW.pos)) or (obj == 'open'):
         dview.close()
         tabs.view.color = WHITE
     else:

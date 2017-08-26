@@ -33,9 +33,9 @@ def OpenBagPickMenu(obj):
 
 class BagPickItem(ButtonBehavior, RelativeLayout):
     def __init__(self, bagID, **kwargs):
-        NAME = size.BAGPICK_ITEM_NAME
-        MISC = size.BAGPICK_ITEM_MISC
-        BPI = size.BAGPICK_ITEM
+        NAME = bagPick.ITEM_NAME
+        MISC = bagPick.ITEM_MISC
+        BPI = bagPick.ITEM
 
         self.bagID = str(bagID)
         self.size_hint = FILLS

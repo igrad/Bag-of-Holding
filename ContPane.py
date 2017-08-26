@@ -58,13 +58,13 @@ def PopulateItemViews(openBagID, items = None):
 
     if bag.view == 'cozy':
         ItemView = CozyView
-        cont.list.row_default_height = size.ITEMVIEW_COZY.h
+        cont.list.row_default_height = cont.ITEMVIEW_COZY.h
     elif bag.view == 'norm':
         ItemView = NormView
-        cont.list.row_default_height = size.ITEMVIEW_NORM.h
+        cont.list.row_default_height = cont.ITEMVIEW_NORM.h
     elif bag.view == 'card':
         ItemView = CardView
-        cont.list.row_default_height = size.ITEMVIEW_CARD.h
+        cont.list.row_default_height = cont.ITEMVIEW_CARD.h
 
     # If no items were explicitly listed for this function, check the search input to see
     # if there's anything worthwhile there.
@@ -265,7 +265,7 @@ def SelectItem(btn):
 
     if btn == 'picknoupdate':
         pick.open()
-    elif (pick.pos == list(size.PICK.pos)) or (btn == None):
+    elif (pick.pos == list(pick.PICK.pos)) or (btn == None):
         pick.close()
 
         args = dict()

@@ -71,133 +71,7 @@ class Size():
         # Sizes ==========================================================================
         self.APP_W = 432/scale.X
         self.APP_H = 768/scale.Y
-        self.FRAME = SizeMap(0, 0, 432, 768, (self.APP_W, self.APP_H))
-
-        # MAIN
-        self.MENU = SizeMap(0, 670, 432, 98, self.FRAME.pair)
-        self.MENU_BTN_BAG = SizeMap(18, 18, 72, 72, self.MENU.pair)
-        self.MENU_BTN_OPTS = SizeMap(342, 18, 72, 72, self.MENU.pair)
-        self.MENU_TITLE = SizeMap(153, 34, 128, 40, self.MENU.pair)
-
-        self.TABS = SizeMap(0, 602, 432, 60, self.FRAME.pair)
-        self.TABS_BTN = SizeMap(0, 0, 144, 60, self.TABS.pair)
-
-        self.SEARCH = SizeMap(11, 563, 326, 34, self.FRAME.pair)
-        self.SEARCH_INPUT = SizeMap(34, 0, 284, 34, self.SEARCH.pair)
-
-        self.CONT = SizeMap(0, 0, 432, 557, self.FRAME.pair)
-        self.CONT_SPACE = SizeMap(0, 0, 0, 5, self.CONT.pair)
-        self.CONT_PAD = SizeMap(0, 0, 2, 2, self.CONT.pair)
-        self.CONT_SCROLL = SizeMap(0, 0, 12, 0, self.CONT.pair)
-
-        # BAGPICK MENU
-        self.BAGPICK = SizeMap(0, 0, 380, 768, self.FRAME.pair)
-        self.BAGPICK_HALT = SizeMap(0, 0, 368, 768, self.BAGPICK.pair)
-        self.BAGPICK_BACK = SizeMap(360, 0, 72, 768, self.BAGPICK.pair)
-        self.BAGPICK_NAME = SizeMap(8, 698, 344, 56, self.BAGPICK.pair)
-        self.BAGPICK_SCROLL = SizeMap(8, 60, 344, 636, self.BAGPICK.pair)
-        self.BAGPICK_ITEM = SizeMap(0, 0, 344, 64, self.BAGPICK_SCROLL.pair)
-        self.BAGPICK_ITEM_NAME = SizeMap(0, 24, 344, 40, self.BAGPICK_ITEM.pair)
-        self.BAGPICK_ITEM_MISC = SizeMap(0, 4, 344, 20, self.BAGPICK_ITEM.pair)
-        self.BAGPICK_NEW = SizeMap(8, 20, 344, 32, self.BAGPICK.pair)
-
-        # BAGOPEN MENU
-        self.BAGOPEN = SizeMap(32, 272, 368, 232, self.FRAME.pair)
-        self.BAGOPEN_HALT = SizeMap(-36, -276, 432, 768, self.BAGOPEN.pair)
-        self.BAGOPEN_NAME = SizeMap(12, 180, 344, 32, self.BAGOPEN.pair)
-        self.BAGOPEN_BTNS = SizeMap(12, 12, 344, 160, self.BAGOPEN.pair)
-        self.BAGOPEN_BTN = SizeMap(0, 0, 344, 40, self.BAGOPEN_BTNS.pair)
-
-        # BAGDELETE MENU
-        self.BAGDELETE = SizeMap(32, 272, 368, 232, self.FRAME.pair)
-        self.BAGDELETE_LBL = SizeMap(12, 180, 344, 32, self.BAGOPEN.pair)
-        self.BAGDELETE_CANCEL = SizeMap(12, 12, 168, 40, self.BAGOPEN.pair)
-        self.BAGDELETE_CONFIRM = SizeMap(188, 12, 168, 40, self.BAGOPEN.pair)
-
-        # SELECTED ITEM
-        # Note: spacing should be (20, 20, 392, 516)
-        self.PICK = SizeMap(0, 105, 432, 557, self.FRAME.pair)
-        self.PICK_HALT = SizeMap(0, -105, 432, 768, self.PICK.pair)
-        self.PICK_NAME = SizeMap(20, 476, 392, 40, self.PICK.pair)
-        self.PICK_ICON = SizeMap(138, 316, 156, 156, self.PICK.pair)
-        self.PICK_MISC = SizeMap(21, 287, 390, 27, self.PICK.pair)
-        self.PICK_QTY = SizeMap(0, 0, 130, 27, self.PICK.pair)
-        self.PICK_WEIGHT = SizeMap(0, 1, 390, 27, self.PICK_MISC.pair)
-        self.PICK_VAL = SizeMap(0, 0, 130, 27, self.PICK.pair)
-        self.PICK_TAGS = SizeMap(20, 256, 392, 27, self.PICK.pair)
-        self.PICK_DESC = SizeMap(20, 20, 392, 232, self.PICK.pair)
-        self.PICK_OPTS = SizeMap(8, 550, 26, 26, self.PICK.pair)
-        self.PICK_X = SizeMap(396, 550, 26, 26, self.PICK.pair)
-
-        # ICON MENU
-        self.ICON = SizeMap(36, 106, 360, 556, self.FRAME.pair)
-        self.ICON_HALT = SizeMap(-36, -106, 432, 768, self.ICON.pair)
-        self.ICON_SCROLL = SizeMap(20, 60, 320, 476, self.ICON.pair)
-        self.ICON_BAR = SizeMap(0, 0, 4, 0, self.ICON_SCROLL.pair)
-        self.ICON_GRID = SizeMap(0, 0, 320, 476, self.ICON_SCROLL.pair)
-        self.ICON_PAD = SizeMap(16, 16, 90, 90, self.ICON_SCROLL.pair)
-        self.ICON_SPACE = SizeMap(0, 0, 90, 16, self.ICON_SCROLL.pair)
-        self.ICON_HEIGHT = SizeMap(0, 0, 80, 80, self.ICON_SCROLL.pair)
-        self.ICON_CANCEL = SizeMap(20, 20, 156, 32, self.ICON.pair)
-        self.ICON_SAVE = SizeMap(184, 20, 156, 32, self.ICON.pair)
-
-        # DROP MENUS
-        self.DROP_NEW = SizeMap(0, 174, 422, 496, self.FRAME.pair)
-        self.DROP_SORT = SizeMap(140, 474, 288, 196, self.FRAME.pair)
-        self.DROP_VIEW = SizeMap(148, 414, 284, 256, self.FRAME.pair)
-        self.DROP_NEW_HALT = SizeMap(4, 8, 408, 420, self.DROP_NEW.pair)
-        self.DROP_SORT_HALT = SizeMap(8, 8, 272, 120, self.DROP_SORT.pair)
-        self.DROP_VIEW_HALT = SizeMap(8, 8, 272, 180, self.DROP_VIEW.pair)
-
-        # ITEMS
-        self.ITEMVIEW_COZY = SizeMap(0, 0, 408, 84, self.CONT.pair)
-        self.ITEMVIEW_NORM = SizeMap(0, 0, 408, 24, self.CONT.pair)
-        self.ITEMVIEW_CARD = SizeMap(0, 0, 408, 156, self.CONT.pair)
-        self.IV_COZY_ICON = SizeMap(8, 8, 68, 68, self.ITEMVIEW_COZY.pair)
-        self.IV_COZY_NAME = SizeMap(84, 40, 316, 30, self.ITEMVIEW_COZY.pair)
-        self.IV_COZY_MISC = SizeMap(84, 10, 316, 24, self.ITEMVIEW_COZY.pair)
-        self.IV_NORM_ICON = SizeMap(4, 4, 16, 16, self.ITEMVIEW_NORM.pair)
-        self.IV_NORM_NAME = SizeMap(24, 2, 204, 24, self.ITEMVIEW_NORM.pair)
-        self.IV_NORM_MISC = SizeMap(232, 2, 172, 24, self.ITEMVIEW_NORM.pair)
-        self.IV_CARD_ICON = SizeMap(8, 80, 68, 68, self.ITEMVIEW_CARD.pair)
-        self.IV_CARD_NAME = SizeMap(84, 112, 316, 30, self.ITEMVIEW_CARD.pair)
-        self.IV_CARD_MISC = SizeMap(84, 82, 316, 24, self.ITEMVIEW_CARD.pair)
-        self.IV_CARD_DESC = SizeMap(8, 8, 392, 64, self.ITEMVIEW_CARD.pair)
-
-        # NEW
-        self.NEW_NAME = SizeMap(12, 375, 392, 30, self.DROP_NEW.pair)
-        self.NEW_ICON = SizeMap(12, 213, 144, 144, self.DROP_NEW.pair)
-        self.NEW_QTY = SizeMap(226, 327, 178, 30, self.DROP_NEW.pair)
-        self.NEW_QTY_L = SizeMap(157, 327, 65, 30, self.DROP_NEW.pair)
-        self.NEW_WEIGHT = SizeMap(226, 270, 178, 30, self.DROP_NEW.pair)
-        self.NEW_WEIGHT_L = SizeMap(157, 270, 65, 30, self.DROP_NEW.pair)
-        self.NEW_VAL = SizeMap(226, 213, 178, 30, self.DROP_NEW.pair)
-        self.NEW_VAL_L = SizeMap(157, 213, 65, 30, self.DROP_NEW.pair)
-        self.NEW_TAGS = SizeMap(12, 60, 192, 135, self.DROP_NEW.pair)
-        self.NEW_TAGS_L = SizeMap(12, 196, 192, 30, self.DROP_NEW.pair)
-        self.NEW_DESC = SizeMap(212, 60, 192, 135, self.DROP_NEW.pair)
-        self.NEW_CANCEL = SizeMap(12, 16, 192, 36, self.DROP_NEW.pair)
-        self.NEW_SAVE = SizeMap(212, 16, 192, 36, self.DROP_NEW.pair)
-
-        # SORT
-        self.SORT_TYPE = SizeMap(16, 12, 124, 92, self.DROP_SORT.pair)
-        self.SORT_TYPE_L = SizeMap(16, 106, 124, 30, self.DROP_SORT.pair)
-        self.SORT_TYPE_BTN = SizeMap(0, 0, 124, 22, self.SORT_TYPE.pair)
-        self.SORT_ORDER = SizeMap(148, 60, 124, 46, self.DROP_SORT.pair)
-        self.SORT_ORDER_L = SizeMap(148, 104, 124, 30, self.DROP_SORT.pair)
-        self.SORT_ORDER_BTN = SizeMap(0, 0, 124, 22, self.SORT_ORDER.pair)
-
-        # VIEW
-        self.VIEW_NORM = SizeMap(16, 132, 256, 48, self.DROP_VIEW.pair)
-        self.VIEW_NORM_L = SizeMap(184, 144, 49, 24, self.DROP_VIEW.pair)
-        self.VIEW_NORM_CHECK = SizeMap(245, 153, 13, 12, self.DROP_VIEW.pair)
-        self.VIEW_COZY = SizeMap(16, 74, 256, 48, self.DROP_VIEW.pair)
-        self.VIEW_COZY_L = SizeMap(184, 86, 49, 24, self.DROP_VIEW.pair)
-        self.VIEW_COZY_CHECK = SizeMap(245, 95, 13, 12, self.DROP_VIEW.pair)
-        self.VIEW_CARD = SizeMap(16, 16, 256, 48, self.DROP_VIEW.pair)
-        self.VIEW_CARD_L = SizeMap(184, 28, 49, 24, self.DROP_VIEW.pair)
-        self.VIEW_CARD_CHECK = SizeMap(245, 37, 13, 12, self.DROP_VIEW.pair)
-
+        self.Frame = SizeMap(0, 0, 432, 768, (self.APP_W, self.APP_H))
 
 
 class ScreenPos():
@@ -222,35 +96,41 @@ class Base():
 
 class Menu(HasBase):
     def __init__(self, Size, ScreenPos, **kwargs):
-        # Menu
-        self.base = RelativeLayout(pos = Size.MENU.pos, size_hint = Size.MENU.hpair)
-        self.title = Label(size_hint = Size.MENU_TITLE.hpair, pos = Size.MENU_TITLE.pos,
+        self.MENU = SizeMap(0, 670, 432, 98, Size.Frame.pair)
+        self.BTN_BAG = SizeMap(18, 18, 72, 72, self.MENU.pair)
+        self.BTN_OPTS = SizeMap(342, 18, 72, 72, self.MENU.pair)
+        self.TITLE = SizeMap(153, 34, 128, 40, self.MENU.pair)
+
+        self.base = RelativeLayout(pos = self.MENU.pos, size_hint = self.MENU.hpair)
+        self.title = Label(size_hint = self.TITLE.hpair, pos = self.TITLE.pos,
             font_name = FONT_BASK, font_size = Size.FONT_SIZE_A, color = WHITE)
-        self.bag = Image(size_hint = Size.MENU_BTN_BAG.hpair,
-            pos = Size.MENU_BTN_BAG.pos,
+        self.bag = Image(size_hint = self.BTN_BAG.hpair,
+            pos = self.BTN_BAG.pos,
             source = 'images/IMG_BAGS.png', keep_ratio = False, allow_stretch = True)
-        self.bagBtn = Button(size_hint = Size.MENU_BTN_BAG.hpair,
-            pos = Size.MENU_BTN_BAG.pos, background_color = CLEAR)
-        self.opts = Image(size_hint = Size.MENU_BTN_OPTS.hpair,
-            pos = Size.MENU_BTN_OPTS.pos, source = 'images/IMG_SETTINGS.png',
+        self.bagBtn = Button(size_hint = self.BTN_BAG.hpair,
+            pos = self.BTN_BAG.pos, background_color = CLEAR)
+        self.opts = Image(size_hint = self.BTN_OPTS.hpair,
+            pos = self.BTN_OPTS.pos, source = 'images/IMG_SETTINGS.png',
             keep_ratio = False, allow_stretch = True)
-        self.optsBtn = Button(size_hint = Size.MENU_BTN_OPTS.hpair,
-            pos = Size.MENU_BTN_OPTS.pos, background_color = CLEAR)
+        self.optsBtn = Button(size_hint = self.BTN_OPTS.hpair,
+            pos = self.BTN_OPTS.pos, background_color = CLEAR)
 
 
 
 class Tabs(HasBase):
     def __init__(self, Size, ScreenPos, **kwargs):
-        # Tabs
-        self.base = BoxLayout(size_hint = Size.TABS.hpair, pos = Size.TABS.pos,
+        self.TABS = SizeMap(0, 602, 432, 60, Size.Frame.pair)
+        self.BTN = SizeMap(0, 0, 144, 60, self.TABS.pair)
+
+        self.base = BoxLayout(size_hint = self.TABS.hpair, pos = self.TABS.pos,
             orientation = 'horizontal')
-        self.new = Button(size_hint = Size.TABS_BTN.hpair, text = 'NEW', color = WHITE,
+        self.new = Button(size_hint = self.BTN.hpair, text = 'NEW', color = WHITE,
             font_name = FONT_BASK, font_size = Size.FONT_SIZE_A,
             background_color = CLEAR)
-        self.sort = Button(size_hint = Size.TABS_BTN.hpair, text = 'SORT',
+        self.sort = Button(size_hint = self.BTN.hpair, text = 'SORT',
             color = WHITE, font_name = FONT_BASK, font_size = Size.FONT_SIZE_A,
             background_color = CLEAR)
-        self.view = Button(size_hint = Size.TABS_BTN.hpair, text = 'VIEW',
+        self.view = Button(size_hint = self.BTN.hpair, text = 'VIEW',
             color = WHITE, font_name = FONT_BASK, font_size = Size.FONT_SIZE_A,
             background_color = CLEAR)
 
@@ -258,12 +138,14 @@ class Tabs(HasBase):
 
 class Search(HasBase):
     def __init__(self, Size, ScreenPos, **kwargs):
-        # Search
-        self.base = RelativeLayout(size_hint = Size.SEARCH.hpair, pos = Size.SEARCH.pos)
+        self.SEARCH = SizeMap(11, 563, 326, 34, Size.Frame.pair)
+        self.INPUT = SizeMap(34, 0, 284, 34, self.SEARCH.pair)
+
+        self.base = RelativeLayout(size_hint = self.SEARCH.hpair, pos = self.SEARCH.pos)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_SEARCH.png',
             allow_stretch = True, keep_ratio = False)
-        self.input = TextInput(size_hint = Size.SEARCH_INPUT.hpair,
-            pos = Size.SEARCH_INPUT.pos, hint_text = 'Search for an item...',
+        self.input = TextInput(size_hint = self.INPUT.hpair,
+            pos = self.INPUT.pos, hint_text = 'Search for an item...',
             font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             foreground_color = BLACK, write_tab = False, multiline = False,
             cursor_color = BLACK, background_normal = '', background_active = '',
@@ -273,75 +155,109 @@ class Search(HasBase):
 
 class Cont(HasBase):
     def __init__(self, Size, ScreenPos, **kwargs):
-        # Content
-        self.base = RelativeLayout(size_hint = Size.CONT.hpair, pos = Size.CONT.pos)
+        self.CONT = SizeMap(0, 0, 432, 557, Size.Frame.pair)
+        self.SPACE = SizeMap(0, 0, 0, 5, self.CONT.pair)
+        self.PAD = SizeMap(0, 0, 2, 2, self.CONT.pair)
+        self.SCROLL = SizeMap(0, 0, 12, 0, self.CONT.pair)
+
+        self.ITEMVIEW_COZY = SizeMap(0, 0, 408, 84, self.CONT.pair)
+        self.ITEMVIEW_NORM = SizeMap(0, 0, 408, 24, self.CONT.pair)
+        self.ITEMVIEW_CARD = SizeMap(0, 0, 408, 156, self.CONT.pair)
+        self.IV_COZY_ICON = SizeMap(8, 8, 68, 68, self.ITEMVIEW_COZY.pair)
+        self.IV_COZY_NAME = SizeMap(84, 40, 316, 30, self.ITEMVIEW_COZY.pair)
+        self.IV_COZY_MISC = SizeMap(84, 10, 316, 24, self.ITEMVIEW_COZY.pair)
+        self.IV_NORM_ICON = SizeMap(4, 4, 16, 16, self.ITEMVIEW_NORM.pair)
+        self.IV_NORM_NAME = SizeMap(24, 2, 204, 24, self.ITEMVIEW_NORM.pair)
+        self.IV_NORM_MISC = SizeMap(232, 2, 172, 24, self.ITEMVIEW_NORM.pair)
+        self.IV_CARD_ICON = SizeMap(8, 80, 68, 68, self.ITEMVIEW_CARD.pair)
+        self.IV_CARD_NAME = SizeMap(84, 112, 316, 30, self.ITEMVIEW_CARD.pair)
+        self.IV_CARD_MISC = SizeMap(84, 82, 316, 24, self.ITEMVIEW_CARD.pair)
+        self.IV_CARD_DESC = SizeMap(8, 8, 392, 64, self.ITEMVIEW_CARD.pair)
+
+        self.base = RelativeLayout(size_hint = self.CONT.hpair, pos = self.CONT.pos)
         self.scroll = ScrollView(size_hint = FILLS, do_scroll_x = False,
-            bar_width = Size.CONT_SCROLL.x)
+            bar_width = self.SCROLL.x)
         self.list = GridLayout(size_hint = (1.0, None), cols = 1,
-            padding = list(Size.CONT_PAD.pair), spacing = list(Size.CONT_SPACE.pair),
+            padding = list(self.PAD.pair), spacing = list(self.SPACE.pair),
             row_force_default = True)
 
 
 
 class BagPick(Opens, HasBase):
-    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
-        # Bag selection menu
-        self.pos_on = pos_on
-        self.pos_off = pos_off
+    def __init__(self, Size, ScreenPos, **kwargs):
+        # BAGPICK MENU
+        self.BAGPICK = SizeMap(0, 0, 380, 768, Size.Frame.pair)
+        self.HALT = SizeMap(0, 0, 368, 768, self.BAGPICK.pair)
+        self.BACK = SizeMap(360, 0, 72, 768, self.BAGPICK.pair)
+        self.NAME = SizeMap(8, 698, 344, 56, self.BAGPICK.pair)
+        self.SCROLL = SizeMap(8, 60, 344, 636, self.BAGPICK.pair)
+        self.ITEM = SizeMap(0, 0, 344, 64, self.SCROLL.pair)
+        self.ITEM_NAME = SizeMap(0, 24, 344, 40, self.ITEM.pair)
+        self.ITEM_MISC = SizeMap(0, 4, 344, 20, self.ITEM.pair)
+        self.NEW = SizeMap(8, 20, 344, 32, self.BAGPICK.pair)
+
+        self.pos_on = self.BAGPICK.pos
+        self.pos_off = ScreenPos.OFF
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = Size.BAGPICK.hpair, pos = ScreenPos.OFF)
-        self.back = Button(pos = Size.BAGPICK_BACK.pos,
-            size_hint = Size.BAGPICK_BACK.hpair, background_normal = IMG_BLACK,
+        self.base = RelativeLayout(size_hint = self.BAGPICK.hpair, pos = ScreenPos.OFF)
+        self.back = Button(pos = self.BACK.pos,
+            size_hint = self.BACK.hpair, background_normal = IMG_BLACK,
             background_down = IMG_BLACK, opacity = 0.5)
-        self.halt = Button(pos = Size.BAGPICK_HALT.pos,
-            size_hint = Size.BAGPICK_HALT.hpair, opacity = 0)
+        self.halt = Button(pos = self.HALT.pos,
+            size_hint = self.HALT.hpair, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_BAG_PICK_BG.png',
             allow_stretch = True, keep_ratio = False)
-        self.name = Label(size_hint = Size.BAGPICK_NAME.hpair,
-            pos = Size.BAGPICK_NAME.pos, text = 'Bags', font_name = FONT_BASK,
+        self.name = Label(size_hint = self.NAME.hpair,
+            pos = self.NAME.pos, text = 'Bags', font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_A)
-        self.scroll = ScrollView(size_hint = Size.BAGPICK_SCROLL.hpair,
-            pos = Size.BAGPICK_SCROLL.pos, do_scroll_x = False, bar_width = 0)
+        self.scroll = ScrollView(size_hint = self.SCROLL.hpair,
+            pos = self.SCROLL.pos, do_scroll_x = False, bar_width = 0)
         self.grid = GridLayout(size_hint = (1.0, None), cols = 1,
-            row_default_height = Size.BAGPICK_ITEM.h, row_force_default = True)
-        self.newBag = AnchorButton(size_hint = Size.BAGPICK_NEW.hpair,
-            pos = Size.BAGPICK_NEW.pos, font_name = FONT_BASK,
+            row_default_height = self.ITEM.h, row_force_default = True)
+        self.newBag = AnchorButton(size_hint = self.NEW.hpair,
+            pos = self.NEW.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_D, text = 'New Bag')
 
 
 
 class BagOpen(Opens, HasBase):
-    def __init__(self, pos_on, pos_off, Size, ScreenPos,**kwargs):
-        # Bag open/edit menu
-        self.pos_on = pos_on
-        self.pos_off = pos_off
+    def __init__(self, Size, ScreenPos,**kwargs):
+        # BAGOPEN MENU
+        self.BAGOPEN = SizeMap(32, 272, 368, 232, Size.Frame.pair)
+        self.HALT = SizeMap(-36, -276, 432, 768, self.BAGOPEN.pair)
+        self.NAME = SizeMap(12, 180, 344, 32, self.BAGOPEN.pair)
+        self.BTNS = SizeMap(12, 12, 344, 160, self.BAGOPEN.pair)
+        self.BTN = SizeMap(0, 0, 344, 40, self.BTNS.pair)
+
+        self.pos_on = self.BAGOPEN.pos
+        self.pos_off = ScreenPos.FAR_OFF
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = Size.BAGOPEN.hpair, pos = self.pos_off)
-        self.halt = Button(size_hint = Size.BAGOPEN_HALT.hpair,
-            pos = Size.BAGOPEN_HALT.pos, background_normal = IMG_BLACK,
+        self.base = RelativeLayout(size_hint = self.BAGOPEN.hpair, pos = self.pos_off)
+        self.halt = Button(size_hint = self.HALT.hpair,
+            pos = self.HALT.pos, background_normal = IMG_BLACK,
             background_down = IMG_BLACK, opacity = 0.5)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PROMPT_SMALL.png',
             allow_stretch = True, keep_ratio = False)
-        self.name = Label(size_hint = Size.BAGOPEN_NAME.hpair,
-            pos = Size.BAGOPEN_NAME.pos, text = 'Bag Name', font_name = FONT_BASK,
+        self.name = Label(size_hint = self.NAME.hpair,
+            pos = self.NAME.pos, text = 'Bag Name', font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_A)
-        self.btns = BoxLayout(size_hint = Size.BAGOPEN_BTNS.hpair,
-            pos = Size.BAGOPEN_BTNS.pos, orientation = 'vertical')
-        self.weight = AnchorButton(size_hint = Size.BAGOPEN_BTN.hpair,
+        self.btns = BoxLayout(size_hint = self.BTNS.hpair,
+            pos = self.BTNS.pos, orientation = 'vertical')
+        self.weight = AnchorButton(size_hint = self.BTN.hpair,
             text = 'Set weight system', color = WHITE, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
             background_img = 'images/IMG_BTN_BG_1.png')
-        self.currency = AnchorButton(size_hint = Size.BAGOPEN_BTN.hpair,
+        self.currency = AnchorButton(size_hint = self.BTN.hpair,
             text = 'Set currency system', color = WHITE, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
             background_img = 'images/IMG_BTN_BG_2.png')
-        self.delete = AnchorButton(size_hint = Size.BAGOPEN_BTN.hpair,
+        self.delete = AnchorButton(size_hint = self.BTN.hpair,
             text = 'Delete bag', color = WHITE, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
             background_img = 'images/IMG_BTN_BG_3.png')
-        self.done = AnchorButton(size_hint = Size.BAGOPEN_BTN.hpair,
+        self.done = AnchorButton(size_hint = self.BTN.hpair,
             text = 'Save Changes', color = WHITE, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
             background_img = 'images/IMG_BTN_BG_4.png')
@@ -349,42 +265,61 @@ class BagOpen(Opens, HasBase):
 
 
 class BagDelete(Opens, HasBase):
-    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
-        self.pos_on = pos_on
-        self.pos_off = pos_off
+    def __init__(self, Size, ScreenPos, **kwargs):
+        # BAGDELETE MENU
+        self.BAGDELETE = SizeMap(32, 272, 368, 232, Size.Frame.pair)
+        self.BAGDELETE_LBL = SizeMap(12, 180, 344, 32, self.BAGDELETE.pair)
+        self.BAGDELETE_CANCEL = SizeMap(12, 12, 168, 40, self.BAGDELETE.pair)
+        self.BAGDELETE_CONFIRM = SizeMap(188, 12, 168, 40, self.BAGDELETE.pair)
+
+        self.pos_on = self.BAGDELETE.pos
+        self.pos_off = ScreenPos.FAR_OFF
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = size.BAGDELETE.hpair, pos = self.pos_off)
-        #self.lbl = Label(size_hint = size.BAGDELETE_LBL.hpair,
-        #    pos = size.BAGDELETE_LBL.pos, )
+        self.base = RelativeLayout(size_hint = self.BAGDELETE.hpair, pos = self.pos_off)
+        #self.lbl = Label(size_hint = bagDelete.LBL.hpair,
+        #    pos = bagDelete.LBL.pos, )
 
 
 
 class Pick(Opens, HasBase):
-    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
-        # Selected Item
-        self.pos_on = pos_on
-        self.pos_off = pos_off
+    def __init__(self, Size, ScreenPos, **kwargs):
+        # Note: spacing should be (20, 20, 392, 516)
+        self.PICK = SizeMap(0, 105, 432, 557, Size.Frame.pair)
+        self.HALT = SizeMap(0, -105, 432, 768, self.PICK.pair)
+        self.NAME = SizeMap(20, 476, 392, 40, self.PICK.pair)
+        self.ICON = SizeMap(138, 316, 156, 156, self.PICK.pair)
+        self.MISC = SizeMap(21, 287, 390, 27, self.PICK.pair)
+        self.QTY = SizeMap(0, 0, 130, 27, self.PICK.pair)
+        self.WEIGHT = SizeMap(0, 1, 390, 27, self.MISC.pair)
+        self.VAL = SizeMap(0, 0, 130, 27, self.PICK.pair)
+        self.TAGS = SizeMap(20, 256, 392, 27, self.PICK.pair)
+        self.DESC = SizeMap(20, 20, 392, 232, self.PICK.pair)
+        self.OPTS = SizeMap(8, 550, 26, 26, self.PICK.pair)
+        self.X = SizeMap(396, 550, 26, 26, self.PICK.pair)
+
+        self.pos_on = self.PICK.pos
+        self.pos_off = ScreenPos.FAR_OFF
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = Size.PICK.hpair, pos = ScreenPos.OFF)
-        self.halt = Button(pos = Size.PICK_HALT.pos, size_hint = Size.PICK_HALT.hpair,
+        self.base = RelativeLayout(size_hint = self.PICK.hpair, pos = ScreenPos.OFF)
+        self.halt = Button(pos = self.HALT.pos, size_hint = self.HALT.hpair,
             background_disabled_normal = IMG_BLACK, opacity = 0.5, disabled = True)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
             allow_stretch = True, keep_ratio = False)
         self.widges = RelativeLayout(size_hint = FILLS, pos = ZEROS)
-        self.name = TextInput(size_hint = Size.PICK_NAME.hpair,
-            pos = Size.PICK_NAME.pos, font_name = FONT_BASK,
+        self.name = TextInput(size_hint = self.NAME.hpair,
+            pos = self.NAME.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_A, foreground_color = BLACK,
             border = [2,2,2,2], write_tab = False, multiline = False,
             cursor_color = BLACK, background_normal = 'images/IMG_1x1BORDER.png',
             hint_text = 'Item Name', background_active = 'images/IMG_1x1BORDER.png')
-        self.icon = Button(size_hint = Size.PICK_ICON.hpair, pos = Size.PICK_ICON.pos,
+        self.icon = Button(size_hint = self.ICON.hpair, pos = self.ICON.pos,
             background_normal = 'images/blankIcon.png',
             background_down = 'images/blankIcon.png', border = [0,0,0,0])
-        self.misc = BoxLayout(size_hint = Size.PICK_MISC.hpair,
-            pos = Size.PICK_MISC.pos, orientation = 'horizontal')
-        self.qty_L = AnchorLabel(pos = Size.PICK_QTY.pos, font_name = FONT_BASK,
+        self.misc = BoxLayout(size_hint = self.MISC.hpair,
+            pos = self.MISC.pos, orientation = 'horizontal')
+        self.qty_L = AnchorLabel(pos = self.QTY.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C, color = BLACK, text = 'Quantity: ',
             anchor_x = 'right', halign = 'right', valign = 'bottom')
         self.qty_I = TextInput(font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
@@ -405,155 +340,190 @@ class Pick(Opens, HasBase):
             foreground_color = BLACK, background_normal = 'images/IMG_1x1BORDER.png',
             background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
             write_tab = False, multiline = False, cursor_color = BLACK)
-        self.tags = TextInput(size_hint = Size.PICK_TAGS.hpair,
-            pos = Size.PICK_TAGS.pos, font_name = FONT_BASK,
+        self.tags = TextInput(size_hint = self.TAGS.hpair,
+            pos = self.TAGS.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C, foreground_color = BLACK,
             background_normal = 'images/IMG_1x1BORDER.png',
             background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
             cursor_color = BLACK)
-        self.desc = TextInput(size_hint = Size.PICK_DESC.hpair,
-            pos = Size.PICK_DESC.pos, font_name = FONT_BASK,
+        self.desc = TextInput(size_hint = self.DESC.hpair,
+            pos = self.DESC.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C, foreground_color = BLACK,
             background_normal = 'images/IMG_1x1BORDER.png',
             background_active = 'images/IMG_1x1BORDER.png', border = [2,2,2,2],
             cursor_color = BLACK)
-        self.opts = AnchorButton(size_hint = Size.PICK_OPTS.hpair,
-            pos = Size.PICK_OPTS.pos, source = 'images/IMG_SETTINGS.png',
+        self.opts = AnchorButton(size_hint = self.OPTS.hpair,
+            pos = self.OPTS.pos, source = 'images/IMG_SETTINGS.png',
             keep_ratio = True, allow_stretch = False, background_img = None)
-        self.X = AnchorButton(size_hint = Size.PICK_X.hpair, pos = Size.PICK_X.pos,
+        self.X = AnchorButton(size_hint = self.X.hpair, pos = self.X.pos,
             text = 'X', font_name = FONT_BASK, font_size = Size.FONT_SIZE_D,
             color = WHITE, background_img = None, valign = 'bottom')
 
 
 
 class Icon(Opens, HasBase):
-    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
-        # Icon selection
-        self.pos_on = pos_on
-        self.pos_off = pos_off
+    def __init__(self, Size, ScreenPos, **kwargs):
+        # ICON MENU
+        self.ICON = SizeMap(36, 106, 360, 556, Size.Frame.pair)
+        self.HALT = SizeMap(-36, -106, 432, 768, self.ICON.pair)
+        self.SCROLL = SizeMap(20, 60, 320, 476, self.ICON.pair)
+        self.BAR = SizeMap(0, 0, 4, 0, self.SCROLL.pair)
+        self.GRID = SizeMap(0, 0, 320, 476, self.SCROLL.pair)
+        self.PAD = SizeMap(16, 16, 90, 90, self.SCROLL.pair)
+        self.SPACE = SizeMap(0, 0, 90, 16, self.SCROLL.pair)
+        self.HEIGHT = SizeMap(0, 0, 80, 80, self.SCROLL.pair)
+        self.CANCEL = SizeMap(20, 20, 156, 32, self.ICON.pair)
+        self.SAVE = SizeMap(184, 20, 156, 32, self.ICON.pair)
+
+        self.pos_on = self.ICON.pos
+        self.pos_off = ScreenPos.FAR_OFF
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = Size.ICON.hpair, pos = ScreenPos.FAR_OFF)
-        self.halt = Button(pos = Size.ICON_HALT.pos, size_hint = Size.ICON_HALT.hpair,
+        self.base = RelativeLayout(size_hint = self.ICON.hpair, pos = ScreenPos.FAR_OFF)
+        self.halt = Button(pos = self.HALT.pos, size_hint = self.HALT.hpair,
             background_disabled_normal = IMG_BLACK, opacity = 0.5, disabled = True)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
             allow_stretch = True, keep_ratio = False)
-        self.scroll = ScrollView(size_hint = Size.ICON_SCROLL.hpair,
-            pos = Size.ICON_SCROLL.pos, do_scroll_x = False,
-            bar_width = Size.ICON_BAR.w)
+        self.scroll = ScrollView(size_hint = self.SCROLL.hpair,
+            pos = self.SCROLL.pos, do_scroll_x = False,
+            bar_width = self.BAR.w)
         self.grid = GridLayout(size_hint = (1.0, None), cols = 4,
-            row_default_height = Size.ICON_HEIGHT.h, row_force_default = True,
-            col_default_width = Size.ICON_HEIGHT.w, col_force_default = True)
-        self.cancel = Button(size_hint = Size.ICON_CANCEL.hpair,
-            pos = Size.ICON_CANCEL.pos, text = 'Cancel', font_name = FONT_BASK,
+            row_default_height = self.HEIGHT.h, row_force_default = True,
+            col_default_width = self.HEIGHT.w, col_force_default = True)
+        self.cancel = Button(size_hint = self.CANCEL.hpair,
+            pos = self.CANCEL.pos, text = 'Cancel', font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_D, color = WHITE)
-        self.save = Button(size_hint = Size.ICON_SAVE.hpair, pos = Size.ICON_SAVE.pos,
+        self.save = Button(size_hint = self.SAVE.hpair, pos = self.SAVE.pos,
             text = 'Save', font_name = FONT_BASK, font_size = Size.FONT_SIZE_D,
             color = WHITE)
 
 
 
 class New(Opens, HasBase):
-    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
-        # Tab drop: New
-        self.pos_on = pos_on
-        self.pos_off = pos_off
+    def __init__(self, Size, ScreenPos, **kwargs):
+        self.NEW = SizeMap(0, 174, 422, 496, Size.Frame.pair)
+        self.HALT = SizeMap(4, 8, 408, 420, self.NEW.pair)
+        self.NAME = SizeMap(12, 375, 392, 30, self.NEW.pair)
+        self.ICON = SizeMap(12, 213, 144, 144, self.NEW.pair)
+        self.QTY = SizeMap(226, 327, 178, 30, self.NEW.pair)
+        self.QTY_L = SizeMap(157, 327, 65, 30, self.NEW.pair)
+        self.WEIGHT = SizeMap(226, 270, 178, 30, self.NEW.pair)
+        self.WEIGHT_L = SizeMap(157, 270, 65, 30, self.NEW.pair)
+        self.VAL = SizeMap(226, 213, 178, 30, self.NEW.pair)
+        self.VAL_L = SizeMap(157, 213, 65, 30, self.NEW.pair)
+        self.TAGS = SizeMap(12, 60, 192, 135, self.NEW.pair)
+        self.TAGS_L = SizeMap(12, 196, 192, 30, self.NEW.pair)
+        self.DESC = SizeMap(212, 60, 192, 135, self.NEW.pair)
+        self.CANCEL = SizeMap(12, 16, 192, 36, self.NEW.pair)
+        self.SAVE = SizeMap(212, 16, 192, 36, self.NEW.pair)
+
+        self.pos_on = self.NEW.pos
+        self.pos_off = ScreenPos.FAR_OFF
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = Size.DROP_NEW.hpair,
+        self.base = RelativeLayout(size_hint = self.NEW.hpair,
             pos = ScreenPos.OFF)
-        self.halt = Button(size_hint = Size.DROP_NEW_HALT.hpair,
-            pos = Size.DROP_NEW_HALT.pos, opacity = 0)
+        self.halt = Button(size_hint = self.HALT.hpair,
+            pos = self.HALT.pos, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_DROP_NEW.png',
             allow_stretch = True, keep_ratio = False)
-        self.name = TextInput(size_hint = Size.NEW_NAME.hpair, hint_text = 'Name',
-            pos = Size.NEW_NAME.pos, font_name = FONT_BASK,
+        self.name = TextInput(size_hint = self.NAME.hpair, hint_text = 'Name',
+            pos = self.NAME.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C,
             write_tab = False, multiline = False)
-        self.icon = Button(size_hint = Size.NEW_ICON.hpair, pos = Size.NEW_ICON.pos,
+        self.icon = Button(size_hint = self.ICON.hpair, pos = self.ICON.pos,
             background_normal = 'images/blankIcon.png',
             background_down = 'images/blankIcon.png', border = [0,0,0,0])
-        self.qty = TextInput(size_hint = Size.NEW_QTY.hpair, hint_text = 'Quantity',
-            pos = Size.NEW_QTY.pos, font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
+        self.qty = TextInput(size_hint = self.QTY.hpair, hint_text = 'Quantity',
+            pos = self.QTY.pos, font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             write_tab = False, multiline = False)
-        self.qty_L = AnchorLabel(size_hint = Size.NEW_QTY_L.hpair, text = 'Quantity',
-            pos = Size.NEW_QTY_L.pos, font_name = FONT_BASK,
+        self.qty_L = AnchorLabel(size_hint = self.QTY_L.hpair, text = 'Quantity',
+            pos = self.QTY_L.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C,
             anchor_x = 'right', color = BLACK, halign = 'right')
-        self.weight = TextInput(size_hint = Size.NEW_WEIGHT.hpair, hint_text = 'Weight',
-            pos = Size.NEW_WEIGHT.pos, font_name = FONT_BASK,
+        self.weight = TextInput(size_hint = self.WEIGHT.hpair, hint_text = 'Weight',
+            pos = self.WEIGHT.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C, write_tab = False, multiline = False)
-        self.weight_L = AnchorLabel(size_hint = Size.NEW_WEIGHT_L.hpair,
-            text = 'Weight', pos = Size.NEW_WEIGHT_L.pos, font_name = FONT_BASK,
+        self.weight_L = AnchorLabel(size_hint = self.WEIGHT_L.hpair,
+            text = 'Weight', pos = self.WEIGHT_L.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C, anchor_x = 'right', color = BLACK,
             halign = 'right')
-        self.val = TextInput(size_hint = Size.NEW_VAL.hpair, hint_text = 'Value',
-            pos = Size.NEW_VAL.pos, font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
+        self.val = TextInput(size_hint = self.VAL.hpair, hint_text = 'Value',
+            pos = self.VAL.pos, font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             write_tab = False, multiline = False)
-        self.val_L = AnchorLabel(size_hint = Size.NEW_VAL_L.hpair, text = 'Value',
-            pos = Size.NEW_VAL_L.pos, font_name = FONT_BASK,
+        self.val_L = AnchorLabel(size_hint = self.VAL_L.hpair, text = 'Value',
+            pos = self.VAL_L.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C,
             anchor_x = 'right', color = BLACK, halign = 'right')
-        self.tags = TextInput(size_hint = Size.NEW_TAGS.hpair, hint_text = 'Tags',
-            pos = Size.NEW_TAGS.pos, font_name = FONT_BASK,
+        self.tags = TextInput(size_hint = self.TAGS.hpair, hint_text = 'Tags',
+            pos = self.TAGS.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C)
-        self.desc = TextInput(size_hint = Size.NEW_DESC.hpair,
-            hint_text = 'Item description', pos = Size.NEW_DESC.pos,
+        self.desc = TextInput(size_hint = self.DESC.hpair,
+            hint_text = 'Item description', pos = self.DESC.pos,
             font_name = FONT_BASK, font_size = Size.FONT_SIZE_C)
-        self.cancel = Button(size_hint = Size.NEW_CANCEL.hpair, text = 'CANCEL',
-            pos = Size.NEW_CANCEL.pos, font_name = FONT_BASK,
+        self.cancel = Button(size_hint = self.CANCEL.hpair, text = 'CANCEL',
+            pos = self.CANCEL.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C)
-        self.save = Button(size_hint = Size.NEW_SAVE.hpair, text = 'SAVE',
-            pos = Size.NEW_SAVE.pos, font_name = FONT_BASK,
+        self.save = Button(size_hint = self.SAVE.hpair, text = 'SAVE',
+            pos = self.SAVE.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C)
 
 
 
 class Sort(Opens, HasBase):
-    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
-        self.pos_on = pos_on
-        self.pos_off = pos_off
+    def __init__(self, Size, ScreenPos, **kwargs):
+        self.SORT = SizeMap(140, 474, 288, 196, Size.Frame.pair)
+        self.HALT = SizeMap(8, 8, 272, 120, self.SORT.pair)
+        self.TYPE = SizeMap(16, 12, 124, 92, self.SORT.pair)
+        self.TYPE_L = SizeMap(16, 106, 124, 30, self.SORT.pair)
+        self.TYPE_BTN = SizeMap(0, 0, 124, 22, self.TYPE.pair)
+        self.ORDER = SizeMap(148, 60, 124, 46, self.SORT.pair)
+        self.ORDER_L = SizeMap(148, 104, 124, 30, self.SORT.pair)
+        self.ORDER_BTN = SizeMap(0, 0, 124, 22, self.ORDER.pair)
+
+        self.pos_on = self.SORT.pos
+        self.pos_off = ScreenPos.OFF
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = Size.DROP_SORT.hpair,
+        self.base = RelativeLayout(size_hint = self.SORT.hpair,
             pos = ScreenPos.OFF)
-        self.halt = Button(size_hint = Size.DROP_SORT_HALT.hpair,
-            pos = Size.DROP_SORT_HALT.pos, opacity = 0)
+        self.halt = Button(size_hint = self.HALT.hpair,
+            pos = self.HALT.pos, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_DROP_SORT.png',
             allow_stretch = True, keep_ratio = False)
-        self.type_L = AnchorLabel(size_hint = Size.SORT_TYPE_L.hpair, text = 'Sort by',
-            pos = Size.SORT_TYPE_L.pos, font_name = FONT_BASK,
+        self.type_L = AnchorLabel(size_hint = self.TYPE_L.hpair, text = 'Sort by',
+            pos = self.TYPE_L.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C, anchor_x = 'left', anchor_y = 'bottom',
             color = BLACK, halign = 'left')
-        self.type = BoxLayout(size_hint = Size.SORT_TYPE.hpair,
-            pos = Size.SORT_TYPE.pos, orientation = 'vertical')
-        self.type_name = AnchorToggleButton(size_hint = Size.SORT_TYPE_BTN.hpair,
+        self.type = BoxLayout(size_hint = self.TYPE.hpair,
+            pos = self.TYPE.pos, orientation = 'vertical')
+        self.type_name = AnchorToggleButton(size_hint = self.TYPE_BTN.hpair,
             text = 'Name', font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             color = BLACK, anchor_x = 'left', halign = 'left', group = 'sortAttr',
             allow_no_selection = False, state = 'down')
-        self.type_qty = AnchorToggleButton(size_hint = Size.SORT_TYPE_BTN.hpair,
+        self.type_qty = AnchorToggleButton(size_hint = self.TYPE_BTN.hpair,
             text = 'Quantity', font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             color = BLACK, anchor_x = 'left', halign = 'left', group = 'sortAttr',
             allow_no_selection = False)
-        self.type_weight = AnchorToggleButton(size_hint = Size.SORT_TYPE_BTN.hpair,
+        self.type_weight = AnchorToggleButton(size_hint = self.TYPE_BTN.hpair,
             text = 'Weight', font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             color = BLACK, anchor_x = 'left', halign = 'left', group = 'sortAttr',
             allow_no_selection = False)
-        self.type_val = AnchorToggleButton(size_hint = Size.SORT_TYPE_BTN.hpair,
+        self.type_val = AnchorToggleButton(size_hint = self.TYPE_BTN.hpair,
             text = 'Value', font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             color = BLACK, anchor_x = 'left', halign = 'left', group = 'sortAttr',
             allow_no_selection = False)
-        self.order_L = AnchorLabel(size_hint = Size.SORT_ORDER_L.hpair,
-            text = 'Sort order', pos = Size.SORT_ORDER_L.pos, font_name = FONT_BASK,
+        self.order_L = AnchorLabel(size_hint = self.ORDER_L.hpair,
+            text = 'Sort order', pos = self.ORDER_L.pos, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_C, anchor_x = 'left', anchor_y = 'bottom',
             color = BLACK, halign = 'left')
-        self.order = BoxLayout(size_hint = Size.SORT_ORDER.hpair,
-            pos = Size.SORT_ORDER.pos, orientation = 'vertical')
-        self.order_asc = AnchorToggleButton(size_hint = Size.SORT_ORDER_BTN.hpair,
+        self.order = BoxLayout(size_hint = self.ORDER.hpair,
+            pos = self.ORDER.pos, orientation = 'vertical')
+        self.order_asc = AnchorToggleButton(size_hint = self.ORDER_BTN.hpair,
             text = 'Ascending', font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             color = BLACK, anchor_x = 'left', halign = 'left', group = 'sortMethod',
             allow_no_selection = False, state = 'down')
-        self.order_desc = AnchorToggleButton(size_hint = Size.SORT_ORDER_BTN.hpair,
+        self.order_desc = AnchorToggleButton(size_hint = self.ORDER_BTN.hpair,
             text = 'Descending', font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             color = BLACK, anchor_x = 'left', halign = 'left', group = 'sortMethod',
             allow_no_selection = False)
@@ -561,41 +531,53 @@ class Sort(Opens, HasBase):
 
 
 class View(Opens, HasBase):
-    def __init__(self, pos_on, pos_off, Size, ScreenPos, **kwargs):
-        self.pos_on = pos_on
-        self.pos_off = pos_off
+    def __init__(self, Size, ScreenPos, **kwargs):
+        self.VIEW = SizeMap(148, 414, 284, 256, Size.Frame.pair)
+        self.HALT = SizeMap(8, 8, 272, 180, self.VIEW.pair)
+        self.NORM = SizeMap(16, 132, 256, 48, self.VIEW.pair)
+        self.NORM_L = SizeMap(184, 144, 49, 24, self.VIEW.pair)
+        self.NORM_CHECK = SizeMap(245, 153, 13, 12, self.VIEW.pair)
+        self.COZY = SizeMap(16, 74, 256, 48, self.VIEW.pair)
+        self.COZY_L = SizeMap(184, 86, 49, 24, self.VIEW.pair)
+        self.COZY_CHECK = SizeMap(245, 95, 13, 12, self.VIEW.pair)
+        self.CARD = SizeMap(16, 16, 256, 48, self.VIEW.pair)
+        self.CARD_L = SizeMap(184, 28, 49, 24, self.VIEW.pair)
+        self.CARD_CHECK = SizeMap(245, 37, 13, 12, self.VIEW.pair)
+
+        self.pos_on = self.VIEW.pos
+        self.pos_off = ScreenPos.OFF
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = Size.DROP_VIEW.hpair,
+        self.base = RelativeLayout(size_hint = self.VIEW.hpair,
             pos = ScreenPos.OFF)
-        self.halt = Button(size_hint = Size.DROP_VIEW_HALT.hpair,
-            pos = Size.DROP_VIEW_HALT.pos, opacity = 0)
+        self.halt = Button(size_hint = self.HALT.hpair,
+            pos = self.HALT.pos, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_DROP_VIEW.png',
             allow_stretch = True, keep_ratio = False)
-        self.norm = Button(size_hint = Size.VIEW_NORM.hpair, pos = Size.VIEW_NORM.pos,
+        self.norm = Button(size_hint = self.NORM.hpair, pos = self.NORM.pos,
             opacity = 0)
-        self.norm_L = AnchorLabel(size_hint = Size.VIEW_NORM_L.hpair,
-            pos = Size.VIEW_NORM_L.pos, text = 'Normal', font_name = FONT_BASK,
+        self.norm_L = AnchorLabel(size_hint = self.NORM_L.hpair,
+            pos = self.NORM_L.pos, text = 'Normal', font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_B, color = WHITE, anchor_x = 'right',
             halign = 'right')
-        self.norm_Check = Image(size_hint = Size.VIEW_NORM_CHECK.hpair,
-            pos = Size.VIEW_NORM_CHECK.pos, source = VIEW_CHECK_INACTIVE)
-        self.cozy = Button(size_hint = Size.VIEW_COZY.hpair, pos = Size.VIEW_COZY.pos,
+        self.norm_Check = Image(size_hint = self.NORM_CHECK.hpair,
+            pos = self.NORM_CHECK.pos, source = VIEW_CHECK_INACTIVE)
+        self.cozy = Button(size_hint = self.COZY.hpair, pos = self.COZY.pos,
             opacity = 0)
-        self.cozy_L = AnchorLabel(size_hint = Size.VIEW_COZY_L.hpair,
-            pos = Size.VIEW_COZY_L.pos, text = 'Cozy', font_name = FONT_BASK,
+        self.cozy_L = AnchorLabel(size_hint = self.COZY_L.hpair,
+            pos = self.COZY_L.pos, text = 'Cozy', font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_B, color = WHITE, anchor_x = 'right',
             halign = 'right')
-        self.cozy_Check = Image(size_hint = Size.VIEW_COZY_CHECK.hpair,
-            pos = Size.VIEW_COZY_CHECK.pos, source = VIEW_CHECK_INACTIVE)
-        self.card = Button(size_hint = Size.VIEW_CARD.hpair, pos = Size.VIEW_CARD.pos,
+        self.cozy_Check = Image(size_hint = self.COZY_CHECK.hpair,
+            pos = self.COZY_CHECK.pos, source = VIEW_CHECK_INACTIVE)
+        self.card = Button(size_hint = self.CARD.hpair, pos = self.CARD.pos,
             opacity = 0)
-        self.card_L = AnchorLabel(size_hint = Size.VIEW_CARD_L.hpair,
-            pos = Size.VIEW_CARD_L.pos, text = 'Cards', font_name = FONT_BASK,
+        self.card_L = AnchorLabel(size_hint = self.CARD_L.hpair,
+            pos = self.CARD_L.pos, text = 'Cards', font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_B, color = WHITE, anchor_x = 'right',
             halign = 'right')
-        self.card_Check = Image(size_hint = Size.VIEW_CARD_CHECK.hpair,
-            pos = Size.VIEW_CARD_CHECK.pos, source = VIEW_CHECK_INACTIVE)
+        self.card_Check = Image(size_hint = self.CARD_CHECK.hpair,
+            pos = self.CARD_CHECK.pos, source = VIEW_CHECK_INACTIVE)
 
 
 
@@ -608,14 +590,14 @@ menu = Menu(size, screenPos)
 tabs = Tabs(size, screenPos)
 search = Search(size, screenPos)
 cont = Cont(size, screenPos)
-bagPick = BagPick(size.BAGPICK.pos, screenPos.OFF, size, screenPos)
-bagOpen = BagOpen(size.BAGOPEN.pos, screenPos.FAR_OFF, size, screenPos)
-bagDelete = BagDelete(size.BAGDELETE.pos, screenPos.FAR_OFF, size, screenPos)
-pick = Pick(size.PICK.pos, screenPos.OFF, size, screenPos)
-icon = Icon(size.ICON.pos, screenPos.FAR_OFF, size, screenPos)
-dnew = New(size.DROP_NEW.pos, screenPos.OFF, size, screenPos)
-dsort = Sort(size.DROP_SORT.pos, screenPos.OFF, size, screenPos)
-dview = View(size.DROP_VIEW.pos, screenPos.OFF, size, screenPos)
+bagPick = BagPick(size, screenPos)
+bagOpen = BagOpen(size, screenPos)
+bagDelete = BagDelete(size, screenPos)
+pick = Pick(size, screenPos)
+icon = Icon(size, screenPos)
+dnew = New(size, screenPos)
+dsort = Sort(size, screenPos)
+dview = View(size, screenPos)
 
 FONT_SIZE_A = size.FONT_SIZE_A
 FONT_SIZE_B = size.FONT_SIZE_B
