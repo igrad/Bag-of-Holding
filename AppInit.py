@@ -42,19 +42,13 @@ class HasBase():
 
 
 class Opens():
-    def open(self):
-        if self.pos_on != None:
-            self.is_open = True
-            self.base.pos = self.pos_on
-        else:
-            return 'No open position specified!'
+    def open(self, index = 0):
+        self.is_open = True
+        self.container.add_widget(self.base, index)
 
     def close(self):
-        if self.pos_off != None:
-            self.is_open = False
-            self.base.pos = self.pos_off
-        else:
-            return 'No close position specified!'
+        self.is_open = False
+        self.container.remove_widget(self.base)
 
 
 
@@ -75,23 +69,15 @@ class Size():
 
 
 
-class ScreenPos():
-    def __init__(self, Size, **kwargs):
-        self.ON = ZEROS
-        self.OFF = (Size.APP_W, Size.APP_H)
-        self.FAR_OFF = (Size.APP_W*2, Size.APP_H*2)
-
-
-
 class Base():
-    def __init__(self, Size, ScreenPos, **kwargs):
+    def __init__(self, Size, **kwargs):
         # FRAME
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_MAIN.png',
             allow_stretch = True, keep_ratio = False)
 
         # SCREENS
-        self.screenMain = RelativeLayout(pos = ScreenPos.ON, size_hint = FILLS)
-        self.screenSettings = RelativeLayout(pos = ScreenPos.OFF, size_hint = FILLS)
+        self.screenMain = RelativeLayout()
+        self.screenSettings = RelativeLayout()
 
 
 
@@ -114,7 +100,7 @@ class Halt(Button):
 
 
 class Menu(HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+    def __init__(self, Size, **kwargs):
         self.MENU = SizeMap(0, 670, 432, 98, Size.Frame.pair)
         self.BTN_BAG = SizeMap(18, 18, 72, 72, self.MENU.pair)
         self.BTN_OPTS = SizeMap(342, 18, 72, 72, self.MENU.pair)
@@ -137,7 +123,7 @@ class Menu(HasBase):
 
 
 class Tabs(HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+    def __init__(self, Size, **kwargs):
         self.TABS = SizeMap(0, 602, 432, 60, Size.Frame.pair)
         self.BTN = SizeMap(0, 0, 144, 60, self.TABS.pair)
 
@@ -156,7 +142,7 @@ class Tabs(HasBase):
 
 
 class Search(HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+    def __init__(self, Size, **kwargs):
         self.SEARCH = SizeMap(11, 563, 326, 34, Size.Frame.pair)
         self.INPUT = SizeMap(34, 0, 284, 34, self.SEARCH.pair)
 
@@ -173,7 +159,7 @@ class Search(HasBase):
 
 
 class Cont(HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+    def __init__(self, Size, **kwargs):
         self.CONT = SizeMap(0, 0, 432, 557, Size.Frame.pair)
         self.SPACE = SizeMap(0, 0, 0, 5, self.CONT.pair)
         self.PAD = SizeMap(0, 0, 2, 2, self.CONT.pair)
@@ -203,7 +189,7 @@ class Cont(HasBase):
 
 
 class BagPick(Opens, HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+    def __init__(self, Size, **kwargs):
         # BAGPICK MENU
         self.BAGPICK = SizeMap(0, 0, 380, 768, Size.Frame.pair)
         self.HALT = SizeMap(0, 0, 368, 768, self.BAGPICK.pair)
@@ -215,11 +201,10 @@ class BagPick(Opens, HasBase):
         self.ITEM_MISC = SizeMap(0, 4, 344, 20, self.ITEM.pair)
         self.NEW = SizeMap(8, 20, 344, 32, self.BAGPICK.pair)
 
-        self.pos_on = self.BAGPICK.pos
-        self.pos_off = ScreenPos.OFF
+        self.container = base.screenMain
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = self.BAGPICK.hpair, pos = ScreenPos.OFF)
+        self.base = RelativeLayout(size_hint = self.BAGPICK.hpair, pos = self.BAGPICK.pos)
         self.back = Button(pos = self.BACK.pos,
             size_hint = self.BACK.hpair, background_normal = IMG_BLACK,
             background_down = IMG_BLACK, opacity = 0.5)
@@ -240,7 +225,7 @@ class BagPick(Opens, HasBase):
 
 
 class BagOpen(Opens, HasBase):
-    def __init__(self, Size, ScreenPos,**kwargs):
+    def __init__(self, Size,**kwargs):
         # BAGOPEN MENU
         self.BAGOPEN = SizeMap(32, 272, 368, 232, Size.Frame.pair)
         self.HALT = SizeMap(-36, -276, 432, 768, self.BAGOPEN.pair)
@@ -248,11 +233,10 @@ class BagOpen(Opens, HasBase):
         self.BTNS = SizeMap(12, 12, 344, 160, self.BAGOPEN.pair)
         self.BTN = SizeMap(0, 0, 344, 40, self.BTNS.pair)
 
-        self.pos_on = self.BAGOPEN.pos
-        self.pos_off = ScreenPos.FAR_OFF
+        self.container = base.screenMain
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = self.BAGOPEN.hpair, pos = self.pos_off)
+        self.base = RelativeLayout(size_hint = self.BAGOPEN.hpair, pos = self.BAGOPEN.pos)
         self.halt = Halt(pos = self.HALT.pos)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PROMPT_SMALL.png',
             allow_stretch = True, keep_ratio = False)
@@ -281,25 +265,25 @@ class BagOpen(Opens, HasBase):
 
 
 class BagDelete(Opens, HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+    def __init__(self, Size, **kwargs):
         # BAGDELETE MENU
         self.BAGDELETE = SizeMap(32, 272, 368, 232, Size.Frame.pair)
         self.LBL = SizeMap(12, 180, 344, 32, self.BAGDELETE.pair)
         self.CANCEL = SizeMap(12, 12, 168, 40, self.BAGDELETE.pair)
         self.CONFIRM = SizeMap(188, 12, 168, 40, self.BAGDELETE.pair)
 
-        self.pos_on = self.BAGDELETE.pos
-        self.pos_off = ScreenPos.FAR_OFF
+        self.container = base.screenMain
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = self.BAGDELETE.hpair, pos = self.pos_off)
+        self.base = RelativeLayout(size_hint = self.BAGDELETE.hpair,
+            pos = self.BAGDELETE.pos)
         #self.lbl = Label(size_hint = bagDelete.LBL.hpair,
         #    pos = bagDelete.LBL.pos, )
 
 
 
 class Pick(Opens, HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+    def __init__(self, Size, **kwargs):
         # Note: spacing should be (20, 20, 392, 516)
         self.PICK = SizeMap(0, 105, 432, 557, Size.Frame.pair)
         self.HALT = SizeMap(0, -105, 432, 768, self.PICK.pair)
@@ -314,11 +298,10 @@ class Pick(Opens, HasBase):
         self.OPTS = SizeMap(8, 550, 26, 26, self.PICK.pair)
         self.X = SizeMap(396, 550, 26, 26, self.PICK.pair)
 
-        self.pos_on = self.PICK.pos
-        self.pos_off = ScreenPos.FAR_OFF
+        self.container = base.screenMain
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = self.PICK.hpair, pos = ScreenPos.OFF)
+        self.base = RelativeLayout(size_hint = self.PICK.hpair, pos = self.PICK.pos)
         self.halt = Halt(pos = self.HALT.pos, disabled = True)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
             allow_stretch = True, keep_ratio = False)
@@ -377,7 +360,7 @@ class Pick(Opens, HasBase):
 
 
 class Icon(Opens, HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+    def __init__(self, Size, **kwargs):
         # ICON MENU
         self.ICON = SizeMap(36, 106, 360, 556, Size.Frame.pair)
         self.HALT = SizeMap(-36, -106, 432, 768, self.ICON.pair)
@@ -390,11 +373,10 @@ class Icon(Opens, HasBase):
         self.CANCEL = SizeMap(20, 20, 156, 32, self.ICON.pair)
         self.SAVE = SizeMap(184, 20, 156, 32, self.ICON.pair)
 
-        self.pos_on = self.ICON.pos
-        self.pos_off = ScreenPos.FAR_OFF
+        self.container = base.screenMain
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = self.ICON.hpair, pos = ScreenPos.FAR_OFF)
+        self.base = RelativeLayout(size_hint = self.ICON.hpair, pos = self.ICON.pos)
         self.halt = Halt(pos = self.HALT.pos, disabled = True)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PICK.png',
             allow_stretch = True, keep_ratio = False)
@@ -414,7 +396,7 @@ class Icon(Opens, HasBase):
 
 
 class New(Opens, HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+    def __init__(self, Size, **kwargs):
         self.NEW = SizeMap(0, 174, 422, 496, Size.Frame.pair)
         self.HALT = SizeMap(4, 8, 408, 420, self.NEW.pair)
         self.NAME = SizeMap(12, 375, 392, 30, self.NEW.pair)
@@ -431,12 +413,10 @@ class New(Opens, HasBase):
         self.CANCEL = SizeMap(12, 16, 192, 36, self.NEW.pair)
         self.SAVE = SizeMap(212, 16, 192, 36, self.NEW.pair)
 
-        self.pos_on = self.NEW.pos
-        self.pos_off = ScreenPos.FAR_OFF
+        self.container = base.screenMain
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = self.NEW.hpair,
-            pos = ScreenPos.OFF)
+        self.base = RelativeLayout(size_hint = self.NEW.hpair, pos = self.NEW.pos)
         self.halt = Halt(size_hint = self.HALT.hpair, pos = self.HALT.pos, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_DROP_NEW.png',
             allow_stretch = True, keep_ratio = False)
@@ -482,9 +462,13 @@ class New(Opens, HasBase):
             font_size = Size.FONT_SIZE_C)
 
 
+    def open(self):
+        super(New, self).open(1)
+
+
 
 class Sort(Opens, HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+    def __init__(self, Size, **kwargs):
         self.SORT = SizeMap(140, 474, 288, 196, Size.Frame.pair)
         self.HALT = SizeMap(8, 8, 272, 120, self.SORT.pair)
         self.TYPE = SizeMap(16, 12, 124, 92, self.SORT.pair)
@@ -494,12 +478,10 @@ class Sort(Opens, HasBase):
         self.ORDER_L = SizeMap(148, 104, 124, 30, self.SORT.pair)
         self.ORDER_BTN = SizeMap(0, 0, 124, 22, self.ORDER.pair)
 
-        self.pos_on = self.SORT.pos
-        self.pos_off = ScreenPos.OFF
+        self.container = base.screenMain
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = self.SORT.hpair,
-            pos = ScreenPos.OFF)
+        self.base = RelativeLayout(size_hint = self.SORT.hpair, pos = self.SORT.pos)
         self.halt = Halt(size_hint = self.HALT.hpair, pos = self.HALT.pos, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_DROP_SORT.png',
             allow_stretch = True, keep_ratio = False)
@@ -541,9 +523,13 @@ class Sort(Opens, HasBase):
             allow_no_selection = False)
 
 
+    def open(self):
+        super(Sort, self).open(1)
+
+
 
 class View(Opens, HasBase):
-    def __init__(self, Size, ScreenPos, **kwargs):
+    def __init__(self, Size, **kwargs):
         self.VIEW = SizeMap(148, 414, 284, 256, Size.Frame.pair)
         self.HALT = SizeMap(8, 8, 272, 180, self.VIEW.pair)
         self.NORM = SizeMap(16, 132, 256, 48, self.VIEW.pair)
@@ -556,12 +542,10 @@ class View(Opens, HasBase):
         self.CARD_L = SizeMap(184, 28, 49, 24, self.VIEW.pair)
         self.CARD_CHECK = SizeMap(245, 37, 13, 12, self.VIEW.pair)
 
-        self.pos_on = self.VIEW.pos
-        self.pos_off = ScreenPos.OFF
+        self.container = base.screenMain
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = self.VIEW.hpair,
-            pos = ScreenPos.OFF)
+        self.base = RelativeLayout(size_hint = self.VIEW.hpair, pos = self.VIEW.pos)
         self.halt = Halt(size_hint = self.HALT.hpair, pos = self.HALT.pos, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_DROP_VIEW.png',
             allow_stretch = True, keep_ratio = False)
@@ -591,24 +575,27 @@ class View(Opens, HasBase):
             pos = self.CARD_CHECK.pos, source = VIEW_CHECK_INACTIVE)
 
 
+    def open(self):
+        super(View, self).open(1)
+
+
 
 LogMsg('Creating widget groups...')
 
 size = Size()
-screenPos = ScreenPos(size)
-base = Base(size, screenPos)
-menu = Menu(size, screenPos)
-tabs = Tabs(size, screenPos)
-search = Search(size, screenPos)
-cont = Cont(size, screenPos)
-bagPick = BagPick(size, screenPos)
-bagOpen = BagOpen(size, screenPos)
-bagDelete = BagDelete(size, screenPos)
-pick = Pick(size, screenPos)
-icon = Icon(size, screenPos)
-dnew = New(size, screenPos)
-dsort = Sort(size, screenPos)
-dview = View(size, screenPos)
+base = Base(size)
+menu = Menu(size)
+tabs = Tabs(size)
+search = Search(size)
+cont = Cont(size)
+bagPick = BagPick(size)
+bagOpen = BagOpen(size)
+bagDelete = BagDelete(size)
+pick = Pick(size)
+icon = Icon(size)
+dnew = New(size)
+dsort = Sort(size)
+dview = View(size)
 
 FONT_SIZE_A = size.FONT_SIZE_A
 FONT_SIZE_B = size.FONT_SIZE_B

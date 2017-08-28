@@ -11,7 +11,7 @@ from ContPane import PopulateItemViews, HighlightView, SortChanged
 #=======================================================================================#
 def OpenNew(obj):
     '''Open/close the New drop menu from the tabs bar.'''
-    if (dnew.pos == list(dnew.NEW.pos)) or (obj == None):
+    if (dnew.is_open) or (obj == None):
         dnew.close()
         tabs.new.color = WHITE
     else:
@@ -64,7 +64,7 @@ def InputItem(obj):
 #=======================================================================================#
 def OpenSort(obj):
     '''Open/close the Sort drop menu from the tabs bar.'''
-    if (dsort.pos == list(dsort.SORT.pos)) or (obj == 'open'):
+    if (dsort.is_open) or (obj == 'open'):
         dsort.close()
         tabs.sort.color = WHITE
     else:
@@ -114,7 +114,7 @@ def UpdateSort(obj):
 # VIEW                                                                                  #
 #=======================================================================================#
 def OpenView(obj):
-    if (dview.pos == list(dview.VIEW.pos)) or (obj == 'open'):
+    if (dview.is_open) or (obj == 'open'):
         dview.close()
         tabs.view.color = WHITE
     else:

@@ -265,7 +265,7 @@ def SelectItem(btn):
 
     if btn == 'picknoupdate':
         pick.open()
-    elif (pick.pos == list(pick.PICK.pos)) or (btn == None):
+    elif (pick.is_open) or (btn == None):
         pick.close()
 
         args = dict()

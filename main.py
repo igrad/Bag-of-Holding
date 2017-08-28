@@ -178,7 +178,7 @@ class BagOfHolding(RelativeLayout):
 
 
         # Render
-        for widge in [cont.base, menu.base, search.base, dnew.base, dsort.base, dview.base, tabs.base, bagPick.base, bagOpen.base, pick.base, icon.base]:
+        for widge in [cont.base, menu.base, search.base, tabs.base]:
             base.screenMain.add_widget(widge)
 
         self.add_widget(base.screenMain)
@@ -234,21 +234,20 @@ class Builder(App):
         # Build widgets
         LogMsg('Resizing widget groups')
 
-        global size, screenPos, base, menu, tabs, search, cont, bagPick, bagOpen, pick, icon, dnew, dsort, dview, FONT_SIZE_A, FONT_SIZE_B, FONT_SIZE_C, FONT_SIZE_D, FONT_SIZE_HEAD
+        global size, base, menu, tabs, search, cont, bagPick, bagOpen, pick, icon, dnew, dsort, dview, FONT_SIZE_A, FONT_SIZE_B, FONT_SIZE_C, FONT_SIZE_D, FONT_SIZE_HEAD
         size.__init__()
-        screenPos.__init__(size)
-        base.__init__(size, screenPos)
-        menu.__init__(size, screenPos)
-        tabs.__init__(size, screenPos)
-        search.__init__(size, screenPos)
-        cont.__init__(size, screenPos)
-        bagPick.__init__(size, screenPos)
-        bagOpen.__init__(size, screenPos)
-        pick.__init__(size, screenPos)
-        icon.__init__(size, screenPos)
-        dnew.__init__(size, screenPos)
-        dsort.__init__(size, screenPos)
-        dview.__init__(size, screenPos)
+        base.__init__(size)
+        menu.__init__(size)
+        tabs.__init__(size)
+        search.__init__(size)
+        cont.__init__(size)
+        bagPick.__init__(size)
+        bagOpen.__init__(size)
+        pick.__init__(size)
+        icon.__init__(size)
+        dnew.__init__(size)
+        dsort.__init__(size)
+        dview.__init__(size)
 
 
     def build(self):
