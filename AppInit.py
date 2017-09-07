@@ -268,6 +268,8 @@ class BagDelete(Opens, HasBase):
     def __init__(self, Size, **kwargs):
         # BAGDELETE MENU
         self.BAGDELETE = SizeMap(32, 272, 368, 232, Size.Frame.pair)
+        self.HALT = SizeMap(-32, -272, 432, 768, self.BAGDELETE.pair)
+        self.BACK = SizeMap(0, 0, 368, 232, self.BAGDELETE.pair)
         self.LBL = SizeMap(12, 180, 344, 32, self.BAGDELETE.pair)
         self.CANCEL = SizeMap(12, 12, 168, 40, self.BAGDELETE.pair)
         self.CONFIRM = SizeMap(188, 12, 168, 40, self.BAGDELETE.pair)
@@ -277,6 +279,9 @@ class BagDelete(Opens, HasBase):
 
         self.base = RelativeLayout(size_hint = self.BAGDELETE.hpair,
             pos = self.BAGDELETE.pos)
+        self.halt = Halt(pos = self.HALT.pos)
+        self.back = Button(pos = self.BACK.pos, size_hint = self.BACK.hpair,
+            background_normal = IMG_BLACK, background_down = IMG_BLACK, opacity = 0.5)
         #self.lbl = Label(size_hint = bagDelete.LBL.hpair,
         #    pos = bagDelete.LBL.pos, )
 

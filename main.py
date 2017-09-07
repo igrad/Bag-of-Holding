@@ -11,6 +11,9 @@ from Tabs import *
 from ContPane import *
 from Icon import LoadAllIcons, OpenIconMenu, SaveIcon
 from BagPick import *
+from BagOpen import *
+
+
 
 class BagOfHolding(RelativeLayout):
     def __init__(self, **kwargs):
@@ -84,6 +87,12 @@ class BagOfHolding(RelativeLayout):
         # BAGPICK
         menu.bagBtn.bind(on_press = OpenBagPickMenu)
         bagPick.back.bind(on_press = OpenBagPickMenu)
+
+        # BAGOPEN
+        bagOpen.halt.bind(on_press = PreviewBagMenu)
+
+        # BAGDELETE
+        bagDelete.halt.bind(on_press = OnBagDeleteSelected)
 
         # SELECT
         pick.X.bind(on_press = SelectItem)
@@ -182,6 +191,7 @@ class BagOfHolding(RelativeLayout):
             base.screenMain.add_widget(widge)
 
         self.add_widget(base.screenMain)
+
 
 
 class Builder(App):
