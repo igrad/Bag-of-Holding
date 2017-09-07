@@ -229,6 +229,7 @@ class BagOpen(Opens, HasBase):
         # BAGOPEN MENU
         self.BAGOPEN = SizeMap(32, 272, 368, 232, Size.Frame.pair)
         self.HALT = SizeMap(-36, -276, 432, 768, self.BAGOPEN.pair)
+        self.BACK = SizeMap(0, 0, 368, 232, self.BAGOPEN.pair)
         self.NAME = SizeMap(12, 180, 344, 32, self.BAGOPEN.pair)
         self.BTNS = SizeMap(12, 12, 344, 160, self.BAGOPEN.pair)
         self.BTN = SizeMap(0, 0, 344, 40, self.BTNS.pair)
@@ -238,6 +239,7 @@ class BagOpen(Opens, HasBase):
 
         self.base = RelativeLayout(size_hint = self.BAGOPEN.hpair, pos = self.BAGOPEN.pos)
         self.halt = Halt(pos = self.HALT.pos)
+        self.back = Button(pos = self.BACK.pos, size_hint = self.BACK.hpair, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PROMPT_SMALL.png',
             allow_stretch = True, keep_ratio = False)
         self.name = Label(size_hint = self.NAME.hpair,
@@ -280,10 +282,8 @@ class BagDelete(Opens, HasBase):
         self.base = RelativeLayout(size_hint = self.BAGDELETE.hpair,
             pos = self.BAGDELETE.pos)
         self.halt = Halt(pos = self.HALT.pos)
-        self.back = Button(pos = self.BACK.pos, size_hint = self.BACK.hpair,
-            background_normal = IMG_BLACK, background_down = IMG_BLACK, opacity = 0.5)
-        #self.lbl = Label(size_hint = bagDelete.LBL.hpair,
-        #    pos = bagDelete.LBL.pos, )
+        self.back = Button(pos = self.BACK.pos, size_hint = self.BACK.hpair, opacity = 0)
+        self.lbl = Label(size_hint = self.LBL.hpair, pos = self.LBL.pos)
 
 
 

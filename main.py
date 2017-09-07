@@ -164,7 +164,7 @@ class BagOfHolding(RelativeLayout):
         for widge in (bagOpen.weight, bagOpen.currency, bagOpen.delete, bagOpen.done):
             bagOpen.btns.add_widget(widge)
 
-        for widge in (bagOpen.halt, bagOpen.BG, bagOpen.name, bagOpen.btns):
+        for widge in (bagOpen.halt, bagOpen.back, bagOpen.BG, bagOpen.name, bagOpen.btns):
             bagOpen.base.add_widget(widge)
 
 
