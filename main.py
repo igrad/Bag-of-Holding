@@ -167,6 +167,9 @@ class BagOfHolding(RelativeLayout):
         for widge in (bagOpen.halt, bagOpen.back, bagOpen.BG, bagOpen.name, bagOpen.btns):
             bagOpen.base.add_widget(widge)
 
+        for widge in (bagDelete.halt, bagDelete.back, bagDelete.BG, bagDelete.lbl):
+            bagDelete.base.add_widget(widge)
+
 
         # Selected Item
         for widge in [pick.qty_L, pick.qty_I, pick.weight_L, pick.weight_I, pick.val_L, pick.val_I]:
