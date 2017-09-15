@@ -93,7 +93,7 @@ def ExtractNumber(string):
         if '.' in number: return float(number)
         return int(number)
     else:
-        return string
+        return 0
 
 
 def LogMsg(arg1):
