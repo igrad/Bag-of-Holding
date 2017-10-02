@@ -129,6 +129,16 @@ class AnchorButton(AnchorLayout):
         self._image = newImage
 
 
+    @property
+    def itemID(self):
+        return self._btn.itemID
+
+
+    @itemID.setter
+    def itemID(self, newID):
+        self._btn.itemID = newID
+
+
 class AnchorToggleButton(AnchorLayout):
     '''Create a button from the data passed in, wrap it in a AnchorLayout, so that it
     quickly aligns without having to hassle with the textsize parameter.'''

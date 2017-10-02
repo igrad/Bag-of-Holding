@@ -12,6 +12,7 @@ from ContPane import *
 from Icon import LoadAllIcons, OpenIconMenu, SaveIcon
 from BagPick import *
 from BagOpen import *
+from ItemOpts import *
 
 
 
@@ -96,6 +97,7 @@ class BagOfHolding(RelativeLayout):
 
         # SELECT
         pick.X.bind(on_press = SelectItem)
+        pick.opts.bind(on_press = OpenItemOpts)
         pick.icon.bind(on_press = OpenIconMenu)
         SetItemViewsOnPress(SelectItem)
 
@@ -182,6 +184,14 @@ class BagOfHolding(RelativeLayout):
             pick.base.add_widget(widge)
 
 
+        # Item Options
+        for widge in [itemOpts.move, itemOpts.delete, itemOpts.cancel]:
+            itemOpts.btns.add_widget(widge)
+            
+        for widge in [itemOpts.back, itemOpts.halt, itemOpts.BG, itemOpts.lbl, itemOpts.btns]:
+            itemOpts.base.add_widget(widge)
+
+
         # Icon selection screen
         icon.scroll.add_widget(icon.grid)
 
@@ -256,6 +266,8 @@ class Builder(App):
         cont.__init__(size)
         bagPick.__init__(size)
         bagOpen.__init__(size)
+        bagDelete.__init__(size)
+        itemOpts.__init__(size)
         pick.__init__(size)
         icon.__init__(size)
         dnew.__init__(size)

@@ -260,7 +260,7 @@ class BagOpen(Opens, HasBase):
             font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
             background_img = 'images/IMG_BTN_BG_3.png')
         self.done = AnchorButton(size_hint = self.BTN.hpair,
-            text = 'Save Changes', color = WHITE, font_name = FONT_BASK,
+            text = 'Done', color = WHITE, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
             background_img = 'images/IMG_BTN_BG_4.png')
 
@@ -370,23 +370,24 @@ class Pick(Opens, HasBase):
 class ItemOpts(Opens, HasBase):
     def __init__(self, Size, **kwargs):
         self.ITEMOPTS = SizeMap(32, 272, 368, 232, Size.Frame.pair)
-        self.HALT = SizeMap(-32, -272, 432, 768, self.BAGDELETE.pair)
-        self.BACK = SizeMap(0, 0, 368, 232, self.BAGDELETE.pair)
-        self.BG = SizeMap(0, 0, 368, 232, self.BAGDELETE.pair)
-        self.LBL = SizeMap(12, 140, 384, 32, self.BAGDELETE.pair)
-        self.BTNS = SizeMap(12, 12, 344, 120, self.BAGOPEN.pair)
+        self.HALT = SizeMap(-32, -272, 432, 768, self.ITEMOPTS.pair)
+        self.BACK = SizeMap(0, 0, 368, 232, self.ITEMOPTS.pair)
+        self.BG = SizeMap(0, 0, 368, 232, self.ITEMOPTS.pair)
+        self.LBL = SizeMap(12, 160, 344, 32, self.ITEMOPTS.pair)
+        self.BTNS = SizeMap(12, 12, 344, 120, self.ITEMOPTS.pair)
         self.BTN = SizeMap(0, 0, 344, 40, self.BTNS.pair)
 
         self.container = base.screenMain
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = self.BAGDELETE.hpair,
-            pos = self.BAGDELETE.pos)
+        self.base = RelativeLayout(size_hint = self.ITEMOPTS.hpair,
+            pos = self.ITEMOPTS.pos)
         self.halt = Halt(pos = self.HALT.pos)
         self.back = Button(pos = self.BACK.pos, size_hint = self.BACK.hpair, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PROMPT_SMALL.png',
             allow_stretch = True, keep_ratio = False)
-        self.lbl = Label(size_hint = self.LBL.hpair, pos = self.LBL.pos)
+        self.lbl = Label(size_hint = self.LBL.hpair, pos = self.LBL.pos,
+            font_name = FONT_BASK, font_size = Size.FONT_SIZE_A)
         self.btns = BoxLayout(size_hint = self.BTNS.hpair,
             pos = self.BTNS.pos, orientation = 'vertical')
         self.move = AnchorButton(size_hint = self.BTN.hpair,
@@ -636,6 +637,7 @@ cont = Cont(size)
 bagPick = BagPick(size)
 bagOpen = BagOpen(size)
 bagDelete = BagDelete(size)
+itemOpts = ItemOpts(size)
 pick = Pick(size)
 icon = Icon(size)
 dnew = New(size)

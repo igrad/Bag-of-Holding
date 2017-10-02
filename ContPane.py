@@ -288,7 +288,6 @@ def SelectItem(btn):
             ITEMS[pick.itemID].UpdateItem(**args)
             ITEMVIEWS[str(pick.itemID)].UpdateItemView(**args)
     else:
-
         if type(btn) != int:
             pick.itemID = btn.itemID
 
@@ -306,6 +305,8 @@ def SelectItem(btn):
             pick.icon.selected = int(ITEMS[pick.itemID].icon[-7:-4])
         except:
             pick.icon.selected = None
+
+        pick.opts.itemID = btn.itemID
 
         pick.open()
 

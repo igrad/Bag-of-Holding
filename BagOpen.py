@@ -4,19 +4,19 @@ from Bag import *
 from Currency import *
 from AnchorLabel import *
 
-def PreviewBagMenu(obj):
+def PreviewBagMenu(btn):
     '''Open or close the bagOpen menu.'''
     if not bagOpen.is_open:
-        bag = BAGS[obj.bagID]
+        bag = BAGS[btn.bagID]
         bagOpen.name.text = bag.name
-        bagOpen.bagID = obj.bagID
+        bagOpen.bagID = btn.bagID
 
         bagOpen.open()
     else:
         bagOpen.close()
 
 
-def OnBagDeleteSelected(obj):
+def OnBagDeleteSelected(btn):
     '''Open bagDelete menu.'''
     if not bagDelete.is_open:
         bagDelete.open()

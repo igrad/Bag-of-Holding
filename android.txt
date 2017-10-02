@@ -1,0 +1,3 @@
+title=Bag of Holding
+author=Ian Gradert
+orientation=portrait
