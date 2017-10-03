@@ -11,7 +11,7 @@ from Tabs import *
 from ContPane import *
 from Icon import LoadAllIcons, OpenIconMenu, SaveIcon
 from BagPick import *
-from BagOpen import *
+from BagOpts import *
 from ItemOpts import *
 
 
@@ -82,24 +82,31 @@ class BagOfHolding(RelativeLayout):
         dsort.order_asc.bind(on_press = UpdateSort)
         dsort.order_desc.bind(on_press = UpdateSort)
 
+
         # SEARCH
         search.input.bind(text = ScheduleSearch)
 
-        # BAGPICK
-        menu.bagBtn.bind(on_press = OpenBagPickMenu)
-        bagPick.back.bind(on_press = OpenBagPickMenu)
-
-        # BAGOPEN
-        bagOpen.halt.bind(on_press = PreviewBagMenu)
-
-        # BAGDELETE
-        bagDelete.halt.bind(on_press = OnBagDeleteSelected)
 
         # SELECT
         pick.X.bind(on_press = SelectItem)
         pick.opts.bind(on_press = OpenItemOpts)
         pick.icon.bind(on_press = OpenIconMenu)
         SetItemViewsOnPress(SelectItem)
+
+        # ITEMOPTS
+        itemOpts.back.bind(on_press = OpenItemOpts)
+        itemOpts.cancel.bind(on_press = OpenItemOpts)
+
+
+        # BAGPICK
+        menu.bagBtn.bind(on_press = OpenBagPickMenu)
+        bagPick.back.bind(on_press = OpenBagPickMenu)
+
+        # BAGOPTS
+        bagOpts.halt.bind(on_press = PreviewBagMenu)
+
+        # BAGDELETE
+        bagDelete.halt.bind(on_press = OnBagDeleteSelected)
 
         # ICON
         icon.cancel.bind(on_press = OpenIconMenu)
@@ -163,11 +170,11 @@ class BagOfHolding(RelativeLayout):
 
 
         # Bag preview menu
-        for widge in (bagOpen.weight, bagOpen.currency, bagOpen.delete, bagOpen.done):
-            bagOpen.btns.add_widget(widge)
+        for widge in (bagOpts.weight, bagOpts.currency, bagOpts.delete, bagOpts.done):
+            bagOpts.btns.add_widget(widge)
 
-        for widge in (bagOpen.halt, bagOpen.back, bagOpen.BG, bagOpen.name, bagOpen.btns):
-            bagOpen.base.add_widget(widge)
+        for widge in (bagOpts.halt, bagOpts.back, bagOpts.BG, bagOpts.name, bagOpts.btns):
+            bagOpts.base.add_widget(widge)
 
         for widge in (bagDelete.halt, bagDelete.back, bagDelete.BG, bagDelete.lbl):
             bagDelete.base.add_widget(widge)
@@ -187,7 +194,7 @@ class BagOfHolding(RelativeLayout):
         # Item Options
         for widge in [itemOpts.move, itemOpts.delete, itemOpts.cancel]:
             itemOpts.btns.add_widget(widge)
-            
+
         for widge in [itemOpts.back, itemOpts.halt, itemOpts.BG, itemOpts.lbl, itemOpts.btns]:
             itemOpts.base.add_widget(widge)
 
@@ -257,7 +264,7 @@ class Builder(App):
         # Build widgets
         LogMsg('Resizing widget groups')
 
-        global size, base, menu, tabs, search, cont, bagPick, bagOpen, pick, icon, dnew, dsort, dview, FONT_SIZE_A, FONT_SIZE_B, FONT_SIZE_C, FONT_SIZE_D, FONT_SIZE_HEAD
+        global size, base, menu, tabs, search, cont, bagPick, bagOpts, pick, icon, dnew, dsort, dview, FONT_SIZE_A, FONT_SIZE_B, FONT_SIZE_C, FONT_SIZE_D, FONT_SIZE_HEAD
         size.__init__()
         base.__init__(size)
         menu.__init__(size)
@@ -265,7 +272,7 @@ class Builder(App):
         search.__init__(size)
         cont.__init__(size)
         bagPick.__init__(size)
-        bagOpen.__init__(size)
+        bagOpts.__init__(size)
         bagDelete.__init__(size)
         itemOpts.__init__(size)
         pick.__init__(size)

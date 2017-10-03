@@ -3,7 +3,7 @@ from AppInit import *
 from Bag import *
 from Currency import *
 from AnchorLabel import *
-from BagOpen import PreviewBagMenu
+from BagOpts import PreviewBagMenu
 
 
 def LoadBagPickGridData():

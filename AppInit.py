@@ -224,20 +224,20 @@ class BagPick(Opens, HasBase):
 
 
 
-class BagOpen(Opens, HasBase):
+class BagOpts(Opens, HasBase):
     def __init__(self, Size,**kwargs):
-        # BAGOPEN MENU
-        self.BAGOPEN = SizeMap(32, 272, 368, 232, Size.Frame.pair)
-        self.HALT = SizeMap(-36, -276, 432, 768, self.BAGOPEN.pair)
-        self.BACK = SizeMap(0, 0, 368, 232, self.BAGOPEN.pair)
-        self.NAME = SizeMap(12, 180, 344, 32, self.BAGOPEN.pair)
-        self.BTNS = SizeMap(12, 12, 344, 160, self.BAGOPEN.pair)
+        # BAGOPTS MENU
+        self.BAGOPTS = SizeMap(32, 272, 368, 232, Size.Frame.pair)
+        self.HALT = SizeMap(-36, -276, 432, 768, self.BAGOPTS.pair)
+        self.BACK = SizeMap(0, 0, 368, 232, self.BAGOPTS.pair)
+        self.NAME = SizeMap(12, 180, 344, 32, self.BAGOPTS.pair)
+        self.BTNS = SizeMap(12, 12, 344, 160, self.BAGOPTS.pair)
         self.BTN = SizeMap(0, 0, 344, 40, self.BTNS.pair)
 
         self.container = base.screenMain
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = self.BAGOPEN.hpair, pos = self.BAGOPEN.pos)
+        self.base = RelativeLayout(size_hint = self.BAGOPTS.hpair, pos = self.BAGOPTS.pos)
         self.halt = Halt(pos = self.HALT.pos)
         self.back = Button(pos = self.BACK.pos, size_hint = self.BACK.hpair, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PROMPT_SMALL.png',
@@ -635,7 +635,7 @@ tabs = Tabs(size)
 search = Search(size)
 cont = Cont(size)
 bagPick = BagPick(size)
-bagOpen = BagOpen(size)
+bagOpts = BagOpts(size)
 bagDelete = BagDelete(size)
 itemOpts = ItemOpts(size)
 pick = Pick(size)

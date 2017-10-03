@@ -5,15 +5,15 @@ from Currency import *
 from AnchorLabel import *
 
 def PreviewBagMenu(btn):
-    '''Open or close the bagOpen menu.'''
-    if not bagOpen.is_open:
+    '''Open or close the bagOpts menu.'''
+    if not bagOpts.is_open:
         bag = BAGS[btn.bagID]
-        bagOpen.name.text = bag.name
-        bagOpen.bagID = btn.bagID
+        bagOpts.name.text = bag.name
+        bagOpts.bagID = btn.bagID
 
-        bagOpen.open()
+        bagOpts.open()
     else:
-        bagOpen.close()
+        bagOpts.close()
 
 
 def OnBagDeleteSelected(btn):
