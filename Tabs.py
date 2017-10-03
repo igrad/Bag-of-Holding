@@ -77,8 +77,6 @@ def OpenSort(obj):
 
 def UpdateSort(obj):
     '''Called when one of the buttons within the sort menu is pressed.'''
-    print('\n\nbutton pressed: ' + obj.text)
-
     sort_attr = ''
     sort_method = ''
 
@@ -96,14 +94,12 @@ def UpdateSort(obj):
         l = ToggleButton.get_widgets('sortAttr')
         for item in l:
             if item.state == 'down':
-                print('Found item currently activated: {}'.format(item.text))
                 sort_attr = item.text
 
     if findMethod:
         l = ToggleButton.get_widgets('sortMethod')
         for item in l:
             if item.state == 'down':
-                print('Found item currently activated: {}'.format(item.text))
                 sort_method = item.text
 
     SortChanged(sort_attr, sort_method)
