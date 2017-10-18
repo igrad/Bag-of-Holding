@@ -405,6 +405,40 @@ class ItemOpts(Opens, HasBase):
 
 
 
+class ItemMove(Opens, HasBase):
+    def __init__(self, Size, **kwargs):
+        self.ITEMMOVE = SizeMap(32, 272, 368, 232, Size.Frame.pair)
+        self.HALT = SizeMap(-32, -272, 432, 768, self.ITEMMOVE.pair)
+        self.BACK = SizeMap(0, 0, 368, 232, self.ITEMMOVE.pair)
+        self.BG = SizeMap(0, 0, 368, 232, self.ITEMMOVE.pair)
+        self.LBL = SizeMap(12, 180, 344, 32, self.ITEMMOVE.pair)
+        self.SCROLL = SizeMap(12, 12, 344, 160, self.ITEMMOVE.pair)
+        self.ITEM = SizeMap(0, 0, 344, 32, self.SCROLL.pair)
+        self.CANCEL = SizeMap(12, 12, 344, 40, self.ITEMMOVE.pair)
+
+        self.container = base.screenMain
+        self.is_open = False
+
+        self.base = RelativeLayout(size_hint = self.ITEMMOVE.hpair,
+            pos = self.ITEMMOVE.pos)
+        self.halt = Halt(pos = self.HALT.pos)
+        self.back = Button(pos = self.BACK.pos, size_hint = self.BACK.hpair, opacity = 0)
+        self.BG = Image(size_hint = FILLS, source = 'images/IMG_PROMPT_SMALL.png',
+            allow_stretch = True, keep_ratio = False)
+        self.lbl = Label(size_hint = self.LBL.hpair, pos = self.LBL.pos,
+            font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
+            text = 'Where should this item be moved to?')
+        self.scroll = ScrollView(size_hint = self.SCROLL.hpair,
+            pos = self.SCROLL.pos, do_scroll_x = False, bar_width = 0)
+        self.grid = GridLayout(size_hint = (1.0, None), cols = 1,
+            row_default_height = self.ITEM.h, row_force_default = True)
+        self.cancel = AnchorButton(pos = self.CANCEL.pos, size_hint = self.CANCEL.hpair,
+            text = 'Cancel', color = WHITE, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
+            background_img = 'images/IMG_BTN_BG_4.png')
+
+
+
 class Icon(Opens, HasBase):
     def __init__(self, Size, **kwargs):
         # ICON MENU
@@ -638,6 +672,7 @@ bagPick = BagPick(size)
 bagOpts = BagOpts(size)
 bagDelete = BagDelete(size)
 itemOpts = ItemOpts(size)
+itemMove = ItemMove(size)
 pick = Pick(size)
 icon = Icon(size)
 dnew = New(size)

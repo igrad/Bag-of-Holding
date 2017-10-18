@@ -94,8 +94,12 @@ class BagOfHolding(RelativeLayout):
         SetItemViewsOnPress(SelectItem)
 
         # ITEMOPTS
-        itemOpts.back.bind(on_press = OpenItemOpts)
+        itemOpts.halt.bind(on_press = OpenItemOpts)
+        itemOpts.move.bind(on_press = OpenItemMove)
         itemOpts.cancel.bind(on_press = OpenItemOpts)
+
+        itemMove.halt.bind(on_press = OpenItemMove)
+        itemMove.cancel.bind(on_press = OpenItemMove)
 
 
         # BAGPICK
@@ -195,8 +199,11 @@ class BagOfHolding(RelativeLayout):
         for widge in [itemOpts.move, itemOpts.delete, itemOpts.cancel]:
             itemOpts.btns.add_widget(widge)
 
-        for widge in [itemOpts.back, itemOpts.halt, itemOpts.BG, itemOpts.lbl, itemOpts.btns]:
+        for widge in [itemOpts.halt, itemOpts.back, itemOpts.BG, itemOpts.lbl, itemOpts.btns]:
             itemOpts.base.add_widget(widge)
+
+        for widge in [itemMove.halt, itemMove.back, itemMove.BG, itemMove.lbl, itemMove.scroll, itemMove.cancel]:
+            itemMove.base.add_widget(widge)
 
 
         # Icon selection screen
@@ -275,6 +282,7 @@ class Builder(App):
         bagOpts.__init__(size)
         bagDelete.__init__(size)
         itemOpts.__init__(size)
+        itemMove.__init__(size)
         pick.__init__(size)
         icon.__init__(size)
         dnew.__init__(size)
