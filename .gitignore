@@ -2,8 +2,5 @@ LICENSE
 README.md
 images/PDNs
 __pycache__
-bags_data.json
-item_data.json
-user_settings.json
+*.json
 run BoH.bat
-.gitignore

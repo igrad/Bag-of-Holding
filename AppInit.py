@@ -172,8 +172,8 @@ class Cont(HasBase):
         self.IV_COZY_NAME = SizeMap(84, 40, 316, 30, self.ITEMVIEW_COZY.pair)
         self.IV_COZY_MISC = SizeMap(84, 10, 316, 24, self.ITEMVIEW_COZY.pair)
         self.IV_NORM_ICON = SizeMap(4, 4, 16, 16, self.ITEMVIEW_NORM.pair)
-        self.IV_NORM_NAME = SizeMap(24, 2, 204, 24, self.ITEMVIEW_NORM.pair)
-        self.IV_NORM_MISC = SizeMap(232, 2, 172, 24, self.ITEMVIEW_NORM.pair)
+        self.IV_NORM_NAME = SizeMap(24, -2, 204, 24, self.ITEMVIEW_NORM.pair)
+        self.IV_NORM_MISC = SizeMap(232, 2, 184, 24, self.ITEMVIEW_NORM.pair)
         self.IV_CARD_ICON = SizeMap(8, 80, 68, 68, self.ITEMVIEW_CARD.pair)
         self.IV_CARD_NAME = SizeMap(84, 112, 316, 30, self.ITEMVIEW_CARD.pair)
         self.IV_CARD_MISC = SizeMap(84, 82, 316, 24, self.ITEMVIEW_CARD.pair)
@@ -224,20 +224,22 @@ class BagPick(Opens, HasBase):
 
 
 
-class BagOpen(Opens, HasBase):
+class BagOpts(Opens, HasBase):
     def __init__(self, Size,**kwargs):
-        # BAGOPEN MENU
-        self.BAGOPEN = SizeMap(32, 272, 368, 232, Size.Frame.pair)
-        self.HALT = SizeMap(-36, -276, 432, 768, self.BAGOPEN.pair)
-        self.NAME = SizeMap(12, 180, 344, 32, self.BAGOPEN.pair)
-        self.BTNS = SizeMap(12, 12, 344, 160, self.BAGOPEN.pair)
+        # BAGOPTS MENU
+        self.BAGOPTS = SizeMap(32, 272, 368, 232, Size.Frame.pair)
+        self.HALT = SizeMap(-36, -276, 432, 768, self.BAGOPTS.pair)
+        self.BACK = SizeMap(0, 0, 368, 232, self.BAGOPTS.pair)
+        self.NAME = SizeMap(12, 180, 344, 32, self.BAGOPTS.pair)
+        self.BTNS = SizeMap(12, 12, 344, 160, self.BAGOPTS.pair)
         self.BTN = SizeMap(0, 0, 344, 40, self.BTNS.pair)
 
         self.container = base.screenMain
         self.is_open = False
 
-        self.base = RelativeLayout(size_hint = self.BAGOPEN.hpair, pos = self.BAGOPEN.pos)
+        self.base = RelativeLayout(size_hint = self.BAGOPTS.hpair, pos = self.BAGOPTS.pos)
         self.halt = Halt(pos = self.HALT.pos)
+        self.back = Button(pos = self.BACK.pos, size_hint = self.BACK.hpair, opacity = 0)
         self.BG = Image(size_hint = FILLS, source = 'images/IMG_PROMPT_SMALL.png',
             allow_stretch = True, keep_ratio = False)
         self.name = Label(size_hint = self.NAME.hpair,
@@ -258,7 +260,7 @@ class BagOpen(Opens, HasBase):
             font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
             background_img = 'images/IMG_BTN_BG_3.png')
         self.done = AnchorButton(size_hint = self.BTN.hpair,
-            text = 'Save Changes', color = WHITE, font_name = FONT_BASK,
+            text = 'Done', color = WHITE, font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
             background_img = 'images/IMG_BTN_BG_4.png')
 
@@ -268,6 +270,9 @@ class BagDelete(Opens, HasBase):
     def __init__(self, Size, **kwargs):
         # BAGDELETE MENU
         self.BAGDELETE = SizeMap(32, 272, 368, 232, Size.Frame.pair)
+        self.HALT = SizeMap(-32, -272, 432, 768, self.BAGDELETE.pair)
+        self.BACK = SizeMap(0, 0, 368, 232, self.BAGDELETE.pair)
+        self.BG = SizeMap(0, 0, 368, 232, self.BAGDELETE.pair)
         self.LBL = SizeMap(12, 180, 344, 32, self.BAGDELETE.pair)
         self.CANCEL = SizeMap(12, 12, 168, 40, self.BAGDELETE.pair)
         self.CONFIRM = SizeMap(188, 12, 168, 40, self.BAGDELETE.pair)
@@ -277,8 +282,11 @@ class BagDelete(Opens, HasBase):
 
         self.base = RelativeLayout(size_hint = self.BAGDELETE.hpair,
             pos = self.BAGDELETE.pos)
-        #self.lbl = Label(size_hint = bagDelete.LBL.hpair,
-        #    pos = bagDelete.LBL.pos, )
+        self.halt = Halt(pos = self.HALT.pos)
+        self.back = Button(pos = self.BACK.pos, size_hint = self.BACK.hpair, opacity = 0)
+        self.BG = Image(size_hint = FILLS, source = 'images/IMG_PROMPT_SMALL.png',
+            allow_stretch = True, keep_ratio = False)
+        self.lbl = Label(size_hint = self.LBL.hpair, pos = self.LBL.pos)
 
 
 
@@ -356,6 +364,78 @@ class Pick(Opens, HasBase):
         self.X = AnchorButton(size_hint = self.X.hpair, pos = self.X.pos,
             text = 'X', font_name = FONT_BASK, font_size = Size.FONT_SIZE_D,
             color = WHITE, background_img = None, valign = 'bottom')
+
+
+
+class ItemOpts(Opens, HasBase):
+    def __init__(self, Size, **kwargs):
+        self.ITEMOPTS = SizeMap(32, 272, 368, 232, Size.Frame.pair)
+        self.HALT = SizeMap(-32, -272, 432, 768, self.ITEMOPTS.pair)
+        self.BACK = SizeMap(0, 0, 368, 232, self.ITEMOPTS.pair)
+        self.BG = SizeMap(0, 0, 368, 232, self.ITEMOPTS.pair)
+        self.LBL = SizeMap(12, 160, 344, 32, self.ITEMOPTS.pair)
+        self.BTNS = SizeMap(12, 12, 344, 120, self.ITEMOPTS.pair)
+        self.BTN = SizeMap(0, 0, 344, 40, self.BTNS.pair)
+
+        self.container = base.screenMain
+        self.is_open = False
+
+        self.base = RelativeLayout(size_hint = self.ITEMOPTS.hpair,
+            pos = self.ITEMOPTS.pos)
+        self.halt = Halt(pos = self.HALT.pos)
+        self.back = Button(pos = self.BACK.pos, size_hint = self.BACK.hpair, opacity = 0)
+        self.BG = Image(size_hint = FILLS, source = 'images/IMG_PROMPT_SMALL.png',
+            allow_stretch = True, keep_ratio = False)
+        self.lbl = Label(size_hint = self.LBL.hpair, pos = self.LBL.pos,
+            font_name = FONT_BASK, font_size = Size.FONT_SIZE_A)
+        self.btns = BoxLayout(size_hint = self.BTNS.hpair,
+            pos = self.BTNS.pos, orientation = 'vertical')
+        self.move = AnchorButton(size_hint = self.BTN.hpair,
+            text = 'Move to another bag', color = WHITE, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
+            background_img = 'images/IMG_BTN_BG_2.png')
+        self.delete = AnchorButton(size_hint = self.BTN.hpair,
+            text = 'Delete item', color = WHITE, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
+            background_img = 'images/IMG_BTN_BG_3.png')
+        self.cancel = AnchorButton(size_hint = self.BTN.hpair,
+            text = 'Cancel', color = WHITE, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
+            background_img = 'images/IMG_BTN_BG_4.png')
+
+
+
+class ItemMove(Opens, HasBase):
+    def __init__(self, Size, **kwargs):
+        self.ITEMMOVE = SizeMap(32, 272, 368, 232, Size.Frame.pair)
+        self.HALT = SizeMap(-32, -272, 432, 768, self.ITEMMOVE.pair)
+        self.BACK = SizeMap(0, 0, 368, 232, self.ITEMMOVE.pair)
+        self.BG = SizeMap(0, 0, 368, 232, self.ITEMMOVE.pair)
+        self.LBL = SizeMap(12, 180, 344, 32, self.ITEMMOVE.pair)
+        self.SCROLL = SizeMap(12, 12, 344, 160, self.ITEMMOVE.pair)
+        self.ITEM = SizeMap(0, 0, 344, 32, self.SCROLL.pair)
+        self.CANCEL = SizeMap(12, 12, 344, 40, self.ITEMMOVE.pair)
+
+        self.container = base.screenMain
+        self.is_open = False
+
+        self.base = RelativeLayout(size_hint = self.ITEMMOVE.hpair,
+            pos = self.ITEMMOVE.pos)
+        self.halt = Halt(pos = self.HALT.pos)
+        self.back = Button(pos = self.BACK.pos, size_hint = self.BACK.hpair, opacity = 0)
+        self.BG = Image(size_hint = FILLS, source = 'images/IMG_PROMPT_SMALL.png',
+            allow_stretch = True, keep_ratio = False)
+        self.lbl = Label(size_hint = self.LBL.hpair, pos = self.LBL.pos,
+            font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
+            text = 'Where should this item be moved to?')
+        self.scroll = ScrollView(size_hint = self.SCROLL.hpair,
+            pos = self.SCROLL.pos, do_scroll_x = False, bar_width = 0)
+        self.grid = GridLayout(size_hint = (1.0, None), cols = 1,
+            row_default_height = self.ITEM.h, row_force_default = True)
+        self.cancel = AnchorButton(pos = self.CANCEL.pos, size_hint = self.CANCEL.hpair,
+            text = 'Cancel', color = WHITE, font_name = FONT_BASK,
+            font_size = Size.FONT_SIZE_D, valign = 'bottom', border = [0,0,0,0],
+            background_img = 'images/IMG_BTN_BG_4.png')
 
 
 
@@ -589,8 +669,10 @@ tabs = Tabs(size)
 search = Search(size)
 cont = Cont(size)
 bagPick = BagPick(size)
-bagOpen = BagOpen(size)
+bagOpts = BagOpts(size)
 bagDelete = BagDelete(size)
+itemOpts = ItemOpts(size)
+itemMove = ItemMove(size)
 pick = Pick(size)
 icon = Icon(size)
 dnew = New(size)

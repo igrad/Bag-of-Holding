@@ -37,9 +37,9 @@ class CozyView(ButtonBehavior, RelativeLayout):
             keep_ratio = False)
         self.dicon = Image(size_hint = IV_ICON.hpair, pos = IV_ICON.pos,
             source = 'images/IMG_CLEAR.png', allow_stretch = True, keep_ratio = False)
-        self.dname = Label(size_hint = IV_NAME.hpair, pos = IV_NAME.pos,
-            halign = 'left', valign = 'middle', text = 'Item Name', color = BLACK,
-            font_name = FONT_BASK, font_size = FONT_SIZE_A, shorten = True,
+        self.dname = Label(size_hint = IV_NAME.hpair, size = IV_NAME.pair,
+            pos = IV_NAME.pos, halign = 'left', valign = 'middle', text = 'Item Name',
+            color = BLACK, font_name = FONT_BASK, font_size = FONT_SIZE_A, shorten = True,
             shorten_from = 'right')
         self.dmisc = BoxLayout(size_hint = IV_MISC.hpair, pos = IV_MISC.pos,
             orientation = 'horizontal')
@@ -94,21 +94,24 @@ class NormView(ButtonBehavior, RelativeLayout):
             color = [0,0,0,0.45], allow_stretch = True, keep_ratio = False)
         self.dicon = Image(size_hint = IV_ICON.hpair, pos = IV_ICON.pos,
             source = '', allow_stretch = True, keep_ratio = False)
-        self.dname = AnchorLabel(size_hint = IV_NAME.hpair, pos = IV_NAME.pos,
-            anchor_x = 'left', anchor_y = 'bottom', halign = 'left', text = '',
+        self.dname = AnchorLabel(size_hint = IV_NAME.hpair, size = IV_NAME.pair,
+            pos = IV_NAME.pos, anchor_x = 'left', halign = 'left', text = '',
             color = WHITE, font_name = FONT_BASK, font_size = FONT_SIZE_C,
             shorten = True, shorten_from = 'right')
         self.dmisc = BoxLayout(size_hint = IV_MISC.hpair, pos = IV_MISC.pos,
             orientation = 'horizontal')
-        self.dqty = AnchorLabel(size_hint = FILLS, anchor_x = 'right',
-            anchor_y = 'bottom', halign = 'right', text = '', font_name = FONT_BASK,
-            font_size = FONT_SIZE_C, color = WHITE)
-        self.dweight = AnchorLabel(size_hint = FILLS, anchor_x = 'right',
-            anchor_y = 'bottom', halign = 'right', text = '', font_name = FONT_BASK,
-            font_size = FONT_SIZE_C, color = WHITE)
-        self.dval = AnchorLabel(size_hint = FILLS, anchor_x = 'right',
-            anchor_y = 'bottom', halign = 'right', text = '',
-            font_name = FONT_BASK,font_size = FONT_SIZE_C, color = WHITE)
+        self.dqty = AnchorLabel(size_hint = FILLS,
+            size = (IV_MISC.w/5, IV_MISC.h), anchor_x = 'right', anchor_y = 'bottom',
+            halign = 'right', text = '', font_name = FONT_BASK, font_size = FONT_SIZE_C,
+            color = WHITE, shorten = True, shorten_from = 'right')
+        self.dweight = AnchorLabel(size_hint = FILLS,
+            size = (2 * IV_MISC.w/5, IV_MISC.h), anchor_x = 'right', anchor_y = 'bottom',
+            halign = 'right', text = '', font_name = FONT_BASK, font_size = FONT_SIZE_C,
+            color = WHITE, shorten = True, shorten_from = 'right')
+        self.dval = AnchorLabel(size_hint = FILLS, size = (2 * IV_MISC.w/5, IV_MISC.h),
+            anchor_x = 'right', anchor_y = 'bottom', halign = 'right', text = '',
+            font_name = FONT_BASK, font_size = FONT_SIZE_C, color = WHITE,
+            shorten = True, shorten_from = 'right')
 
         self.dicon.source = ITEMS[self.itemID].icon
         self.dname.text = ITEMS[self.itemID].name
@@ -162,9 +165,9 @@ class CardView(ButtonBehavior, RelativeLayout):
             keep_ratio = False)
         self.dicon = Image(size_hint = IV_ICON.hpair, pos = IV_ICON.pos,
             source = 'images/IMG_CLEAR.png', allow_stretch = True, keep_ratio = False)
-        self.dname = Label(size_hint = IV_NAME.hpair, pos = IV_NAME.pos,
-            halign = 'left', valign = 'middle', text = 'Item Name', color = BLACK,
-            font_name = FONT_BASK, font_size = FONT_SIZE_A, shorten = True,
+        self.dname = Label(size_hint = IV_NAME.hpair, size = IV_NAME.pair,
+            pos = IV_NAME.pos, halign = 'left', valign = 'middle', text = 'Item Name',
+            color = BLACK, font_name = FONT_BASK, font_size = FONT_SIZE_A, shorten = True,
             shorten_from = 'right')
         self.dmisc = BoxLayout(size_hint = IV_MISC.hpair, pos = IV_MISC.pos,
             orientation = 'horizontal')

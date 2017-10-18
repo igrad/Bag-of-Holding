@@ -3,7 +3,7 @@ from AppInit import *
 from Bag import *
 from Currency import *
 from AnchorLabel import *
-from BagOpen import PreviewBagMenu
+from BagOpts import PreviewBagMenu
 
 
 def LoadBagPickGridData():
@@ -43,12 +43,12 @@ class BagPickItem(ButtonBehavior, RelativeLayout):
         super(BagPickItem, self).__init__(size_hint = FILLS, **kwargs)
 
         bg_var = int(self.bagID) % 3
-        bg = 'images/IMG_COZYVIEW_BG_1.png'
+        bg = 'images/IMG_PICK_ITEM_1.png'
 
         if bg_var == 1:
-            bg = 'images/IMG_COZYVIEW_BG_2.png'
+            bg = 'images/IMG_PICK_ITEM_2.png'
         elif bg_var == 2:
-            bg = 'images/IMG_COZYVIEW_BG_3.png'
+            bg = 'images/IMG_PICK_ITEM_3.png'
 
         self.BG = Image(size_hint = FILLS, source = bg, allow_stretch = True,
             keep_ratio = False)
