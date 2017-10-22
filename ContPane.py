@@ -306,7 +306,7 @@ def SelectItem(btn):
         except:
             pick.icon.selected = None
 
-        pick.opts.itemID = btn.itemID
+        pick.opts.itemID = pick.itemID
 
         pick.open()
 
