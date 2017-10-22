@@ -15,7 +15,7 @@ def SetItemViewsOnPress(func):
     CardView.on_press = func
 
 class CozyView(ButtonBehavior, RelativeLayout):
-    def __init__(self, itemID, **kwargs):
+    def __init__(self, itemID, bg_var = 0, **kwargs):
         self.itemID = str(itemID)
         self.size_hint = FILLS
 
@@ -25,7 +25,10 @@ class CozyView(ButtonBehavior, RelativeLayout):
         IV_NAME = cont.IV_COZY_NAME
         IV_MISC = cont.IV_COZY_MISC
 
-        bg_var = int(self.itemID) % 3
+        if bg_var == None:
+            bg_var = self.itemID
+
+        bg_var = int(bg_var) % 3
         bg = 'images/IMG_COZYVIEW_BG_1.png'
 
         if bg_var == 1:
@@ -80,7 +83,7 @@ class CozyView(ButtonBehavior, RelativeLayout):
 
 
 class NormView(ButtonBehavior, RelativeLayout):
-    def __init__(self, itemID, **kwargs):
+    def __init__(self, itemID, bg_var = 0, **kwargs):
         self.itemID = str(itemID)
         self.size_hint = FILLS
 
@@ -142,7 +145,7 @@ class NormView(ButtonBehavior, RelativeLayout):
 
 
 class CardView(ButtonBehavior, RelativeLayout):
-    def __init__(self, itemID, **kwargs):
+    def __init__(self, itemID, bg_var = None, **kwargs):
         IV_ICON = cont.IV_CARD_ICON
         IV_NAME = cont.IV_CARD_NAME
         IV_MISC = cont.IV_CARD_MISC
@@ -153,7 +156,10 @@ class CardView(ButtonBehavior, RelativeLayout):
 
         super(CardView, self).__init__(size_hint = FILLS, **kwargs)
 
-        bg_var = int(self.itemID) % 3
+        if bg_var == None:
+            bg_var = self.itemID
+
+        bg_var = int(bg_var) % 3
         bg = 'images/IMG_CARDVIEW_BG_1.png'
 
         if bg_var == 1:

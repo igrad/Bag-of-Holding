@@ -76,15 +76,18 @@ def PopulateItemViews(openBagID, items = None):
     # Apply the sorting method to the items of this bag
     items = ApplySort(items)
 
+    bg_var = 0
     for itemID in items:
         itemID = str(itemID)
 
-        newItem = ItemView(itemID = itemID)
+        newItem = ItemView(itemID = itemID, bg_var = bg_var)
 
         if bag.view == 'card':
             newItem.SetDescNumLines()
 
         cont.list.add_widget(ITEMVIEWS[str(itemID)])
+
+        bg_var += 1
 
     # Apply the search input parameters if not explicitly specified in the items arg
     if checkSearchInput == True:
