@@ -7,7 +7,7 @@ from ContPane import SelectItem
 from Tabs import OpenNew
 
 
-NUM_DEFAULT_ICONS = 40
+NUM_DEFAULT_ICONS = 54
 
 def LoadIcon(index, selected = False, is_new = False):
     '''Load a single icon onto the icon.grid.
