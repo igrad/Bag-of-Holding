@@ -65,16 +65,16 @@ class SCALE():
 
 class SizeMap():
     def __init__(self, x, y, w, h, parentPair):
-        self.x = int(x / scale.X)
-        self.y = int(y / scale.Y)
-        self.w = int(w / scale.X)
-        self.h = int(h / scale.Y)
+        self.x = int(float(x) / scale.X)
+        self.y = int(float(y) / scale.Y)
+        self.w = int(float(w) / scale.X)
+        self.h = int(float(h) / scale.Y)
 
         self.pos = (self.x, self.y)
         self.pair = (self.w, self.h)
 
-        self.hw = self.w/parentPair[0]
-        self.hh = self.h/parentPair[1]
+        self.hw = float(self.w)/float(parentPair[0])
+        self.hh = float(self.h)/float(parentPair[1])
         self.hpair = (self.hw, self.hh)
 
         self.parentW = parentPair[0]

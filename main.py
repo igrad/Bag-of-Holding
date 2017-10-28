@@ -1,6 +1,6 @@
 #!usr/bin/python3
 import kivy
-kivy.require('1.10.0')
+kivy.require('1.9.1')
 
 from SysFuncs import *
 
@@ -222,8 +222,8 @@ class BagOfHolding(RelativeLayout):
 
 
 class Builder(App):
-    #mode = "PROD"
-    mode = "DEV"
+    mode = "PROD"
+    #mode = "DEV"
     res = "normal"
 
     def build_config(self, config):
@@ -256,12 +256,16 @@ class Builder(App):
             Config.set('graphics', 'rotation', 0)
         else:
             LogMsg('Opening App in Prod mode.')
-            Config.set('graphics', 'rotation', 90)
+            Config.set('graphics', 'rotation', 0)
             Config.set('graphics', 'fullscreen', 'auto')
 
 
-        scale.X = 432/Window.size[0]
-        scale.Y = 768/Window.size[1]
+        LogMsg("Building scales. Window dimensions: ({}, {})".format(Window.size[0], Window.size[1]))
+        LogMsg("w = 432/" + str(Window.size[0]) + " = " + str(float(432)/float(Window.size[0])))
+        LogMsg("h = 768/" + str(Window.size[1]) + " = " + str(float(768)/float(Window.size[1])))
+        scale.X = float(432)/float(Window.size[0])
+        scale.Y = float(768)/float(Window.size[1])
+        LogMsg("Scales set to ({}, {})".format(scale.X, scale.Y))
 
         Config.set('kivy', 'window_icon', 'images/icon.png')
         Config.write()

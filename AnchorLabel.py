@@ -209,7 +209,7 @@ class AnchorToggleButton(AnchorLayout):
         if 'on_press' in kwargs and len(kwargs) == 1:
             return self._btn.bind(on_press = kwargs.pop('on_press'))
         else:
-            super(AnchorButton, self).bind()
+            super(AnchorToggleButton, self).bind()
 
 
     @property

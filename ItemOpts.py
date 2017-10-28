@@ -23,4 +23,7 @@ def OpenItemMove(btn):
     else:
         itemOpts.close()
         itemMove.returnToOpts = btn.itemID
+
+        
+
         itemMove.open()

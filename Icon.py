@@ -34,7 +34,7 @@ def LoadIcon(index, selected = False, is_new = False):
             icon.selected = index
 
         btn = Button(background_normal = 'images/icons/{:03d}.png'.format(index),
-        background_down = 'images/icons/{:03d}.png'.format(index))
+        background_down = 'images/icons/{:03d}.png'.format(index), border = [0,0,0,0])
 
         wrap.add_widget(btn, 0)
 

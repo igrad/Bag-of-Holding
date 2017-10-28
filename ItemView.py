@@ -42,7 +42,7 @@ class CozyView(ButtonBehavior, RelativeLayout):
             source = 'images/IMG_CLEAR.png', allow_stretch = True, keep_ratio = False)
         self.dname = Label(size_hint = IV_NAME.hpair, size = IV_NAME.pair,
             pos = IV_NAME.pos, halign = 'left', valign = 'middle', text = 'Item Name',
-            color = BLACK, font_name = FONT_BASK, font_size = FONT_SIZE_A, shorten = True,
+            color = BLACK, font_name = FONT_BASK, font_size = size.FONT_SIZE_A, shorten = True,
             shorten_from = 'right')
         self.dmisc = BoxLayout(size_hint = IV_MISC.hpair, pos = IV_MISC.pos,
             orientation = 'horizontal')
@@ -173,20 +173,20 @@ class CardView(ButtonBehavior, RelativeLayout):
             source = 'images/IMG_CLEAR.png', allow_stretch = True, keep_ratio = False)
         self.dname = Label(size_hint = IV_NAME.hpair, size = IV_NAME.pair,
             pos = IV_NAME.pos, halign = 'left', valign = 'middle', text = 'Item Name',
-            color = BLACK, font_name = FONT_BASK, font_size = FONT_SIZE_A, shorten = True,
+            color = BLACK, font_name = FONT_BASK, font_size = size.FONT_SIZE_A, shorten = True,
             shorten_from = 'right')
         self.dmisc = BoxLayout(size_hint = IV_MISC.hpair, pos = IV_MISC.pos,
             orientation = 'horizontal')
         self.dqty = Label(size_hint = FILLS, text = 'Quantity: ', font_name = FONT_BASK,
-            font_size = FONT_SIZE_C, color = BLACK)
+            font_size = size.FONT_SIZE_C, color = BLACK)
         self.dweight = Label(size_hint = FILLS, text = 'Weight: ', font_name = FONT_BASK,
-            font_size = FONT_SIZE_C, color = BLACK)
+            font_size = size.FONT_SIZE_C, color = BLACK)
         self.dval = Label(size_hint = FILLS, text = 'Value: ', font_name = FONT_BASK,
-            font_size = FONT_SIZE_C, color = BLACK)
+            font_size = size.FONT_SIZE_C, color = BLACK)
         self.ddescwrap = StencilLayout(size_hint = IV_DESC.hpair, pos = IV_DESC.pos)
         self.ddesc = TextInput(size_hint = (0.99, None), disabled = True,
             pos_hint = {'x': 0.01, 'top': 1}, font_name = FONT_BASK,
-            font_size = FONT_SIZE_C, background_color = CLEAR, foreground_color = BLACK,
+            font_size = size.FONT_SIZE_C, background_color = CLEAR, foreground_color = BLACK,
             disabled_foreground_color = BLACK)
 
         self.dicon.source = ITEMS[self.itemID].icon

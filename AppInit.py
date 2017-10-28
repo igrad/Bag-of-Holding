@@ -55,16 +55,16 @@ class Opens():
 class Size():
     def __init__(self, **kwargs):
         # Stylization ====================================================================
-        self.MAX = max(scale.X, scale.Y)
-        self.FONT_SIZE_A = 32/self.MAX
-        self.FONT_SIZE_B = 20/self.MAX
-        self.FONT_SIZE_C = 16/self.MAX
-        self.FONT_SIZE_D = 24/self.MAX
-        self.FONT_SIZE_HEAD = 48/self.MAX
+        self.MAX = max(float(scale.X), float(scale.Y))
+        self.FONT_SIZE_A = float(32)/self.MAX
+        self.FONT_SIZE_B = float(20)/self.MAX
+        self.FONT_SIZE_C = float(16)/self.MAX
+        self.FONT_SIZE_D = float(24)/self.MAX
+        self.FONT_SIZE_HEAD = float(48)/self.MAX
 
         # Sizes ==========================================================================
-        self.APP_W = 432/scale.X
-        self.APP_H = 768/scale.Y
+        self.APP_W = int(float(432)/float(scale.X))
+        self.APP_H = int(float(768)/float(scale.Y))
         self.Frame = SizeMap(0, 0, 432, 768, (self.APP_W, self.APP_H))
 
 
@@ -181,7 +181,8 @@ class Cont(HasBase):
 
         self.base = RelativeLayout(size_hint = self.CONT.hpair, pos = self.CONT.pos)
         self.scroll = ScrollView(size_hint = FILLS, do_scroll_x = False,
-            bar_width = self.SCROLL.x)
+            bar_width = self.SCROLL.x, scroll_distance = size.FONT_SIZE_HEAD,
+            scroll_timeout = 90)
         self.list = GridLayout(size_hint = (1.0, None), cols = 1,
             padding = list(self.PAD.pair), spacing = list(self.SPACE.pair),
             row_force_default = True)
@@ -215,7 +216,8 @@ class BagPick(Opens, HasBase):
             pos = self.NAME.pos, text = 'Bags', font_name = FONT_BASK,
             font_size = Size.FONT_SIZE_A)
         self.scroll = ScrollView(size_hint = self.SCROLL.hpair,
-            pos = self.SCROLL.pos, do_scroll_x = False, bar_width = 0)
+            pos = self.SCROLL.pos, do_scroll_x = False, bar_width = 0,
+            scroll_distance = size.FONT_SIZE_HEAD, scroll_timeout = 90)
         self.grid = GridLayout(size_hint = (1.0, None), cols = 1,
             row_default_height = self.ITEM.h, row_force_default = True)
         self.newBag = AnchorButton(size_hint = self.NEW.hpair,
@@ -542,10 +544,6 @@ class New(Opens, HasBase):
             font_size = Size.FONT_SIZE_C)
 
 
-    def open(self):
-        super(New, self).open(1)
-
-
 
 class Sort(Opens, HasBase):
     def __init__(self, Size, **kwargs):
@@ -601,10 +599,6 @@ class Sort(Opens, HasBase):
             text = 'Descending', font_name = FONT_BASK, font_size = Size.FONT_SIZE_C,
             color = BLACK, anchor_x = 'left', halign = 'left', group = 'sortMethod',
             allow_no_selection = False)
-
-
-    def open(self):
-        super(Sort, self).open(1)
 
 
 

@@ -54,16 +54,16 @@ class BagPickItem(ButtonBehavior, RelativeLayout):
             keep_ratio = False)
         self.name = Label(size_hint = NAME.hpair, pos = NAME.pos,
             halign = 'left', valign = 'middle', text = 'Item Name', color = BLACK,
-            font_name = FONT_BASK, font_size = FONT_SIZE_A, shorten = True,
+            font_name = FONT_BASK, font_size = size.FONT_SIZE_A, shorten = True,
             shorten_from = 'right')
         self.misc = BoxLayout(size_hint = MISC.hpair, pos = MISC.pos,
             orientation = 'horizontal')
         self.tot_items = Label(size_hint = FILLS, text = 'Items: ',
-            font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK)
+            font_name = FONT_BASK, font_size = size.FONT_SIZE_C, color = BLACK)
         self.tot_weight = Label(size_hint = FILLS, text = 'Weight: ',
-            font_name = FONT_BASK, font_size = FONT_SIZE_C, color = BLACK)
+            font_name = FONT_BASK, font_size = size.FONT_SIZE_C, color = BLACK)
         self.tot_val = Label(size_hint = FILLS, text = 'Value: ', font_name = FONT_BASK,
-            font_size = FONT_SIZE_C, color = BLACK)
+            font_size = size.FONT_SIZE_C, color = BLACK)
 
         self.name.text = BAGS[self.bagID].name
 
