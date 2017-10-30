@@ -189,7 +189,7 @@ class Cont(HasBase):
 
 
 
-class BagPick(Opens, HasBase):
+class BagPick(HasBase):
     def __init__(self, Size, **kwargs):
         # BAGPICK MENU
         self.BAGPICK = SizeMap(0, 0, 380, 768, Size.Frame.pair)
@@ -226,7 +226,7 @@ class BagPick(Opens, HasBase):
 
 
 
-class BagOpts(Opens, HasBase):
+class BagOpts(HasBase):
     def __init__(self, Size,**kwargs):
         # BAGOPTS MENU
         self.BAGOPTS = SizeMap(32, 272, 368, 232, Size.Frame.pair)
@@ -268,7 +268,7 @@ class BagOpts(Opens, HasBase):
 
 
 
-class BagDelete(Opens, HasBase):
+class BagDelete(HasBase):
     def __init__(self, Size, **kwargs):
         # BAGDELETE MENU
         self.BAGDELETE = SizeMap(32, 272, 368, 232, Size.Frame.pair)
@@ -292,7 +292,7 @@ class BagDelete(Opens, HasBase):
 
 
 
-class Pick(Opens, HasBase):
+class Pick(HasBase):
     def __init__(self, Size, **kwargs):
         # Note: spacing should be (20, 20, 392, 516)
         self.PICK = SizeMap(0, 105, 432, 557, Size.Frame.pair)
@@ -369,7 +369,7 @@ class Pick(Opens, HasBase):
 
 
 
-class ItemOpts(Opens, HasBase):
+class ItemOpts(HasBase):
     def __init__(self, Size, **kwargs):
         self.ITEMOPTS = SizeMap(32, 272, 368, 232, Size.Frame.pair)
         self.HALT = SizeMap(-32, -272, 432, 768, self.ITEMOPTS.pair)
@@ -407,7 +407,7 @@ class ItemOpts(Opens, HasBase):
 
 
 
-class ItemMove(Opens, HasBase):
+class ItemMove(HasBase):
     def __init__(self, Size, **kwargs):
         self.ITEMMOVE = SizeMap(32, 272, 368, 232, Size.Frame.pair)
         self.HALT = SizeMap(-32, -272, 432, 768, self.ITEMMOVE.pair)
@@ -441,7 +441,7 @@ class ItemMove(Opens, HasBase):
 
 
 
-class Icon(Opens, HasBase):
+class Icon(HasBase):
     def __init__(self, Size, **kwargs):
         # ICON MENU
         self.ICON = SizeMap(36, 106, 360, 556, Size.Frame.pair)
@@ -477,7 +477,7 @@ class Icon(Opens, HasBase):
 
 
 
-class New(Opens, HasBase):
+class New(HasBase):
     def __init__(self, Size, **kwargs):
         self.NEW = SizeMap(0, 174, 422, 496, Size.Frame.pair)
         self.HALT = SizeMap(4, 8, 408, 420, self.NEW.pair)
@@ -545,7 +545,7 @@ class New(Opens, HasBase):
 
 
 
-class Sort(Opens, HasBase):
+class Sort(HasBase):
     def __init__(self, Size, **kwargs):
         self.SORT = SizeMap(140, 474, 288, 196, Size.Frame.pair)
         self.HALT = SizeMap(8, 8, 272, 120, self.SORT.pair)
@@ -602,7 +602,7 @@ class Sort(Opens, HasBase):
 
 
 
-class View(Opens, HasBase):
+class View(HasBase):
     def __init__(self, Size, **kwargs):
         self.VIEW = SizeMap(148, 414, 284, 256, Size.Frame.pair)
         self.HALT = SizeMap(8, 8, 272, 180, self.VIEW.pair)

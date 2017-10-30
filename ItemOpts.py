@@ -4,7 +4,7 @@ from AppInit import *
 
 def OpenItemOpts(btn, itemID = None):
     if itemOpts.is_open:
-        itemOpts.close()
+        Opens.close(itemOpts)
     else:
         ID = itemID
 
@@ -13,17 +13,17 @@ def OpenItemOpts(btn, itemID = None):
             itemOpts.move.itemID = ID
 
         itemOpts.lbl.text = ITEMS[str(ID)].name
-        itemOpts.open()
+        Opens.open(itemOpts)
 
 
 def OpenItemMove(btn):
     if itemMove.is_open:
-        itemMove.close()
+        Opens.close(itemMove)
         OpenItemOpts(None, itemMove.returnToOpts)
     else:
-        itemOpts.close()
+        Opens.close(itemOpts)
         itemMove.returnToOpts = btn.itemID
 
-        
 
-        itemMove.open()
+
+        Opens.open(itemMove)

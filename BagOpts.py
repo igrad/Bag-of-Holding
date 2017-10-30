@@ -11,14 +11,14 @@ def PreviewBagMenu(btn):
         bagOpts.name.text = bag.name
         bagOpts.bagID = btn.bagID
 
-        bagOpts.open()
+        Opens.open(bagOpts)
     else:
-        bagOpts.close()
+        Opens.close(bagOpts)
 
 
 def OnBagDeleteSelected(btn):
     '''Open bagDelete menu.'''
     if not bagDelete.is_open:
-        bagDelete.open()
+        Opens.open(bagDelete)
     else:
-        bagDelete.close()
+        Opens.close(bagDelete)

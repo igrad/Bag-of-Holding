@@ -222,8 +222,8 @@ class BagOfHolding(RelativeLayout):
 
 
 class Builder(App):
-    mode = "PROD"
-    #mode = "DEV"
+    #mode = "PROD"
+    mode = "DEV"
     res = "normal"
 
     def build_config(self, config):

@@ -12,7 +12,7 @@ def LoadBagPickGridData():
 def OpenBagPickMenu(obj):
     '''Open up the bagPick menu on-screen.'''
     if bagPick.is_open:
-        bagPick.close()
+        Opens.close(bagPick)
 
     else:
         bagPick.grid.clear_widgets()
@@ -28,7 +28,7 @@ def OpenBagPickMenu(obj):
             bpi.bind(on_press = PreviewBagMenu)
             bagPick.grid.add_widget(bpi)
 
-        bagPick.open()
+        Opens.open(bagPick)
 
 
 class BagPickItem(ButtonBehavior, RelativeLayout):

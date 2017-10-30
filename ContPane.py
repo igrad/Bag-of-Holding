@@ -267,9 +267,9 @@ def SelectItem(btn):
     '''Called when an ItemView is called for display in the PICK screen.'''
 
     if btn == 'picknoupdate':
-        pick.open()
+        Opens.open(pick)
     elif (pick.is_open) or (btn == None):
-        pick.close()
+        Opens.close(pick)
 
         args = dict()
         if pick.name.text != str(ITEMS[pick.itemID].name):
@@ -311,7 +311,7 @@ def SelectItem(btn):
 
         pick.opts.itemID = pick.itemID
 
-        pick.open()
+        Opens.open(pick)
 
 
 def ApplySort(obj):

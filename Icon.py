@@ -90,7 +90,7 @@ def LoadAllIcons():
 def OpenIconMenu(obj):
     '''Opens the icon menu.'''
     if icon.is_open:
-        icon.close()
+        Opens.close(icon)
 
         if icon.called_from == 'pick':
             if obj == 'picknoupdate':
@@ -119,4 +119,4 @@ def OpenIconMenu(obj):
         elif dnew.is_open:
             icon.called_from = 'new'
 
-        icon.open()
+        Opens.open(icon)
