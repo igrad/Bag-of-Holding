@@ -1,3 +1,6 @@
+# Notice
+This project has been discontinued, though the code here is nearly ready for deployment to alpha version as it stands. Other apps have come along to fill the niche role BoH was targetted at, and those other apps have polish and funding that simply render this app inferior in many ways. I've moved on to other projects, including a rogue-like game called Catacombs of Halfwind Keep. You can find this new project on my GitHub page!
+
 # Bag-of-Holding
 Bag of Holding is a cross-platform mobile app for maintaining inventory in RPG tabletop games, such as Dungeons and Dragons. This project is named after the "Bag of Holding" item from Dungeons & Dragons, and is intended as a small play on the well-known item. The app is intended for both iOS and Android platforms, and may support Windows mobile platforms down the road if Kivy begins to support it.
 
